@@ -1,0 +1,23 @@
+@import url(http://fonts.googleapis.com/css?family=Titillium+Web);
+
+#control {
+  color: rgb(165, 160, 118);
+}
+
+[layout=code] .hljs-comment {
+  color: #555;
+}
+
+.m0 * {
+  margin: 0;
+}
+
+.yoshiko * {
+  font-family: 'Titillium Web',NotoSansCJKjp-Light,Open Sans,Hiragino Kaku Gothic ProN,Meiryo,sans-serif !important;
+  font-weight: normal !important;
+}
+
+[layout] iframe {
+  width: 640px;
+  height: 480px;
+}
