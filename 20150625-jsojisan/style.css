@@ -29,3 +29,13 @@
   width: 640px;
   height: 480px;
 }
+
+.goodpatch h3 {
+  font-family:NotoSansCJKjp-Light,Open Sans,Hiragino Kaku Gothic ProN,Meiryo,sans-serif;
+}
+[layout].goodpatch a:link,
+[layout].goodpatch a:visited,
+[layout].goodpatch a:hover,
+[layout].goodpatch a:active {
+  color: #C7E6FF;
+}
