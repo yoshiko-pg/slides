@@ -1,0 +1,273 @@
+<html>
+<head>
+  <title>おいしくたべようBacon.js - @yoshiko_pg</title>
+  <link rel="stylesheet" href="lib/talkie.min.css">
+  <link rel="stylesheet" href="lib/talkie-default.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="lib/hljs-styles/railscasts.css">
+  <script src="lib/bacon.js"></script>
+  <script src="script.js"></script>
+</head>
+<body>
+
+<script layout="cover" invert type="text/x-markdown"
+  backface="image/bacon.jpg" backface-filter="blur(2px)">
+# おいしくたべようBacon.js
+
+2015.7.28 [@yoshiko_pg](http://yoshiko-pg.github.io)  
+Goodpatch フロントエンド勉強会
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## 今日話したいこと
+
+* FRPって何
+* FRPで新しく扱える値
+* 実用例
+</script>
+
+
+<script layout="bullets-invert" type="text/x-markdown">
+# FRPって何
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+### FRP = Functional Reactive Programming
+
+すごいざっくりいうと
+
+* Functional Programming = 関数型プログラミング
+  - aならbする、ではなく、aはbである(宣言的)
+* Reactive Programming = 変化が自動で伝わる仕組み
+  - ex.) データバインディング
+  - ex.) Excel  A1 + B1 = C1
+
+そのふたつの性質を併せ持ったプログラミング手法  
+昔からある。新しいものではない（[初出：1997年](http://conal.net/papers/icfp97/)）
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## タイトルのBacon.jsとは
+
+* JavaScriptのFRPライブラリ
+  * 他にも大きい[RxJS](https://github.com/Reactive-Extensions/RxJS)や小さい[Kefir](https://github.com/rpominov/kefir)がある
+  * Bacon.jsは中くらい
+  * [比較](http://qiita.com/kondei/items/17e5d4867a0652911e52)
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## FRPについて 参考資料
+
+* [Reactive Programming in JavaScript](http://ahomu.github.io/s/150221-frontrend_conference/index.html)
+* [【翻訳】あなたが求めていたリアクティブプログラミング入門](http://ninjinkun.hatenablog.com/entry/introrxja)
+* [やさしいFunctional reactive programming（概要編）](http://maoe.hatenadiary.jp/entry/20100109/1263059731)
+* [Q. （関数型）リアクティブプログラミングとは何ですか？](http://postd.cc/what-is-functional-reactive-programming/)
+
+*正直今日の話は最初のスライド読んでくださいで終わってしまう話*
+</script>
+
+
+<script layout type="text/x-markdown">
+## FRPは非同期データストリームを用いるプログラミングである
+### FRP is programming with<br>asynchronous data streams
+
+*引用元：[【翻訳】あなたが求めていたリアクティブプログラミング入門](http://ninjinkun.hatenablog.com/entry/introrxja)*
+</script>
+
+
+<script layout="bullets-invert" type="text/x-markdown">
+# 非同期データ<br>ストリームって何
+</script>
+
+
+<script layout type="text/x-markdown">
+## 複数の非同期的な値のリスト
+
+<img src="image/stream.png">
+</script>
+
+
+<script layout type="text/x-markdown">
+## ストリームの便利さ
+
+いつ起きるかわからない特定のイベント(clickやkeyupなど)をリストとして扱える  
+　  
+イベントがいつ起きるかを気にせずに、  
+その値がどう変化するかを宣言すればよい  
+　  
+→膨大なイベントを扱わなければならないGUIと相性が良い
+
+</script>
+
+
+<script layout type="text/x-markdown">
+## 実例
+
+お絵かきアプリ
+</script>
+
+
+<section layout class="body">
+  <div class="wrapper">
+    <canvas id="cv" width="800" height="400"></canvas>
+    <div class="tools">
+      <div class="width-slider">
+        <input type="range" name="width" min="1" max="30" value="1"/>
+        <div class="current-width"></div>
+      </div>
+    </div>
+    <p>
+      <small>doubleClick =&gt; clear</small>
+      <small>View code on <a href="http://codepen.io/anon/pen/LVgBZp" target="_blank">codepen.io</a></small>
+    </p>
+  </div>
+  <script>document.addEventListener('DOMContentLoaded', drawDemo);</script>
+</section>
+
+
+<script layout="code" type="text/x-markdown">
+## input event <=> border width
+
+```html
+<input type="range" name="width" min="1" max="30" value="1"/>
+```
+
+```javascript
+let widthInput = document.getElementsByName('width')[0];
+
+Bacon.fromEventTarget(widthInput, 'input')
+  .map('.target.value')
+  .onValue((width) => {
+    context.lineWidth = width
+  })
+  ;
+```
+</script>
+
+<script layout="code" type="text/x-markdown">
+## click event <=> border color
+
+```javascript
+let colorPalette = document.getElementsByClassName('width-slider')[0];
+
+Bacon.fromEventTarget(colorPalette, 'click')
+  .map(() => {
+    '#'+Math.floor(Math.random()*16777215).toString(16)
+  })
+  .onValue((color) => {
+    context.strokeStyle = color
+    colorPalette.style.color = color
+  })
+  ;
+```
+</script>
+
+<script layout="code" type="text/x-markdown">
+## drag <=> draw line
+
+```javascript
+let mouseDowns = Bacon.fromEventTarget(canvas, 'mousedown')
+  .doAction('.preventDefault')
+  .doAction(() => context.beginPath())
+  ;
+let mouseUps = Bacon.fromEventTarget(canvas, 'mouseup')
+  .doAction('.preventDefault')
+  .doAction(() => context.closePath())
+  ;
+let isPainting = mouseDowns.awaiting(mouseUps);
+```
+</script>
+
+<script layout="code" type="text/x-markdown">
+## drag <=> draw line
+
+```javascript
+Bacon.fromEventTarget(canvas, 'mousemove')
+  .filter(isPainting)
+  .onValue((e) => {
+    context.lineTo(e.offsetX, e.offsetY)
+    context.stroke()
+  })
+  ;
+```
+</script>
+
+<script layout="code" type="text/x-markdown">
+## double click <=> canvas clear
+
+```javascript
+Bacon.fromEventTarget(canvas, 'click')
+  .bufferWithTime(500, 2)
+  .filter(({length}) => length == 2)
+  .onValue(() => {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+  }) 
+  ;
+```
+</script>
+
+
+<script layout type="text/x-markdown">
+## 便利ですね
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## デメリット
+
+* APIが多い
+* 学習コスト
+* 知らない人は読みづらい
+* 適さない場面で使うと余計複雑になるかも
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## メリット
+
+* コードを独立した関数にわけられる
+  * 疎結合、変更に強い
+  * 単体テストがしやすい
+* 扱う値を統一できる
+  * プリミティブな値でも配列でもストリーム化できる
+  * ストリームに対する処理のみを書けばよい
+* なんか楽しい
+  * パズル感、レゴブロック感
+  * Baconで書こー→モチベーション
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## もちろんJSだけじゃない！
+
+* Java - [RxJava](https://www.google.co.jp/search?q=rxjava)
+* Objective-C - [ReactiveCocoa](https://www.google.co.jp/search?q=reactivecocoa)
+* [Rubyも調べれば何かしらでてくる](https://www.google.co.jp/search?q=ruby%20reactive%20programming)
+* .NET - [Reactive Extensions（派生元）](https://www.google.co.jp/search?q=reactive%20extensions)
+  * C# - LINQ
+  * RxとはC#のLINQを時間軸に拡張したものである。
+</script>
+
+
+<script layout="cover" invert type="text/x-markdown"
+  backface="image/meet1.jpg" backface-filter="blur(2px) brightness(.8)">
+## おいしいので一度<br>味見してみてください
+</script>
+
+
+<script layout="cover" invert type="text/x-markdown"
+  backface="image/meet2.jpg" backface-filter="blur(1px) brightness(.8)">
+# Thank you
+[@yoshiko_pg](http://yoshiko-pg.github.io/)
+</script>
+
+
+<script src="lib/highlight.min.js"></script>
+<script src="lib/talkie.min.js"></script>
+<script>Talkie();</script>
+</body>
+</html>

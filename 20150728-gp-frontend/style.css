@@ -1,0 +1,109 @@
+@import url(http://fonts.googleapis.com/css?family=Titillium+Web);
+
+#control {
+  color: rgb(165, 160, 118);
+}
+
+[layout=code] .hljs-comment {
+  color: #555;
+}
+
+.m0 * {
+  margin: 0;
+}
+
+.yoshiko * {
+  font-family: 'Titillium Web',NotoSansCJKjp-Light,Open Sans,Hiragino Kaku Gothic ProN,Meiryo,sans-serif !important;
+  font-weight: normal !important;
+}
+
+[layout] iframe {
+  width: 640px;
+  height: 480px;
+}
+
+
+/* ============================================================= */
+
+
+.body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapper {
+}
+.wrapper #cv {
+  width: 100%;
+  height: 400px;
+  background: #fff;
+  border: 10px solid #99CDCD;
+  margin-bottom: 40px;
+  cursor: url('image/pen.png'), default;
+}
+.wrapper .tools {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wrapper .width-slider {
+  width: 300px;
+  position: relative;
+  height: 30px;
+  margin-right: 50px;
+  color: #000;
+}
+.wrapper .width-slider:before {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 0;
+  content: "";
+  border-top: 15px solid transparent;
+  border-left: 0px solid transparent;
+  border-bottom: 15px solid transparent;
+  border-right: 300px solid currentColor;
+}
+.wrapper .width-slider:after {
+  content: "";
+  background-color: currentColor;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  right: -15px;
+  top: 0;
+}
+.wrapper .width-slider input[type="range"] {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 105%;
+  height: 30px;
+  margin: 0;
+  z-index: 1;
+  cursor: pointer;
+  -webkit-appearance: none;
+  background-color: transparent;
+  outline: none;
+}
+.wrapper .width-slider input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: 1px solid #000000;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  background: transparent;
+}
+.wrapper p {
+  margin: 80px 0 0;
+  text-align: center;
+}
+.wrapper p small {
+  font-size: 1.2rem;
+}
+.wrapper p small + small {
+  margin-left: 30px;
+}
