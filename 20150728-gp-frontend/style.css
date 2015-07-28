@@ -35,8 +35,6 @@
 .wrapper {
 }
 .wrapper #cv {
-  width: 100%;
-  height: 400px;
   background: #fff;
   border: 10px solid #99CDCD;
   margin-bottom: 40px;
