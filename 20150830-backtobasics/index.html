@@ -1,0 +1,184 @@
+<html>
+<head>
+  <title>タイトル - @yoshiko_pg</title>
+  <link rel="stylesheet" href="lib/talkie.min.css">
+  <link rel="stylesheet" href="lib/talkie-default.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="lib/hljs-styles/railscasts.css">
+</head>
+<body>
+
+<section layout="win8">
+  <h1 class="heading">スタート</h1>
+  <div class="user"><span class="name">yoshiko-pg</span><img src="./images/icon.jpg" class="icon"></div>
+  <div class="wrapper"><a href="#2" class="grid grid--2-1">
+  <div class="thumb"><i class="icon ion-android-mail"></i></div></a><a href="#3" class="grid grid--2-1"></a><a href="#4" class="grid grid--2-1"></a><a href="#5" class="grid grid--2-1"></a><a href="#6" class="grid grid--2-1"></a><a href="#7" class="grid grid--1-1"></a><a href="#8" class="grid grid--1-1"></a><a href="#9" class="grid grid--2-1"></a><a href="#10" class="grid grid--2-1"></a><a href="#11" class="grid grid--2-1"></a><a href="#12" class="grid grid--2-1"></a><a href="#13" class="grid grid--2-1"></a><a href="#14" class="grid grid--2-1"></a><a href="#15" class="grid grid--2-1"></a><a href="#16" class="grid grid--2-1"></a><a href="#17" class="grid grid--2-1"></a><a href="#18" class="grid grid--2-1"></a></div>
+</section>
+
+
+<!--
+# CSSで固定比率のレイアウト
+
+* 画像って横幅が縮まると縦幅も一緒に縮まりますよね
+  元画像の比率を保ってくれます
+* そんな動きの要素がほしくなるときないですか？
+* たとえば1:1
+* たとえば4:3
+* 高さはどうやって指定したらいいでしょうか？
+* 高さの指定に横幅を持ち込みたい！！
+* 横幅を100%として縦幅を%指定したい！！
+* そんなときにはこれ
+* padding
+* mdnをみてみよう
+* <percentage> 包含ブロックの幅に対する割合です。
+* 親要素の幅に対する割合
+* やったー（親要素と自分の幅が同じ場合）
+* 親要素と自分の幅が違うとき困る
+* 自分の幅を基準にするには・・・？
+* 逆転の発想 自分の子要素をスペーサーにしよう
+* before / after
+* できたー
+* というわけで（書き方まとめ）
+* ちなみにmarginでも
+* demo
+* 宣伝
+* ありがとうございました
+-->
+
+
+<script layout="cover" invert type="text/x-markdown"
+  backface="image/sai.jpg" backface-filter="brightness(.4)">
+# CSSで固定比率レイアウト
+
+2015.8.30 [@yoshiko_pg](http://yoshiko-pg.github.io)
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+
+![よしこ](./image/yoshiko.png)
+
+よしこ [@yoshiko_pg](https://twitter.com/yoshiko_pg)
+
+in [Goodpatch inc.](http://goodpatch.com/jp)
+
+</script>
+
+
+<script layout type="text/x-markdown">
+### 画像って横幅が変わると<br>縦幅も一緒に変わりますよね
+
+<div class="resizable">
+  <img src="./image/cat.jpg">
+</div>
+</script>
+
+
+<script layout type="text/x-markdown">
+### そんな動きをするHTML要素が<br>ほしくなるときないですか？
+
+<div class="resizable">
+  <div class="box box-dummy"></div>
+</div>
+</script>
+
+
+<script layout type="text/x-markdown">
+### たとえば1:1
+
+<div class="resizable">
+  <div class="box box-1-1 num-4"></div>
+  <div class="box box-1-1 num-4"></div>
+  <div class="box box-1-1 num-4"></div>
+  <div class="box box-1-1 num-4"></div>
+</div>
+</script>
+
+
+<script layout type="text/x-markdown">
+### たとえば4:3
+
+<div class="resizable">
+  <div class="box box-4-3 num-4"></div>
+  <div class="box box-4-3 num-4"></div>
+  <div class="box box-4-3 num-4"></div>
+  <div class="box box-4-3 num-4"></div>
+  <div class="box box-4-3 num-4"></div>
+  <div class="box box-4-3 num-4"></div>
+  <div class="box box-4-3 num-4"></div>
+  <div class="box box-4-3 num-4"></div>
+</div>
+</script>
+
+
+<script layout type="text/x-markdown">
+### heightには<br>何を指定したらいいでしょうか？
+
+<div class="resizable">
+  <div class="box box-1-1 num-2">
+  1:1
+  width: 50%;
+  height: ?;
+  </div>
+  <div class="box box-4-3 num-2">
+  4:3
+  width: 50%;
+  height: ?;
+  </div>
+</div>
+</script>
+
+
+<script layout type="text/x-markdown">
+### heightを%指定すると、親要素の縦幅に対する割合になってしまいます
+
+<div class="resizable">
+  <div class="box box-1-1 num-2">
+  width: 50%;
+  height: ?;
+  </div>
+  <div class="box box-4-3 num-2">
+  width: 50%;
+  height: ?;
+  </div>
+</div>
+</script>
+
+
+<script layout invert type="text/x-markdown"
+  backface="image/koara1.jpg" backface-filter="blur(1px) brightness(.6)">
+# 余裕？
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+## このコード読めますか？
+
+```javascript
+function sum (...nums) {
+  return nums.reduce((a, b) => a + b)
+}
+console.log(sum(1,2,3,4)); // 10
+
+
+function hi (name = 'Bob') {
+  console.log("Hi, my name is ${name}");
+}
+hi('Tom'); // Hi, my name is Tom
+hi();      // Hi, my name is Bob
+```
+</script>
+
+
+<script layout="cover" invert type="text/x-markdown"
+  backface="image/end.jpg" backface-filter="blur(2px) brightness(.6)">
+# Thank you
+[@yoshiko_pg](http://yoshiko-pg.github.io/)
+</script>
+
+
+<script src="lib/highlight.min.js"></script>
+<script src="lib/talkie.min.js"></script>
+<script>Talkie();</script>
+</body>
+</html>
