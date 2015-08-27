@@ -1,0 +1,187 @@
+@import url(http://fonts.googleapis.com/css?family=Titillium+Web);
+
+#control
+  color: gray;
+
+[layout=code] .hljs-comment
+  color: #555;
+
+.m0 *
+  margin: 0;
+
+.yoshiko *
+  font-family: 'Titillium Web',NotoSansCJKjp-Light,Open Sans,Hiragino Kaku Gothic ProN,Meiryo,sans-serif !important;
+  font-weight: normal !important;
+
+///////////////////////////////////////////////////////////////////////////////////////
+
+
+.resizable {
+  resize: both;
+  border: 3px solid blue;
+  width: 30%;
+  height: 30%;
+  max-width: 1000px;
+  overflow: auto;
+}
+.resizable img {
+  max-width: 100%;
+}
+.box {
+  background: gray;
+}
+.box:before {
+  content: '';
+  display: block;
+  padding-top: 100%;
+}
+.box.box-4-3:before {
+  padding-top: 75%;
+}
+.box.box-dummy:before {
+  padding-top: 66.7%;
+}
+.num-2 {
+  float: left;
+  width: calc(50% - 10px);
+  margin: 5px
+}
+.num-2:nth-of-type(2n+1) {
+  clear: both;
+}
+.num-4 {
+  float: left;
+  width: calc(25% - 10px);
+  margin: 5px
+}
+.num-4:nth-of-type(4n+1) {
+  clear: both;
+}
+
+
+
+
+[body-bg="win8"]
+  background: #250040;
+  background: linear-gradient(to bottom, #250040 0%, #2d004e 100%);
+
+
+
+[layout="win8"] {
+  padding: 30px;
+  position: relative;
+  font-family: 'メイリオ';
+  color: #fff;
+  font-size: 1.4rem;
+}
+[layout="win8"] .heading {
+  font-weight: normal;
+  margin: 0 auto 50px;
+  width: 90%;
+  font-size: 5rem;
+}
+[layout="win8"] .user {
+  position: absolute;
+  right: 5%;
+  top: 30px;
+}
+[layout="win8"] .user .icon {
+  width: 40px;
+  height: 40px;
+}
+[layout="win8"] .user .name {
+  margin-right: 10px;
+  font-size: 2.2rem;
+}
+[layout="win8"] .wrapper {
+  padding: 0 10%;
+  position: relative;
+}
+[layout="win8"] .wrapper::after {
+  content: '';
+  display: block;
+  clear: both;
+}
+[layout="win8"] .wrapper .grid {
+  margin: 5px;
+  float: left;
+  position: relative;
+/*
+      .content
+        display none
+
+      &.expand
+        position absolute
+        width 90%
+        height 90%
+        left 10%
+        right 10%
+        top 10%
+        bottom 10%
+        z-index 2
+        box-shadow 0 0 0 3000px rgba(0, 0, 0, 0.5)
+        &::before
+          display none
+        .content
+          position absolute
+          width 100%
+          height 100%
+          */
+}
+[layout="win8"] .wrapper .grid::before {
+  content: '';
+  display: block;
+}
+[layout="win8"] .wrapper .grid.grid--1-1 {
+  width: calc(12.5% - 10px);
+}
+[layout="win8"] .wrapper .grid.grid--1-1::before {
+  padding-top: calc(100% + 5px);
+}
+[layout="win8"] .wrapper .grid.grid--2-1 {
+  width: calc(25% - 10px);
+}
+[layout="win8"] .wrapper .grid.grid--2-1::before {
+  padding-top: 50%;
+}
+[layout="win8"] .wrapper .grid:nth-of-type(8n+0) {
+  background: #008299;
+}
+[layout="win8"] .wrapper .grid:nth-of-type(8n+1) {
+  background: #2672ec;
+}
+[layout="win8"] .wrapper .grid:nth-of-type(8n+2) {
+  background: #8c0095;
+}
+[layout="win8"] .wrapper .grid:nth-of-type(8n+3) {
+  background: #5133ab;
+}
+[layout="win8"] .wrapper .grid:nth-of-type(8n+4) {
+  background: #ac193d;
+}
+[layout="win8"] .wrapper .grid:nth-of-type(8n+5) {
+  background: #d24726;
+}
+[layout="win8"] .wrapper .grid:nth-of-type(8n+6) {
+  background: #008a00;
+}
+[layout="win8"] .wrapper .grid:nth-of-type(8n+7) {
+  background: #094ab2;
+}
+[layout="win8"] .wrapper .grid .thumb {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+}
+[layout="win8"] .wrapper .grid .thumb .icon {
+  color: #fff;
+  font-size: 12rem;
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  margin-left: -0.5em;
+  line-height: 1;
+}

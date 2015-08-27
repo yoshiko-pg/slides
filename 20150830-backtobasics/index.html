@@ -3,52 +3,15 @@
   <title>タイトル - @yoshiko_pg</title>
   <link rel="stylesheet" href="lib/talkie.min.css">
   <link rel="stylesheet" href="lib/talkie-default.min.css">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="dest/style.css">
   <link rel="stylesheet" href="lib/hljs-styles/railscasts.css">
 </head>
 <body>
 
-<section layout="win8">
-  <h1 class="heading">スタート</h1>
-  <div class="user"><span class="name">yoshiko-pg</span><img src="./images/icon.jpg" class="icon"></div>
-  <div class="wrapper"><a href="#2" class="grid grid--2-1">
-  <div class="thumb"><i class="icon ion-android-mail"></i></div></a><a href="#3" class="grid grid--2-1"></a><a href="#4" class="grid grid--2-1"></a><a href="#5" class="grid grid--2-1"></a><a href="#6" class="grid grid--2-1"></a><a href="#7" class="grid grid--1-1"></a><a href="#8" class="grid grid--1-1"></a><a href="#9" class="grid grid--2-1"></a><a href="#10" class="grid grid--2-1"></a><a href="#11" class="grid grid--2-1"></a><a href="#12" class="grid grid--2-1"></a><a href="#13" class="grid grid--2-1"></a><a href="#14" class="grid grid--2-1"></a><a href="#15" class="grid grid--2-1"></a><a href="#16" class="grid grid--2-1"></a><a href="#17" class="grid grid--2-1"></a><a href="#18" class="grid grid--2-1"></a></div>
-</section>
-
-
-<!--
-# CSSで固定比率のレイアウト
-
-* 画像って横幅が縮まると縦幅も一緒に縮まりますよね
-  元画像の比率を保ってくれます
-* そんな動きの要素がほしくなるときないですか？
-* たとえば1:1
-* たとえば4:3
-* 高さはどうやって指定したらいいでしょうか？
-* 高さの指定に横幅を持ち込みたい！！
-* 横幅を100%として縦幅を%指定したい！！
-* そんなときにはこれ
-* padding
-* mdnをみてみよう
-* <percentage> 包含ブロックの幅に対する割合です。
-* 親要素の幅に対する割合
-* やったー（親要素と自分の幅が同じ場合）
-* 親要素と自分の幅が違うとき困る
-* 自分の幅を基準にするには・・・？
-* 逆転の発想 自分の子要素をスペーサーにしよう
-* before / after
-* できたー
-* というわけで（書き方まとめ）
-* ちなみにmarginでも
-* demo
-* 宣伝
-* ありがとうございました
--->
-
 
 <script layout="cover" invert type="text/x-markdown"
-  backface="image/sai.jpg" backface-filter="brightness(.4)">
-# CSSで固定比率レイアウト
+  backface="image/cover.jpg" backface-filter="blur(2px) brightness(.7)">
+# CSSで固定比率<br>レイアウト
 
 2015.8.30 [@yoshiko_pg](http://yoshiko-pg.github.io)
 </script>
@@ -56,11 +19,13 @@
 
 <script layout="bullets" type="text/x-markdown">
 
+## 自己紹介
+
 ![よしこ](./image/yoshiko.png)
 
 よしこ [@yoshiko_pg](https://twitter.com/yoshiko_pg)
 
-in [Goodpatch inc.](http://goodpatch.com/jp)
+Frontend Engineer in [Goodpatch inc.](http://goodpatch.com/jp)
 
 </script>
 
@@ -116,13 +81,13 @@ in [Goodpatch inc.](http://goodpatch.com/jp)
 
 <div class="resizable">
   <div class="box box-1-1 num-2">
-  1:1
-  width: 50%;
+  1:1<br>
+  width: 50%;<br>
   height: ?;
   </div>
   <div class="box box-4-3 num-2">
-  4:3
-  width: 50%;
+  4:3<br>
+  width: 50%;<br>
   height: ?;
   </div>
 </div>
@@ -145,9 +110,30 @@ in [Goodpatch inc.](http://goodpatch.com/jp)
 </script>
 
 
-<script layout invert type="text/x-markdown"
-  backface="image/koara1.jpg" backface-filter="blur(1px) brightness(.6)">
-# 余裕？
+<script layout type="text/x-markdown">
+## 高さの指定に<br>横幅を持ち込みたい！！
+</script>
+
+
+<script layout type="text/x-markdown">
+# そんなときにはこれ
+# margin & padding
+</script>
+
+
+<script layout type="text/x-markdown">
+## どういうこと？
+## MDNをみてみよう
+</script>
+
+
+<script layout type="text/x-markdown">
+percentage 包含ブロックの幅に対する割合です。
+</script>
+
+
+<script layout type="text/x-markdown">
+percentage 包含ブロックの幅に対する割合です。
 </script>
 
 
@@ -170,12 +156,138 @@ hi();      // Hi, my name is Bob
 </script>
 
 
+<script layout type="text/x-markdown">
+# やったー！！！
+
+<div class="resizable">
+  <div class="box box-1-1 num-2">
+  width: 100%;
+  padding-top: 100%;
+  </div>
+  <div class="box box-4-3 num-2">
+  width: 100%;
+  padding-top: 75%;
+  </div>
+</div>
+</script>
+
+
+<script layout type="text/x-markdown">
+# あれ？
+
+<div class="resizable">
+  <div class="box box-1-1 num-2">
+  width: 50%;
+  padding-top: 100%;
+  </div>
+  <div class="box box-4-3 num-2">
+  width: 50%;
+  padding-top: 75%;
+  </div>
+</div>
+</script>
+
+
+<script layout type="text/x-markdown">
+### 親要素と自分の幅が違うとき困る・・・
+
+<div class="resizable">
+  <div class="box box-1-1 num-2">
+  width: 50%;
+  padding-top: 100%;
+  </div>
+  <div class="box box-4-3 num-2">
+  width: 50%;
+  padding-top: 75%;
+  </div>
+</div>
+</script>
+
+
+<script layout type="text/x-markdown">
+### 自分の幅を基準にしたい！！！
+</script>
+
+
+<script layout type="text/x-markdown">
+* 自分にpaddingを指定すると100%の基準が親要素の幅になってしまう
+↓
+* 子要素にpaddingを指定すると100%の基準が自分の幅になる
+</script>
+
+
+<script layout type="text/x-markdown">
+# :before & :after
+</script>
+
+
+<script layout type="text/x-markdown">
+# できたー！
+
+<div class="resizable">
+  <div class="box box-1-1 num-2">
+  width: 50%;
+  padding-top: 100%;
+  </div>
+  <div class="box box-4-3 num-2">
+  width: 50%;
+  padding-top: 75%;
+  </div>
+</div>
+</script>
+
+
+<script layout type="text/x-markdown">
+まとめ
+</script>
+
+
+<script layout type="text/x-markdown">
+こんなのもできます
+</script>
+
+
+<script layout type="text/x-markdown">
+## 宣伝
+本でます
+</script>
+
+
 <script layout="cover" invert type="text/x-markdown"
   backface="image/end.jpg" backface-filter="blur(2px) brightness(.6)">
 # Thank you
 [@yoshiko_pg](http://yoshiko-pg.github.io/)
 </script>
 
+
+<!--
+# CSSで固定比率のレイアウト
+
+* 画像って横幅が縮まると縦幅も一緒に縮まりますよね
+  元画像の比率を保ってくれます
+* そんな動きの要素がほしくなるときないですか？
+* たとえば1:1
+* たとえば4:3
+* 高さはどうやって指定したらいいでしょうか？
+* 高さの指定に横幅を持ち込みたい！！
+* 横幅を100%として縦幅を%指定したい！！
+* そんなときにはこれ
+* padding
+* mdnをみてみよう
+* <percentage> 包含ブロックの幅に対する割合です。
+* 親要素の幅に対する割合
+* やったー（親要素と自分の幅が同じ場合）
+* 親要素と自分の幅が違うとき困る
+* 自分の幅を基準にするには・・・？
+* 逆転の発想 自分の子要素をスペーサーにしよう
+* before / after
+* できたー
+* というわけで（書き方まとめ）
+* ちなみにmarginでも
+* demo
+* 宣伝
+* ありがとうございました
+-->
 
 <script src="lib/highlight.min.js"></script>
 <script src="lib/talkie.min.js"></script>
