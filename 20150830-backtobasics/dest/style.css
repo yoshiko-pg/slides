@@ -1,57 +1,135 @@
-@import url("http://fonts.googleapis.com/css?family=TitilliumWeb");
 #control {
   color: #808080;
+}
+a {
+  color: #8fc0ff;
+  -webkit-transition: color 0.1s ease-in-out;
+          transition: color 0.1s ease-in-out;
 }
 [layout=code] .hljs-comment {
   color: #555;
 }
+[layout][invert] a:link,
+[layout][invert] a:visited,
+[layout][invert] a:active {
+  color: #8fc0ff;
+}
+[layout][invert] a:hover {
+  color: #c7e0ff;
+}
 .m0 * {
   margin: 0;
-}
-.yoshiko * {
-  font-family: 'Titillium Web', NotoSansCJKjp-Light, Open Sans, Hiragino Kaku Gothic ProN, Meiryo, sans-serif !important;
-  font-weight: normal !important;
 }
 .resizable {
   resize: both;
   border: 3px solid #00f;
   width: 30%;
-  height: 30%;
+  height: 35%;
   max-width: 1000px;
-  overflow: auto;
+  overflow: hidden;
+  position: relative;
+}
+.resizable::before {
+  content: 'draggable!';
+  display: block;
+  position: absolute;
+  right: 6px;
+  bottom: 8px;
+  font-size: 0.6rem;
+  color: #fff;
+  background: #8fc0ff;
+  border-radius: 20px;
+  padding: 3px 10px;
+  font-weight: bold;
+}
+.resizable::after {
+  content: '';
+  display: block;
+  position: absolute;
+  right: 4px;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-top: 10px solid #8fc0ff;
+  -webkit-transform: rotate(-40deg);
+      -ms-transform: rotate(-40deg);
+          transform: rotate(-40deg);
 }
 .resizable img {
   max-width: 100%;
 }
+.resizable.clear-2 > * {
+  float: left;
+  width: calc(100% / 2 - 10px);
+  margin: 5px;
+}
+.resizable.clear-2 > * *:nth-of-type(2n+1) {
+  clear: both;
+}
+.resizable.clear-3 > * {
+  float: left;
+  width: calc(100% / 3 - 10px);
+  margin: 5px;
+}
+.resizable.clear-3 > * *:nth-of-type(3n+1) {
+  clear: both;
+}
+.resizable.clear-4 > * {
+  float: left;
+  width: calc(100% / 4 - 10px);
+  margin: 5px;
+}
+.resizable.clear-4 > * *:nth-of-type(4n+1) {
+  clear: both;
+}
+.resizable.clear-5 > * {
+  float: left;
+  width: calc(100% / 5 - 10px);
+  margin: 5px;
+}
+.resizable.clear-5 > * *:nth-of-type(5n+1) {
+  clear: both;
+}
+.resizable.clear-6 > * {
+  float: left;
+  width: calc(100% / 6 - 10px);
+  margin: 5px;
+}
+.resizable.clear-6 > * *:nth-of-type(6n+1) {
+  clear: both;
+}
 .box {
   background: #808080;
+  position: relative;
 }
-.box:before {
+.box::before {
   content: '';
   display: block;
   padding-top: 100%;
 }
-.box.box-4-3:before {
+.box.bad {
+  height: 100%;
+}
+.box.bad::before {
+  display: none;
+}
+.box.box-4-3::before {
   padding-top: 75%;
 }
-.box.box-dummy:before {
-  padding-top: 66.7%;
+.box.box-6-4::before {
+  padding-top: 66.66666666666667%;
 }
-.num-2 {
-  float: left;
-  width: calc(50% - 10px);
-  margin: 5px;
-}
-.num-2:nth-of-type(2n+1) {
-  clear: both;
-}
-.num-4 {
-  float: left;
-  width: calc(25% - 10px);
-  margin: 5px;
-}
-.num-4:nth-of-type(4n+1) {
-  clear: both;
+.box .inner {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  color: #fff;
+  font-weight: bold;
+  padding-top: 10%;
 }
 [body-bg="win8"] {
   background: #250040;
@@ -97,6 +175,7 @@
   margin: 5px;
   float: left;
   position: relative;
+}
 /*
       .content
         display none
@@ -118,7 +197,6 @@
           width 100%
           height 100%
           */
-}
 [layout="win8"] .wrapper .grid::before {
   content: '';
   display: block;
@@ -135,28 +213,28 @@
 [layout="win8"] .wrapper .grid.grid--2-1::before {
   padding-top: 50%;
 }
-[layout="win8"] .wrapper .grid:nth-of-type(8n+0) {
+[layout="win8"] .wrapper .gridnth-of-type(8n+0) {
   background: #008299;
 }
-[layout="win8"] .wrapper .grid:nth-of-type(8n+1) {
+[layout="win8"] .wrapper .gridnth-of-type(8n+1) {
   background: #2672ec;
 }
-[layout="win8"] .wrapper .grid:nth-of-type(8n+2) {
+[layout="win8"] .wrapper .gridnth-of-type(8n+2) {
   background: #8c0095;
 }
-[layout="win8"] .wrapper .grid:nth-of-type(8n+3) {
+[layout="win8"] .wrapper .gridnth-of-type(8n+3) {
   background: #5133ab;
 }
-[layout="win8"] .wrapper .grid:nth-of-type(8n+4) {
+[layout="win8"] .wrapper .gridnth-of-type(8n+4) {
   background: #ac193d;
 }
-[layout="win8"] .wrapper .grid:nth-of-type(8n+5) {
+[layout="win8"] .wrapper .gridnth-of-type(8n+5) {
   background: #d24726;
 }
-[layout="win8"] .wrapper .grid:nth-of-type(8n+6) {
+[layout="win8"] .wrapper .gridnth-of-type(8n+6) {
   background: #008a00;
 }
-[layout="win8"] .wrapper .grid:nth-of-type(8n+7) {
+[layout="win8"] .wrapper .gridnth-of-type(8n+7) {
   background: #094ab2;
 }
 [layout="win8"] .wrapper .grid .thumb {

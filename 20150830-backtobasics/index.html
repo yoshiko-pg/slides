@@ -17,7 +17,8 @@
 </script>
 
 
-<script layout="bullets" type="text/x-markdown">
+<script layout="bullets" invert type="text/x-markdown"
+  backface="image/bg-profile.png" backface-filter="blur(2px) brightness(.5)">
 
 ## 自己紹介
 
@@ -43,7 +44,7 @@ Frontend Engineer in [Goodpatch inc.](http://goodpatch.com/jp)
 ### そんな動きをするHTML要素が<br>ほしくなるときないですか？
 
 <div class="resizable">
-  <div class="box box-dummy"></div>
+  <div class="box box-6-4"></div>
 </div>
 </script>
 
@@ -51,11 +52,11 @@ Frontend Engineer in [Goodpatch inc.](http://goodpatch.com/jp)
 <script layout type="text/x-markdown">
 ### たとえば1:1
 
-<div class="resizable">
-  <div class="box box-1-1 num-4"></div>
-  <div class="box box-1-1 num-4"></div>
-  <div class="box box-1-1 num-4"></div>
-  <div class="box box-1-1 num-4"></div>
+<div class="resizable clear-4">
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
 </div>
 </script>
 
@@ -63,15 +64,13 @@ Frontend Engineer in [Goodpatch inc.](http://goodpatch.com/jp)
 <script layout type="text/x-markdown">
 ### たとえば4:3
 
-<div class="resizable">
-  <div class="box box-4-3 num-4"></div>
-  <div class="box box-4-3 num-4"></div>
-  <div class="box box-4-3 num-4"></div>
-  <div class="box box-4-3 num-4"></div>
-  <div class="box box-4-3 num-4"></div>
-  <div class="box box-4-3 num-4"></div>
-  <div class="box box-4-3 num-4"></div>
-  <div class="box box-4-3 num-4"></div>
+<div class="resizable clear-3">
+  <div class="box box-4-3"></div>
+  <div class="box box-4-3"></div>
+  <div class="box box-4-3"></div>
+  <div class="box box-4-3"></div>
+  <div class="box box-4-3"></div>
+  <div class="box box-4-3"></div>
 </div>
 </script>
 
@@ -79,16 +78,20 @@ Frontend Engineer in [Goodpatch inc.](http://goodpatch.com/jp)
 <script layout type="text/x-markdown">
 ### heightには<br>何を指定したらいいでしょうか？
 
-<div class="resizable">
-  <div class="box box-1-1 num-2">
-  1:1<br>
-  width: 50%;<br>
-  height: ?;
+<div class="resizable clear-2">
+  <div class="box">
+    <div class="inner">
+      1:1<br>
+      width: 50%;<br>
+      height: ?;
+    </div>
   </div>
-  <div class="box box-4-3 num-2">
-  4:3<br>
-  width: 50%;<br>
-  height: ?;
+  <div class="box box-4-3">
+    <div class="inner">
+      4:3<br>
+      width: 50%;<br>
+      height: ?;
+    </div>
   </div>
 </div>
 </script>
@@ -97,14 +100,20 @@ Frontend Engineer in [Goodpatch inc.](http://goodpatch.com/jp)
 <script layout type="text/x-markdown">
 ### heightを%指定すると、親要素の縦幅に対する割合になってしまいます
 
-<div class="resizable">
-  <div class="box box-1-1 num-2">
-  width: 50%;
-  height: ?;
+<div class="resizable clear-2">
+  <div class="box bad" style="height: 50%;">
+    <div class="inner">
+      1:1<br>
+      width: 50%;<br>
+      height: 50%;
+    </div>
   </div>
-  <div class="box box-4-3 num-2">
-  width: 50%;
-  height: ?;
+  <div class="box box-4-3 bad" style="height: 37.5%;">
+    <div class="inner">
+      4:3<br>
+      width: 50%;<br>
+      height: 37.5%;
+    </div>
   </div>
 </div>
 </script>
@@ -159,12 +168,12 @@ hi();      // Hi, my name is Bob
 <script layout type="text/x-markdown">
 # やったー！！！
 
-<div class="resizable">
-  <div class="box box-1-1 num-2">
+<div class="resizable clear-2">
+  <div class="box">
   width: 100%;
   padding-top: 100%;
   </div>
-  <div class="box box-4-3 num-2">
+  <div class="box box-4-3">
   width: 100%;
   padding-top: 75%;
   </div>
@@ -175,12 +184,12 @@ hi();      // Hi, my name is Bob
 <script layout type="text/x-markdown">
 # あれ？
 
-<div class="resizable">
-  <div class="box box-1-1 num-2">
+<div class="resizable clear-2">
+  <div class="box">
   width: 50%;
   padding-top: 100%;
   </div>
-  <div class="box box-4-3 num-2">
+  <div class="box box-4-3">
   width: 50%;
   padding-top: 75%;
   </div>
@@ -191,12 +200,12 @@ hi();      // Hi, my name is Bob
 <script layout type="text/x-markdown">
 ### 親要素と自分の幅が違うとき困る・・・
 
-<div class="resizable">
-  <div class="box box-1-1 num-2">
+<div class="resizable clear-2">
+  <div class="box">
   width: 50%;
   padding-top: 100%;
   </div>
-  <div class="box box-4-3 num-2">
+  <div class="box box-4-3">
   width: 50%;
   padding-top: 75%;
   </div>
@@ -224,12 +233,12 @@ hi();      // Hi, my name is Bob
 <script layout type="text/x-markdown">
 # できたー！
 
-<div class="resizable">
-  <div class="box box-1-1 num-2">
+<div class="resizable clear-2">
+  <div class="box">
   width: 50%;
   padding-top: 100%;
   </div>
-  <div class="box box-4-3 num-2">
+  <div class="box box-4-3">
   width: 50%;
   padding-top: 75%;
   </div>
