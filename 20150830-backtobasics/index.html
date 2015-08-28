@@ -26,7 +26,7 @@
 
 よしこ [@yoshiko_pg](https://twitter.com/yoshiko_pg)
 
-Frontend Engineer in [Goodpatch inc.](http://goodpatch.com/jp)
+Frontend engineer at [Goodpatch, Inc.](http://goodpatch.com/jp)
 
 </script>
 
@@ -119,48 +119,69 @@ Frontend Engineer in [Goodpatch inc.](http://goodpatch.com/jp)
 </script>
 
 
-<script layout type="text/x-markdown">
+<script layout="bullets-invert" type="text/x-markdown">
 ## 高さの指定に<br>横幅を持ち込みたい！！
 </script>
 
 
-<script layout type="text/x-markdown">
-# そんなときにはこれ
-# margin & padding
+<script layout="bullets-invert" type="text/x-markdown">
+## そんなときに<br>使えるプロパティが
 </script>
 
 
-<script layout type="text/x-markdown">
-## どういうこと？
-## MDNをみてみよう
+<script layout="cover" invert type="text/x-markdown"
+  backface="image/don.jpg" backface-filter="blur(2px) brightness(.4)">
+# margin<br>&<br>padding
 </script>
 
 
-<script layout type="text/x-markdown">
-percentage 包含ブロックの幅に対する割合です。
+<script layout="bullets" type="text/x-markdown">
+## 本当にできるの？<br>MDNをみてみよう
+
+* [margin - CSS | MDN](https://developer.mozilla.org/ja/docs/Web/CSS/margin)
+* [padding - CSS | MDN](https://developer.mozilla.org/ja/docs/Web/CSS/padding)
+
+*MDN = Mozilla Developer Network*
 </script>
 
 
-<script layout type="text/x-markdown">
-percentage 包含ブロックの幅に対する割合です。
+<script layout="bullets" invert type="text/x-markdown"
+  backface="image/mdn.png">
+</script>
+
+
+<script layout="bullets" invert type="text/x-markdown"
+  backface="image/mdn.png" backface-filter="blur(2px) brightness(.2)">
+<h3 style="text-align: left;">
+&lt;percentage&gt;<br>
+　包含ブロックの**幅**に対する割合です。
+</h3>
+</script>
+
+
+<script layout="bullets-invert" type="text/x-markdown">
+## 上下左右どのpaddingでも
+## 親要素の幅が基準になる
+
+*ここ大事*
 </script>
 
 
 <script layout="code" type="text/x-markdown">
-## このコード読めますか？
+## つまり・・・？
 
-```javascript
-function sum (...nums) {
-  return nums.reduce((a, b) => a + b)
+```css
+.box-1-1 {
+  width: 50%;
+  /* height: 50%; */
+  padding-top: 50%;
 }
-console.log(sum(1,2,3,4)); // 10
 
-
-function hi (name = 'Bob') {
-  console.log("Hi, my name is ${name}");
-}
-hi('Tom'); // Hi, my name is Tom
-hi();      // Hi, my name is Bob
+/*
+width   = 基準が親要素の幅
+height  = 基準が親要素の高さ
+padding = 基準が親要素の幅
+*/
 ```
 </script>
 
@@ -170,63 +191,90 @@ hi();      // Hi, my name is Bob
 
 <div class="resizable clear-2">
   <div class="box">
-  width: 100%;
-  padding-top: 100%;
+    <div class="inner">
+      1:1<br>
+      width: 50%;<br>
+      <strong>padding-top: 50%;</strong>
+    </div>
   </div>
   <div class="box box-4-3">
-  width: 100%;
-  padding-top: 75%;
+    <div class="inner">
+      4:3<br>
+      width: 50%;<br>
+      <strong>padding-top: 37.5%;</strong>
+    </div>
   </div>
 </div>
 </script>
 
 
-<script layout type="text/x-markdown">
-# あれ？
+<script layout="bullets" type="text/x-markdown">
+### でもwidthが変わるたびに
+### 割合を計算するのは面倒
 
-<div class="resizable clear-2">
-  <div class="box">
+width : padding-top が 4 : 3 で  
+どちらも親要素の幅を100%としているとき  
+
+* width 100% : padding-top 75%
+* width 50% : padding-top 37.5%
+* width 30% : padding-top 22.5%
+* width 13% : padding-top 9.75%
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+### 親要素の横幅ではなく自分の横幅を
+### 基準にしてくれればいいのに・・・
+
+width : padding-top が 4 : 3 で  
+paddingがwidthを100%としているとき  
+
+* width 100% : padding-top 75% \(100%の75%=75%\)
+* width 50% : padding-top 75% \(50%の75%=37.5%\)
+* width 30% : padding-top 75% \(30%の75%=22.5%\)
+* width 13% : padding-top 75% \(13%の75%=9.75%\)
+</script>
+
+
+<script layout type="text/x-markdown">
+### 自分にpaddingを指定すると<br>親要素の幅を100%の基準にしてしまう
+### ↓
+### 子要素にpaddingを指定すると<br>親である自分の幅を100%の基準にできる
+</script>
+
+
+<script layout="bullets-invert" type="text/x-markdown">
+# 便利な子要素といえば
+</script>
+
+
+<script layout="cover" invert type="text/x-markdown"
+  backface="image/don.jpg" backface-filter="blur(2px) brightness(.4)">
+# ::before<br>&<br>::after
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+```css
+/*
+paddingを自分で持たず、擬似要素に持たせることで
+paddingの基準を自分の横幅にできる
+*/
+
+.box-1-1 {
   width: 50%;
+}
+.box-1-1::before {
   padding-top: 100%;
-  </div>
-  <div class="box box-4-3">
+}
+
+.box-4-3 {
   width: 50%;
+}
+.box-4-3::before {
   padding-top: 75%;
-  </div>
-</div>
-</script>
-
-
-<script layout type="text/x-markdown">
-### 親要素と自分の幅が違うとき困る・・・
-
-<div class="resizable clear-2">
-  <div class="box">
-  width: 50%;
-  padding-top: 100%;
-  </div>
-  <div class="box box-4-3">
-  width: 50%;
-  padding-top: 75%;
-  </div>
-</div>
-</script>
-
-
-<script layout type="text/x-markdown">
-### 自分の幅を基準にしたい！！！
-</script>
-
-
-<script layout type="text/x-markdown">
-* 自分にpaddingを指定すると100%の基準が親要素の幅になってしまう
-↓
-* 子要素にpaddingを指定すると100%の基準が自分の幅になる
-</script>
-
-
-<script layout type="text/x-markdown">
-# :before & :after
+}
+```
 </script>
 
 
@@ -235,35 +283,74 @@ hi();      // Hi, my name is Bob
 
 <div class="resizable clear-2">
   <div class="box">
-  width: 50%;
-  padding-top: 100%;
+    <div class="inner">
+      1:1<br>
+      width: 50%;<br>
+      <strong>padding-top: 100%;</strong>
+    </div>
   </div>
   <div class="box box-4-3">
-  width: 50%;
-  padding-top: 75%;
+    <div class="inner">
+      4:3<br>
+      width: 50%;<br>
+      <strong>padding-top: 75%;</strong>
+    </div>
   </div>
 </div>
+
+[比較](#17)
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+比率固定した要素の中はpaddingでいっぱいなので  
+中身を置くには絶対位置指定(absolute)の.innerが必要
+
+```css
+.box {
+  position: relative;
+}
+.box .inner {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/*
+<div class="box box-1-1">
+  <div class="inner">コンテンツ</div>
+</div>
+*/
+```
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## まとめ
+
+* heightは親要素の縦幅が基準なので自分の縦横比を固定できない
+* **marginとpaddingの%指定は上下左右とも親要素の横幅が基準**
+* padding-topをスペーサーにすれば比率固定の要素が作れる
+* 親ではなく自分の横幅を基準にしたい場合は擬似要素を使おう
+* 中身を置く場合は別途absoluteなインナー用の要素を追加
 </script>
 
 
 <script layout type="text/x-markdown">
-まとめ
-</script>
+## 本が出ます
 
+2015年9月 Amazonで予約開始
 
-<script layout type="text/x-markdown">
-こんなのもできます
-</script>
+![よしこ](./image/yoshiko.png)
 
-
-<script layout type="text/x-markdown">
-## 宣伝
-本でます
+↑ marginを使った比率固定のテクニック紹介してます
 </script>
 
 
 <script layout="cover" invert type="text/x-markdown"
-  backface="image/end.jpg" backface-filter="blur(2px) brightness(.6)">
+  backface="image/end.gif" backface-filter="blur(3px) brightness(.4)">
 # Thank you
 [@yoshiko_pg](http://yoshiko-pg.github.io/)
 </script>
@@ -300,6 +387,15 @@ hi();      // Hi, my name is Bob
 
 <script src="lib/highlight.min.js"></script>
 <script src="lib/talkie.min.js"></script>
-<script>Talkie();</script>
+<script>
+Talkie();
+
+// リンクは別タブ
+var i, links = document.querySelectorAll("a[href^='http']")
+for(i=0; i<links.length; i++) {
+  links[i].setAttribute('target', '_blank');
+}
+</script>
+</script>
 </body>
 </html>

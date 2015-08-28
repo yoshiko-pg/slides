@@ -23,8 +23,8 @@ a {
 .resizable {
   resize: both;
   border: 3px solid #00f;
-  width: 30%;
-  height: 35%;
+  width: 50%;
+  height: 50%;
   max-width: 1000px;
   overflow: hidden;
   position: relative;
@@ -130,6 +130,9 @@ a {
   color: #fff;
   font-weight: bold;
   padding-top: 10%;
+}
+.box strong {
+  color: #ff0;
 }
 [body-bg="win8"] {
   background: #250040;
