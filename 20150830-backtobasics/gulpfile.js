@@ -3,11 +3,11 @@ var $ = require('gulp-load-plugins')();
 var browserSync = require('browser-sync');
 
 gulp.task('stylus', function(){
-  gulp.src('src/*.stylus')
+  gulp.src('./*.stylus')
     .pipe($.plumber())
     .pipe($.stylus())
     .pipe($.autoprefixer('last 2 version'))
-    .pipe(gulp.dest('dest'))
+    .pipe(gulp.dest('./'))
     .pipe(browserSync.reload({stream: true, once: true}))
     ;
 });
@@ -23,6 +23,6 @@ gulp.task('reload', function(){
 });
 
   gulp.task('default', ['serve', 'stylus'], function(){
-  gulp.watch('src/*.stylus', ['stylus']);
+  gulp.watch('./*.stylus', ['stylus']);
   gulp.watch('index.html', ['reload']);
 });
