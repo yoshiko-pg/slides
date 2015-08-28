@@ -20,6 +20,10 @@ a {
 .m0 * {
   margin: 0;
 }
+.book img {
+  height: 55%;
+  margin: -20px auto;
+}
 .resizable {
   resize: both;
   border: 3px solid #00f;
@@ -30,7 +34,7 @@ a {
   position: relative;
 }
 .resizable::before {
-  content: 'draggable!';
+  content: 'drag me!';
   display: block;
   position: absolute;
   right: 7px;
