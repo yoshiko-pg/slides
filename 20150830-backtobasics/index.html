@@ -355,34 +355,40 @@ marginを使った比率固定のテクニック紹介してます
 </script>
 
 
-<!--
-# CSSで固定比率のレイアウト
+<script layout="bullets-invert" type="text/x-markdown">
+# おまけ
+</script>
 
-* 画像って横幅が縮まると縦幅も一緒に縮まりますよね
-  元画像の比率を保ってくれます
-* そんな動きの要素がほしくなるときないですか？
-* たとえば1:1
-* たとえば4:3
-* 高さはどうやって指定したらいいでしょうか？
-* 高さの指定に横幅を持ち込みたい！！
-* 横幅を100%として縦幅を%指定したい！！
-* そんなときにはこれ
-* padding
-* mdnをみてみよう
-* <percentage> 包含ブロックの幅に対する割合です。
-* 親要素の幅に対する割合
-* やったー（親要素と自分の幅が同じ場合）
-* 親要素と自分の幅が違うとき困る
-* 自分の幅を基準にするには・・・？
-* 逆転の発想 自分の子要素をスペーサーにしよう
-* before / after
-* できたー
-* というわけで（書き方まとめ）
-* ちなみにmarginでも
-* demo
-* 宣伝
-* ありがとうございました
--->
+
+<script layout="bullets" type="text/x-markdown">
+## ↓の作り方
+
+<div class="resizable clear-2">
+</div>
+
+*動作可能ブラウザ：Chrome, Firefox, Safari*
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+[resize - CSS | MDN](https://developer.mozilla.org/ja/docs/Web/CSS/resize)
+
+```css
+.resizable {
+  resize: both;
+  overflow: hidden;
+
+  /* 以下装飾 */
+  border: 3px solid #00f;
+  width: 50%;
+  height: 53%;
+  max-width: 100%;
+  position: relative;
+}
+/* フキダシは::before, ::afterで */
+```
+</script>
+
 
 <script src="lib/highlight.min.js"></script>
 <script src="lib/talkie.min.js"></script>
