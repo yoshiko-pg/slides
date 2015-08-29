@@ -110,6 +110,8 @@ Frontend engineer at <a href="http://goodpatch.com/jp"><img src="./image/goodpat
 
 ## marginとpaddingの%指定は<br>上下方向*(top/bottom)*であっても<br>包含ブロックの**幅**が基準になる
 
+*幅 = 内容領域(Content area)。paddingの内側の、通常内容物が配置される領域*
+
 *仕様の日本語訳： [margin](http://momdo.github.io/css2/box.html#propdef-margin) / 
 [padding](http://momdo.github.io/css2/box.html#propdef-padding)*
 </script>
@@ -121,13 +123,11 @@ Frontend engineer at <a href="http://goodpatch.com/jp"><img src="./image/goodpat
 ```css
 .box-1-1 {
   width: 50%;
-  /* height: 50%; */
   padding-top: 50%;
 }
 
 /*
 width   = 基準が包含ブロックの幅
-height  = 基準が包含ブロックの高さ
 padding = 基準が包含ブロックの幅
 */
 ```
@@ -191,9 +191,9 @@ paddingが自分のwidthを100%の基準にしていると
 
 
 <script layout type="text/x-markdown">
-### 通常paddingは包含ブロックの幅を基準にする
+### 通常paddingは<br>包含ブロックの幅を基準にする
 ### ↓
-### 子要素にpaddingを指定すれば<br>親である自分の幅が基準になる
+### 子要素にpaddingを指定すれば<br>包含ブロックである自分の幅が基準になる
 </script>
 
 
@@ -287,7 +287,7 @@ paddingの基準を自分の横幅にできる
   <li>heightは包含ブロックの高さが基準なので幅との比率を固定できない</li>
   <li>**marginとpaddingの%指定は上下左右とも包含ブロックの横幅が基準**</li>
   <li>padding-topをスペーサーにすれば比率固定の要素が作れる</li>
-  <li>親ではなく自分の横幅を基準にしたい場合は擬似要素を使おう</li>
+  <li>自分の横幅を基準にしたい場合は擬似要素を使おう</li>
   <li>中身を置く場合は別途absoluteなインナー用の要素を追加</li>
 </ul>
 </script>
