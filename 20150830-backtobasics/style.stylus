@@ -17,8 +17,9 @@ a
 [layout][invert] a:hover
   color lighten(linkColor, 50%)
 
-.m0 *
-  margin 0
+.wide-list
+  margin-left 0
+  margin-right 0
 
 .yoshiko
   width 250px

@@ -32,7 +32,7 @@ Frontend engineer at <a href="http://goodpatch.com/jp"><img src="./image/goodpat
 
 
 <script layout type="text/x-markdown">
-### 画像って横幅が変わると<br>縦幅も一緒に変わりますよね
+### 画像って横幅が変わると<br>高さも一緒に変わりますよね
 
 <div class="resizable">
   <img src="./image/cat.jpg">
@@ -68,7 +68,7 @@ Frontend engineer at <a href="http://goodpatch.com/jp"><img src="./image/goodpat
 
 
 <script layout type="text/x-markdown">
-### heightを%指定しても、<br>親要素の縦幅に左右されてしまいます
+### heightを%指定しても、<br>包含ブロックの高さに左右されてしまいます
 
 <div class="resizable clear-2">
   <div class="box bad" style="height: 50%;">
@@ -108,9 +108,7 @@ Frontend engineer at <a href="http://goodpatch.com/jp"><img src="./image/goodpat
 <script layout type="text/x-markdown">
 # 今日伝えたいこと
 
-## marginとpaddingの%指定は<br>上下方向*(top/bottom)*であっても<br>親要素の**幅**が基準になる
-
-*※幅 = widthではなくpaddingの内側にあたる、内容物を置ける領域の幅*
+## marginとpaddingの%指定は<br>上下方向*(top/bottom)*であっても<br>包含ブロックの**幅**が基準になる
 
 *仕様の日本語訳： [margin](http://momdo.github.io/css2/box.html#propdef-margin) / 
 [padding](http://momdo.github.io/css2/box.html#propdef-padding)*
@@ -128,9 +126,9 @@ Frontend engineer at <a href="http://goodpatch.com/jp"><img src="./image/goodpat
 }
 
 /*
-width   = 基準が親要素の幅
-height  = 基準が親要素の高さ
-padding = 基準が親要素の幅
+width   = 基準が包含ブロックの幅
+height  = 基準が包含ブロックの高さ
+padding = 基準が包含ブロックの幅
 */
 ```
 </script>
@@ -163,7 +161,7 @@ padding = 基準が親要素の幅
 ### 割合を計算するのは面倒
 
 width:padding-top を4:3にしたいとき  
-どちらも親要素の幅を100%の基準にしていると  
+どちらも包含ブロックの幅を100%の基準にしていると  
 
 * width 100% : padding-top 75%
 * width 50% : padding-top 37.5%
@@ -175,23 +173,25 @@ width:padding-top を4:3にしたいとき
 
 
 <script layout="bullets" type="text/x-markdown">
-### paddingが親要素の横幅ではなく
+### paddingが包含ブロックの横幅ではなく
 ### 自分の横幅を基準にしてくれれば…
 
 width:padding-topを4:3にしたいとき  
 paddingが自分のwidthを100%の基準にしていると  
 
-* width 100% : padding-top **75%** \(親要素の100%の75%=75%\)
-* width 50% : padding-top **75%** \(親要素の50%の75%=37.5%\)
-* width 30% : padding-top **75%** \(親要素の30%の75%=22.5%\)
-* width 13% : padding-top **75%** \(親要素の13%の75%=9.75%\)
+<ul class="wide-list">
+  <li>width 100% : padding-top **75%** \(包含ブロックの100%の75%=75%\)</li>
+  <li>width 50% : padding-top **75%** \(包含ブロックの50%の75%=37.5%\)</li>
+  <li>width 30% : padding-top **75%** \(包含ブロックの30%の75%=22.5%\)</li>
+  <li>width 13% : padding-top **75%** \(包含ブロックの13%の75%=9.75%\)</li>
+</ul>
 
 楽！こうしたい！！
 </script>
 
 
 <script layout type="text/x-markdown">
-### 通常paddingは親要素の幅を基準にする
+### 通常paddingは包含ブロックの幅を基準にする
 ### ↓
 ### 子要素にpaddingを指定すれば<br>親である自分の幅が基準になる
 </script>
@@ -199,7 +199,7 @@ paddingが自分のwidthを100%の基準にしていると
 
 <script layout="bullets-invert" type="text/x-markdown">
 # こんなとき使える
-# 便利な子要素といえば
+# 便利な要素といえば
 </script>
 
 
@@ -283,11 +283,13 @@ paddingの基準を自分の横幅にできる
 <script layout="bullets" type="text/x-markdown">
 ## まとめ
 
-* heightは親要素の縦幅が基準なので自分の縦横比を固定できない
-* **marginとpaddingの%指定は上下左右とも親要素の横幅が基準**
-* padding-topをスペーサーにすれば比率固定の要素が作れる
-* 親ではなく自分の横幅を基準にしたい場合は擬似要素を使おう
-* 中身を置く場合は別途absoluteなインナー用の要素を追加
+<ul class="wide-list">
+  <li>heightは包含ブロックの高さが基準なので幅との比率を固定できない</li>
+  <li>**marginとpaddingの%指定は上下左右とも包含ブロックの横幅が基準**</li>
+  <li>padding-topをスペーサーにすれば比率固定の要素が作れる</li>
+  <li>親ではなく自分の横幅を基準にしたい場合は擬似要素を使おう</li>
+  <li>中身を置く場合は別途absoluteなインナー用の要素を追加</li>
+</ul>
 </script>
 
 

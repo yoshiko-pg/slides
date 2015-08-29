@@ -17,8 +17,9 @@ a {
 [layout][invert] a:hover {
   color: #c7e0ff;
 }
-.m0 * {
-  margin: 0;
+.wide-list {
+  margin-left: 0;
+  margin-right: 0;
 }
 .yoshiko {
   width: 250px;
