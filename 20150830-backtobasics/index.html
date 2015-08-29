@@ -18,15 +18,15 @@
 
 
 <script layout="bullets" invert type="text/x-markdown"
-  backface="image/bg-profile.png" backface-filter="blur(2px) brightness(.5)">
+  backface="image/bg-profile.png" backface-filter="blur(2px) brightness(.4)">
 
 ## 自己紹介
 
-![よしこ](./image/yoshiko.png)
+<img src="./image/yoshiko.png" class="yoshiko">
 
 よしこ [@yoshiko_pg](https://twitter.com/yoshiko_pg)
 
-Frontend engineer at [Goodpatch, Inc.](http://goodpatch.com/jp)
+Frontend engineer at <a href="http://goodpatch.com/jp"><img src="./image/goodpatch.png" class="company-logo"></a>
 
 </script>
 
@@ -41,7 +41,7 @@ Frontend engineer at [Goodpatch, Inc.](http://goodpatch.com/jp)
 
 
 <script layout type="text/x-markdown">
-### そんな動きをするHTML要素が<br>ほしくなるときないですか？
+### そんな動きをするHTML要素は<br>どうやったら作れるでしょうか？
 
 <div class="resizable">
   <div class="box box-6-4"></div>
@@ -50,47 +50,17 @@ Frontend engineer at [Goodpatch, Inc.](http://goodpatch.com/jp)
 
 
 <script layout type="text/x-markdown">
-### たとえば1:1
-
-<div class="resizable clear-4">
-  <div class="box"></div>
-  <div class="box"></div>
-  <div class="box"></div>
-  <div class="box"></div>
-</div>
-</script>
-
-
-<script layout type="text/x-markdown">
-### たとえば4:3
-
-<div class="resizable clear-3">
-  <div class="box box-4-3"></div>
-  <div class="box box-4-3"></div>
-  <div class="box box-4-3"></div>
-  <div class="box box-4-3"></div>
-  <div class="box box-4-3"></div>
-  <div class="box box-4-3"></div>
-</div>
-</script>
-
-
-<script layout type="text/x-markdown">
-### heightには<br>何を指定したらいいでしょうか？
+### たとえば1:1や4:3
 
 <div class="resizable clear-2">
   <div class="box">
     <div class="inner">
-      1:1<br>
-      width: 50%;<br>
-      height: ?;
+      幅1 : 高さ1
     </div>
   </div>
   <div class="box box-4-3">
     <div class="inner">
-      4:3<br>
-      width: 50%;<br>
-      height: ?;
+      幅4 : 高さ3
     </div>
   </div>
 </div>
@@ -98,7 +68,7 @@ Frontend engineer at [Goodpatch, Inc.](http://goodpatch.com/jp)
 
 
 <script layout type="text/x-markdown">
-### heightを%指定すると、親要素の縦幅に対する割合になってしまいます
+### heightを%指定しても、<br>親要素の縦幅に左右されてしまいます
 
 <div class="resizable clear-2">
   <div class="box bad" style="height: 50%;">
@@ -120,7 +90,7 @@ Frontend engineer at [Goodpatch, Inc.](http://goodpatch.com/jp)
 
 
 <script layout="bullets-invert" type="text/x-markdown">
-## 高さの指定に<br>横幅を持ち込みたい！！
+## 横幅に対する割合で<br>高さを指定したい！！
 </script>
 
 
@@ -135,35 +105,15 @@ Frontend engineer at [Goodpatch, Inc.](http://goodpatch.com/jp)
 </script>
 
 
-<script layout="bullets" type="text/x-markdown">
-## 本当にできるの？<br>MDNをみてみよう
+<script layout type="text/x-markdown">
+# 今日伝えたいこと
 
-* [margin - CSS | MDN](https://developer.mozilla.org/ja/docs/Web/CSS/margin)
-* [padding - CSS | MDN](https://developer.mozilla.org/ja/docs/Web/CSS/padding)
+## marginとpaddingの%指定は<br>上下方向*(top/bottom)*であっても<br>親要素の**幅**が基準になる
 
-*MDN = Mozilla Developer Network*
-</script>
+*※幅 = widthではなくpaddingの内側にあたる、内容物を置ける領域の幅*
 
-
-<script layout="bullets" invert type="text/x-markdown"
-  backface="image/mdn.png">
-</script>
-
-
-<script layout="bullets" invert type="text/x-markdown"
-  backface="image/mdn.png" backface-filter="blur(2px) brightness(.2)">
-<h3 style="text-align: left;">
-&lt;percentage&gt;<br>
-　包含ブロックの**幅**に対する割合です。
-</h3>
-</script>
-
-
-<script layout="bullets-invert" type="text/x-markdown">
-## 上下左右どのpaddingでも
-## 親要素の幅が基準になる
-
-*ここ大事*
+*仕様の日本語訳： [margin](http://momdo.github.io/css2/box.html#propdef-margin) / 
+[padding](http://momdo.github.io/css2/box.html#propdef-padding)*
 </script>
 
 
@@ -212,38 +162,43 @@ padding = 基準が親要素の幅
 ### でもwidthが変わるたびに
 ### 割合を計算するのは面倒
 
-width : padding-top が 4 : 3 で  
-どちらも親要素の幅を100%としているとき  
+width:padding-top を4:3にしたいとき  
+どちらも親要素の幅を100%の基準にしていると  
 
 * width 100% : padding-top 75%
 * width 50% : padding-top 37.5%
 * width 30% : padding-top 22.5%
 * width 13% : padding-top 9.75%
+
+都度計算が必要
 </script>
 
 
 <script layout="bullets" type="text/x-markdown">
-### 親要素の横幅ではなく自分の横幅を
-### 基準にしてくれればいいのに・・・
+### paddingが親要素の横幅ではなく
+### 自分の横幅を基準にしてくれれば…
 
-width : padding-top が 4 : 3 で  
-paddingがwidthを100%としているとき  
+width:padding-topを4:3にしたいとき  
+paddingが自分のwidthを100%の基準にしていると  
 
-* width 100% : padding-top 75% \(100%の75%=75%\)
-* width 50% : padding-top 75% \(50%の75%=37.5%\)
-* width 30% : padding-top 75% \(30%の75%=22.5%\)
-* width 13% : padding-top 75% \(13%の75%=9.75%\)
+* width 100% : padding-top **75%** \(親要素の100%の75%=75%\)
+* width 50% : padding-top **75%** \(親要素の50%の75%=37.5%\)
+* width 30% : padding-top **75%** \(親要素の30%の75%=22.5%\)
+* width 13% : padding-top **75%** \(親要素の13%の75%=9.75%\)
+
+楽！こうしたい！！
 </script>
 
 
 <script layout type="text/x-markdown">
-### 自分にpaddingを指定すると<br>親要素の幅を100%の基準にしてしまう
+### 通常paddingは親要素の幅を基準にする
 ### ↓
-### 子要素にpaddingを指定すると<br>親である自分の幅を100%の基準にできる
+### 子要素にpaddingを指定すれば<br>親である自分の幅が基準になる
 </script>
 
 
 <script layout="bullets-invert" type="text/x-markdown">
+# こんなとき使える
 # 便利な子要素といえば
 </script>
 
@@ -298,12 +253,12 @@ paddingの基準を自分の横幅にできる
   </div>
 </div>
 
-[比較](#17)
+[比較](#12)
 </script>
 
 
 <script layout="code" type="text/x-markdown">
-比率固定した要素の中はpaddingでいっぱいなので  
+ちなみに比率固定した要素はpaddingでいっぱいなので  
 中身を置くには絶対位置指定(absolute)の.innerが必要
 
 ```css
@@ -317,12 +272,10 @@ paddingの基準を自分の横幅にできる
   width: 100%;
   height: 100%;
 }
-
-/*
+/* HTML側は
 <div class="box">
   <div class="inner">コンテンツ</div>
-</div>
-*/
+</div> */
 ```
 </script>
 
