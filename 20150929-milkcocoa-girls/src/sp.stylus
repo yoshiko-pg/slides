@@ -1,17 +1,55 @@
-long-shadow(color, n)
-  n ?= 10
+long-shadow(color, n = 60)
   value = 1px 1px color
   for i in 2..n
     value = value, i * 1px i * 1px color
   return value
 
+btn-reset()
+  padding: 0
+  border: none
+  outline: none
+  appearance: none
+  user-select: none
+  -webkit-tap-highlight-color: rgba(0,0,0,0)
+
 
 ///////////////////////////////////////////////////////////
 @import url('https://fonts.googleapis.com/css?family=Passion+One')
 
+html
+  font-size: 62.5%
+
 body
   margin: 0
   padding: 0
+  background: #3d3636
+  color: #f2f2f2
+
+*, *::before, *::after
+  box-sizing: border-box
+  font-family: 'Passion One', cursive, 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+
+h1
+  margin: 1rem
+  font-size: 3rem
+  white-space: nowrap
+  overflow: hidden
+  text-overflow: ellipsis
+  line-height: 1
+  font-weight: normal
+  letter-spacing: 1px
+
+.author
+  font-size: 1.6rem
+  text-align: right
+  margin: 0 1rem
+  line-height: .6
+
+.remocon
+  position: absolute
+  bottom: 0
+  left: 0
+  right: 0
 
 .reactions
   &::after
@@ -25,34 +63,35 @@ body
     float: left
     overflow: hidden
     &:nth-of-type(1)
-      background: #c94b4a
+      background: #ed5552
       .reaction-btn
-        box-shadow: long-shadow(#9f3b3b, 50)
-        text-shadow: long-shadow(#687b35, 50)
-        background: #8ca846
-        font-size: 2.1rem
+        box-shadow: long-shadow(#bf4341)
+        text-shadow: long-shadow(#749039)
+        background: #94ba49
+        font-size: 3.4rem
     &:nth-of-type(2)
-      background: #efefef
+      background: #f2f2f2
       .reaction-btn
-        box-shadow: long-shadow(#c2c2c2, 50)
-        text-shadow: long-shadow(#b64424, 50)
-        background: #e55c2e
-        font-size: 3rem
+        box-shadow: long-shadow(#cdcdcd)
+        text-shadow: long-shadow(#c5592b)
+        background: #f6732b
+        font-size: 4.8rem
     &:nth-of-type(3)
-      background: #efa537
+      background: #ffad3d
       .reaction-btn
-        box-shadow: long-shadow(#c37e3d, 50)
-        text-shadow: long-shadow(#183645, 60)
-        background: #235671
-        font-size: 2.1rem
+        box-shadow: long-shadow(#db8a38)
+        text-shadow: long-shadow(#094659)
+        background: #0f6984
+        font-size: 3.4rem
     &:nth-of-type(4)
-      background: #82d6f8
+      background: #92defe
       .reaction-btn
-        box-shadow: long-shadow(#75a6c4, 50)
-        text-shadow: long-shadow(#9f3b3b, 60)
-        background: #e23c40
-        font-size: 2rem
+        box-shadow: long-shadow(#79b6d3)
+        text-shadow: long-shadow(#bf4341)
+        background: #ed5552
+        font-size: 3.2rem
     .reaction-btn
+      btn-reset()
       width: 72%
       height: 72%
       position: absolute
@@ -61,17 +100,44 @@ body
       top: 0
       bottom: 0
       margin: auto
-      padding: 0
       border-radius: 50%
       background: red
-      border: none
       color: white
       text-align: center
-      font-family: 'Passion One', cursive
-      outline: none
       overflow: hidden
-      appearance: none
-      user-select: none
-      -webkit-tap-highlight-color: rgba(0,0,0,0)
       &:active
-        transform: scale(1.1)
+        transform: scale(.93)
+.comment-box
+  padding: 1.8rem 1.3rem
+  .comment
+    padding: 0 1rem
+    font-size: 1.2rem
+    line-height: 3rem
+    vertical-align: top
+    appearance: none
+    background: #f2f2f2
+    border: none
+    border-radius: 5px
+    width: 78%
+    margin: 0
+    margin-right: 2%
+    color: #3d3636
+    box-shadow: long-shadow(#242020)
+    outline: none
+    &::placeholder
+      font-size: 1.8rem
+      color: #ccc
+  .send
+    btn-reset()
+    width: 20%
+    font-size: 1.2rem
+    line-height: 3rem
+    vertical-align: top
+    background: #ed5552
+    color: white
+    border-radius: 5px
+    font-size: 2rem
+    margin: 0
+    box-shadow: long-shadow(#242020)
+    &:active
+      transform: scale(.93)

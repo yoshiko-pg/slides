@@ -6,14 +6,17 @@ html(lang="ja")
     title りもこん
     link(rel='stylesheet', href='./dest/sp.css')
   body
-    .reactions
-      .reaction-box: button#www.reaction-btn www
-      .reaction-box: button#plus-1.reaction-btn +1
-      .reaction-box: button#kwsk.reaction-btn kwsk
-      .reaction-box: button#cheer.reaction-btn \Cheer/
-    .comment
-      input(type="text")
-      button send
+    h1 Extream lightning talk with milkcocoa
+    p.author @yoshiko_pg
+    .remocon
+      .reactions
+        .reaction-box: button#www.reaction-btn www
+        .reaction-box: button#plus-1.reaction-btn +1
+        .reaction-box: button#kwsk.reaction-btn kwsk
+        .reaction-box: button#cheer.reaction-btn \Cheer/
+      .comment-box
+        input.comment(type="text", placeholder="any comment?")
+        button.send(type="submit") send
 
     script(src='https://cdn.mlkcca.com/v2.0.0/milkcocoa.js')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js')
