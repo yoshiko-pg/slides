@@ -1,0 +1,27 @@
+doctype html
+html(lang="ja")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width,initial-scale=1,user-scalable=no")
+    title りもこん
+    link(rel='stylesheet', href='./dest/sp.css')
+  body
+    .reactions
+      .reaction-box: button#www.reaction-btn www
+      .reaction-box: button#plus-1.reaction-btn +1
+      .reaction-box: button#kwsk.reaction-btn kwsk
+      .reaction-box: button#cheer.reaction-btn \Cheer/
+    .comment
+      input(type="text")
+      button send
+
+    script(src='https://cdn.mlkcca.com/v2.0.0/milkcocoa.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/bacon.js/0.7.73/Bacon.min.js')
+    script(src='./dest/sp.js')
+    script.
+      if ('addEventListener' in document) {
+        document.addEventListener('DOMContentLoaded', function() {
+          FastClick.attach(document.body);
+        }, false);
+      }

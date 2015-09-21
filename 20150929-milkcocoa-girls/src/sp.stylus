@@ -1,0 +1,77 @@
+long-shadow(color, n)
+  n ?= 10
+  value = 1px 1px color
+  for i in 2..n
+    value = value, i * 1px i * 1px color
+  return value
+
+
+///////////////////////////////////////////////////////////
+@import url('https://fonts.googleapis.com/css?family=Passion+One')
+
+body
+  margin: 0
+  padding: 0
+
+.reactions
+  &::after
+    clear: both
+    display: block
+    content: ''
+  .reaction-box
+    width: 50%
+    padding-top: 50%
+    position: relative
+    float: left
+    overflow: hidden
+    &:nth-of-type(1)
+      background: #c94b4a
+      .reaction-btn
+        box-shadow: long-shadow(#9f3b3b, 50)
+        text-shadow: long-shadow(#687b35, 50)
+        background: #8ca846
+        font-size: 2.1rem
+    &:nth-of-type(2)
+      background: #efefef
+      .reaction-btn
+        box-shadow: long-shadow(#c2c2c2, 50)
+        text-shadow: long-shadow(#b64424, 50)
+        background: #e55c2e
+        font-size: 3rem
+    &:nth-of-type(3)
+      background: #efa537
+      .reaction-btn
+        box-shadow: long-shadow(#c37e3d, 50)
+        text-shadow: long-shadow(#183645, 60)
+        background: #235671
+        font-size: 2.1rem
+    &:nth-of-type(4)
+      background: #82d6f8
+      .reaction-btn
+        box-shadow: long-shadow(#75a6c4, 50)
+        text-shadow: long-shadow(#9f3b3b, 60)
+        background: #e23c40
+        font-size: 2rem
+    .reaction-btn
+      width: 72%
+      height: 72%
+      position: absolute
+      left: 0
+      right: 0
+      top: 0
+      bottom: 0
+      margin: auto
+      padding: 0
+      border-radius: 50%
+      background: red
+      border: none
+      color: white
+      text-align: center
+      font-family: 'Passion One', cursive
+      outline: none
+      overflow: hidden
+      appearance: none
+      user-select: none
+      -webkit-tap-highlight-color: rgba(0,0,0,0)
+      &:active
+        transform: scale(1.1)
