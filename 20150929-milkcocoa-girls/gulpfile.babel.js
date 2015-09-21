@@ -1,8 +1,10 @@
-var gulp = require('gulp');
-var $ = require('gulp-load-plugins')();
-var browserSync = require('browser-sync');
+import gulp from 'gulp';
+import gulpLoadPlugins from 'gulp-load-plugins';
+import browserSync from 'browser-sync';
 
-gulp.task('stylus', function(){
+const $ = gulpLoadPlugins();
+
+gulp.task('stylus', () => {
   gulp.src('./*.stylus')
     .pipe($.plumber())
     .pipe($.stylus())
@@ -12,17 +14,15 @@ gulp.task('stylus', function(){
     ;
 });
 
-gulp.task('serve', function(){
+gulp.task('serve', () => {
   browserSync.init(null, {
     server: {baseDir: './'}
   });
 });
 
-gulp.task('reload', function(){
-  browserSync.reload();
-});
+gulp.task('reload', () => browserSync.reload());
 
-  gulp.task('default', ['serve', 'stylus'], function(){
+gulp.task('default', ['serve', 'stylus'], () => {
   gulp.watch('./*.stylus', ['stylus']);
   gulp.watch('index.html', ['reload']);
 });
