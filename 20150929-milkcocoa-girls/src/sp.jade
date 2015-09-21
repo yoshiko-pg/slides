@@ -10,10 +10,10 @@ html(lang="ja")
     p.author @yoshiko_pg
     .remocon
       .reactions
-        .reaction-box: button#www.reaction-btn www
-        .reaction-box: button#plus-1.reaction-btn +1
-        .reaction-box: button#kwsk.reaction-btn kwsk
-        .reaction-box: button#cheer.reaction-btn \Cheer/
+        .reaction-box: button.reaction-btn(value='www') www
+        .reaction-box: button.reaction-btn(value='plus') +1
+        .reaction-box: button.reaction-btn(value='kwsk') kwsk
+        .reaction-box: button.reaction-btn(value='cheer') \cheer/
       .comment-box
         input.comment(type="text", placeholder="any comment?")
         button.send(type="submit") send
