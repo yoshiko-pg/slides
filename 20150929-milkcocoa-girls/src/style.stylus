@@ -34,3 +34,43 @@ a
   margin -20px auto
 
 ///////////////////////////////////////////////////////////////////////////////////////
+body
+  overflow hidden
+  &[body-bg$=invert]
+    .liver, .cheer
+      color: white
+
+.liver
+  font-size 2rem
+  position absolute
+  left 100%
+  top 0
+  transition left 6s linear
+  z-index: 1
+  white-space nowrap
+  &.move
+    left -100%
+
+.cheer
+  font-size 2rem
+  position absolute
+  left 0
+  bottom -2em
+  transition bottom .5s ease-in-out
+  z-index: 1
+  white-space nowrap
+  &.move
+    bottom 20px
+
+.like
+  position absolute
+  left 20%
+  top 50%
+  width 50px
+  height 50px
+  background url(../image/like.png) no-repeat left top
+  background-size contain
+  transition all .3s ease-in-out
+  &.move
+    margin-top -100px
+    opacity 0

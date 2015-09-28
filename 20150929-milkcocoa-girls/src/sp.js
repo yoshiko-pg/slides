@@ -7,4 +7,4 @@ Bacon.fromArray(buttons)
   .flatMap((e) => Bacon.fromEventTarget(e, 'click'))
   .map((e) => e.target.value)
   .log()
-  .onValue((value) => ds.send({message: value}));
+  .onValue((value) => ds.send({type: value}));
