@@ -60,57 +60,57 @@ h1
     clear: both
     display: block
     content: ''
-  .reaction-box
-    width: 50%
-    padding-top: 50%
-    position: relative
-    float: left
-    overflow: hidden
-    &:nth-of-type(1)
-      background: #ed5552
-      .reaction-btn
-        box-shadow: long-shadow(#bf4341)
-        text-shadow: long-shadow(#749039)
-        background: #94ba49
-        font-size: 3.4rem
-    &:nth-of-type(2)
-      background: #f2f2f2
-      .reaction-btn
-        box-shadow: long-shadow(#cdcdcd)
-        text-shadow: long-shadow(#c5592b)
-        background: #f6732b
-        font-size: 4.8rem
-    &:nth-of-type(3)
-      background: #ffad3d
-      .reaction-btn
-        box-shadow: long-shadow(#db8a38)
-        text-shadow: long-shadow(#094659)
-        background: #0f6984
-        font-size: 3.4rem
-    &:nth-of-type(4)
-      background: #92defe
-      .reaction-btn
-        box-shadow: long-shadow(#79b6d3)
-        text-shadow: long-shadow(#bf4341)
-        background: #ed5552
-        font-size: 3.2rem
+.reaction-box
+  width: 50%
+  padding-top: 50%
+  position: relative
+  float: left
+  overflow: hidden
+  &:nth-of-type(1)
+    background: #ed5552
     .reaction-btn
-      btn-reset()
-      width: 72%
-      height: 72%
-      position: absolute
-      left: 0
-      right: 0
-      top: 0
-      bottom: 0
-      margin: auto
-      border-radius: 50%
-      background: red
-      color: white
-      text-align: center
-      overflow: hidden
-      &:active
-        transform: scale(.93)
+      box-shadow: long-shadow(#bf4341)
+      text-shadow: long-shadow(#749039)
+      background: #94ba49
+      font-size: 3.4rem
+  &:nth-of-type(2)
+    background: #f2f2f2
+    .reaction-btn
+      box-shadow: long-shadow(#cdcdcd)
+      text-shadow: long-shadow(#c5592b)
+      background: #f6732b
+      font-size: 4.8rem
+  &:nth-of-type(3)
+    background: #ffad3d
+    .reaction-btn
+      box-shadow: long-shadow(#db8a38)
+      text-shadow: long-shadow(#094659)
+      background: #0f6984
+      font-size: 3.4rem
+  &:nth-of-type(4)
+    background: #92defe
+    .reaction-btn
+      box-shadow: long-shadow(#79b6d3)
+      text-shadow: long-shadow(#bf4341)
+      background: #ed5552
+      font-size: 3.2rem
+  .reaction-btn
+    btn-reset()
+    width: 72%
+    height: 72%
+    position: absolute
+    left: 0
+    right: 0
+    top: 0
+    bottom: 0
+    margin: auto
+    border-radius: 50%
+    background: red
+    color: white
+    text-align: center
+    overflow: hidden
+    &:active
+      transform: scale(.93)
 
 .vote
   width: 100%
@@ -127,6 +127,24 @@ h1
     display: flex
     flex-direction: column
     justify-content: space-around
+
+.end
+  width: 100%
+  padding-top: 100%
+  position: relative
+  .reaction-box
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    background: #A9BCDC
+    .reaction-btn
+      box-shadow: long-shadow(#8BA3CA, 100)
+      text-shadow: long-shadow(#A9BCDC, 120)
+      background: #C4D0E6
+      font-size: 10rem
+      letter-spacing: 2px
 
 .comment-box
   padding: 1.8rem 1.3rem

@@ -17,6 +17,8 @@ html(lang="ja")
       .vote
         form(class="ac-custom ac-radio ac-circle" autocomplete="off")
           ul
+      .end
+        .reaction-box: button.reaction-btn(value='clap') clap
 
       form.comment-box(onsubmit="window.send()")
         input.comment#comment(type="text", placeholder="any comment?")

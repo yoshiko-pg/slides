@@ -9,7 +9,7 @@
 <body>
 
 <script layout="cover" invert type="text/x-markdown"
-  backface="image/cover.jpg" backface-filter="blur(1px) brightness(.7)">
+  backface="image/cover.jpg" backface-filter="blur(1px) brightness(.6)">
 # milkcocoaでエクストリームライトニングトーク
 
 2015.9.29 [@yoshiko_pg](http://yoshiko-pg.github.io)
@@ -156,39 +156,49 @@ datastore.on('send', (data) => {
 
 
 <script layout="code" type="text/x-markdown">
-ちなみに草の生やし方
+datastore.onのコールバック内  
+メッセージを受信したらbodyに草を追加
+
+```javascript
+datastore.on('send', (data) => {
+  let el = document.createElement('div');
+  el.classList.add('www');
+  el.style.top = getRandPer() + '%';
+  el.innerText = 'www';
+  document.body.appendChild(el);
+});
+```
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+横切る動きはCSSアニメーション
 
 ```css
 .www {
   position: absolute;
   left: 100%;
   top: 0; /* あとでrandom() */
-  animation-name: liverAnim;
-  animation-duration: 6s;
-  animation-timing-function: linear;
+  animation: marquee 6s linear;
+}
+
+@keyframes marquee {
+  0% {
+    left 100%
+  }
+  100% {
+    left -100%
+  }
 }
 ```
 </script>
 
 
 <script layout="code" type="text/x-markdown">
-datastore.onのコールバック内  
-メッセージを受信したらbodyに草を追加
+アニメーションが終わったら要素を削除
 
-```javascript
-let el = document.createElement('div');
-el.classList.add('www');
-el.style.top = getRandPer() + '%';
-document.body.appendChild(el);
-```
-</script>
-
-
-<script layout="code" type="text/x-markdown">
-Transitionが終わったら要素を削除
-
-TransitionEndはトランジションを指定したプロパティの数だけ発火するので  
-最初に発火したときにイベントリスナを削除する
+animationendイベントが使える  
+イベントリスナと要素を削除する
 
 ```javascript
 el.addEventListener("animationend",
@@ -198,6 +208,15 @@ el.addEventListener("animationend",
   },
 false);
 ```
+</script>
+
+
+<script layout="bullets-invert" type="text/x-markdown">
+### ES6の記法に慣れてない方はこちらをどうぞ
+
+　
+
+### [Hello, ES6 ~これから迎えるJSのミライ~](http://yoshiko-pg.github.io/slides/20150425-jsfes/)
 </script>
 
 
@@ -287,8 +306,17 @@ app <- なんてよむ？
 </script>
 
 
+<script layout type="text/x-markdown" class="book">
+## 11/2に著書が出ます
+
+![HTML5/CSS3 モダンコーディング](./image/book.jpg)
+
+[Amazonで絶賛予約受付中！！](http://www.amazon.co.jp/dp/4798141577)
+</script>
+
+
 <script layout="cover" invert type="text/x-markdown"
-  backface="image/end.gif" backface-filter="blur(3px) brightness(.4)">
+  backface="image/cat.jpg" backface-filter="blur(1px) brightness(.5)" end>
 # Thank you
 [@yoshiko_pg](http://yoshiko-pg.github.io/)
 </script>

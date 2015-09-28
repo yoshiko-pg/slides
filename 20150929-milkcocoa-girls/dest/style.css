@@ -41,9 +41,11 @@ body {
   overflow: hidden;
 }
 body[body-bg$=invert] .liver,
-body[body-bg$=code] .liver,
+body[body-bg=cover] .liver,
+body[body-bg=code] .liver,
 body[body-bg$=invert] .cheer,
-body[body-bg$=code] .cheer {
+body[body-bg=cover] .cheer,
+body[body-bg=code] .cheer {
   color: #fff;
 }
 .liver {

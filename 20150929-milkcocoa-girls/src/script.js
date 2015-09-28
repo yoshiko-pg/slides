@@ -9,6 +9,10 @@
   talkie.changed
     .onValue(() => ds.send({to: 'sp', mode: 'reactions'}));
   talkie.changed
+    .filter((current) => current.hasAttribute('end'))
+    .log()
+    .onValue((current) => ds.send({to: 'sp', mode: 'end'}));
+  talkie.changed
     .filter((current) => current.hasAttribute('vote'))
     .onValue((current) => {
       let items = [];
@@ -38,7 +42,9 @@
         case 'cheer':
           return makeCheerFn();
         case 'www':
-          return makeMarqueeFn(data.value.type);
+          return makeMarqueeFn('wwwww');
+        case 'clap':
+          return makeMarqueeFn('88888888888888');
         default:
           return makeMarqueeFn(data.value.message);
       }

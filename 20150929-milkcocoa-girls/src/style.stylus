@@ -43,7 +43,8 @@ a
 body
   overflow hidden
   &[body-bg$=invert],
-  &[body-bg$=code]
+  &[body-bg=cover],
+  &[body-bg=code]
     .liver, .cheer
       color: white
 
