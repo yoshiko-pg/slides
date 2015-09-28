@@ -20,6 +20,18 @@ Bacon.fromBinder((callback) => {
   .onValue((value) => ds.send({to: 'pc', vote: value, id: id}));
 
 
+// メッセージ送信
+Bacon.fromBinder((callback) => {
+    window.send = () => {callback(); return false;};
+    () => window.send = null;
+  })
+  .onValue(() => {
+    let commentEl = document.getElementById('comment');
+    ds.send({to: 'pc', message: commentEl.value});
+    commentEl.value = '';
+  });
+
+
 // モード変更
 let stream = Bacon.fromBinder((callback) => {
     ds.on('send', callback);

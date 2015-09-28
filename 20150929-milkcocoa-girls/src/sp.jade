@@ -18,8 +18,8 @@ html(lang="ja")
         form(class="ac-custom ac-radio ac-circle" autocomplete="off")
           ul
 
-      .comment-box
-        input.comment(type="text", placeholder="any comment?")
+      form.comment-box(onsubmit="window.send()")
+        input.comment#comment(type="text", placeholder="any comment?")
         button.send(type="submit") send
 
     script(src='https://cdn.mlkcca.com/v2.0.0/milkcocoa.js')
