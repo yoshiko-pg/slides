@@ -40,23 +40,23 @@ a {
 body {
   overflow: hidden;
 }
-body[body-bg$=invert] .liver,
-body[body-bg=cover] .liver,
-body[body-bg=code] .liver,
+body[body-bg$=invert] .marquee,
+body[body-bg=cover] .marquee,
+body[body-bg=code] .marquee,
 body[body-bg$=invert] .cheer,
 body[body-bg=cover] .cheer,
 body[body-bg=code] .cheer {
   color: #fff;
 }
-.liver {
+.marquee {
   position: absolute;
   left: 100%;
   top: 0;
   z-index: 10;
   white-space: nowrap;
   font-size: 2rem;
-  -webkit-animation-name: liverAnim;
-          animation-name: liverAnim;
+  -webkit-animation-name: marqueeAnim;
+          animation-name: marqueeAnim;
   -webkit-animation-duration: 6s;
           animation-duration: 6s;
   -webkit-animation-timing-function: linear;
@@ -137,7 +137,7 @@ section[vote] ul li::before {
   text-align: center;
   font-weight: bold;
 }
-@-webkit-keyframes liverAnim {
+@-webkit-keyframes marqueeAnim {
   0% {
     left: 100%;
   }
@@ -145,7 +145,7 @@ section[vote] ul li::before {
     left: -100%;
   }
 }
-@keyframes liverAnim {
+@keyframes marqueeAnim {
   0% {
     left: 100%;
   }

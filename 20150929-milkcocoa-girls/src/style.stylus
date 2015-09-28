@@ -45,21 +45,21 @@ body
   &[body-bg$=invert],
   &[body-bg=cover],
   &[body-bg=code]
-    .liver, .cheer
+    .marquee, .cheer
       color: white
 
-.liver
+.marquee
   position absolute
   left 100%
   top 0
   z-index: 10
   white-space nowrap
   font-size 2rem
-  animation-name: liverAnim
+  animation-name: marqueeAnim
   animation-duration: 6s
   animation-timing-function: linear
 
-@keyframes liverAnim
+@keyframes marqueeAnim
   0%
     left 100%
   100%

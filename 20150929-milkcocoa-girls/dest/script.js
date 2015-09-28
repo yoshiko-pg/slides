@@ -86,7 +86,7 @@
     return function () {
       var el = document.createElement('div');
       el.textContent = text;
-      el.classList.add('liver');
+      el.classList.add('marquee');
       el.style.top = getRandPer() + '%';
       return el;
     };
