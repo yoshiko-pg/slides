@@ -33,6 +33,9 @@ a
   height 55%
   margin -20px auto
 
+[layout] > pre
+  margin: 0
+
 ///////////////////////////////////////////////////////////////////////////////////////
 @import url('https://fonts.googleapis.com/css?family=Passion+One')
 
