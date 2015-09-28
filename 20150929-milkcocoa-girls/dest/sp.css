@@ -1,0 +1,316 @@
+@import url("https://fonts.googleapis.com/css?family=Passion+One");
+html {
+  font-size: 62.5%;
+}
+body {
+  margin: 0;
+  padding: 0;
+  background: #3d3636;
+  color: #f2f2f2;
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  font-family: 'Passion One', cursive, 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+}
+h1 {
+  margin: 1rem;
+  font-size: 3rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1;
+  font-weight: normal;
+  letter-spacing: 1px;
+}
+.author {
+  font-size: 1.6rem;
+  text-align: right;
+  margin: 0 1rem;
+  line-height: 0.6;
+}
+.remocon {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.remocon > *:not(.showing) {
+  display: none;
+}
+.remocon > .comment-box {
+  display: block;
+}
+.reactions::after {
+  clear: both;
+  display: block;
+  content: '';
+}
+.reactions .reaction-box {
+  width: 50%;
+  padding-top: 50%;
+  position: relative;
+  float: left;
+  overflow: hidden;
+}
+.reactions .reaction-box:nth-of-type(1) {
+  background: #ed5552;
+}
+.reactions .reaction-box:nth-of-type(1) .reaction-btn {
+  box-shadow: 1px 1px #bf4341, 2px 2px #bf4341, 3px 3px #bf4341, 4px 4px #bf4341, 5px 5px #bf4341, 6px 6px #bf4341, 7px 7px #bf4341, 8px 8px #bf4341, 9px 9px #bf4341, 10px 10px #bf4341, 11px 11px #bf4341, 12px 12px #bf4341, 13px 13px #bf4341, 14px 14px #bf4341, 15px 15px #bf4341, 16px 16px #bf4341, 17px 17px #bf4341, 18px 18px #bf4341, 19px 19px #bf4341, 20px 20px #bf4341, 21px 21px #bf4341, 22px 22px #bf4341, 23px 23px #bf4341, 24px 24px #bf4341, 25px 25px #bf4341, 26px 26px #bf4341, 27px 27px #bf4341, 28px 28px #bf4341, 29px 29px #bf4341, 30px 30px #bf4341, 31px 31px #bf4341, 32px 32px #bf4341, 33px 33px #bf4341, 34px 34px #bf4341, 35px 35px #bf4341, 36px 36px #bf4341, 37px 37px #bf4341, 38px 38px #bf4341, 39px 39px #bf4341, 40px 40px #bf4341, 41px 41px #bf4341, 42px 42px #bf4341, 43px 43px #bf4341, 44px 44px #bf4341, 45px 45px #bf4341, 46px 46px #bf4341, 47px 47px #bf4341, 48px 48px #bf4341, 49px 49px #bf4341, 50px 50px #bf4341, 51px 51px #bf4341, 52px 52px #bf4341, 53px 53px #bf4341, 54px 54px #bf4341, 55px 55px #bf4341, 56px 56px #bf4341, 57px 57px #bf4341, 58px 58px #bf4341, 59px 59px #bf4341, 60px 60px #bf4341;
+  text-shadow: 1px 1px #749039, 2px 2px #749039, 3px 3px #749039, 4px 4px #749039, 5px 5px #749039, 6px 6px #749039, 7px 7px #749039, 8px 8px #749039, 9px 9px #749039, 10px 10px #749039, 11px 11px #749039, 12px 12px #749039, 13px 13px #749039, 14px 14px #749039, 15px 15px #749039, 16px 16px #749039, 17px 17px #749039, 18px 18px #749039, 19px 19px #749039, 20px 20px #749039, 21px 21px #749039, 22px 22px #749039, 23px 23px #749039, 24px 24px #749039, 25px 25px #749039, 26px 26px #749039, 27px 27px #749039, 28px 28px #749039, 29px 29px #749039, 30px 30px #749039, 31px 31px #749039, 32px 32px #749039, 33px 33px #749039, 34px 34px #749039, 35px 35px #749039, 36px 36px #749039, 37px 37px #749039, 38px 38px #749039, 39px 39px #749039, 40px 40px #749039, 41px 41px #749039, 42px 42px #749039, 43px 43px #749039, 44px 44px #749039, 45px 45px #749039, 46px 46px #749039, 47px 47px #749039, 48px 48px #749039, 49px 49px #749039, 50px 50px #749039, 51px 51px #749039, 52px 52px #749039, 53px 53px #749039, 54px 54px #749039, 55px 55px #749039, 56px 56px #749039, 57px 57px #749039, 58px 58px #749039, 59px 59px #749039, 60px 60px #749039;
+  background: #94ba49;
+  font-size: 3.4rem;
+}
+.reactions .reaction-box:nth-of-type(2) {
+  background: #f2f2f2;
+}
+.reactions .reaction-box:nth-of-type(2) .reaction-btn {
+  box-shadow: 1px 1px #cdcdcd, 2px 2px #cdcdcd, 3px 3px #cdcdcd, 4px 4px #cdcdcd, 5px 5px #cdcdcd, 6px 6px #cdcdcd, 7px 7px #cdcdcd, 8px 8px #cdcdcd, 9px 9px #cdcdcd, 10px 10px #cdcdcd, 11px 11px #cdcdcd, 12px 12px #cdcdcd, 13px 13px #cdcdcd, 14px 14px #cdcdcd, 15px 15px #cdcdcd, 16px 16px #cdcdcd, 17px 17px #cdcdcd, 18px 18px #cdcdcd, 19px 19px #cdcdcd, 20px 20px #cdcdcd, 21px 21px #cdcdcd, 22px 22px #cdcdcd, 23px 23px #cdcdcd, 24px 24px #cdcdcd, 25px 25px #cdcdcd, 26px 26px #cdcdcd, 27px 27px #cdcdcd, 28px 28px #cdcdcd, 29px 29px #cdcdcd, 30px 30px #cdcdcd, 31px 31px #cdcdcd, 32px 32px #cdcdcd, 33px 33px #cdcdcd, 34px 34px #cdcdcd, 35px 35px #cdcdcd, 36px 36px #cdcdcd, 37px 37px #cdcdcd, 38px 38px #cdcdcd, 39px 39px #cdcdcd, 40px 40px #cdcdcd, 41px 41px #cdcdcd, 42px 42px #cdcdcd, 43px 43px #cdcdcd, 44px 44px #cdcdcd, 45px 45px #cdcdcd, 46px 46px #cdcdcd, 47px 47px #cdcdcd, 48px 48px #cdcdcd, 49px 49px #cdcdcd, 50px 50px #cdcdcd, 51px 51px #cdcdcd, 52px 52px #cdcdcd, 53px 53px #cdcdcd, 54px 54px #cdcdcd, 55px 55px #cdcdcd, 56px 56px #cdcdcd, 57px 57px #cdcdcd, 58px 58px #cdcdcd, 59px 59px #cdcdcd, 60px 60px #cdcdcd;
+  text-shadow: 1px 1px #c5592b, 2px 2px #c5592b, 3px 3px #c5592b, 4px 4px #c5592b, 5px 5px #c5592b, 6px 6px #c5592b, 7px 7px #c5592b, 8px 8px #c5592b, 9px 9px #c5592b, 10px 10px #c5592b, 11px 11px #c5592b, 12px 12px #c5592b, 13px 13px #c5592b, 14px 14px #c5592b, 15px 15px #c5592b, 16px 16px #c5592b, 17px 17px #c5592b, 18px 18px #c5592b, 19px 19px #c5592b, 20px 20px #c5592b, 21px 21px #c5592b, 22px 22px #c5592b, 23px 23px #c5592b, 24px 24px #c5592b, 25px 25px #c5592b, 26px 26px #c5592b, 27px 27px #c5592b, 28px 28px #c5592b, 29px 29px #c5592b, 30px 30px #c5592b, 31px 31px #c5592b, 32px 32px #c5592b, 33px 33px #c5592b, 34px 34px #c5592b, 35px 35px #c5592b, 36px 36px #c5592b, 37px 37px #c5592b, 38px 38px #c5592b, 39px 39px #c5592b, 40px 40px #c5592b, 41px 41px #c5592b, 42px 42px #c5592b, 43px 43px #c5592b, 44px 44px #c5592b, 45px 45px #c5592b, 46px 46px #c5592b, 47px 47px #c5592b, 48px 48px #c5592b, 49px 49px #c5592b, 50px 50px #c5592b, 51px 51px #c5592b, 52px 52px #c5592b, 53px 53px #c5592b, 54px 54px #c5592b, 55px 55px #c5592b, 56px 56px #c5592b, 57px 57px #c5592b, 58px 58px #c5592b, 59px 59px #c5592b, 60px 60px #c5592b;
+  background: #f6732b;
+  font-size: 4.8rem;
+}
+.reactions .reaction-box:nth-of-type(3) {
+  background: #ffad3d;
+}
+.reactions .reaction-box:nth-of-type(3) .reaction-btn {
+  box-shadow: 1px 1px #db8a38, 2px 2px #db8a38, 3px 3px #db8a38, 4px 4px #db8a38, 5px 5px #db8a38, 6px 6px #db8a38, 7px 7px #db8a38, 8px 8px #db8a38, 9px 9px #db8a38, 10px 10px #db8a38, 11px 11px #db8a38, 12px 12px #db8a38, 13px 13px #db8a38, 14px 14px #db8a38, 15px 15px #db8a38, 16px 16px #db8a38, 17px 17px #db8a38, 18px 18px #db8a38, 19px 19px #db8a38, 20px 20px #db8a38, 21px 21px #db8a38, 22px 22px #db8a38, 23px 23px #db8a38, 24px 24px #db8a38, 25px 25px #db8a38, 26px 26px #db8a38, 27px 27px #db8a38, 28px 28px #db8a38, 29px 29px #db8a38, 30px 30px #db8a38, 31px 31px #db8a38, 32px 32px #db8a38, 33px 33px #db8a38, 34px 34px #db8a38, 35px 35px #db8a38, 36px 36px #db8a38, 37px 37px #db8a38, 38px 38px #db8a38, 39px 39px #db8a38, 40px 40px #db8a38, 41px 41px #db8a38, 42px 42px #db8a38, 43px 43px #db8a38, 44px 44px #db8a38, 45px 45px #db8a38, 46px 46px #db8a38, 47px 47px #db8a38, 48px 48px #db8a38, 49px 49px #db8a38, 50px 50px #db8a38, 51px 51px #db8a38, 52px 52px #db8a38, 53px 53px #db8a38, 54px 54px #db8a38, 55px 55px #db8a38, 56px 56px #db8a38, 57px 57px #db8a38, 58px 58px #db8a38, 59px 59px #db8a38, 60px 60px #db8a38;
+  text-shadow: 1px 1px #094659, 2px 2px #094659, 3px 3px #094659, 4px 4px #094659, 5px 5px #094659, 6px 6px #094659, 7px 7px #094659, 8px 8px #094659, 9px 9px #094659, 10px 10px #094659, 11px 11px #094659, 12px 12px #094659, 13px 13px #094659, 14px 14px #094659, 15px 15px #094659, 16px 16px #094659, 17px 17px #094659, 18px 18px #094659, 19px 19px #094659, 20px 20px #094659, 21px 21px #094659, 22px 22px #094659, 23px 23px #094659, 24px 24px #094659, 25px 25px #094659, 26px 26px #094659, 27px 27px #094659, 28px 28px #094659, 29px 29px #094659, 30px 30px #094659, 31px 31px #094659, 32px 32px #094659, 33px 33px #094659, 34px 34px #094659, 35px 35px #094659, 36px 36px #094659, 37px 37px #094659, 38px 38px #094659, 39px 39px #094659, 40px 40px #094659, 41px 41px #094659, 42px 42px #094659, 43px 43px #094659, 44px 44px #094659, 45px 45px #094659, 46px 46px #094659, 47px 47px #094659, 48px 48px #094659, 49px 49px #094659, 50px 50px #094659, 51px 51px #094659, 52px 52px #094659, 53px 53px #094659, 54px 54px #094659, 55px 55px #094659, 56px 56px #094659, 57px 57px #094659, 58px 58px #094659, 59px 59px #094659, 60px 60px #094659;
+  background: #0f6984;
+  font-size: 3.4rem;
+}
+.reactions .reaction-box:nth-of-type(4) {
+  background: #92defe;
+}
+.reactions .reaction-box:nth-of-type(4) .reaction-btn {
+  box-shadow: 1px 1px #79b6d3, 2px 2px #79b6d3, 3px 3px #79b6d3, 4px 4px #79b6d3, 5px 5px #79b6d3, 6px 6px #79b6d3, 7px 7px #79b6d3, 8px 8px #79b6d3, 9px 9px #79b6d3, 10px 10px #79b6d3, 11px 11px #79b6d3, 12px 12px #79b6d3, 13px 13px #79b6d3, 14px 14px #79b6d3, 15px 15px #79b6d3, 16px 16px #79b6d3, 17px 17px #79b6d3, 18px 18px #79b6d3, 19px 19px #79b6d3, 20px 20px #79b6d3, 21px 21px #79b6d3, 22px 22px #79b6d3, 23px 23px #79b6d3, 24px 24px #79b6d3, 25px 25px #79b6d3, 26px 26px #79b6d3, 27px 27px #79b6d3, 28px 28px #79b6d3, 29px 29px #79b6d3, 30px 30px #79b6d3, 31px 31px #79b6d3, 32px 32px #79b6d3, 33px 33px #79b6d3, 34px 34px #79b6d3, 35px 35px #79b6d3, 36px 36px #79b6d3, 37px 37px #79b6d3, 38px 38px #79b6d3, 39px 39px #79b6d3, 40px 40px #79b6d3, 41px 41px #79b6d3, 42px 42px #79b6d3, 43px 43px #79b6d3, 44px 44px #79b6d3, 45px 45px #79b6d3, 46px 46px #79b6d3, 47px 47px #79b6d3, 48px 48px #79b6d3, 49px 49px #79b6d3, 50px 50px #79b6d3, 51px 51px #79b6d3, 52px 52px #79b6d3, 53px 53px #79b6d3, 54px 54px #79b6d3, 55px 55px #79b6d3, 56px 56px #79b6d3, 57px 57px #79b6d3, 58px 58px #79b6d3, 59px 59px #79b6d3, 60px 60px #79b6d3;
+  text-shadow: 1px 1px #bf4341, 2px 2px #bf4341, 3px 3px #bf4341, 4px 4px #bf4341, 5px 5px #bf4341, 6px 6px #bf4341, 7px 7px #bf4341, 8px 8px #bf4341, 9px 9px #bf4341, 10px 10px #bf4341, 11px 11px #bf4341, 12px 12px #bf4341, 13px 13px #bf4341, 14px 14px #bf4341, 15px 15px #bf4341, 16px 16px #bf4341, 17px 17px #bf4341, 18px 18px #bf4341, 19px 19px #bf4341, 20px 20px #bf4341, 21px 21px #bf4341, 22px 22px #bf4341, 23px 23px #bf4341, 24px 24px #bf4341, 25px 25px #bf4341, 26px 26px #bf4341, 27px 27px #bf4341, 28px 28px #bf4341, 29px 29px #bf4341, 30px 30px #bf4341, 31px 31px #bf4341, 32px 32px #bf4341, 33px 33px #bf4341, 34px 34px #bf4341, 35px 35px #bf4341, 36px 36px #bf4341, 37px 37px #bf4341, 38px 38px #bf4341, 39px 39px #bf4341, 40px 40px #bf4341, 41px 41px #bf4341, 42px 42px #bf4341, 43px 43px #bf4341, 44px 44px #bf4341, 45px 45px #bf4341, 46px 46px #bf4341, 47px 47px #bf4341, 48px 48px #bf4341, 49px 49px #bf4341, 50px 50px #bf4341, 51px 51px #bf4341, 52px 52px #bf4341, 53px 53px #bf4341, 54px 54px #bf4341, 55px 55px #bf4341, 56px 56px #bf4341, 57px 57px #bf4341, 58px 58px #bf4341, 59px 59px #bf4341, 60px 60px #bf4341;
+  background: #ed5552;
+  font-size: 3.2rem;
+}
+.reactions .reaction-box .reaction-btn {
+  padding: 0;
+  border: none;
+  outline: none;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  width: 72%;
+  height: 72%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  border-radius: 50%;
+  background: #f00;
+  color: #fff;
+  text-align: center;
+  overflow: hidden;
+}
+.reactions .reaction-box .reaction-btn:active {
+  -webkit-transform: scale(0.93);
+      -ms-transform: scale(0.93);
+          transform: scale(0.93);
+}
+.vote {
+  width: 100%;
+  padding-top: 100%;
+  position: relative;
+  background: #fb887c;
+  color: #fff;
+}
+.vote ul {
+  position: absolute;
+  left: 3rem;
+  right: 2rem;
+  top: 0;
+  bottom: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-justify-content: space-around;
+      -ms-flex-pack: distribute;
+          justify-content: space-around;
+}
+.comment-box {
+  padding: 1.8rem 1.3rem;
+}
+.comment-box .comment {
+  padding: 0 1rem;
+  font-size: 1.2rem;
+  line-height: 3rem;
+  vertical-align: top;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background: #f2f2f2;
+  border: none;
+  border-radius: 5px;
+  width: 78%;
+  margin: 0;
+  margin-right: 2%;
+  color: #3d3636;
+  box-shadow: 1px 1px #242020, 2px 2px #242020, 3px 3px #242020, 4px 4px #242020, 5px 5px #242020, 6px 6px #242020, 7px 7px #242020, 8px 8px #242020, 9px 9px #242020, 10px 10px #242020, 11px 11px #242020, 12px 12px #242020, 13px 13px #242020, 14px 14px #242020, 15px 15px #242020, 16px 16px #242020, 17px 17px #242020, 18px 18px #242020, 19px 19px #242020, 20px 20px #242020, 21px 21px #242020, 22px 22px #242020, 23px 23px #242020, 24px 24px #242020, 25px 25px #242020, 26px 26px #242020, 27px 27px #242020, 28px 28px #242020, 29px 29px #242020, 30px 30px #242020, 31px 31px #242020, 32px 32px #242020, 33px 33px #242020, 34px 34px #242020, 35px 35px #242020, 36px 36px #242020, 37px 37px #242020, 38px 38px #242020, 39px 39px #242020, 40px 40px #242020, 41px 41px #242020, 42px 42px #242020, 43px 43px #242020, 44px 44px #242020, 45px 45px #242020, 46px 46px #242020, 47px 47px #242020, 48px 48px #242020, 49px 49px #242020, 50px 50px #242020, 51px 51px #242020, 52px 52px #242020, 53px 53px #242020, 54px 54px #242020, 55px 55px #242020, 56px 56px #242020, 57px 57px #242020, 58px 58px #242020, 59px 59px #242020, 60px 60px #242020;
+  outline: none;
+}
+.comment-box .comment::-webkit-input-placeholder {
+  font-size: 1.8rem;
+  color: #ccc;
+}
+.comment-box .comment::-moz-placeholder {
+  font-size: 1.8rem;
+  color: #ccc;
+}
+.comment-box .comment:-ms-input-placeholder {
+  font-size: 1.8rem;
+  color: #ccc;
+}
+.comment-box .comment::placeholder {
+  font-size: 1.8rem;
+  color: #ccc;
+}
+.comment-box .send {
+  padding: 0;
+  border: none;
+  outline: none;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  width: 20%;
+  font-size: 1.2rem;
+  line-height: 3rem;
+  vertical-align: top;
+  background: #ed5552;
+  color: #fff;
+  border-radius: 5px;
+  font-size: 2rem;
+  margin: 0;
+  box-shadow: 1px 1px #242020, 2px 2px #242020, 3px 3px #242020, 4px 4px #242020, 5px 5px #242020, 6px 6px #242020, 7px 7px #242020, 8px 8px #242020, 9px 9px #242020, 10px 10px #242020, 11px 11px #242020, 12px 12px #242020, 13px 13px #242020, 14px 14px #242020, 15px 15px #242020, 16px 16px #242020, 17px 17px #242020, 18px 18px #242020, 19px 19px #242020, 20px 20px #242020, 21px 21px #242020, 22px 22px #242020, 23px 23px #242020, 24px 24px #242020, 25px 25px #242020, 26px 26px #242020, 27px 27px #242020, 28px 28px #242020, 29px 29px #242020, 30px 30px #242020, 31px 31px #242020, 32px 32px #242020, 33px 33px #242020, 34px 34px #242020, 35px 35px #242020, 36px 36px #242020, 37px 37px #242020, 38px 38px #242020, 39px 39px #242020, 40px 40px #242020, 41px 41px #242020, 42px 42px #242020, 43px 43px #242020, 44px 44px #242020, 45px 45px #242020, 46px 46px #242020, 47px 47px #242020, 48px 48px #242020, 49px 49px #242020, 50px 50px #242020, 51px 51px #242020, 52px 52px #242020, 53px 53px #242020, 54px 54px #242020, 55px 55px #242020, 56px 56px #242020, 57px 57px #242020, 58px 58px #242020, 59px 59px #242020, 60px 60px #242020;
+}
+.comment-box .send:active {
+  -webkit-transform: scale(0.93);
+      -ms-transform: scale(0.93);
+          transform: scale(0.93);
+}
+.ac-custom {
+  padding: 0 3em;
+  margin: 0 auto;
+}
+.ac-custom ul,
+.ac-custom ol {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+}
+.ac-custom li {
+  padding: 2em 0;
+  position: relative;
+}
+.ac-custom label {
+  display: inline-block;
+  position: relative;
+  font-size: 2em;
+  padding: 0 0 0 80px;
+  vertical-align: top;
+  color: rgba(0,0,0,0.2);
+  cursor: pointer;
+  -webkit-transition: color 0.3s;
+  transition: color 0.3s;
+}
+.ac-custom input[type="checkbox"],
+.ac-custom input[type="radio"],
+.ac-custom label::before {
+  width: 50px;
+  height: 50px;
+  top: 50%;
+  left: 0;
+  margin-top: -25px;
+  position: absolute;
+  cursor: pointer;
+}
+.ac-custom input[type="checkbox"],
+.ac-custom input[type="radio"] {
+  opacity: 0;
+  -webkit-appearance: none;
+  display: inline-block;
+  vertical-align: middle;
+  z-index: 100;
+}
+.ac-custom label::before {
+  content: '';
+  border: 4px solid #fff;
+  -webkit-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+}
+.ac-radio label::before {
+  border-radius: 50%;
+}
+.ac-custom input[type="checkbox"]:checked + label,
+.ac-custom input[type="radio"]:checked + label {
+  color: #fff;
+}
+.ac-custom input[type="checkbox"]:checked + label::before,
+.ac-custom input[type="radio"]:checked + label::before {
+  opacity: 0.8;
+}
+/* General SVG and path styles */
+.ac-custom svg {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  top: 50%;
+  margin-top: -20px;
+  left: 5px;
+  pointer-events: none;
+}
+.ac-custom svg path {
+  stroke: #fff;
+  stroke-width: 13px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
+/* Specific input, SVG and path styles */
+/* Circle */
+.ac-circle input[type="checkbox"],
+.ac-circle input[type="radio"],
+.ac-circle label::before {
+  width: 30px;
+  height: 30px;
+  margin-top: -15px;
+  left: 10px;
+  position: absolute;
+}
+.ac-circle label::before {
+  background-color: #fff;
+  border: none;
+}
+.ac-circle svg {
+  width: 70px;
+  height: 70px;
+  margin-top: -35px;
+  left: -10px;
+}
+.ac-circle svg path {
+  stroke-width: 5px;
+}
