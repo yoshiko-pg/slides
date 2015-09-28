@@ -38,7 +38,8 @@
     switch (data.value.type) {
       case 'like':
         return makeLikeFn();
-      //case 'kwsk':
+      case 'kwsk':
+        return makeKwskFn();
       case 'cheer':
         return makeCheerFn();
       case 'www':
@@ -106,15 +107,20 @@
     };
   }
 
+  function makeKwskFn() {
+    return function () {
+      var el = document.createElement('div');
+      el.classList.add('kwsk');
+      return el;
+    };
+  }
+
   function showAndRemove(el) {
     document.body.appendChild(el);
-    el.addEventListener("webkitTransitionEnd", function callback(event) {
+    el.addEventListener("animationend", function callback(event) {
       document.body.removeChild(el);
-      el.removeEventListener("webkitTransitionEnd", callback);
+      el.removeEventListener("animationend", callback);
     }, false);
-    setTimeout(function () {
-      el.classList.add('move');
-    }, 100);
   }
 
   function getRandPer() {

@@ -163,17 +163,16 @@ datastore.on('send', (data) => {
   position: absolute;
   left: 100%;
   top: 0; /* あとでrandom() */
-  transition: left 6s linear;
-}
-.www.move {
-  left: -100%;
+  animation-name: liverAnim;
+  animation-duration: 6s;
+  animation-timing-function: linear;
 }
 ```
 </script>
 
 
 <script layout="code" type="text/x-markdown">
-datastore.onのコールバック内
+datastore.onのコールバック内  
 メッセージを受信したらbodyに草を追加
 
 ```javascript
@@ -181,10 +180,6 @@ let el = document.createElement('div');
 el.classList.add('www');
 el.style.top = getRandPer() + '%';
 document.body.appendChild(el);
-
-setTimeout(() => {
-  el.classList.add('move');
-}, 100);
 ```
 </script>
 
@@ -196,10 +191,10 @@ TransitionEndはトランジションを指定したプロパティの数だけ�
 最初に発火したときにイベントリスナを削除する
 
 ```javascript
-el.addEventListener("webkitTransitionEnd",
+el.addEventListener("animationend",
   function callback(event) {
     document.body.removeChild(el);
-    el.removeEventListener("webkitTransitionEnd", callback);
+    el.removeEventListener("animationend", callback);
   },
 false);
 ```
