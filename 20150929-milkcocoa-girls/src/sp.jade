@@ -9,11 +9,15 @@ html(lang="ja")
     h1 Extream lightning talk with milkcocoa
     p.author @yoshiko_pg
     .remocon
-      .reactions
+      .reactions.showing
         .reaction-box: button.reaction-btn(value='www') www
         .reaction-box: button.reaction-btn(value='like') +1
         .reaction-box: button.reaction-btn(value='kwsk') kwsk
         .reaction-box: button.reaction-btn(value='cheer') \cheer/
+      .vote
+        form(class="ac-custom ac-radio ac-circle" autocomplete="off")
+          ul
+
       .comment-box
         input.comment(type="text", placeholder="any comment?")
         button.send(type="submit") send
@@ -21,6 +25,8 @@ html(lang="ja")
     script(src='https://cdn.mlkcca.com/v2.0.0/milkcocoa.js')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/bacon.js/0.7.73/Bacon.min.js')
+    script(src='./lib/modernizr.custom.js')
+    script(src='./lib/svgcheckbx.js')
     script(src='./dest/sp.js')
     script.
       if ('addEventListener' in document) {

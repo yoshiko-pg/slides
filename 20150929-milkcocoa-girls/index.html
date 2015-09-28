@@ -8,6 +8,16 @@
 </head>
 <body>
 
+
+<script layout type="text/x-markdown" vote>
+## 質問
+
+エディタはどっちが好きですか？
+
+ * Emacs
+ * Vim
+</script>
+
 <script layout="cover" invert type="text/x-markdown"
   backface="image/cover.jpg" backface-filter="blur(2px) brightness(.7)">
 # milkcocoaでエクストリームライトニングトーク
@@ -68,9 +78,8 @@ Frontend engineer at <a href="http://goodpatch.com/jp"><img src="./image/goodpat
 <script src="lib/talkie.min.js"></script>
 <script src="https://cdn.mlkcca.com/v2.0.0/milkcocoa.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bacon.js/0.7.73/Bacon.min.js"></script>
-<script src="dest/script.js"></script>
 <script>
-Talkie();
+window.talkie = Talkie();
 
 // リンクは別タブ
 var i, links = document.querySelectorAll("a[href^='http']")
@@ -78,6 +87,6 @@ for(i=0; i<links.length; i++) {
   links[i].setAttribute('target', '_blank');
 }
 </script>
-</script>
+<script src="dest/script.js"></script>
 </body>
 </html>

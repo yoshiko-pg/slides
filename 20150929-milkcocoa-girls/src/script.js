@@ -3,29 +3,72 @@
 
   const milkcocoa = new MilkCocoa("woodieto7do3.mlkcca.com");
   const ds = milkcocoa.dataStore('slide/20150929');
+  let currentPage;
 
-  Bacon.fromBinder((callback) => {
-    ds.on('send', callback);
-    () => ds.off('send');
-  })
-  .log()
-  .map((data) => {
-    switch(data.value.type) {
-      case 'like':
-        return makeLikeFn();
-      //case 'kwsk':
-      case 'cheer':
-        return makeCheerFn();
-      case 'www':
-        return makeMarqueeFn(data.value.type);
-      default:
-        return makeMarqueeFn(data.value.message);
-    }
-  })
-  .onValue((fn) => {
-    let el = fn();
-    showAndRemove(el);
-  });
+  // スマートフォン側の表示変更
+  talkie.changed
+    .onValue(() => ds.send({to: 'sp', mode: 'reactions'}));
+  talkie.changed
+    .filter((current) => current.hasAttribute('vote'))
+    .onValue((current) => {
+      let items = [];
+      let itemElems = current.getElementsByTagName('LI');
+      for(let i=0;i<itemElems.length;i++) {
+        items.push(itemElems[i].innerText);
+      }
+      ds.send({to: 'sp', mode: 'vote', items: items});
+      currentPage = current;
+    });
+
+  // スマートフォンからのデータの受信
+  let stream = Bacon.fromBinder((callback) => {
+      ds.on('send', callback);
+      () => ds.off('send');
+    })
+    .filter((data) => data.value.to == 'pc');
+
+  // スライド上にリアクション表示
+  stream
+    .map((data) => {
+      switch(data.value.type) {
+        case 'like':
+          return makeLikeFn();
+        //case 'kwsk':
+        case 'cheer':
+          return makeCheerFn();
+        case 'www':
+          return makeMarqueeFn(data.value.type);
+        default:
+          return makeMarqueeFn(data.value.message);
+      }
+    })
+    .onValue((fn) => {
+      let el = fn();
+      showAndRemove(el);
+    });
+
+  // 投票
+  stream
+    .filter((data) => data.value.vote)
+    .onValue((data) => {
+      let stamped = document.getElementById(data.value.id);
+      if (stamped) {
+        stamped.parentNode.setAttribute('count', stamped.parentNode.getAttribute('count') - 1);
+        stamped.parentNode.removeChild(stamped);
+      }
+
+      let items = currentPage.getElementsByTagName('LI');
+      for(let i=0;i<items.length;i++) {
+        if (items[i].innerText == data.value.vote) {
+          let stamp = document.createElement('span');
+          stamp.classList.add('stamp');
+          stamp.setAttribute('id', data.value.id);
+          items[i].appendChild(stamp);
+          let stampCount = items[i].querySelectorAll('.stamp').length;
+          items[i].setAttribute('count', stampCount);
+        }
+      }
+    });
 
   function makeMarqueeFn(text) {
     return () => {
