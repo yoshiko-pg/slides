@@ -9,7 +9,7 @@
 <body>
 
 <script layout="cover" invert type="text/x-markdown"
-  backface="image/cover.jpg" backface-filter="blur(1px) brightness(.6)">
+  backface="image/cover.jpg" backface-filter="blur(1px) brightness(.5)">
 # Milkcocoaでエクストリームライトニングトーク
 
 2015.9.29 [@yoshiko_pg](http://yoshiko-pg.github.io)
@@ -357,6 +357,37 @@ app <- なんてよむ？
 [@yoshiko_pg](http://yoshiko-pg.github.io/)
 </script>
 
+
+<script layout="bullets-invert" type="text/x-markdown">
+# おまけ
+</script>
+
+
+<script layout="bullets-invert" type="text/x-markdown">
+## このロングシャドウ
+
+<img src="./image/btn-cheer.png">
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+## お好みのCSSプリプロセッサで  
+（私はStylus）
+
+```stylus
+.reaction-btn
+  box-shadow: long-shadow(#bf4341)
+  text-shadow: long-shadow(#749039)
+
+long-shadow(color, n = 60)
+  value = 1px 1px color
+  for i in 2..n
+    value = value, i * 1px i * 1px color
+  return value
+```
+
+ずらして重ねるため透過色は使えないので注意！
+</script>
 
 
 <script src="lib/highlight.min.js"></script>
