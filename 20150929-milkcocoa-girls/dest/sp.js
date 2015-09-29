@@ -18,22 +18,6 @@ Bacon.fromArray(buttons).flatMap(function (e) {
   return ds.send({ to: 'pc', type: value });
 });
 
-// 3d touch
-var touchStarts = Bacon.fromArray(buttons).flatMap(function (e) {
-  return Bacon.fromEventTarget(e, 'touchstart');
-});
-var touchMoves = Bacon.fromArray(buttons).flatMap(function (e) {
-  return Bacon.fromEventTarget(e, 'touchmove');
-});
-touchStarts.log().merge(touchMoves).log().map(function (e) {
-  return e.touches[0] && e.touches[0].force;
-}).filter(function (force) {
-  return force;
-}).onValue(function (force) {
-  console.log(force);
-  // ds.send({to: 'pc', type: value})
-});
-
 // 投票送信
 Bacon.fromBinder(function (callback) {
   window.vote = callback;
