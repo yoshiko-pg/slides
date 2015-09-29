@@ -12,6 +12,23 @@ Bacon.fromArray(buttons)
   .onValue((value) => ds.send({to: 'pc', type: value}));
 
 
+// 3d touch
+let touchStarts = Bacon.fromArray(buttons)
+  .flatMap((e) => Bacon.fromEventTarget(e, 'touchstart'));
+let touchMoves = Bacon.fromArray(buttons)
+  .flatMap((e) => Bacon.fromEventTarget(e, 'touchmove'));
+touchStarts
+  .log()
+  .merge(touchMoves)
+  .log()
+  .map((e) => e.touches[0] && e.touches[0].force)
+  .filter((force) => force)
+  .onValue((force) => {
+    console.log(force);
+    // ds.send({to: 'pc', type: value})
+  });
+
+
 // 投票送信
 Bacon.fromBinder((callback) => {
     window.vote = callback;

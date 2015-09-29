@@ -31,8 +31,7 @@ Frontend engineer at <a href="http://goodpatch.com/jp"><img src="./image/goodpat
 
 
 <script layout type="text/x-markdown">
-# 今日は
-## エクストリームな<br>ライトニングトークをします
+## 今日はMilkcocoaを使って<br>エクストリームな<br>ライトニングトークをします
 </script>
 
 
@@ -108,13 +107,15 @@ LT中って、自分が喋ってるだけでちょっと寂しいので
 
 <script layout="cover" invert type="text/x-markdown"
   backface="image/milkcocoa.png" backface-filter="blur(2px) brightness(.3)">
-# 30秒でできる
+# 3STEPでできる
 # Milkcocoaで
 # リアルタイム通信
 </script>
 
 
 <script layout="code" type="text/x-markdown">
+# 1
+
 データ受け取る側・送る側共に
 dataStoreを作ります
 
@@ -126,6 +127,8 @@ const datastore = milkcocoa.dataStore('slide/20150929');
 
 
 <script layout="code" type="text/x-markdown">
+# 2
+
 送る側は DataStore.send でデータを送れます
 
 ```javascript
@@ -135,7 +138,9 @@ datastore.send({message: 'Hello world!!'});
 
 
 <script layout="code" type="text/x-markdown">
-受け取る側はsendをリッスンしておく
+# 3
+
+受け取る側はsendをリッスンしておきます
 
 ```javascript
 datastore.on('send', (data) => {
@@ -155,19 +160,9 @@ datastore.on('send', (data) => {
 </script>
 
 
-<script layout="code" type="text/x-markdown">
-datastore.onのコールバック内  
-メッセージを受信したらbodyに草を追加
-
-```javascript
-datastore.on('send', (data) => {
-  let el = document.createElement('div');
-  el.classList.add('www');
-  el.style.top = getRandPer() + '%';
-  el.innerText = 'www';
-  document.body.appendChild(el);
-});
-```
+<script layout="bullets-invert" type="text/x-markdown">
+## たとえば
+## 草の生やし方はというと
 </script>
 
 
@@ -195,10 +190,25 @@ datastore.on('send', (data) => {
 
 
 <script layout="code" type="text/x-markdown">
-アニメーションが終わったら要素を削除
+datastore.onのコールバック内  
+メッセージを受信したらbodyに草を追加
 
-animationendイベントが使える  
-イベントリスナと要素を削除する
+```javascript
+datastore.on('send', (data) => {
+  let el = document.createElement('div');
+  el.classList.add('www');
+  el.style.top = getRandPer() + '%';
+  el.innerText = 'www';
+  document.body.appendChild(el);
+});
+```
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+アニメーションが終わったら  
+animationendイベントで  
+イベントリスナと要素を削除  
 
 ```javascript
 el.addEventListener("animationend",
@@ -208,6 +218,9 @@ el.addEventListener("animationend",
   },
 false);
 ```
+
+コールバック関数に名前をつけておくと  
+自分の中で自分を参照できます
 </script>
 
 
@@ -302,7 +315,30 @@ app <- なんてよむ？
 
 
 <script layout="bullets" type="text/x-markdown">
-## なんかまとめ
+# まとめ
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+### リアルタイムなフィードバックが<br>もらえると楽しい
+</script>
+
+
+<script layout="bullets-invert" type="text/x-markdown">
+## ちなみに
+</script>
+
+
+<script layout="bullets-invert" type="text/x-markdown">
+## このリモコンを
+## 今後、別の発表の場で
+## 使う予定はありません
+</script>
+
+
+<script layout invert type="text/x-markdown"
+  backface="image/shock.jpg" backface-filter="blur(1px) brightness(.4)">
+# スライドの文字<br>読みづらいから！！
 </script>
 
 
