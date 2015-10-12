@@ -1,0 +1,56 @@
+#control {
+  color: #808080;
+}
+a {
+  color: #8fc0ff;
+  -webkit-transition: color 0.1s ease-in-out;
+          transition: color 0.1s ease-in-out;
+}
+[layout],
+#backface {
+  -webkit-transition: none;
+          transition: none;
+}
+[layout=code] .hljs-comment {
+  color: #555;
+}
+[layout][invert] a:link,
+[layout][invert] a:visited,
+[layout][invert] a:active {
+  color: #8fc0ff;
+}
+[layout][invert] a:hover {
+  color: #c7e0ff;
+}
+code {
+  background: #f3f3f3;
+  border: 1px solid #add8e6;
+  border-radius: 3px;
+  padding: 2px 5px;
+  font-size: 0.8em;
+  color: #333;
+}
+[layout][invert] code,
+[layout$=invert] code {
+  background: #555;
+  color: #fff;
+}
+.wide-list {
+  margin-left: 0;
+  margin-right: 0;
+}
+.yoshiko {
+  width: 250px;
+}
+.company-logo {
+  height: 3rem;
+  vertical-align: middle;
+  margin-left: 3px;
+}
+.book img {
+  height: 55%;
+  margin: -20px auto;
+}
+.m0 > * {
+  margin: 0;
+}
