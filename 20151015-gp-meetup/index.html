@@ -129,7 +129,8 @@ Watch数調査にはChrome拡張を使用すると便利
 </script>
 
 
-<script layout="bullets" type="text/x-markdown">
+<script layout invert type="text/x-markdown"
+  backface="image/angular-watchers.png" backface-filter="blur(1px) brightness(.3)">
 ### [Angular watchers](https://chrome.google.com/webstore/detail/angular-watchers/nlmjblobloedpmkmmckeehnbfalnjnjk)
 
 調べたいページで開発者ツールのタブを開くだけで
@@ -139,7 +140,8 @@ Watch数がわかるすぐれもの
 </script>
 
 
-<script layout="bullets" type="text/x-markdown">
+<script layout invert type="text/x-markdown"
+  backface="image/angular-batarang.png" backface-filter="blur(1px) brightness(.3)">
 ### [AngularJS Batarang](https://chrome.google.com/webstore/detail/angularjs-batarang/ighdmehidhipcmcojjgiloacoafjmpfk)
 
 こっちはとても有名なんですが  
@@ -160,19 +162,27 @@ Watch数がわかるすぐれもの
 </script>
 
 
-<script layout="bullets" type="text/x-markdown">
+<script layout invert type="text/x-markdown"
+  backface="image/prott-projects.png" backface-filter="blur(1px) brightness(.4)">
 ## プロジェクト一覧画面
-## Watch数 **19,000**
+## Watch数 約**23,000**
 
-*※プロジェクト200件表示時*
+*※プロジェクト660件表示時*
+</script>
+
+<script layout invert type="text/x-markdown"
+  backface="image/prott-groups.png" backface-filter="blur(1px) brightness(.4)">
+## グループ画面は・・・？
+
+*※ メンバー102名・プロジェクト360個・グループ22個の場合*
 </script>
 
 
-<script layout="bullets" type="text/x-markdown">
-## グループ画面
-## Watch数 **60,000**
+<script layout invert type="text/x-markdown" backface="image/prott-groups-real.png">
+</script>
 
-*※メンバー◯名・プロジェクト◯個*
+
+<script layout invert type="text/x-markdown" backface="image/baba--n.png">
 </script>
 
 
@@ -201,13 +211,26 @@ Watch数がわかるすぐれもの
 </script>
 
 
-<script layout type="text/x-markdown">
+<script layout="bullets-invert" type="text/x-markdown">
 ##  One Time Binding
 
 * 一度Watch対象の値を認識したら、  
 それ以降の監視を行わない機能。  
 * 一度決まれば二度と変動しない値に使用することで  
 パフォーマンスを改善できる
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+##  One Time Binding
+
+```javaScript
+// 何度も更新される(ng-bindなどでも同様)
+{{hoge}}
+
+// 一度値が決まれば更新されない
+{{::hoge}}
+```
 
 ※ ただし使えるのはAngularJS 1.3以降
 </script>
@@ -254,50 +277,173 @@ AngularJSのバージョンアップになりました
 
 <script layout="bullets" type="text/x-markdown">
 ## 言語とフレームワーク
-
-## 同時アップグレード  ダメ絶対
+## 同時バージョンアップ
+## ダメ絶対
 
 *切り分けが面倒なので*
 </script>
 
 
 <script layout="bullets-invert" type="text/x-markdown">
-### One Time Bindingの適用
-</script>
-
-<!--
-* Angular Translateにあてる
-* 2画面のWatch数比較
-* ng-repeatのイベントまとめる
-* 2画面のWatch数比較
-* まとめ
-  * 上の施策が有効
--->
-
-
-<script layout="cover" invert type="text/x-markdown"
-  backface="image/don.jpg" backface-filter="blur(2px) brightness(.4)">
-##  なんか背景
+### バージョンも上がったので
+### One Time Bindingを適用
 </script>
 
 
-<script layout="bullets" type="text/x-markdown">
-## なんかまとめ
+<script layout="code" type="text/x-markdown">
+### angular-translateに一括適用
+
+[angular-translate](https://angular-translate.github.io/)
+
+```javaScript
+.title {{"USER_DIALOG.MY_ACCOUNT" | translate}}
+// ↓
+.title {{::"USER_DIALOG.MY_ACCOUNT" | translate}}
+```
+
+Prottのテキストは多言語対応のため  
+すべてangular-translateを通しています
+
+*こんなのも：[angular-translate-once](http://atticuswhite.com/blog/angularjs-translate-once-angular-translate-one-time-binding/)*
 </script>
 
 
-<script layout="cover" invert type="text/x-markdown"
-  backface="image/end.gif" backface-filter="blur(3px) brightness(.4)">
-# Thank you
-[@yoshiko_pg](http://yoshiko-pg.github.io/)
+<script layout="code" type="text/x-markdown">
+### 目視でwatchが不要なところに適用
+
+セミコロンをふたつつけるだけの  
+簡単なお仕事です
+</script>
+
+
+<script layout invert type="text/x-markdown"
+  backface="image/prott-groups.png" backface-filter="blur(1px) brightness(.4)">
+## グループ画面
+## Watch数 約**60,000**
+↓
+## Watch数 約**27,000**
 </script>
 
 
 <script layout="bullets-invert" type="text/x-markdown">
-# おまけ
+### One Time Binding
+
+* angular-translateに一括適用
+  * 引数がある場合もあるので注意
+* 目視でwatchが不要なところに適用
+  * ng-repeatの中とか効果大
+
+### Watch数 -33,000
 </script>
 
 
+<script layout="bullets" type="text/x-markdown">
+## 次の手
+
+* ng-hide → ng-if
+* ng-repeat内のイベントハンドラを駆逐
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+### ng-hide → ng-if
+
+* ng-hide
+  * display: none; をかけて見えなくする  
+* ng-if
+  * HTML自体が出たり消えたりする
+
+大きめのブロックをトグルするときなどは  
+ng-ifを使ったほうが軽いです
+
+※ ng-ifは新たなchild Scopeができてしまうことに注意
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+### ng-repeat内の<br>イベントハンドラを駆逐
+
+ng-repeatで数百件ぐらい回す中にいくつもng-clickなどのイベントハンドラがあると**めちゃ重**になりがち
+
+親の要素ひとつだけに指定して、コールバックの中で  
+対象要素を絞り込むことで回避できる
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+```javascript
+// コードかく
+```
+</script>
+
+
+<script layout invert type="text/x-markdown"
+  backface="image/prott-groups.png" backface-filter="blur(1px) brightness(.4)">
+## グループ画面
+## Watch数 約**27,000**
+↓
+## Watch数 約**1,700**
+</script>
+
+
+<script layout="bullets-invert" type="text/x-markdown">
+# 最終的に
+</script>
+
+
+<script layout invert type="text/x-markdown"
+  backface="image/prott-groups.png" backface-filter="blur(1px) brightness(.4)">
+## グループ画面
+## Watch数 約**60,000**
+↓
+## Watch数 約**1,700**
+</script>
+
+
+<script layout="title" invert type="text/x-markdown"
+  backface="image/don.jpg" backface-filter="blur(2px) brightness(.4)">
+#  2.8%
+## 1/35になりました
+</script>
+
+<script layout="bullets-invert" type="text/x-markdown">
+## まとめ
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+### 肥大したWatch数の対処
+
+* One Time Binding
+  * AngularJS 1.3〜
+  * angular-translateをざざっと
+  * 他のところは目視でがんばる
+* ng-hide → ng-if
+* ng-repeat内のイベントハンドラを駆逐
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## 今後もどんどん
+## 軽くしていきます！！
+</script>
+
+<!--
+* リンク色明るくする
+* ng-ifにするときScope要注意
+* 最終的な差をグラフ
+  * 約-98%
+* $digest loopの話はスライド入れる
+* Wachについても
+  * ここに双方向バインディングとダイジェストループの説明入れるか悩む。→いれる
+-->
+
+
+<script layout="cover" invert type="text/x-markdown"
+  backface="image/nya.jpg" backface-filter="blur(1px) brightness(.5)">
+# Thank you
+[@yoshiko_pg](http://yoshiko-pg.github.io/)
+</script>
 
 
 <script src="lib/highlight.min.js"></script>

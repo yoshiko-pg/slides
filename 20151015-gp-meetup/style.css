@@ -6,7 +6,6 @@ a {
   -webkit-transition: color 0.1s ease-in-out;
           transition: color 0.1s ease-in-out;
 }
-[layout],
 #backface {
   -webkit-transition: none;
           transition: none;
@@ -22,7 +21,8 @@ a {
 [layout][invert] a:hover {
   color: #c7e0ff;
 }
-code {
+p > code,
+li > code {
   background: #f3f3f3;
   border: 1px solid #add8e6;
   border-radius: 3px;
