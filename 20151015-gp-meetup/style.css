@@ -2,9 +2,25 @@
   color: #808080;
 }
 a {
-  color: #8fc0ff;
+  color: #efc4dd;
   -webkit-transition: color 0.1s ease-in-out;
           transition: color 0.1s ease-in-out;
+}
+[layout][invert] a:link,
+[layout$='invert'] a:link,
+[layout='code'] a:link,
+[layout][invert] a:visited,
+[layout$='invert'] a:visited,
+[layout='code'] a:visited,
+[layout][invert] a:active,
+[layout$='invert'] a:active,
+[layout='code'] a:active {
+  color: #efc4dd;
+}
+[layout][invert] a:hover,
+[layout$='invert'] a:hover,
+[layout='code'] a:hover {
+  color: #f7e2ee;
 }
 #backface {
   -webkit-transition: none;
@@ -12,14 +28,6 @@ a {
 }
 [layout=code] .hljs-comment {
   color: #555;
-}
-[layout][invert] a:link,
-[layout][invert] a:visited,
-[layout][invert] a:active {
-  color: #8fc0ff;
-}
-[layout][invert] a:hover {
-  color: #c7e0ff;
 }
 p > code,
 li > code {
@@ -34,6 +42,9 @@ li > code {
 [layout$=invert] code {
   background: #555;
   color: #fff;
+}
+strong {
+  color: #f00;
 }
 .wide-list {
   margin-left: 0;
@@ -52,5 +63,6 @@ li > code {
   margin: -20px auto;
 }
 .m0 > * {
-  margin: 0;
+  margin-left: 0;
+  margin-right: 0;
 }

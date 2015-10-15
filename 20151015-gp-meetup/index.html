@@ -1,6 +1,6 @@
 <html>
 <head>
-  <title>AngularJSのWatch数が60,000だった - @yoshiko_pg</title>
+  <title>AngularJSの$watch登録数が60,000だった - @yoshiko_pg</title>
   <link rel="stylesheet" href="lib/talkie.min.css">
   <link rel="stylesheet" href="lib/talkie-default.min.css">
   <link rel="stylesheet" href="style.css">
@@ -11,7 +11,7 @@
 
 <script layout="cover" invert type="text/x-markdown"
   backface="image/cover.jpg" backface-filter="blur(2px) brightness(.7)">
-# AngularJSのWatch数が60,000だった
+# AngularJSの$watch登録数が60,000だった
 
 2015.10.15 [@yoshiko_pg](http://yoshiko-pg.github.io)
 
@@ -39,8 +39,8 @@ Frontend engineer at <a href="http://goodpatch.com/jp"><img src="./image/goodpat
 　
 
 * AngularJSのパフォーマンスを改善した思い出
-  * Watch数を減らすのに有効な施策
-  * 重くなりがちなアンチパターン
+  * $watchの登録数を減らすのに有効な施策
+  * AngularJSで重くなりがちなアンチパターン
 </script>
 
 
@@ -109,23 +109,40 @@ Angularが重くなる代表的な原因のひとつ
 
 　
 
-### Watch多すぎ問題
+### $watch登録数多すぎ問題
 </script>
-
-<!--
-ここに双方向バインディングとダイジェストループの説明入れるか悩む。
--->
 
 
 <script layout="bullets" type="text/x-markdown">
+### AngularJSの$watchとは？
+
+双方向バインディングを実現する仕組み。  
+
+* データバインドしたい値を``$scope.$watch()``で登録
+* 特定のきっかけで、$watchに登録されたすべての式を値が定まるまで評価（2~10回）
+  * DOMイベント
+  * AngularJSのタイマー($timeout, $interval)発火
+  * AngularJSのAjax($http, $resource)でレスポンスが返る
+  * AngularJSの$locationでURLが変わる
+* 変更があった値をビューに反映
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+ng-bindなんかは直接``$scope.$watch()``使ってないけど、  
+Angular側がコンパイルするときかわりに内部で  
+$watchで登録しているため数にカウントされる。
+
+毎回すべての式の評価が何度も走る(digest loop)ので、$watchへの登録が多ければ重くなる。  
+
 指標としては2,000個以下に保っておきたいところ
 
-*[AngularJSのパフォーマンス改善入門](http://qiita.com/zoetro/items/5156aef51222e81dd022)*
+*詳しくは：[AngularJSのパフォーマンス改善入門](http://qiita.com/zoetro/items/5156aef51222e81dd022)*
 </script>
 
 
 <script layout="bullets" type="text/x-markdown">
-Watch数調査にはChrome拡張を使用すると便利
+$watch登録数調査にはChrome拡張を使用すると便利
 </script>
 
 
@@ -134,7 +151,7 @@ Watch数調査にはChrome拡張を使用すると便利
 ### [Angular watchers](https://chrome.google.com/webstore/detail/angular-watchers/nlmjblobloedpmkmmckeehnbfalnjnjk)
 
 調べたいページで開発者ツールのタブを開くだけで
-Watch数がわかるすぐれもの  
+$watch登録数がわかるすぐれもの  
 　  
 潔いほどの単機能
 </script>
@@ -165,9 +182,9 @@ Watch数がわかるすぐれもの
 <script layout invert type="text/x-markdown"
   backface="image/prott-projects.png" backface-filter="blur(1px) brightness(.4)">
 ## プロジェクト一覧画面
-## Watch数 約**23,000**
+## $watch登録数 約**23,000**
 
-*※プロジェクト660件表示時*
+*※プロジェクト360件表示時*
 </script>
 
 <script layout invert type="text/x-markdown"
@@ -201,7 +218,7 @@ Watch数がわかるすぐれもの
 
 <script layout="bullets-invert" type="text/x-markdown">
 なにはともあれ
-膨らんだWatch数を減らすには
+膨らんだ$watch登録数を減らすには
 </script>
 
 
@@ -214,9 +231,9 @@ Watch数がわかるすぐれもの
 <script layout="bullets-invert" type="text/x-markdown">
 ##  One Time Binding
 
-* 一度Watch対象の値を認識したら、  
+* 一度$watchに登録された式の評価が確定したら、  
 それ以降の監視を行わない機能。  
-* 一度決まれば二度と変動しない値に使用することで  
+* 評価が一度決まれば二度と変動しない式に使用することで  
 パフォーマンスを改善できる
 </script>
 
@@ -225,13 +242,14 @@ Watch数がわかるすぐれもの
 ##  One Time Binding
 
 ```javaScript
-// 何度も更新される(ng-bindなどでも同様)
-{{hoge}}
+// 更新される可能性がある(監視が必要)
+{{project.name}}
 
-// 一度値が決まれば更新されない
-{{::hoge}}
+// 更新されない(監視が不要)
+{{::project.createdAt}}
 ```
 
+ng-bindなどのディレクティブでも同様。  
 ※ ただし使えるのはAngularJS 1.3以降
 </script>
 
@@ -254,7 +272,7 @@ AngularJSのバージョンアップになりました
 
 
 <script layout="bullets-invert" type="text/x-markdown">
-### AngularJS 1.2 → 1.3 の注意点
+### AngularJS 1.2 → 1.3 の主要な注意点
 
 * ``'false'`` ``'0'`` ``'no'`` ``'n'`` ``'f'`` ``'[]'`` がfalsyでなくなる
   * JS同様、``false`` ``null`` ``undefined`` ``NaN`` ``0`` ``""`` のみ falsyに
@@ -284,16 +302,21 @@ AngularJSのバージョンアップになりました
 </script>
 
 
-<script layout="bullets-invert" type="text/x-markdown">
+<script layout="bullets" type="text/x-markdown">
 ### バージョンも上がったので
 ### One Time Bindingを適用
+　
+### 60,000からどこまで減るかな？
 </script>
 
 
 <script layout="code" type="text/x-markdown">
-### angular-translateに一括適用
+### まずは[angular-translate](https://angular-translate.github.io/)に一括適用
 
-[angular-translate](https://angular-translate.github.io/)
+多言語対応のためPrott上のテキストは  
+すべてangular-translateを通していますが  
+filterなので毎回評価されてしまいます。  
+One Time Bindingで回避できます
 
 ```javaScript
 .title {{"USER_DIALOG.MY_ACCOUNT" | translate}}
@@ -301,39 +324,32 @@ AngularJSのバージョンアップになりました
 .title {{::"USER_DIALOG.MY_ACCOUNT" | translate}}
 ```
 
-Prottのテキストは多言語対応のため  
-すべてangular-translateを通しています
-
-*こんなのも：[angular-translate-once](http://atticuswhite.com/blog/angularjs-translate-once-angular-translate-one-time-binding/)*
+*専用ディレクティブも：[angular-translate-once](http://atticuswhite.com/blog/angularjs-translate-once-angular-translate-one-time-binding/)*
 </script>
 
 
 <script layout="code" type="text/x-markdown">
-### 目視でwatchが不要なところに適用
+### 残りは目視で<br>複数回の$watchが不要なところに適用
 
 セミコロンをふたつつけるだけの  
 簡単なお仕事です
 </script>
 
 
-<script layout invert type="text/x-markdown"
-  backface="image/prott-groups.png" backface-filter="blur(1px) brightness(.4)">
-## グループ画面
-## Watch数 約**60,000**
-↓
-## Watch数 約**27,000**
+<script layout="bullets-invert" type="text/x-markdown"
+  backface="image/nyanto.jpg" backface-filter="blur(1px) brightness(.5)">
+## なんとこれで
 </script>
 
 
-<script layout="bullets-invert" type="text/x-markdown">
-### One Time Binding
+<script layout="bullets" type="text/x-markdown"
+  backface="image/don.jpg" backface-filter="blur(2px) brightness(1.2)">
+## グループ画面
+## 約60,000 → **約27,000**
 
-* angular-translateに一括適用
-  * 引数がある場合もあるので注意
-* 目視でwatchが不要なところに適用
-  * ng-repeatの中とか効果大
+　
 
-### Watch数 -33,000
+## **驚きの55% OFF**
 </script>
 
 
@@ -341,48 +357,74 @@ Prottのテキストは多言語対応のため
 ## 次の手
 
 * ng-hide → ng-if
-* ng-repeat内のイベントハンドラを駆逐
 </script>
 
 
-<script layout="bullets" type="text/x-markdown">
+<script layout="bullets-invert" type="text/x-markdown">
 ### ng-hide → ng-if
 
 * ng-hide
-  * display: none; をかけて見えなくする  
+  * 要素はずっとあるけどdisplay: none; で見えなくする  
 * ng-if
-  * HTML自体が出たり消えたりする
+  * 要素自体がHTML内から消えたり復活したりする
 
-大きめのブロックをトグルするときなどは  
-ng-ifを使ったほうが軽いです
+非表示にするのが大きめのブロックなら  
+評価対象が消えるng-ifを使うと軽くできます
 
-※ ng-ifは新たなchild Scopeができてしまうことに注意
+※ ng-ifはChild Scopeを作り出すことに要注意
 </script>
 
+<!--
+<script layout="code" type="text/x-markdown" class="m0">
+### ng-repeat内のイベントハンドラを駆逐
 
-<script layout="bullets" type="text/x-markdown">
-### ng-repeat内の<br>イベントハンドラを駆逐
+ng-repeatで数百件ぐらい回す中にいくつもng-clickなどの  
+イベントハンドラがあると**めちゃ重**になりがち
 
-ng-repeatで数百件ぐらい回す中にいくつもng-clickなどのイベントハンドラがあると**めちゃ重**になりがち
-
-親の要素ひとつだけに指定して、コールバックの中で  
-対象要素を絞り込むことで回避できる
-</script>
-
-
-<script layout="code" type="text/x-markdown">
-```javascript
-// コードかく
+```html
+<ul>
+  <li ng-repeat="item in items">
+    <span ng-click="hogeAction(item.name)">{{item.name}}</span>
+    <span ng-click="fugaAction(item.obj)">{{item.obj}}</span>
+  </li>
+</ul>
 ```
 </script>
 
 
-<script layout invert type="text/x-markdown"
-  backface="image/prott-groups.png" backface-filter="blur(1px) brightness(.4)">
+<script layout="code" type="text/x-markdown" class="m0">
+親の要素ひとつだけにイベントを指定して、  
+コールバックの中で対象要素を絞り込むことで回避できる
+
+```html
+<ul>
+  <li ng-repeat="item in items" ng-click="action($event)">
+    <span data-name="{{item.name}}">{{item.name}}</span>
+    <span data-index="{{$index}}">{{item.obj}}</span>
+  </li>
+</ul>
+```
+
+```javascript
+```
+</script>
+-->
+
+
+<script layout="bullets-invert" type="text/x-markdown"
+  backface="image/nyanto.jpg" backface-filter="blur(1px) brightness(.5)">
+## なんとこれで
+</script>
+
+
+<script layout="bullets" type="text/x-markdown"
+  backface="image/don.jpg" backface-filter="blur(2px) brightness(1.2)">
 ## グループ画面
-## Watch数 約**27,000**
-↓
-## Watch数 約**1,700**
+## 約27,000 → **約1,700**
+
+　
+
+## **驚きの94% OFF**
 </script>
 
 
@@ -391,20 +433,18 @@ ng-repeatで数百件ぐらい回す中にいくつもng-clickなどのイベン
 </script>
 
 
-<script layout invert type="text/x-markdown"
-  backface="image/prott-groups.png" backface-filter="blur(1px) brightness(.4)">
+<script layout="bullets" type="text/x-markdown"
+  backface="image/don.jpg" backface-filter="blur(2px) brightness(1.2)">
 ## グループ画面
-## Watch数 約**60,000**
-↓
-## Watch数 約**1,700**
+## 約60,000 → **約1,700**
+
+　
+
+## **驚きの97% OFF**
+
+目標だった2,000を下回ったよ！
 </script>
 
-
-<script layout="title" invert type="text/x-markdown"
-  backface="image/don.jpg" backface-filter="blur(2px) brightness(.4)">
-#  2.8%
-## 1/35になりました
-</script>
 
 <script layout="bullets-invert" type="text/x-markdown">
 ## まとめ
@@ -412,14 +452,22 @@ ng-repeatで数百件ぐらい回す中にいくつもng-clickなどのイベン
 
 
 <script layout="bullets" type="text/x-markdown">
-### 肥大したWatch数の対処
+### 肥大した$watch登録数の対処
 
 * One Time Binding
   * AngularJS 1.3〜
   * angular-translateをざざっと
   * 他のところは目視でがんばる
 * ng-hide → ng-if
-* ng-repeat内のイベントハンドラを駆逐
+  * 色々ついて重たい要素をng-ifで消せると軽くなる
+  * Scopeが1階層増えるので要注意
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+### $watch対策以外にも色々しました
+
+そちらは最後のセッションで！
 </script>
 
 

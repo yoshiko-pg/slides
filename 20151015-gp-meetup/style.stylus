@@ -1,24 +1,25 @@
 #control
   color gray
 
-linkColor = #8FC0FF
+linkColor = #EFC4DD
 
 a
   color linkColor
   transition color .1s ease-in-out
+
+[layout][invert],
+[layout$='invert'],
+[layout='code']
+  a:link, a:visited, a:active
+    color linkColor
+  a:hover
+    color lighten(linkColor, 50%)
 
 #backface
   transition: none
 
 [layout=code] .hljs-comment
   color #555
-
-[layout][invert] a:link,
-[layout][invert] a:visited,
-[layout][invert] a:active
-  color linkColor
-[layout][invert] a:hover
-  color lighten(linkColor, 50%)
 
 p > code,
 li > code
@@ -33,6 +34,9 @@ li > code
   code
     background: #555
     color: #fff
+
+strong
+  color: red
 
 .wide-list
   margin-left 0
@@ -51,6 +55,7 @@ li > code
   margin -20px auto
 
 .m0 > *
-  margin: 0
+  margin-left: 0
+  margin-right: 0
 
 ///////////////////////////////////////////////////////////////////////////////////////
