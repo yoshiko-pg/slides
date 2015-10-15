@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css?family=Share");
 #control {
   color: #808080;
 }
@@ -26,6 +27,9 @@ a {
   -webkit-transition: none;
           transition: none;
 }
+strong {
+  color: #f00;
+}
 [layout=code] .hljs-comment {
   color: #555;
 }
@@ -43,8 +47,12 @@ li > code {
   background: #555;
   color: #fff;
 }
-strong {
-  color: #f00;
+[layout][invert] strong,
+[layout$=invert] strong {
+  color: #ff8080;
+}
+[layout=cover] h1 {
+  font-family: Share, Futura, Helvetica, Arial, Hiragino Kaku Gothic ProN, Meiryo, sans-serif;
 }
 .wide-list {
   margin-left: 0;

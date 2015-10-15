@@ -10,8 +10,8 @@
 
 
 <script layout="cover" invert type="text/x-markdown"
-  backface="image/cover.jpg" backface-filter="blur(2px) brightness(.7)">
-# AngularJSの$watch登録数が60,000だった
+  backface="image/angularjs.png" backface-filter="blur(2px) brightness(.3)">
+# AngularJSの<br>$watch登録数が<br>60,000だった
 
 2015.10.15 [@yoshiko_pg](http://yoshiko-pg.github.io)
 
@@ -36,18 +36,14 @@ Frontend engineer at <a href="http://goodpatch.com/jp"><img src="./image/goodpat
 <script layout="bullets" type="text/x-markdown" class="m0">
 ### 今日話すこと
 
-　
-
-* AngularJSのパフォーマンスを改善した思い出
+* AngularJSのパフォーマンス改善フロー
+  * $watchとは何か？
   * $watchの登録数を減らすのに有効な施策
-  * AngularJSで重くなりがちなアンチパターン
 </script>
 
 
 <script layout type="text/x-markdown" class="m0">
 2015年6月1日
-
-　
 
 フロントエンドエンジニアとしてGoodpatchに入社しました
 </script>
@@ -61,15 +57,15 @@ Frontend engineer at <a href="http://goodpatch.com/jp"><img src="./image/goodpat
 <script layout="bullets" type="text/x-markdown">
 ## Prott
 
-* Web App
-* iOS App
-* Android App
-* Mac App
+* [Web App](https://prottapp.com/)
+* [iOS App](https://itunes.apple.com/jp/app/id917618029)
+* [Android App](https://play.google.com/store/apps/details?id=com.prottapp.android)
+* <a href="https://prottapp.com/app/gadgets/prott.dmg" download="prott.dmg" onclick="return confirm('prott.dmgをダウンロードしますか？');">Mac App</a>
 </script>
 
 
 <script layout="bullets" type="text/x-markdown">
-## Prott Web
+## Prott Web App
 
 * AngularJS
 * CoffeeScript
@@ -116,10 +112,10 @@ Angularが重くなる代表的な原因のひとつ
 <script layout="bullets" type="text/x-markdown">
 ### AngularJSの$watchとは？
 
-双方向バインディングを実現する仕組み。  
+AngularJSの双方向バインディングを実現する仕組み。  
 
-* データバインドしたい値を``$scope.$watch()``で登録
-* 特定のきっかけで、$watchに登録されたすべての式を値が定まるまで評価（2~10回）
+* データバインドしたい式を``$scope.$watch()``で登録
+* 特定のイベントをきっかけに、$watchに登録されたすべての式を値が定まるまで評価（2~10回）
   * DOMイベント
   * AngularJSのタイマー($timeout, $interval)発火
   * AngularJSのAjax($http, $resource)でレスポンスが返る
@@ -130,7 +126,7 @@ Angularが重くなる代表的な原因のひとつ
 
 <script layout="bullets" type="text/x-markdown">
 ng-bindなんかは直接``$scope.$watch()``使ってないけど、  
-Angular側がコンパイルするときかわりに内部で  
+かわりにAngular側がコンパイルするとき内部で  
 $watchで登録しているため数にカウントされる。
 
 毎回すべての式の評価が何度も走る(digest loop)ので、$watchへの登録が多ければ重くなる。  
@@ -233,6 +229,7 @@ $watch登録数がわかるすぐれもの
 
 * 一度$watchに登録された式の評価が確定したら、  
 それ以降の監視を行わない機能。  
+* 結果がundefinedである間は監視が続き、<br>それ以外の値に定まった段階で監視対象から外れる
 * 評価が一度決まれば二度と変動しない式に使用することで  
 パフォーマンスを改善できる
 </script>
@@ -250,6 +247,7 @@ $watch登録数がわかるすぐれもの
 ```
 
 ng-bindなどのディレクティブでも同様。  
+
 ※ ただし使えるのはAngularJS 1.3以降
 </script>
 
@@ -268,6 +266,11 @@ ng-bindなどのディレクティブでも同様。
 <script layout="bullets" type="text/x-markdown">
 ということで最初の仕事は  
 AngularJSのバージョンアップになりました
+
+*[One Time Bindingは1.2でもできないことはない](https://github.com/Pasvaz/bindonce)けど、  
+バージョンアップによるパフォーマンス改善も見込めるし  
+今後のことを考えても上げておきたかった
+*
 </script>
 
 
@@ -277,7 +280,6 @@ AngularJSのバージョンアップになりました
 * ``'false'`` ``'0'`` ``'no'`` ``'n'`` ``'f'`` ``'[]'`` がfalsyでなくなる
   * JS同様、``false`` ``null`` ``undefined`` ``NaN`` ``0`` ``""`` のみ falsyに
 * $animateの仕様変更によりCSSにも修正が必要
-* Directiveのreplaceが非推奨に
 * IE8が対象外に
 
 *その他：[AngularJS: Migrating from 1.2 to 1.3 日本語訳](http://angularjsninja.com/blog/2014/10/15/migrating-from-1.2-to-1.3-in-Japanese/)*
@@ -314,9 +316,9 @@ AngularJSのバージョンアップになりました
 ### まずは[angular-translate](https://angular-translate.github.io/)に一括適用
 
 多言語対応のためPrott上のテキストは  
-すべてangular-translateを通していますが  
-filterなので毎回評価されてしまいます。  
-One Time Bindingで回避できます
+すべてangular-translateを通しているが  
+filterなので毎回評価されてしまう。  
+これをOne Time Bindingで回避
 
 ```javaScript
 .title {{"USER_DIALOG.MY_ACCOUNT" | translate}}
@@ -360,55 +362,19 @@ One Time Bindingで回避できます
 </script>
 
 
-<script layout="bullets-invert" type="text/x-markdown">
-### ng-hide → ng-if
+<script layout="bullets" type="text/x-markdown">
+### ng-hideとng-if
 
 * ng-hide
   * 要素はずっとあるけどdisplay: none; で見えなくする  
 * ng-if
-  * 要素自体がHTML内から消えたり復活したりする
+  * 要素がHTML内から削除 or 追加される
 
 非表示にするのが大きめのブロックなら  
-評価対象が消えるng-ifを使うと軽くできます
+その中の評価対象が消えるng-ifを使うと軽くできます
 
 ※ ng-ifはChild Scopeを作り出すことに要注意
 </script>
-
-<!--
-<script layout="code" type="text/x-markdown" class="m0">
-### ng-repeat内のイベントハンドラを駆逐
-
-ng-repeatで数百件ぐらい回す中にいくつもng-clickなどの  
-イベントハンドラがあると**めちゃ重**になりがち
-
-```html
-<ul>
-  <li ng-repeat="item in items">
-    <span ng-click="hogeAction(item.name)">{{item.name}}</span>
-    <span ng-click="fugaAction(item.obj)">{{item.obj}}</span>
-  </li>
-</ul>
-```
-</script>
-
-
-<script layout="code" type="text/x-markdown" class="m0">
-親の要素ひとつだけにイベントを指定して、  
-コールバックの中で対象要素を絞り込むことで回避できる
-
-```html
-<ul>
-  <li ng-repeat="item in items" ng-click="action($event)">
-    <span data-name="{{item.name}}">{{item.name}}</span>
-    <span data-index="{{$index}}">{{item.obj}}</span>
-  </li>
-</ul>
-```
-
-```javascript
-```
-</script>
--->
 
 
 <script layout="bullets-invert" type="text/x-markdown"
@@ -459,13 +425,14 @@ ng-repeatで数百件ぐらい回す中にいくつもng-clickなどの
   * angular-translateをざざっと
   * 他のところは目視でがんばる
 * ng-hide → ng-if
-  * 色々ついて重たい要素をng-ifで消せると軽くなる
+  * $watch対象をたくさん含む要素を  
+    非表示にする場合はng-ifで消すと軽くなる
   * Scopeが1階層増えるので要注意
 </script>
 
 
 <script layout="bullets" type="text/x-markdown">
-### $watch対策以外にも色々しました
+### もちろん$watch対策以外にも色々しました
 
 そちらは最後のセッションで！
 </script>
@@ -476,21 +443,93 @@ ng-repeatで数百件ぐらい回す中にいくつもng-clickなどの
 ## 軽くしていきます！！
 </script>
 
-<!--
-* リンク色明るくする
-* ng-ifにするときScope要注意
-* 最終的な差をグラフ
-  * 約-98%
-* $digest loopの話はスライド入れる
-* Wachについても
-  * ここに双方向バインディングとダイジェストループの説明入れるか悩む。→いれる
--->
+
+<script layout type="text/x-markdown" class="book">
+### 11/2に著書が出ます
+
+![HTML5/CSS3 モダンコーディング](./image/book.jpg)
+
+[Amazonで絶賛予約受付中！！](http://www.amazon.co.jp/dp/4798141577)
+
+*※ JSの話は出てきません*
+</script>
 
 
 <script layout="cover" invert type="text/x-markdown"
   backface="image/nya.jpg" backface-filter="blur(1px) brightness(.5)">
 # Thank you
 [@yoshiko_pg](http://yoshiko-pg.github.io/)
+</script>
+
+
+<script layout="bullets-invert" type="text/x-markdown">
+# おまけ
+
+イベントハンドラが多すぎて重い場合
+</script>
+
+
+<script layout="code" type="text/x-markdown" class="m0">
+### ng-repeat内のイベントハンドラを駆逐
+
+ng-repeatで数百件ぐらい回す中にいくつもng-clickなどの  
+イベントハンドラがあると**めちゃ重**になる場合がある  
+（特にng-mouseenter/leaveとか）
+
+```html
+<ul>
+  <li ng-repeat="item in items">
+    <span ng-click="hogeAction(item.name)">{{item.name}}</span>
+    <span ng-click="fugaAction(item.obj)">{{item.obj}}</span>
+  </li>
+</ul>
+```
+
+</script>
+
+
+<script layout="code" type="text/x-markdown" class="m0">
+親の要素ひとつだけにイベントハンドラを指定して、  
+コールバックの中で対象要素を絞り込むことで  
+イベントハンドラの総量を減らせる
+
+```html
+<ul ng-click="action($event)">
+  <li ng-repeat="item in items">
+    <span item-name="{{item.name}}">{{item.name}}</span>
+    <span index="{{$index}}">{{item.obj}}</span>
+  </li>
+</ul>
+```
+</script>
+
+
+<script layout="code" type="text/x-markdown" class="m0">
+```CoffeeScript
+action: ($event) ->
+  $event.preventDefault()
+  $event.stopPropagation()
+
+  name = @getAttr($event.target, 'item-name')
+  @hogeAction(name) if name?
+
+  index = @getAttr($event.target, 'index')
+  @fugaAction($scope.items[index]) if index?
+
+getAttr: (elem, attr) ->
+  elem.getAttribute(attr) ||
+  $(elem).closest("[#{attr}]").attr(attr)
+```
+
+*※ イメージです*
+</script>
+
+
+<script layout="bullets-invert" type="text/x-markdown">
+Prottではなく前の仕事でこれでかなり軽くなりました。
+
+でも可読性下がるし泥臭いので、もっとスマートな方法ないのかなぁっていつも思います。  
+どなたかより良い方法ありましたら教えて下さい＞＜
 </script>
 
 

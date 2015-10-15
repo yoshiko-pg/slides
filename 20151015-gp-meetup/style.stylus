@@ -1,3 +1,5 @@
+@import url(https://fonts.googleapis.com/css?family=Share);
+
 #control
   color gray
 
@@ -18,6 +20,9 @@ a
 #backface
   transition: none
 
+strong
+  color: red
+
 [layout=code] .hljs-comment
   color #555
 
@@ -34,9 +39,11 @@ li > code
   code
     background: #555
     color: #fff
+  strong
+    color: lighten(red, 50%)
 
-strong
-  color: red
+[layout=cover] h1
+  font-family: Share,Futura,Helvetica,Arial,Hiragino Kaku Gothic ProN,Meiryo,sans-serif;
 
 .wide-list
   margin-left 0
