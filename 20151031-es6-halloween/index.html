@@ -1,0 +1,795 @@
+<html>
+<head>
+  <title>Good afternoon, ES6 - @yoshiko_pg</title>
+  <link rel="stylesheet" href="lib/talkie.min.css">
+  <link rel="stylesheet" href="lib/talkie-default.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="lib/hljs-styles/railscasts.css">
+</head>
+<body>
+
+
+
+
+<script layout="cover" invert type="text/x-markdown"
+  backface="image/sai.jpg" backface-filter="brightness(.4)">
+# Good afternoon, ES6
+
+2015.10.31 [@yoshiko_pg](http://yoshiko-pg.github.io)
+
+[「ECMAScript6勉強会」HappyHalloween JS祭！！](http://eventdots.jp/event/571557)
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+※このスライドは2015年4月に行なった  
+[Hello, ES6 ~これから迎えるJSのミライ~](http://yoshiko-pg.github.io/slides/20150425-jsfes/)
+の再演です  
+
+*（時間の都合上ちょっと内容を削っているので、フルが見たい方は↑からどうぞ）*
+</script>
+
+
+<script layout="bullets" invert type="text/x-markdown"
+  backface="image/bg-profile.png" backface-filter="blur(2px) brightness(.4)">
+
+## 自己紹介
+
+<img src="./image/yoshiko.png" class="yoshiko">
+
+よしこ [@yoshiko_pg](https://twitter.com/yoshiko_pg)
+
+Frontend engineer at <a href="http://goodpatch.com/jp"><img src="./image/goodpatch.png" class="company-logo"></a>
+
+</script>
+
+
+<script layout type="text/x-markdown">
+# 突然ですが
+## JavaScript読めますか？
+</script>
+
+
+<script layout invert type="text/x-markdown"
+  backface="image/koara1.jpg" backface-filter="blur(1px) brightness(.6)">
+# 余裕？
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+## このコード読めますか？
+
+```javascript
+function sum (...nums) {
+  return nums.reduce((a, b) => a + b)
+}
+console.log(sum(1,2,3,4)); // 10
+
+
+function hi (name = 'Bob') {
+  console.log("Hi, my name is ${name}");
+}
+hi('Tom'); // Hi, my name is Tom
+hi();      // Hi, my name is Bob
+```
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+## これは？
+
+```javascript
+class Person {
+  constructor(name) {
+    this.name = name;
+  }
+  hi() {
+    return "Hi, my name is ${this.name}";
+  }
+}
+
+class Noisy extends Person {
+  hi() {
+    return "${super.hi()}!!!!!!!!!";
+  }
+}
+```
+</script>
+
+
+<script layout invert type="text/x-markdown"
+  backface="image/koara2.jpg" backface-filter="blur(1px) brightness(.4)" class="m0">
+## 私の知ってるJavaScriptじゃない
+</script>
+
+
+<script layout type="text/x-markdown">
+## 今日はそんなES6を
+## 深く知るための勉強会！
+</script>
+
+
+<script layout type="text/x-markdown">
+## オープニングセッションとして
+## ES6入門の話をします
+</script>
+
+
+<script layout type="text/x-markdown">
+## おしながき
+* ES6って何
+* 何が変わるの
+* どうやったら使えるの
+</script>
+
+
+<script layout type="text/x-markdown">
+# ES6って何
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## ES6って何
+* ECMAScript 6th Edition
+* 正式名称はECMAScript 2015
+* 長くて呼びづらいのでES6とよく呼ばれる
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## ECMAScriptって何
+* JavaScriptは色々なところで実装されている
+* その実装がバラバラにならないための標準規格
+* JavaScriptはECMAScriptに基いて実装された言語
+
+[ECMAScriptの仕様策定に関するカンニングペーパー](http://efcl.info/2015/10/18/ecmascript-paper/)
+</script>
+
+<!--
+web db press es6の回
+-->
+
+
+<script layout type="text/x-markdown">
+# ES6で何が変わるの
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## ES6で何が変わるの
+* 新しい構文が使えるようになる
+  → 書きやすく・読みやすくなる
+* 新しい機能が使えるようになる
+  → できることが増える
+</script>
+
+<script layout invert type="text/x-markdown"
+  backface="image/dog.jpg" backface-filter="brightness(.4)">
+# ES6の新機能
+## すっきり書けるよ編
+</script>
+
+
+<!--
+<script layout type="text/x-markdown">
+# Arrow Function
+## アロー関数
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+## Arrow Function
+
+```javascript
+// ES5までの書き方
+var calc = function(x) {
+  return x * 2;
+}
+
+// ES6
+var calc = (x) => {
+  return x * 2;
+}
+
+// 省略形
+var calc = x => x * 2;
+```
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+関数の中身の式がひとつの場合、中カッコとreturnを省略できる  
+引数が1つの場合は引数を囲むカッコを省略できる
+
+```javascript
+// 引数なし
+var hi = () => 'hello world!';
+
+// 引数ひとつ
+var calc = x => x * 2;
+
+// 引数ふたつ
+var add = (a, b) => a + b;
+
+// 1行にまとめても式がふたつ以上なら中カッコが必要
+var add = (a, b) => console.log(a, b); a + b; // NG
+var add = (a, b) => { console.log(a, b); a + b; } // OK
+```
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+通常の無名関数とはthisの内容が異なるので注意  
+
+```javascript
+var lazyCounter = {
+  count: 0,
+  countUp: function() { // ここでのthisはlazyCounter
+    setTimeout(function() {
+      // ここではthisがグローバルオブジェクトになる
+      // this.count++; はErrorになる
+    }, 10);
+
+    // アロー関数内のthisは外側のthisと同じ
+    setTimeout(() => this.count++, 10); // OK
+  }
+};
+
+lazyCounter.countUp();
+```
+</script>
+-->
+
+
+<script layout type="text/x-markdown">
+# let
+## ブロックスコープの変数
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+## let
+```javascript
+// ES5
+var i = 100;
+for(var i = 0; i < 5; i++) {
+  console.log(i); // 0 ~ 4
+}
+console.log(i); // 5
+
+// ES6
+var i = 100;
+for(let i = 0; i < 5; i++) {
+  console.log(i); // 0 ~ 5
+}
+console.log(i); // 100
+```
+</script>
+
+
+<script layout type="text/x-markdown">
+# const
+## 定数
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+## const
+```javascript
+// ES5
+var LIMIT = 100;
+LIMIT = 99999; // valid
+console.log(LIMIT); // 99999
+
+// ES6
+const LIMIT = 100;
+LIMIT = 99999; // error
+```
+</script>
+
+
+<script layout type="text/x-markdown">
+# Template Strings
+## テンプレート文字列
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+## Template Strings
+```javascript
+// バッククオートで囲む
+"simple text" // === 'simple text'
+
+// 複数行
+"multiline
+text"        // === "multiline\ntext"
+
+// 変数の埋め込み
+var count = 1, obj = {foo: 'bar'};
+// ES5
+'count is ' + count + ', obj.foo is ' + obj.foo;
+// ES6
+"count is ${count}, obj.foo is ${obj.foo}";
+```
+</script>
+
+
+<script layout type="text/x-markdown">
+# Default Parameters
+## デフォルト引数
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+## Default Parameters
+
+```javascript
+//ES5
+function twice (x) {
+  x = x || 10; // xがfalsyであれば10を代入
+  return x * 2;
+}
+console.log(twice(4), twice(), twice(0));
+// 8 20 20(!?)
+
+//ES6
+function twice (x = 10) {
+  return x * 2;
+}
+console.log(twice(4), twice(), twice(0));
+// 8 20 0
+```
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+## Default Parameters
+
+```javascript
+// デフォルト値のない引数より後にしか置けない
+function(x=1, y) {}; // NG
+function(y, x=1) {}; // OK
+
+// undefinedを渡した場合はデフォルト値が使用される
+function test (value = 'default') {
+  console.log(value);
+}
+test(false); // false
+test(null); // null
+test(undefined); // 'default'
+```
+</script>
+
+
+<script layout type="text/x-markdown">
+# Rest Parameters
+## 可変長引数
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+## Rest Parameters
+
+```javascript
+rest(1, 2, 3);
+
+function rest (...args) {
+  console.log(args); // [1, 2, 3]
+  console.log(arguments); // [1, 2, 3]
+
+  console.log(Array.isArray(args)); // true
+  console.log(Array.isArray(arguments)); // false
+
+  args.forEach(x => console.log(x)); // 1 2 3
+  arguments.forEach(x => console.log(x)); // Error
+}
+```
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+## Rest Parameters
+```javascript
+function rest(x, y, ...others) {
+  console.log(x, y, others);
+}
+
+rest(1, 2, 3);  // 1 2 [3]
+
+// 引数が渡らなかった場合は空の配列になる
+rest(1);        // 1 undefined []
+
+// 最後の引数以外には使用できない
+function rest(first, ...arr, last) {  } // NG
+```
+</script>
+
+
+<script layout type="text/x-markdown">
+# Spread operator
+## スプレッド演算子
+
+*<strong>spread</strong>: 〈人が〉【場所に】〈物〉を広げる, (一面に)並べる*
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+## Spread operator
+配列の前に...をつけることで展開できる
+
+```javascript
+var arr = [3, 4, 5];
+var nums = [1, 2, ...arr, 6, ...[7]];
+console.log(nums); // [1, 2, 3, 4, 5, 6, 7]
+```
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+## Spread operator
+applyメソッドを使用しなくても良い
+
+```javascript
+function f(x, y, z) {
+  console.log(x, y, z);
+}
+
+var args = [1, 2, 3];
+
+// ES5
+f.apply(null, args); // 1 2 3
+
+// ES6
+f(...args); // 1 2 3
+```
+</script>
+
+
+<script layout type="text/x-markdown">
+# Enhanced<br>object literals
+## 強化された<br>オブジェクトリテラル
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+## Enhanced object literals
+
+変数名と同じキーや無名関数のfunctionを省略できる
+
+```javascript
+var name = 'yoshiko', age = 23;
+
+// ES5
+var person = {
+  name: name,
+  age: age,
+  hi: function() { return 'hi'; }
+};
+// ES6
+var person = {
+  name, age, hi() { return 'hi'; }
+};
+```
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+## Enhanced object literals
+keyに動的な値を使用できる
+
+```javascript
+var rand = Math.random();
+
+//ES5
+var obj = {};
+obj[rand] = 'value';
+
+//ES6
+var obj = {[rand]: 'value'};
+console.log(obj);
+// Object {0.2180616082623601: "value"}
+
+var obj2 = {[Math.random()]: 'value'};
+```
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+## Enhanced object literals
+他にも色々あるけど省略
+
+*詳しい解説：[http://wiki.ecmascript.org/doku.php?id=harmony:object_literals](http://wiki.ecmascript.org/doku.php?id=harmony:object_literals)*
+</script>
+
+
+<script layout type="text/x-markdown">
+# Destructuring
+## 分配束縛
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+## Destructuring
+
+```javascript
+var [a, , b] = [1, 2, 3];
+console.log(a, b); // 1 3
+
+function today() { return {y: 2015, m: 4, d: 25}; }
+var {y: year, m: month} = today();
+console.log(year, month); // 2015 4
+
+// 関数の引数にも使える
+function dest({name: name}) {
+  console.log(name);
+}
+var person = {id: 1, name: 'Taro'};
+dest(person); // 'Taro'
+```
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+## Destructuring
+```javascript
+// 値がなくてもエラーは発生しない
+var [c, d] = [4];
+console.log(c, d); // 4 undefined
+
+// 値がなかった場合のデフォルト値も指定できる
+var [e = 1, f] = [];
+console.log(e, f); // 1 undefined
+```
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+## Destructuring
+変数の値の入れ替えが楽
+
+```javascript
+var a = 'bbb', b = 'aaa';
+
+// ES5
+var tmp = a;
+a = b;
+b = tmp;
+
+// ES6
+[a, b] = [b, a];
+
+console.log(a, b); // aaa bbb
+```
+</script>
+
+
+<!--
+<script layout type="text/x-markdown">
+# Class
+## クラス
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+## Class
+
+今までコンストラクタ関数とprototypeを使用して表現してきたクラス構造を、クラス用の構文で定義できる  
+
+```javascript
+// ES5
+var Person = function(name) {
+  this.name = name;
+};
+Person.prototype.hi = function() {
+  return "Hi, my name is ${this.name}";
+};
+var bob = new Person('Bob');
+console.log(bob.hi()); // Hi, my name is Bob
+
+```
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+## Class
+
+```javascript
+// ES6
+class Person {
+  constructor(name) {
+    this.name = name;
+  }
+  hi() {
+    return "Hi, my name is ${this.name}";
+  }
+}
+var tom = new Person('Tom');
+console.log(tom.hi()); // Hi, my name is Tom
+
+// あくまでもシンタックスシュガー
+console.log(typeof Person); // function
+```
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+## Class
+継承もできる
+
+```javascript
+class Noisy extends Person {
+  hi() {
+    return "${super.hi()}!!!!!!!!!";
+  }
+}
+
+var mike = new Noisy('Mike');
+console.log(mike.hi()); // Hi, my name is Mike!!!!!!!!!;
+```
+</script>
+-->
+
+<script layout invert type="text/x-markdown"
+  backface="image/monkey.jpg" backface-filter="blur(2px) brightness(.6)">
+# ES6の新機能
+## こんなこともできるよ編
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## 時間がないので割愛
+
+* Arrow function （今日お話があるよ！）
+* Class （今日お話があるよ！）
+* Promises （今日お話があるよ！）
+* Modules & Module loaders
+* Iterators + For..Of
+* Generators
+* Symbols
+* Array comprehensions
+
+*Unicode, Map + Set + WeakMap + WeakSet, Proxies, Subclassable Built-ins, Math + Number + String + Object APIs, Binary and Octal Literals, Reflect API, Tail Calls*
+</script>
+
+
+<script layout="bullets-invert" type="text/x-markdown">
+## 知りたい方はこちらがおすすめ
+
+* [Effective ES6](http://www.slideshare.net/teppeis/effective-es6)
+* [WEB+DB PRESS Vol.87](http://gihyo.jp/magazine/wdpress/archive/2015/vol87)
+</script>
+
+
+<script layout invert type="text/x-markdown"
+  backface="image/man1.jpg" backface-filter="blur(2px) brightness(.7)">
+# ES6の時代きた！！！<br>今日から使おう！！！
+</script>
+
+
+<script layout invert type="text/x-markdown"
+  backface="image/man2.jpg" backface-filter="blur(2px) brightness(.6)">
+# そのまま書いても<br>まだ使えません
+</script>
+
+
+<script layout type="text/x-markdown">
+# どうやったら使えるの
+</script>
+
+
+<script layout type="text/x-markdown">
+# ブラウザが解釈できるES5に変換しよう！
+</script>
+
+
+<script layout="title" invert type="text/x-markdown"
+  backface="image/babel.jpg" backface-filter="blur(2px) brightness(.4)">
+<a href="http://babeljs.io/" target="_blank">
+  <img src="image/babel-logo.png" alt="BABEL">
+</a>
+</script>
+
+
+<script layout type="text/x-markdown"
+  backface="image/babeljs.png">
+</script>
+
+
+<script layout invert type="text/x-markdown"
+  backface="image/dog-smile.jpg" backface-filter="blur(2px) brightness(.6)">
+## Babelを使えば今すぐ書ける！
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## ES6とのお付き合い 0歩目
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+## Scratch JS *(Chrome Extension)*
+
+[Scratch JS - Chromeウェブストア](https://chrome.google.com/webstore/detail/scratch-js/alploljligeomonipppgaahpkenfnfkn)
+
+[https://github.com/richgilbank/Scratch-JS](https://github.com/richgilbank/Scratch-JS)
+
+Chromeデベロッパーツールにタブが増える  
+Traceur, Babel, CoffeeScript, LiveScriptから<br>使用するトランスパイラを選べる
+</script>
+
+
+<script layout type="text/x-markdown">
+## ES6とのお付き合い 1歩目
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+## gulpfileをES6で *(v3.9.0以上)*
+
+```bash
+npm install -D gulp babel babel-core
+```
+
+```javascript
+// gulpfile.babel.js
+import gulp from 'gulp';
+import babel from 'gulp-babel';
+
+gulp.task('babel', () => {
+  gulp.src('./src/*.js')
+    .pipe(babel())
+    .pipe(gulp.dest('./dist'));
+});
+```
+</script>
+
+
+<script layout="bullets" type="text/x-markdown" class="m0">
+## 開発を取り巻く環境は<br>日々アップデートされていきます
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## わたしたちの知識も<br>ちょっとずつ<br>アップデートしましょう
+</script>
+
+
+<script layout type="text/x-markdown" class="book">
+## 11/2に著書が出ます
+
+![HTML5/CSS3 モダンコーディング](./image/book.jpg)
+
+[Amazonで絶賛予約受付中！！](http://www.amazon.co.jp/dp/4798141577)
+</script>
+
+
+<script layout="cover" invert type="text/x-markdown"
+  backface="image/sai2.jpg" backface-filter="blur(2px) brightness(.6)">
+# Thank you
+[@yoshiko_pg](http://yoshiko-pg.github.io/)
+</script>
+
+
+<script src="lib/highlight.min.js"></script>
+<script src="lib/talkie.min.js"></script>
+<script>
+  Talkie();
+
+  // Highlight.jsはES6未対応
+  // バッククオートでハイライトが崩れるので"を使用し後で`に変える
+  setTimeout(function () {
+    Array.filter(document.getElementsByClassName('hljs-string'), function(el){
+      return el.textContent.match('"');
+    }).forEach(function(el) {
+      el.textContent = el.textContent.replace(/"/g, '`');
+    });
+  }, 100);
+
+  // リンクは別タブ
+  var i, links = document.querySelectorAll("a[href^='http']")
+  for(i=0; i<links.length; i++) {
+    links[i].setAttribute('target', '_blank');
+  }
+</script>
+</body>
+</html>
