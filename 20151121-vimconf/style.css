@@ -1,0 +1,76 @@
+@import url("https://fonts.googleapis.com/css?family=Share");
+#control {
+  color: #808080;
+}
+a {
+  color: #efc4dd;
+  -webkit-transition: color 0.1s ease-in-out;
+          transition: color 0.1s ease-in-out;
+}
+[layout][invert] a:link,
+[layout$='invert'] a:link,
+[layout='code'] a:link,
+[layout][invert] a:visited,
+[layout$='invert'] a:visited,
+[layout='code'] a:visited,
+[layout][invert] a:active,
+[layout$='invert'] a:active,
+[layout='code'] a:active {
+  color: #efc4dd;
+}
+[layout][invert] a:hover,
+[layout$='invert'] a:hover,
+[layout='code'] a:hover {
+  color: #f7e2ee;
+}
+#backface {
+  -webkit-transition: none;
+          transition: none;
+}
+strong {
+  color: #f00;
+}
+[layout=code] .hljs-comment {
+  color: #555;
+}
+p > code,
+li > code {
+  background: #f3f3f3;
+  border: 1px solid #add8e6;
+  border-radius: 3px;
+  padding: 2px 5px;
+  font-size: 0.8em;
+  color: #333;
+}
+[layout][invert] code,
+[layout$=invert] code {
+  background: #555;
+  color: #fff;
+}
+[layout][invert] strong,
+[layout$=invert] strong {
+  color: #ff8080;
+}
+[layout=cover] h1 {
+  font-family: Share, Futura, Helvetica, Arial, Hiragino Kaku Gothic ProN, Meiryo, sans-serif;
+}
+.wide-list {
+  margin-left: 0;
+  margin-right: 0;
+}
+.yoshiko {
+  width: 250px;
+}
+.company-logo {
+  height: 3rem;
+  vertical-align: middle;
+  margin-left: 3px;
+}
+.book img {
+  height: 55%;
+  margin: -20px auto;
+}
+.m0 > * {
+  margin-left: 0;
+  margin-right: 0;
+}

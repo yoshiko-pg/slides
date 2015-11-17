@@ -1,0 +1,305 @@
+<html>
+<head>
+  <title>切り刻め！HTML</title>
+  <link rel="stylesheet" href="lib/talkie.min.css">
+  <link rel="stylesheet" href="lib/talkie-default.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="lib/hljs-styles/railscasts.css">
+</head>
+<body>
+
+
+<script layout="cover" invert type="text/x-markdown"
+  backface="image/bg.png" backface-filter="blur(2px) brightness(0.8)">
+# 切り刻め！HTML
+
+2015.11.21 [@yoshiko_pg](http://yoshiko-pg.github.io)
+
+[Vimconf 2015](http://vimconf.vim-jp.org/2015/)
+</script>
+
+
+<script layout="bullets" invert type="text/x-markdown"
+  backface="image/bg-profile.png" backface-filter="blur(2px) brightness(.4)">
+
+## 自己紹介
+
+<img src="./image/yoshiko.png" class="yoshiko">
+
+よしこ [@yoshiko_pg](https://twitter.com/yoshiko_pg)  
+Vim歴1年半ぐらい
+
+Frontend engineer at <a href="http://goodpatch.com/jp"><img src="./image/goodpatch.png" class="company-logo"></a>
+
+</script>
+
+
+<script layout="bullets" invert type="text/x-markdown" class="m0"
+  backface="image/vimconf.png" backface-filter="blur(2px) brightness(.4)">
+## Vimconf2015の
+## サイトデザインとコーディングを
+## 担当させていただきました
+</script>
+
+
+<script layout="bullets" type="text/x-markdown" class="m0">
+### 今日話すこと
+
+* なぜVimに手を出してしまったのか
+* フロントエンドエンジニアから見たVim
+* フロントエンド開発で便利なプラグイン
+</script>
+
+
+<script layout="bullets-invert" type="text/x-markdown" class="m0">
+## なぜVimに手を出してしまったのか
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## 第一印象
+
+玄人っぽくてカッコイイ
+</script>
+
+
+<script layout="bullets" invert type="text/x-markdown"
+  backface="image/jissenvim.jpg">
+</script>
+
+
+<script layout="bullets" invert type="text/x-markdown"
+  backface="image/jissenvim.png">
+</script>
+
+
+<script layout="bullets" invert type="text/x-markdown" class="m0"
+  backface="image/jissenvim.png" backface-filter="blur(2px) brightness(.2)">
+# 思考のスピードで
+# 編集したい！！！
+</script>
+
+
+<script layout="bullets" invert type="text/x-markdown"
+  backface="image/editors.jpg">
+</script>
+
+
+<script layout="bullets" invert type="text/x-markdown"
+  backface="image/editors2.jpg">
+</script>
+
+<!--
+https://twitter.com/yoshiko_pg/status/652330102869458944
+-->
+
+<script layout="bullets-invert" type="text/x-markdown" class="m0">
+### フロントエンドエンジニアから見たVim
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+普段の業務ではRubyMine + IdeaVimを使っています
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+HTMLやCSSにありがちな、単調で大量の変更をするときなんかにVimを開きます
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+たとえば
+https://twitter.com/Linda_pp/status/497013813976113153
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+たとえば
+https://twitter.com/thinca/status/652317939350138881
+</script>
+
+
+<script layout="bullets-invert" type="text/x-markdown" class="m0">
+### フロントエンド開発で便利なプラグイン
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+## open-browser.vim
+
+URLの上でC-LするとブラウザでURLを開ける
+
+```
+NeoBundle 'tyru/open-browser.vim'
+```
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+## syntastic
+
+各言語のlintでシンタックスチェック  
+私はeslint
+
+```
+NeoBundle 'scrooloose/syntastic'
+```
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+## renamer.vim
+
+vimのテキスト修正の感覚で複数ファイルのファイル名を一括変更できる
+
+```
+NeoBundle 'vim-scripts/renamer.vim'
+```
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+## emmet-vim
+
+HTMLをショートハンドで書いて展開できるemmetのプラグイン  
+Jadeファイル内ではJade記法で展開してくれる！！！
+
+```
+NeoBundle 'mattn/emmet-vim'
+```
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+## colorizer
+
+CSSファイル内でカラーコードなどの色指定に背景色でその色を表示してくれる
+
+```
+NeoBundle 'lilydjwg/colorizer'
+```
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+## vim-csscomb
+
+CSSの整列ができるCSSCormのプラグイン  
+コマンドひとつで指定した順番通りにCSSを整列させられる  
+（書籍執筆時にお世話になりました＞＜）
+
+```
+NeoBundle 'csscomb/vim-csscomb'
+```
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+## vim-javascript
+
+JSサポート。前はvim-javascript-syntaxを使っていたけど、vim-jsxと相性が悪いっぽかったのでこちらに
+
+```
+NeoBundle "pangloss/vim-javascript"
+```
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+## vim-css3-syntax
+
+CSS3のシンタックスに対応
+
+```
+NeoBundle 'hail2u/vim-css3-syntax'
+```
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+## previm
+
+ブラウザでリアルタイムにプレビューできるMarkdownビューアー  
+GitHub風のスタイルが◎  
+愛用してます！！
+
+```
+NeoBundle 'kannokanno/previm'
+```
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+## caw.vim
+
+フロントエンドだけじゃないけど・・・  
+コメントアウトをトグルできるプラグイン  
+べんり
+
+```
+NeoBundle 'tyru/caw.vim'
+```
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+## JS Support
+
+
+```
+NeoBundle 'jiangmiao/simple-javascript-indenter'
+NeoBundle 'nono/jquery.vim'
+NeoBundle 'othree/yajs.vim'
+NeoBundle 'isRuslan/vim-es6'
+```
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+## Alt系
+
+```
+NeoBundle 'slim-template/vim-slim'
+NeoBundle 'digitaltoad/vim-jade'
+NeoBundle 'AtsushiM/sass-compile.vim'
+NeoBundle 'wavded/vim-stylus'
+NeoBundle 'groenewege/vim-less'
+NeoBundle 'kchmck/vim-coffee-script'
+NeoBundle "mxw/vim-jsx"
+```
+</script>
+
+
+
+<script layout type="text/x-markdown" class="book">
+### Vimで書いた本が出ました
+
+![HTML5/CSS3 モダンコーディング](./image/book.jpg)
+
+[Amazonで絶賛予約受付中！！](http://www.amazon.co.jp/dp/4798141577)
+
+</script>
+
+
+<script layout="cover" invert type="text/x-markdown"
+  backface="image/nya.jpg" backface-filter="blur(1px) brightness(.5)">
+# Thank you
+[@yoshiko_pg](http://yoshiko-pg.github.io/)
+</script>
+
+
+<script src="lib/highlight.min.js"></script>
+<script src="lib/talkie.min.js"></script>
+<script>
+Talkie();
+
+// リンクは別タブ
+var i, links = document.querySelectorAll("a[href^='http']")
+for(i=0; i<links.length; i++) {
+  links[i].setAttribute('target', '_blank');
+}
+</script>
+</script>
+</body>
+</html>
