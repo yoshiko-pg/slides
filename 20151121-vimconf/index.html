@@ -35,7 +35,7 @@ Frontend engineer at <a href="http://goodpatch.com/jp"><img src="./image/goodpat
 
 
 <script layout="bullets" type="text/x-markdown" class="m0">
-VimConf2015のサイトデザインとコーディングを  
+[VimConf2015のサイト](http://vimconf.vim-jp.org/2015/)のデザインとコーディングを  
 担当させていただきました
 
 ![VimConf2015](image/vc1.png)
@@ -108,6 +108,9 @@ VimConf2015のサイトデザインとコーディングを
 
 
 <script layout="bullets" type="text/x-markdown">
+やりたいことの操作がわからないときは  
+Twitterにつぶやくと教えてもらえたりします
+
 たとえば
 </script>
 
@@ -116,9 +119,10 @@ VimConf2015のサイトデザインとコーディングを
 随所にちらばったconsole.logの頭に連番をふりたい
 
 <blockquote class="twitter-tweet" data-conversation="none" lang="ja"><p lang="ja" dir="ltr"><a href="https://twitter.com/yoshiko_pg">@yoshiko_pg</a> :let i = 1 としておいて，:%g/console\.log(/let i += 1 | call setline(&#39;.&#39;, substitute(getline(&#39;.&#39;), &#39;log(&quot;&#39;, &#39;log(&quot;&#39; . i . &#39;: &#39;, &#39;&#39;))</p>&mdash; ドッグ (@Linda_pp) <a href="https://twitter.com/Linda_pp/status/497013813976113153">2014, 8月 6</a></blockquote>
+
+[deris/vim-rengbang](https://github.com/deris/vim-rengbang)もオススメ
 </script>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
 
 <script layout="bullets" type="text/x-markdown">
 CSSのカラーコードを一括で大文字に置換したい
@@ -293,12 +297,14 @@ NeoBundle 'tyru/caw.vim'
 
 
 <script layout="bullets" type="text/x-markdown">
-## renamer.vim
+## ~~renamer.vim~~ vimfiler
 
 vimのテキスト修正の感覚で複数ファイルのファイル名を一括変更できる
 
+→vimfilerにも複数ファイルの一括rename機能がありました！こっちがよさそう。
+
 ```vimscript
-NeoBundle 'vim-scripts/renamer.vim'
+NeoBundle 'Shougo/vimfiler'
 ```
 </script>
 
@@ -337,6 +343,7 @@ NeoBundle 'kannokanno/previm'
 
 ![HTML5/CSS3 モダンコーディング](./image/book.jpg)
 
+「モダンコーディング」で検索！  
 [Amazon&全国の書店で発売中です](http://www.amazon.co.jp/dp/4798141577)
 
 </script>
