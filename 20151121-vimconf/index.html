@@ -356,6 +356,23 @@ NeoBundle 'kannokanno/previm'
 </script>
 
 
+<script layout="code" type="text/x-markdown" class="m0">
+# おまけ
+
+べんりキーバインド  
+`Space` + `.` で.vimrcを開く & `Space` + `,` で.vimrcをロード
+
+```
+" .vimrcを開く
+nnoremap <Space>.  :edit $MYVIMRC<CR>
+" source ~/.vimrc を実行する
+nnoremap <Space>,  :source $MYVIMRC<CR>
+```
+
+*シンタックスハイライトが残念…*
+</script>
+
+
 <script src="lib/highlight.min.js"></script>
 <script src="lib/talkie.min.js"></script>
 <script>
