@@ -15,7 +15,7 @@
 
 2015.11.21 [@yoshiko_pg](http://yoshiko-pg.github.io)
 
-[Vimconf 2015](http://vimconf.vim-jp.org/2015/)
+[VimConf 2015](http://vimconf.vim-jp.org/2015/)
 </script>
 
 
@@ -34,11 +34,12 @@ Frontend engineer at <a href="http://goodpatch.com/jp"><img src="./image/goodpat
 </script>
 
 
-<script layout="bullets" invert type="text/x-markdown" class="m0"
-  backface="image/vimconf.png" backface-filter="blur(2px) brightness(.4)">
-## Vimconf2015の
-## サイトデザインとコーディングを
-## 担当させていただきました
+<script layout="bullets" type="text/x-markdown" class="m0">
+VimConf2015のサイトデザインとコーディングを  
+担当させていただきました
+
+![VimConf2015](image/vc1.png)
+![VimConf2015](image/vc2.png)
 </script>
 
 
@@ -80,174 +81,102 @@ Frontend engineer at <a href="http://goodpatch.com/jp"><img src="./image/goodpat
 </script>
 
 
-<script layout="bullets" invert type="text/x-markdown"
-  backface="image/editors.jpg">
+<script layout="bullets" type="text/x-markdown" class="m0">
+できてません（まだ）
 </script>
 
-
-<script layout="bullets" invert type="text/x-markdown"
-  backface="image/editors2.jpg">
-</script>
-
-<!--
-https://twitter.com/yoshiko_pg/status/652330102869458944
--->
 
 <script layout="bullets-invert" type="text/x-markdown" class="m0">
-### フロントエンドエンジニアから見たVim
+## フロントエンドエンジニアから見たVim
 </script>
 
 
 <script layout="bullets" type="text/x-markdown">
-普段の業務ではRubyMine + IdeaVimを使っています
+普段の業務ではRubyMine + IdeaVimを使っています  
+大きなプロジェクトのソースコード追っかける時には  
+やっぱりIDEが便利なので
+
+個人で何か作るときは小規模なのでVimで書きます  
+ターミナルから動かなくていいのが便利です  
 </script>
 
 
 <script layout="bullets" type="text/x-markdown">
-HTMLやCSSにありがちな、単調で大量の変更をするときなんかにVimを開きます
+業務内でも、HTMLやCSSによくありがちな  
+単調で大量の変更をするときなんかにVimを開きます
 </script>
 
 
 <script layout="bullets" type="text/x-markdown">
 たとえば
-https://twitter.com/Linda_pp/status/497013813976113153
 </script>
 
 
 <script layout="bullets" type="text/x-markdown">
-たとえば
-https://twitter.com/thinca/status/652317939350138881
+随所にちらばったconsole.logの頭に連番をふりたい
+
+<blockquote class="twitter-tweet" data-conversation="none" lang="ja"><p lang="ja" dir="ltr"><a href="https://twitter.com/yoshiko_pg">@yoshiko_pg</a> :let i = 1 としておいて，:%g/console\.log(/let i += 1 | call setline(&#39;.&#39;, substitute(getline(&#39;.&#39;), &#39;log(&quot;&#39;, &#39;log(&quot;&#39; . i . &#39;: &#39;, &#39;&#39;))</p>&mdash; ドッグ (@Linda_pp) <a href="https://twitter.com/Linda_pp/status/497013813976113153">2014, 8月 6</a></blockquote>
+</script>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<script layout="bullets" type="text/x-markdown">
+CSSのカラーコードを一括で大文字に置換したい
+
+<blockquote class="twitter-tweet" data-conversation="none" lang="ja"><p lang="ja" dir="ltr"><a href="https://twitter.com/yoshiko_pg">@yoshiko_pg</a> <a href="https://twitter.com/Linda_pp">@Linda_pp</a> %g/#\x\{3,6}/\U\0/g 正規表現の置換の機能自体に大文字小文字変換があります。 :help s/\U</p>&mdash; thinca (@thinca) <a href="https://twitter.com/thinca/status/652317939350138881">2015, 10月 9</a></blockquote>
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+# 圧倒的感謝🙏
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+ほかにも連続したHTMLを一定の形にぐわーって変換するときもマクロを使うためにVimで開き直します
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+```
+<ul>
+  <li>hogehoge</li>
+  <li>fugafuga</li>
+  （100行続く）
+</ul>
+↓
+<ul>
+  <li>
+    <i class="icon-hogehoge"></i>
+    <span>hogehoge</span>
+  </li>
+  <li>
+    <i class="icon-fugafuga"></i>
+    <span>fugafuga</span>
+  </li>
+  （100行続く）
+</ul>
+```
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+置換でもめっちゃ頑張れば可能かもだけどインデントとか改行が面倒
+
+ただマクロだと本当は非効率なこともすこし時間をかければだいたいできてしまうので、本当に最適なコマンドが覚えられない問題が深刻です
 </script>
 
 
 <script layout="bullets-invert" type="text/x-markdown" class="m0">
-### フロントエンド開発で便利なプラグイン
+## フロントエンド開発で<br>便利なプラグイン
 </script>
 
 
-<script layout="code" type="text/x-markdown">
-## open-browser.vim
+<script layout="bullets" type="text/x-markdown">
+## CSS & JS Support
 
-URLの上でC-LするとブラウザでURLを開ける
-
-```
-NeoBundle 'tyru/open-browser.vim'
-```
-</script>
-
-
-<script layout="code" type="text/x-markdown">
-## syntastic
-
-各言語のlintでシンタックスチェック  
-私はeslint
-
-```
-NeoBundle 'scrooloose/syntastic'
-```
-</script>
-
-
-<script layout="code" type="text/x-markdown">
-## renamer.vim
-
-vimのテキスト修正の感覚で複数ファイルのファイル名を一括変更できる
-
-```
-NeoBundle 'vim-scripts/renamer.vim'
-```
-</script>
-
-
-<script layout="code" type="text/x-markdown">
-## emmet-vim
-
-HTMLをショートハンドで書いて展開できるemmetのプラグイン  
-Jadeファイル内ではJade記法で展開してくれる！！！
-
-```
-NeoBundle 'mattn/emmet-vim'
-```
-</script>
-
-
-<script layout="code" type="text/x-markdown">
-## colorizer
-
-CSSファイル内でカラーコードなどの色指定に背景色でその色を表示してくれる
-
-```
-NeoBundle 'lilydjwg/colorizer'
-```
-</script>
-
-
-<script layout="code" type="text/x-markdown">
-## vim-csscomb
-
-CSSの整列ができるCSSCormのプラグイン  
-コマンドひとつで指定した順番通りにCSSを整列させられる  
-（書籍執筆時にお世話になりました＞＜）
-
-```
-NeoBundle 'csscomb/vim-csscomb'
-```
-</script>
-
-
-<script layout="code" type="text/x-markdown">
-## vim-javascript
-
-JSサポート。前はvim-javascript-syntaxを使っていたけど、vim-jsxと相性が悪いっぽかったのでこちらに
-
-```
-NeoBundle "pangloss/vim-javascript"
-```
-</script>
-
-
-<script layout="code" type="text/x-markdown">
-## vim-css3-syntax
-
-CSS3のシンタックスに対応
-
-```
+```vimscriptvimscript
 NeoBundle 'hail2u/vim-css3-syntax'
-```
-</script>
-
-
-<script layout="code" type="text/x-markdown">
-## previm
-
-ブラウザでリアルタイムにプレビューできるMarkdownビューアー  
-GitHub風のスタイルが◎  
-愛用してます！！
-
-```
-NeoBundle 'kannokanno/previm'
-```
-</script>
-
-
-<script layout="code" type="text/x-markdown">
-## caw.vim
-
-フロントエンドだけじゃないけど・・・  
-コメントアウトをトグルできるプラグイン  
-べんり
-
-```
-NeoBundle 'tyru/caw.vim'
-```
-</script>
-
-
-<script layout="code" type="text/x-markdown">
-## JS Support
-
-
-```
 NeoBundle 'jiangmiao/simple-javascript-indenter'
 NeoBundle 'nono/jquery.vim'
 NeoBundle 'othree/yajs.vim'
@@ -256,10 +185,21 @@ NeoBundle 'isRuslan/vim-es6'
 </script>
 
 
-<script layout="code" type="text/x-markdown">
+<script layout="bullets" type="text/x-markdown">
+## vim-javascript
+
+JSサポート。前はvim-javascript-syntaxを使っていたけど、vim-jsxと相性が悪いっぽかったのでこちらに
+
+```vimscript
+NeoBundle "pangloss/vim-javascript"
+```
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
 ## Alt系
 
-```
+```vimscript
 NeoBundle 'slim-template/vim-slim'
 NeoBundle 'digitaltoad/vim-jade'
 NeoBundle 'AtsushiM/sass-compile.vim'
@@ -271,19 +211,139 @@ NeoBundle "mxw/vim-jsx"
 </script>
 
 
+<script layout="bullets" type="text/x-markdown">
+## emmet-vim
+
+HTMLをショートハンドで書いて展開できるemmetのプラグイン  
+Jadeファイル内ではJade記法で展開してくれる！！！
+
+```vimscript
+NeoBundle 'mattn/emmet-vim'
+```
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## vim-csscomb
+
+CSSの整列ができるCSSCormのプラグイン  
+コマンドひとつで指定した順番通りにCSSを整列させられる  
+（書籍執筆時にお世話になりました＞＜）
+
+```vimscript
+NeoBundle 'csscomb/vim-csscomb'
+```
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## colorizer
+
+CSSファイル内でカラーコードなどの色指定に背景色でその色を表示してくれる
+
+```vimscript
+NeoBundle 'lilydjwg/colorizer'
+```
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## syntastic
+
+各言語のlintでシンタックスチェック  
+私はeslint
+
+```vimscript
+NeoBundle 'scrooloose/syntastic'
+```
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## vim-smartinput
+
+ここにカーソルがあるときこのキーを押したらこう入力する、という指定ができる
+
+```vimscript
+NeoBundle 'kana/vim-smartinput'
+```
+
+```bash
+" <tag></tag>の展開
+call smartinput#define_rule({
+            \   'at'    : '>\%#<\/',
+            \   'char'  : '<CR>',
+            \   'input' : '<CR><Esc><S-o>',
+            \   })
+```
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## caw.vim
+
+フロントエンドだけじゃないけど・・・  
+コメントアウトをトグルできるプラグイン  
+べんり
+
+```vimscript
+NeoBundle 'tyru/caw.vim'
+```
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## renamer.vim
+
+vimのテキスト修正の感覚で複数ファイルのファイル名を一括変更できる
+
+```vimscript
+NeoBundle 'vim-scripts/renamer.vim'
+```
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## open-browser.vim
+
+URLの上でC-LするとブラウザでURLを開ける
+
+```vimscript
+NeoBundle 'tyru/open-browser.vim'
+```
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## previm
+
+ブラウザでリアルタイムにプレビューできるMarkdownビューアー  
+GitHub風のスタイルが◎  
+愛用してます！！
+
+```vimscript
+NeoBundle 'kannokanno/previm'
+```
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+他にもオススメがあれば教えてください
+</script>
+
 
 <script layout type="text/x-markdown" class="book">
 ### Vimで書いた本が出ました
 
 ![HTML5/CSS3 モダンコーディング](./image/book.jpg)
 
-[Amazonで絶賛予約受付中！！](http://www.amazon.co.jp/dp/4798141577)
+[Amazon&全国の書店で発売中です](http://www.amazon.co.jp/dp/4798141577)
 
 </script>
 
 
 <script layout="cover" invert type="text/x-markdown"
-  backface="image/nya.jpg" backface-filter="blur(1px) brightness(.5)">
+  backface="image/bg.png" backface-filter="blur(2px) brightness(0.8)">
 # Thank you
 [@yoshiko_pg](http://yoshiko-pg.github.io/)
 </script>

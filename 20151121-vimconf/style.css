@@ -3,7 +3,7 @@
   color: #808080;
 }
 a {
-  color: #efc4dd;
+  color: #c7f0e3;
   -webkit-transition: color 0.1s ease-in-out;
           transition: color 0.1s ease-in-out;
 }
@@ -16,12 +16,12 @@ a {
 [layout][invert] a:active,
 [layout$='invert'] a:active,
 [layout='code'] a:active {
-  color: #efc4dd;
+  color: #c7f0e3;
 }
 [layout][invert] a:hover,
 [layout$='invert'] a:hover,
 [layout='code'] a:hover {
-  color: #f7e2ee;
+  color: #e3f7f1;
 }
 #backface {
   -webkit-transition: none;
@@ -29,6 +29,9 @@ a {
 }
 strong {
   color: #f00;
+}
+[layout=code] {
+  color: #fff;
 }
 [layout=code] .hljs-comment {
   color: #555;

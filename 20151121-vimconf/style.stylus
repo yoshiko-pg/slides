@@ -3,7 +3,7 @@
 #control
   color gray
 
-linkColor = #EFC4DD
+linkColor = lighten(#43cea2, 70%)
 
 a
   color linkColor
@@ -23,8 +23,10 @@ a
 strong
   color: red
 
-[layout=code] .hljs-comment
-  color #555
+[layout=code]
+  color #fff
+  .hljs-comment
+    color #555
 
 p > code,
 li > code
