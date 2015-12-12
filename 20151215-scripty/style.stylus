@@ -1,0 +1,67 @@
+#control
+  color gray
+
+linkColor = #8FC0FF
+
+a
+  color linkColor
+  transition color .1s ease-in-out
+
+[layout=code] .hljs-comment
+  color #555
+
+[layout][invert] a:link,
+[layout][invert] a:visited,
+[layout][invert] a:active
+  color linkColor
+[layout][invert] a:hover
+  color lighten(linkColor, 50%)
+
+strong
+  color: red
+
+[layout=code]
+  color #fff
+  .hljs-comment
+    color #555
+
+.m0 > *
+  margin-left: 0
+  margin-right: 0
+
+.yoshiko
+  width 250px
+
+.company-logo
+  height 3rem
+  vertical-align middle
+  margin-left 3px
+
+.book img
+  height 55%
+  margin -20px auto
+
+///////////////////////////////////////////////////////////////////////////////////////
+
+.center
+  &::before,
+  &::after
+    content: ''
+    position: absolute
+    left: 0
+    top: 0
+    width: 100%
+    height: 100%
+  &::before
+    height: 50%
+    border-bottom: 1px solid blue
+  &::after
+    width: 50%
+    border-right: 1px solid blue
+  > *
+    margin: 0
+    border: 1px solid red
+    padding: .5em 1em
+    background: white
+    z-index: 1
+

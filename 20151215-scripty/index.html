@@ -1,0 +1,411 @@
+<html>
+<head>
+  <title>まだ中央寄せで消耗してるの？ - @yoshiko_pg</title>
+  <link rel="stylesheet" href="lib/talkie.min.css">
+  <link rel="stylesheet" href="lib/talkie-default.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="lib/hljs-styles/railscasts.css">
+</head>
+<body>
+
+
+<script layout="cover" invert type="text/x-markdown"
+  backface="image/cover.jpg" backface-filter="blur(2px) brightness(.7)">
+# まだ中央寄せで<br>消耗してるの？
+
+2015.12.15 [@yoshiko_pg](http://yoshiko-pg.github.io)
+</script>
+
+
+<script layout="bullets" invert type="text/x-markdown"
+  backface="image/bg-profile.png" backface-filter="blur(2px) brightness(.4)">
+
+## 自己紹介
+
+<img src="./image/yoshiko.png" class="yoshiko">
+
+よしこ [@yoshiko_pg](https://twitter.com/yoshiko_pg)
+
+Frontend engineer at <a href="http://goodpatch.com/jp"><img src="./image/goodpatch.png" class="company-logo"></a>
+
+</script>
+
+
+<script layout="bullets" type="text/x-markdown" class="book">
+### 本出しました
+
+HTML5/CSS3 モダンコーディング
+
+![HTML5/CSS3 モダンコーディング](./image/book.jpg)
+
+[好評発売中です！電子版もあるよ](http://www.amazon.co.jp/dp/4798141577)
+
+</script>
+
+
+<script layout="bullets-invert" type="text/x-markdown">
+## 質問です
+</script>
+
+
+<script layout="bullets" type="text/x-markdown" class="center">
+### CSSで縦横中央寄せする方法を<br>ググったことがある人？
+</script>
+
+
+<script layout="bullets" type="text/x-markdown" class="center">
+### 結構色々でてくるんですよね
+</script>
+
+
+<script layout="bullets" type="text/x-markdown" class="center">
+### なぜそうなるのかわからずに<br>コピペしてる場合もあるかも・・・？
+</script>
+
+
+<script layout="bullets-invert" type="text/x-markdown" class="m0">
+## ここらでそろそろ決着をつけようぜ
+</script>
+
+
+<script layout="cover" invert type="text/x-markdown"
+  backface="image/don.jpg" backface-filter="blur(2px) brightness(.4)">
+## 最強の中央寄せは<br>どれなのか・・・！！！
+</script>
+
+
+<script layout="bullets-invert" type="text/x-markdown">
+### エントリーナンバー 1番
+
+　
+
+### absolute + negative margin
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+### absolute + negative margin
+
+```css
+.outer {
+  position: relative; /* or absolute, fixed */
+}
+.inner {
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -100px;
+  margin-top: -100px;
+}
+```
+</script>
+
+<script layout="bullets" type="text/x-markdown">
+### メリット
+
+* 外側のボックスの大きさは問わない
+* 挙動がわかりやすい
+
+　
+
+### デメリット
+
+* 自身の幅と大きさが固定される
+* widthとheightの値がmarginの値に影響する
+</script>
+
+
+<script layout="bullets-invert" type="text/x-markdown">
+### エントリーナンバー 2番
+
+　
+
+### absolute + offsets + margin auto
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+### absolute + offsets + margin auto
+
+```css
+.outer {
+  position: relative; /* or absolute, fixed */
+}
+.inner {
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+}
+```
+</script>
+
+
+<script layout="bullets-invert" type="text/x-markdown">
+### なんでこうなるの？
+
+https://hyper-text.org/archives/2014/08/position_absolute_center_layout.shtml
+
+https://app.codegrid.net/entry/css-centering-4
+
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+### メリット
+
+* 外側のボックスの大きさは問わない
+* widthとheightの値が他のプロパティに影響しない
+
+　
+
+### デメリット
+
+* 自身の幅と大きさが固定される
+* left, right, top, bottomの4つの指定が冗長
+</script>
+
+
+<script layout="bullets-invert" type="text/x-markdown">
+### エントリーナンバー 3番
+
+　
+
+### absolute + transform
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+### absolute + transform
+
+```css
+.outer {
+  position: relative; /* or absolute, fixed */
+}
+.inner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+```
+</script>
+
+<script layout="bullets" type="text/x-markdown">
+### メリット
+
+* 外側のボックスの大きさを問わない
+* 自身のボックスの大きさを問わない
+* 簡潔でわかりやすい
+
+　
+
+### デメリット
+
+* transform対応ブラウザのみ
+  * Safari8, IE9, Android4.4以前では`-webkit-`が必要
+</script>
+
+
+<script layout="bullets-invert" type="text/x-markdown">
+### エントリーナンバー 4番
+
+　
+
+### inline-block
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+### inline-block
+
+```css
+.outer {
+  line-height: 400px;
+  text-align: center;
+}
+.inner {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1;
+}
+```
+</script>
+
+<script layout="bullets" type="text/x-markdown">
+### メリット
+
+* 自身のボックスの大きさを問わない
+
+　
+
+### デメリット
+
+* 外側のボックスの高さが固定される
+</script>
+
+
+<script layout="bullets-invert" type="text/x-markdown">
+### エントリーナンバー 4番
+
+　
+
+### table-cell + text-align + vertical-align
+</script>
+
+<script layout="code" type="text/x-markdown">
+### table-cell + text-align + vertical-align
+
+```css
+.outer {
+  display: table;
+}
+.table-cell {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+.inner {
+  display: inline-block;
+}
+```
+</script>
+
+<script layout="bullets" type="text/x-markdown">
+### メリット
+
+* 外側のボックスの大きさを問わない
+* 自身のボックスの大きさを問わない
+
+　
+
+### デメリット
+
+* 必要な要素がひとつ多くなる
+</script>
+
+
+<script layout="bullets-invert" type="text/x-markdown">
+### エントリーナンバー 5番
+
+　
+
+### flex
+</script>
+
+<script layout="code" type="text/x-markdown">
+### flex
+
+```css
+.outer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+```
+</script>
+
+<script layout="bullets" type="text/x-markdown">
+### メリット
+
+* 顧客が本当に求めていたもの
+
+　
+
+### デメリット
+
+* モダンブラウザのみ
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+### まとめ
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+表
+
+比較
+* 親のサイズ固定
+* 自身のサイズ固定
+* 複数の要素を置けるか
+* 親が自身より小さい時
+* 対応ブラウザ
+
+私はモダンブラウザならflex、それ以外をサポートする必要があるならtransformで書いてます。
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## 2016年こそ中央寄せで消耗しない！
+</script>
+
+
+
+<script layout="cover" invert type="text/x-markdown"
+  backface="image/end.gif" backface-filter="blur(3px) brightness(.4)">
+# Thank you
+[@yoshiko_pg](http://yoshiko-pg.github.io/)
+</script>
+
+
+<script layout="bullets-invert" type="text/x-markdown">
+# おまけ
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+### inline-blockの中でテキストを縦横中央寄せしたいとき
+
+インライン要素の中でテキストを縦横中央寄せにしたい
+line-heightをheightとあわせる
+
+
+```css
+.button {
+  width: 200px;
+  height: 70px;
+  line-height: 70px; /* 縦方向 */
+  text-align: center; /* 横方向 */
+}
+```
+</script>
+
+
+<!--
+ブロックレベルの要素の縦横中央寄せ（上中下？）
+
+margin: 0 auto;
+position: absolute; + negative margin
+position: absolute; + margin: auto;
+position: absolute; + transform: translate(-50%, -50%);
+display: table-cell + vertical-align: middle;
+display: flex;
+
+おまけ
+インライン要素の中でテキストを縦横中央寄せにしたい
+line-heightをheightとあわせる
+-->
+
+
+<script src="lib/highlight.min.js"></script>
+<script src="lib/talkie.min.js"></script>
+<script>
+Talkie();
+
+// リンクは別タブ
+var i, links = document.querySelectorAll("a[href^='http']")
+for(i=0; i<links.length; i++) {
+  links[i].setAttribute('target', '_blank');
+}
+</script>
+</script>
+</body>
+</html>
