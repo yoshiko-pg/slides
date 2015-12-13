@@ -10,15 +10,17 @@
 
 
 <script layout="cover" invert type="text/x-markdown"
-  backface="image/cover.jpg" backface-filter="blur(2px) brightness(.7)">
+  backface="image/cover.jpg" backface-filter="blur(1px) brightness(.5)">
 # まだ中央寄せで<br>消耗してるの？
+
+〜天下一縦横中央寄せCSS決定戦〜
 
 2015.12.15 [@yoshiko_pg](http://yoshiko-pg.github.io)
 </script>
 
 
 <script layout="bullets" invert type="text/x-markdown"
-  backface="image/bg-profile.png" backface-filter="blur(2px) brightness(.4)">
+  backface="image/bg-profile.png" backface-filter="blur(1px) brightness(.4)">
 
 ## 自己紹介
 
@@ -28,17 +30,16 @@
 
 Frontend engineer at <a href="http://goodpatch.com/jp"><img src="./image/goodpatch.png" class="company-logo"></a>
 
+*背景：[プログラミング言語チェックシートメーカー](http://yoshiko-pg.github.io/checksheetmaker/)*
 </script>
 
 
-<script layout="bullets" type="text/x-markdown" class="book">
-### 本出しました
+<script layout="bullets" type="text/x-markdown" class="book m0">
+[HTML5/CSS3 モダンコーディング](http://yoshiko.hatenablog.jp/entry/2015/11/02/081237) という本を出しました
 
-HTML5/CSS3 モダンコーディング
+[![HTML5/CSS3 モダンコーディング](./image/book.jpg)](http://www.amazon.co.jp/dp/4798141577/)
 
-![HTML5/CSS3 モダンコーディング](./image/book.jpg)
-
-[好評発売中です！電子版もあるよ](http://www.amazon.co.jp/dp/4798141577)
+好評発売中！電子版もあるよ！
 
 </script>
 
@@ -68,17 +69,37 @@ HTML5/CSS3 モダンコーディング
 </script>
 
 
-<script layout="cover" invert type="text/x-markdown"
-  backface="image/don.jpg" backface-filter="blur(2px) brightness(.4)">
-## 最強の中央寄せは<br>どれなのか・・・！！！
+<script layout="bullets" type="text/x-markdown">
+## 今日話すこと
+
+* 縦横中央寄せCSSまとめ
+  * ある程度合理的でシンプルであるもの
+  * ググったら出てくるようなメジャーどころ
+
+それぞれのメリット・デメリットを知ることで  
+あなた好みのベストプラクティスを心のなかに
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+### HTML
+
+```html
+<div class="outer">
+  <div class="inner">
+    ほげほげほげほげ
+    <br>
+    ふがふが
+  </div>
+</div>
+```
+
+outerの中でinnerを縦横中央寄せしたい！
 </script>
 
 
 <script layout="bullets-invert" type="text/x-markdown">
 ### エントリーナンバー 1番
-
-　
-
 ### absolute + negative margin
 </script>
 
@@ -96,32 +117,132 @@ HTML5/CSS3 モダンコーディング
   position: absolute;
   top: 50%;
   left: 50%;
-  margin-left: -100px;
-  margin-top: -100px;
+  margin-left: -100px; /* width / 2 */
+  margin-top: -100px; /* height / 2 */
 }
 ```
 </script>
 
+
+<script layout="bullets" type="text/x-markdown" class="negative step-1">
+### position: absolute; top: 50%; left: 50%;
+
+<div class="outer">
+  <div class="inner">
+    ほげほげほげほげ
+    <br>
+    ふがふが
+  </div>
+</div>
+</script>
+
+
+<script layout="bullets" type="text/x-markdown" class="negative step-2">
+### margin-left: -100px;
+
+<div class="outer">
+  <div class="inner">
+    ほげほげほげほげ
+    <br>
+    ふがふが
+  </div>
+</div>
+</script>
+
+
+<script layout="bullets" type="text/x-markdown" class="negative step-3">
+### margin-top: -100px;
+
+<div class="outer">
+  <div class="inner">
+    ほげほげほげほげ
+    <br>
+    ふがふが
+  </div>
+</div>
+</script>
+
+
 <script layout="bullets" type="text/x-markdown">
 ### メリット
 
-* 外側のボックスの大きさは問わない
+* .outerのサイズは可変
 * 挙動がわかりやすい
-
-　
+  * ググったとき出てくる率が高い
 
 ### デメリット
 
-* 自身の幅と大きさが固定される
+* .innerのwidthとheightが固定される
 * widthとheightの値がmarginの値に影響する
 </script>
 
 
 <script layout="bullets-invert" type="text/x-markdown">
 ### エントリーナンバー 2番
+### absolute + transform
+</script>
 
-　
 
+<script layout="code" type="text/x-markdown">
+### absolute + transform
+
+```css
+.outer {
+  position: relative; /* or absolute, fixed */
+}
+.inner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+```
+</script>
+
+
+<script layout="bullets" type="text/x-markdown" class="transform step-1">
+### position: absolute; top: 50%; left: 50%;
+
+<div class="outer">
+  <div class="inner">
+    ほげほげほげほげ
+    <br>
+    ふがふが
+  </div>
+</div>
+</script>
+
+
+<script layout="bullets" type="text/x-markdown" class="transform step-2">
+### transform: translate(-50%, -50%);
+
+<div class="outer">
+  <div class="inner">
+    ほげほげほげほげ
+    <br>
+    ふがふが
+  </div>
+</div>
+</script>
+
+<script layout="bullets" type="text/x-markdown">
+### メリット
+
+* .outer, .inner共にサイズは可変
+* 簡潔でわかりやすい
+
+### デメリット
+
+* transform対応ブラウザのみ
+  * Safari8, IE9, Android4.4以前では`-webkit-`が必要
+* JSで単純に.innerのoffsetTop, offsetLeftを取得しても  
+top: 50%; left: 50%; の位置の値しかとれない  
+（transformの値は要別計算。jQueryのoffset()ならOK）
+</script>
+
+
+<script layout="bullets-invert" type="text/x-markdown">
+### エントリーナンバー 3番
 ### absolute + offsets + margin auto
 </script>
 
@@ -147,76 +268,76 @@ HTML5/CSS3 モダンコーディング
 </script>
 
 
-<script layout="bullets-invert" type="text/x-markdown">
+<script layout="bullets-invert" type="text/x-markdown" class="m0">
 ### なんでこうなるの？
 
-https://hyper-text.org/archives/2014/08/position_absolute_center_layout.shtml
+W3C Visual formatting model details  
+[10.3.7 Absolutely positioned, non-replaced elements](http://www.w3.org/TR/CSS21/visudet.html#abs-non-replaced-width)  
+　  
+日本語訳：視覚整形モデル詳細  
+[10.3.7 絶対配置される非置換要素の場合](http://momdo.s35.xrea.com/web-html-test/spec/CSS21/visudet.html#abs-non-replaced-width)
 
-https://app.codegrid.net/entry/css-centering-4
+> 'left' + 'margin-left' + 'border-left-width' + 'padding-left'  
+\+ 'width' + 'padding-right' + 'border-right-width'  
+\+ 'margin-right' + 'right' = width of containing block
+</script>
 
+
+<script layout="bullets-invert" type="text/x-markdown">
+> 'left'、'width'、'right'の3つすべてが'auto'である場合：（省略）
+
+> この3つが'auto'でない場合：'margin-left'および'margin-right'の両方が'auto'である場合、**2つのマージンが等しい値を得る追加条件の下で式を解き**、
+
+left、width、rightがすべてauto以外で、margin-leftとmargin-rightの両方がautoの場合は両側のmarginが同じ幅になる！→コンテンツが中央に配置される！  
+縦方向についても同様です。  
+
+**top, bottom, right, leftに0を指定していたのは、値を初期値のauto以外の何かにする必要があったということです。（なので対になる値が等しければ0以外でもOK）**
+</script>
+
+
+<script layout="bullets-invert" type="text/x-markdown">
+### ちなみに
+
+> **2つのマージンが等しい値を得る追加条件の下で式を解き**、等式がその3つを負にする場合を除いて、包含ボックスの方向が'ltr'（'rtl'）の場合、'margin-left'（'margin-right'）を0に設定し'margin-right'（'margin-left'）を解く。
+
+left, width, rightが負になる場合を除いて、'margin-left'（'margin-right'）を0に設定されちゃうの・・・？  
+だいたい負にはならないから、そしたら両側のmarginが異なって中央寄せにならなくない？？？？
+</script>
+
+
+<script layout="bullets-invert" type="text/x-markdown" class="m0">
+### ちなみに
+
+[CSS basic box model(W3C Working Draft)](http://www.w3.org/TR/css3-box/#abs-non-replaced-width)では  
+先述の文章のあとに以下の一文が挿入されています
+
+> Should we remove the phrase starting with “unless”?
+
+やっぱり「除いて」は不要っぽい・・・
+
+left, width, rightが負になる場合**は**margin-rightが  
+0として計算される、なら実際の挙動と一致します。
 </script>
 
 
 <script layout="bullets" type="text/x-markdown">
 ### メリット
 
-* 外側のボックスの大きさは問わない
+* .outerのサイズは可変
 * widthとheightの値が他のプロパティに影響しない
 
-　
-
 ### デメリット
 
-* 自身の幅と大きさが固定される
+* .innerのwidthとheightが固定される
+  * 指定しないと.outerいっぱいのサイズになる
 * left, right, top, bottomの4つの指定が冗長
+* .outerが.innerより小さいと負になり中央に寄らない
 </script>
 
 
-<script layout="bullets-invert" type="text/x-markdown">
-### エントリーナンバー 3番
-
-　
-
-### absolute + transform
-</script>
-
-
-<script layout="code" type="text/x-markdown">
-### absolute + transform
-
-```css
-.outer {
-  position: relative; /* or absolute, fixed */
-}
-.inner {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-```
-</script>
-
-<script layout="bullets" type="text/x-markdown">
-### メリット
-
-* 外側のボックスの大きさを問わない
-* 自身のボックスの大きさを問わない
-* 簡潔でわかりやすい
-
-　
-
-### デメリット
-
-* transform対応ブラウザのみ
-  * Safari8, IE9, Android4.4以前では`-webkit-`が必要
-</script>
-
-
+<!--
 <script layout="bullets-invert" type="text/x-markdown">
 ### エントリーナンバー 4番
-
-　
 
 ### inline-block
 </script>
@@ -241,21 +362,17 @@ https://app.codegrid.net/entry/css-centering-4
 <script layout="bullets" type="text/x-markdown">
 ### メリット
 
-* 自身のボックスの大きさを問わない
-
-　
+* .outerのサイズは可変
 
 ### デメリット
 
-* 外側のボックスの高さが固定される
+* .outerの高さが固定される
 </script>
+-->
 
 
 <script layout="bullets-invert" type="text/x-markdown">
 ### エントリーナンバー 4番
-
-　
-
 ### table-cell + text-align + vertical-align
 </script>
 
@@ -265,8 +382,9 @@ https://app.codegrid.net/entry/css-centering-4
 ```css
 .outer {
   display: table;
+  width: 100%; /* or other value */
 }
-.table-cell {
+.between {
   display: table-cell;
   vertical-align: middle;
   text-align: center;
@@ -280,22 +398,18 @@ https://app.codegrid.net/entry/css-centering-4
 <script layout="bullets" type="text/x-markdown">
 ### メリット
 
-* 外側のボックスの大きさを問わない
-* 自身のボックスの大きさを問わない
-
-　
+* .outerのサイズは可変
+* .innerのサイズも可変
 
 ### デメリット
 
 * 必要な要素がひとつ多くなる
+* .outerの幅を100%にしたい場合、明示的に指定が必要
 </script>
 
 
 <script layout="bullets-invert" type="text/x-markdown">
 ### エントリーナンバー 5番
-
-　
-
 ### flex
 </script>
 
@@ -314,13 +428,14 @@ https://app.codegrid.net/entry/css-centering-4
 <script layout="bullets" type="text/x-markdown">
 ### メリット
 
-* 顧客が本当に求めていたもの
-
-　
+* 顧客が本当に必要だったもの
 
 ### デメリット
 
-* モダンブラウザのみ
+![対応ブラウザ表](image/flex.png)
+
+*IE11は一応いけることになってるけど「flex IE11」とかでググるとつらそうな気配がする*
+
 </script>
 
 
@@ -330,27 +445,29 @@ https://app.codegrid.net/entry/css-centering-4
 
 
 <script layout="bullets" type="text/x-markdown">
-表
+### 比較表
 
-比較
-* 親のサイズ固定
-* 自身のサイズ固定
-* 複数の要素を置けるか
-* 親が自身より小さい時
-* 対応ブラウザ
+|                                    | negative margin | transform                          | offsets + auto | table-cell | flex               |
+|------------------------------------|-----------------|------------------------------------|----------------|------------|--------------------|
+| .outerサイズ可変                   | ◯              | ◯                                 | ◯             | ◯         | ◯                 |
+| .innerサイズ可変                   | ✕               | ◯                                 | ✕              | ◯         | ◯                 |
+| .outerが.innerの<br>大きさを下回る | ◯              | ◯                                 | ✕              | 不可能     | ◯                 |
+| その他                             |                 | 一部-webkit-必要<br>Offsetの値に注意 |                | 要素3つ    | モダンブラウザのみ |
+
 
 私はモダンブラウザならflex、それ以外をサポートする必要があるならtransformで書いてます。
 </script>
 
 
-<script layout="bullets" type="text/x-markdown">
-## 2016年こそ中央寄せで消耗しない！
+<script layout invert type="text/x-markdown"
+  backface="image/end.jpg" backface-filter="blur(1px) brightness(.6)">
+## 中央寄せで消耗しない<br>2016年を迎えましょう！
 </script>
 
 
 
 <script layout="cover" invert type="text/x-markdown"
-  backface="image/end.gif" backface-filter="blur(3px) brightness(.4)">
+  backface="image/end.jpg" backface-filter="blur(1px) brightness(.6)">
 # Thank you
 [@yoshiko_pg](http://yoshiko-pg.github.io/)
 </script>
@@ -362,10 +479,9 @@ https://app.codegrid.net/entry/css-centering-4
 
 
 <script layout="code" type="text/x-markdown">
-### inline-blockの中でテキストを縦横中央寄せしたいとき
+### inline-blockな要素の中で<br>テキストを縦横中央寄せしたいとき
 
-インライン要素の中でテキストを縦横中央寄せにしたい
-line-heightをheightとあわせる
+heightと同じ高さをline-heightに指定すると楽  
 
 
 ```css
@@ -376,23 +492,9 @@ line-heightをheightとあわせる
   text-align: center; /* 横方向 */
 }
 ```
+
+複数行は不可。ボタンとかで便利
 </script>
-
-
-<!--
-ブロックレベルの要素の縦横中央寄せ（上中下？）
-
-margin: 0 auto;
-position: absolute; + negative margin
-position: absolute; + margin: auto;
-position: absolute; + transform: translate(-50%, -50%);
-display: table-cell + vertical-align: middle;
-display: flex;
-
-おまけ
-インライン要素の中でテキストを縦横中央寄せにしたい
-line-heightをheightとあわせる
--->
 
 
 <script src="lib/highlight.min.js"></script>

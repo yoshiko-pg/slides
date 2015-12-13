@@ -5,7 +5,10 @@ linkColor = #8FC0FF
 
 a
   color linkColor
-  transition color .1s ease-in-out
+  transition: color .1s ease-in-out
+
+#backface
+  transition: none
 
 [layout=code] .hljs-comment
   color #555
@@ -17,6 +20,11 @@ a
 [layout][invert] a:hover
   color lighten(linkColor, 50%)
 
+[layout=bullets],
+[layout=bullets-invert]
+  h1, h2, h3, h4, h5, h6
+    margin-top: 30px
+
 strong
   color: red
 
@@ -24,6 +32,32 @@ strong
   color #fff
   .hljs-comment
     color #555
+
+p > code,
+li > code
+  background: #f3f3f3
+  border: 1px solid lightblue
+  border-radius: 3px
+  padding: 3px 6px
+  font-size: .8em
+  color: #333
+[layout][invert],
+[layout$=invert]
+  code
+    background: #555
+    color: #fff
+  strong
+    color: lighten(red, 50%)
+
+[layout] table
+  font-size: 10px
+  th
+    background-color: #666
+    color: #fff
+    font-weight: bold
+  td
+    white-space: nowrap
+    padding: .6em
 
 .m0 > *
   margin-left: 0
@@ -43,7 +77,8 @@ strong
 
 ///////////////////////////////////////////////////////////////////////////////////////
 
-.center
+.center,
+.outer
   &::before,
   &::after
     content: ''
@@ -65,3 +100,73 @@ strong
     background: white
     z-index: 1
 
+
+.outer
+  width: 50%
+  height: 50%
+  border: 1px solid black
+  position: relative
+  &::before
+    border-bottom: 1px dashed blue
+  &::after
+    border-right: 1px dashed rgba(0, 0, 255, .8)
+
+.inner
+  background: yellow
+  border: none
+
+.negative
+  .inner
+    width: 200px
+    height: 200px
+    position: absolute
+    top: 50%
+    left: 50%
+    margin-left: -100px
+    margin-top: -100px
+  &.step-1
+    .inner
+      margin: 0
+  &.step-2
+    .inner
+      margin: 0 0 0 -100px
+
+.auto
+  .inner
+    width: 200px
+    height: 200px
+    position: absolute
+    top: 0
+    left: 0
+    bottom: 0
+    right: 0
+    margin: auto
+
+.transform
+  .inner
+    position: absolute
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+  &.step-1
+    .inner
+      transform: none
+
+.table
+  .outer
+    display: table
+    width: 100%
+
+  .between
+    display: table-cell
+    vertical-align: middle
+    text-align: center
+
+  .inner
+    display: inline-block
+
+.flex
+  .outer
+    display: flex
+    justify-content: center
+    align-items: center
