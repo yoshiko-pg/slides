@@ -5,7 +5,10 @@ linkColor = #8FC0FF
 
 a
   color linkColor
-  transition color .1s ease-in-out
+  transition: color .1s ease-in-out
+
+#backface
+  transition: none
 
 [layout=code] .hljs-comment
   color #555
@@ -17,9 +20,48 @@ a
 [layout][invert] a:hover
   color lighten(linkColor, 50%)
 
-.wide-list
-  margin-left 0
-  margin-right 0
+[layout=bullets],
+[layout=bullets-invert]
+  h1, h2, h3, h4, h5, h6
+    margin-top: 30px
+
+strong
+  color: red
+
+[layout=code]
+  color #fff
+  .hljs-comment
+    color #555
+
+p > code,
+li > code
+  background: #f3f3f3
+  border: 1px solid lightblue
+  border-radius: 3px
+  padding: 3px 6px
+  font-size: .8em
+  color: #333
+[layout][invert],
+[layout$=invert]
+  code
+    background: #555
+    color: #fff
+  strong
+    color: lighten(red, 50%)
+
+[layout] table
+  font-size: 10px
+  th
+    background-color: #666
+    color: #fff
+    font-weight: bold
+  td
+    white-space: nowrap
+    padding: .6em
+
+.m0 > *
+  margin-left: 0
+  margin-right: 0
 
 .yoshiko
   width 250px
@@ -34,3 +76,4 @@ a
   margin -20px auto
 
 ///////////////////////////////////////////////////////////////////////////////////////
+
