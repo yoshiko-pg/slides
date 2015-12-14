@@ -76,6 +76,15 @@ li > code
   margin -20px auto
 
 ///////////////////////////////////////////////////////////////////////////////////////
+.align-center
+  text-align: center
+
+.minimum
+  display: inline-block
+  margin: 30px auto
+  li
+    font-size: 1.2rem
+    color: #666
 
 .center,
 .outer

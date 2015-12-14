@@ -55,7 +55,15 @@ Frontend engineer at <a href="http://goodpatch.com/jp"><img src="./image/goodpat
 
 
 <script layout="bullets" type="text/x-markdown" class="center">
-### 結構色々でてくるんですよね
+<div class="align-center">
+  <h3>結構色々でてくるんですよね</h3>
+
+  <ul class="minimum">
+    <li>margin: auto; ?</li>
+    <li>display: table-cell; ?</li>
+    <li>flexbox ?</li>
+  </ul>
+</div>
 </script>
 
 
@@ -234,7 +242,7 @@ outerの中でinnerを縦横中央寄せしたい！
 ### デメリット
 
 * transform対応ブラウザのみ
-  * Safari8, IE9, Android4.4以前では`-webkit-`が必要
+  * Safari8, IE9, Android4.4以前ではプレフィックスが必要
 * JSで単純に.innerのoffsetTop, offsetLeftを取得しても  
 top: 50%; left: 50%; の位置の値しかとれない  
 （transformの値は別で計算が必要。jQueryのoffset()ならOK）
@@ -244,6 +252,7 @@ top: 50%; left: 50%; の位置の値しかとれない
 <script layout="bullets-invert" type="text/x-markdown">
 ### エントリーナンバー 3番
 ### absolute + offsets + margin auto
+### a.k.a "TRBL" method
 </script>
 
 
@@ -446,7 +455,7 @@ left, width, rightが負になる場合**は**margin-rightが
 ![対応ブラウザ表](image/flex.png)
 
 *IE10は古い仕様（-ms-flexbox）なので何かしらの変換ツールをかませる必要がある。[仕様の遷移](http://developers.linecorp.com/blog/?p=2479)*  
-*IE11は一応いけることになってるけど[can i use](http://caniuse.com/#search=flex)のknown issuesだけでもつらみが・・・*
+*IE11は一応いけることになってるけど[can i use](http://caniuse.com/#search=flex)のknown issuesだけでもそこそこある・・・*
 
 </script>
 
@@ -464,7 +473,7 @@ left, width, rightが負になる場合**は**margin-rightが
 | .outerサイズ可変                   | ◯              | ◯                                 | ◯             | ◯         | ◯                 |
 | .innerサイズ可変                   | ✕               | ◯                                 | ✕              | ◯         | ◯                 |
 | .outerが.innerの<br>大きさを下回る | ◯              | ◯                                 | ✕              | 不可能     | ◯                 |
-| その他                             |                 | 一部-webkit-必要<br>Offsetの値に注意 |                | 要素3つ    | モダンブラウザのみ |
+| その他         | .innerのサイズが<br>marginの値に影響 | 対応ブラウザと<br>Offsetの値に注意 |                | 要素3つ    | モダンブラウザのみ |
 
 
 私はモダンブラウザならflex、それ以外をサポートする必要があるならtransformで書いてます。
@@ -476,6 +485,18 @@ left, width, rightが負になる場合**は**margin-rightが
 ## 中央寄せで消耗しない<br>2016年を迎えましょう！
 </script>
 
+
+<script layout="title-invert" invert type="text/x-markdown"
+  backface="image/goodpatch-bg.png" backface-filter="blur(5px) brightness(.5)" class="goodpatch">
+
+### Goodpatchでは中央寄せに消耗しない<br>フロントエンドエンジニアを募集しています
+
+[www.wantedly.com/projects/16402](https://www.wantedly.com/projects/16402)
+
+1月から新フロア増床！オフィスにあそびにきてね！
+
+[学生さん向けに冬のインターンもやります！](https://www.wantedly.com/projects/36592)
+</script>
 
 
 <script layout="cover" invert type="text/x-markdown"

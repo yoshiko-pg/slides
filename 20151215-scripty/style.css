@@ -90,6 +90,17 @@ li > code {
   height: 55%;
   margin: -20px auto;
 }
+.align-center {
+  text-align: center;
+}
+.minimum {
+  display: inline-block;
+  margin: 30px auto;
+}
+.minimum li {
+  font-size: 1.2rem;
+  color: #666;
+}
 .center::before,
 .outer::before,
 .center::after,
