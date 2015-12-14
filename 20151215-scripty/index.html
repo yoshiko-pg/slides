@@ -173,7 +173,7 @@ outerの中でinnerを縦横中央寄せしたい！
 ### デメリット
 
 * .innerのwidthとheightが固定される
-* widthとheightの値がmarginの値に影響する
+* marginの値がwidthとheightの値に依存する
 </script>
 
 
@@ -237,7 +237,7 @@ outerの中でinnerを縦横中央寄せしたい！
   * Safari8, IE9, Android4.4以前では`-webkit-`が必要
 * JSで単純に.innerのoffsetTop, offsetLeftを取得しても  
 top: 50%; left: 50%; の位置の値しかとれない  
-（transformの値は要別計算。jQueryのoffset()ならOK）
+（transformの値は別で計算が必要。jQueryのoffset()ならOK）
 </script>
 
 
@@ -275,7 +275,8 @@ W3C Visual formatting model details
 [10.3.7 Absolutely positioned, non-replaced elements](http://www.w3.org/TR/CSS21/visudet.html#abs-non-replaced-width)  
 　  
 日本語訳：視覚整形モデル詳細  
-[10.3.7 絶対配置される非置換要素の場合](http://momdo.s35.xrea.com/web-html-test/spec/CSS21/visudet.html#abs-non-replaced-width)
+[10.3.7 絶対配置される非置換要素の場合](http://momdo.github.io/css2/visudet.html#abs-non-replaced-width)
+
 
 > 'left' + 'margin-left' + 'border-left-width' + 'padding-left'  
 \+ 'width' + 'padding-right' + 'border-right-width'  
@@ -291,7 +292,9 @@ W3C Visual formatting model details
 left、width、rightがすべてauto以外で、margin-leftとmargin-rightの両方がautoの場合は両側のmarginが同じ幅になる！→コンテンツが中央に配置される！  
 縦方向についても同様です。  
 
-**top, bottom, right, leftに0を指定していたのは、値を初期値のauto以外の何かにする必要があったということです。（なので対になる値が等しければ0以外でもOK）**
+**top, bottom, right, leftに0を指定していた理由：  
+値を初期値のauto以外の何かにする必要があった！  
+（なので対になる値が等しければ0以外でもOK）**
 </script>
 
 
@@ -371,9 +374,17 @@ left, width, rightが負になる場合**は**margin-rightが
 -->
 
 
-<script layout="bullets-invert" type="text/x-markdown">
+<script layout="code" type="text/x-markdown">
 ### エントリーナンバー 4番
 ### table-cell + text-align + vertical-align
+
+```
+<div class="outer">
+  <div class="cell">
+    <div class="inner">ほげほげほげほげ<br>ふがふが</div>
+  </div>
+</div>
+```
 </script>
 
 <script layout="code" type="text/x-markdown">
@@ -384,7 +395,7 @@ left, width, rightが負になる場合**は**margin-rightが
   display: table;
   width: 100%; /* or other value */
 }
-.between {
+.cell {
   display: table-cell;
   vertical-align: middle;
   text-align: center;
@@ -434,7 +445,8 @@ left, width, rightが負になる場合**は**margin-rightが
 
 ![対応ブラウザ表](image/flex.png)
 
-*IE11は一応いけることになってるけど「flex IE11」とかでググるとつらそうな気配がする*
+*IE10は古い仕様（-ms-flexbox）なので何かしらの変換ツールをかませる必要がある。[仕様の遷移](http://developers.linecorp.com/blog/?p=2479)*  
+*IE11は一応いけることになってるけど[can i use](http://caniuse.com/#search=flex)のknown issuesだけでもつらみが・・・*
 
 </script>
 
