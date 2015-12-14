@@ -6,6 +6,10 @@ a {
   -webkit-transition: color 0.1s ease-in-out;
           transition: color 0.1s ease-in-out;
 }
+#backface {
+  -webkit-transition: none;
+          transition: none;
+}
 [layout=code] .hljs-comment {
   color: #555;
 }
@@ -17,7 +21,60 @@ a {
 [layout][invert] a:hover {
   color: #c7e0ff;
 }
-.wide-list {
+[layout=bullets] h1,
+[layout=bullets-invert] h1,
+[layout=bullets] h2,
+[layout=bullets-invert] h2,
+[layout=bullets] h3,
+[layout=bullets-invert] h3,
+[layout=bullets] h4,
+[layout=bullets-invert] h4,
+[layout=bullets] h5,
+[layout=bullets-invert] h5,
+[layout=bullets] h6,
+[layout=bullets-invert] h6 {
+  margin-top: 30px;
+}
+strong {
+  color: #f00;
+}
+[layout=code] {
+  color: #fff;
+}
+[layout=code] .hljs-comment {
+  color: #555;
+}
+p > code,
+li > code {
+  background: #f3f3f3;
+  border: 1px solid #add8e6;
+  border-radius: 3px;
+  padding: 3px 6px;
+  font-size: 0.8em;
+  color: #333;
+}
+[layout][invert] code,
+[layout$=invert] code {
+  background: #555;
+  color: #fff;
+}
+[layout][invert] strong,
+[layout$=invert] strong {
+  color: #ff8080;
+}
+[layout] table {
+  font-size: 10px;
+}
+[layout] table th {
+  background-color: #666;
+  color: #fff;
+  font-weight: bold;
+}
+[layout] table td {
+  white-space: nowrap;
+  padding: 0.6em;
+}
+.m0 > * {
   margin-left: 0;
   margin-right: 0;
 }
