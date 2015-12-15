@@ -123,8 +123,8 @@ outerの中でinnerを縦横中央寄せしたい！
   width: 200px;
   height: 200px;
   position: absolute;
-  top: 50%;
   left: 50%;
+  top: 50%;
   margin-left: -100px; /* width / 2 */
   margin-top: -100px; /* height / 2 */
 }
@@ -268,9 +268,9 @@ top: 50%; left: 50%; の位置の値しかとれない
   height: 200px;
   position: absolute;
   top: 0;
-  left: 0;
-  bottom: 0;
   right: 0;
+  bottom: 0;
+  left: 0;
   margin: auto;
 }
 ```
@@ -301,7 +301,7 @@ W3C Visual formatting model details
 left、width、rightがすべてauto以外で、margin-leftとmargin-rightの両方がautoの場合は両側のmarginが同じ幅になる！→コンテンツが中央に配置される！  
 縦方向についても同様です。  
 
-**top, bottom, right, leftに0を指定していた理由：  
+**top, right, bottom, leftに0を指定していた理由：  
 値を初期値のauto以外の何かにする必要があった！  
 （なので対になる値が等しければ0以外でもOK）**
 </script>
@@ -310,7 +310,7 @@ left、width、rightがすべてauto以外で、margin-leftとmargin-rightの両
 <script layout="bullets-invert" type="text/x-markdown">
 ### ちなみに
 
-> **2つのマージンが等しい値を得る追加条件の下で式を解き**、等式がその3つを負にする場合を除いて、包含ボックスの方向が'ltr'（'rtl'）の場合、'margin-left'（'margin-right'）を0に設定し'margin-right'（'margin-left'）を解く。
+> 2つのマージンが等しい値を得る追加条件の下で式を解き、**等式がその3つを負にする場合を除いて、**包含ボックスの方向が'ltr'（'rtl'）の場合、**'margin-left'（'margin-right'）を0に設定し'margin-right'（'margin-left'）を解く。**
 
 left, width, rightが負になる場合を除いて、'margin-left'（'margin-right'）を0に設定されちゃうの・・・？  
 だいたい負にはならないから、そしたら両側のmarginが異なって中央寄せにならなくない？？？？
@@ -342,7 +342,7 @@ left, width, rightが負になる場合**は**margin-rightが
 
 * .innerのwidthとheightが固定される
   * 指定しないと.outerいっぱいのサイズになる
-* left, right, top, bottomの4つの指定が冗長
+* top, right, bottom, leftの4つの指定が冗長
 * .outerが.innerより小さいと負になり中央に寄らない
 </script>
 
@@ -402,7 +402,6 @@ left, width, rightが負になる場合**は**margin-rightが
 ```css
 .outer {
   display: table;
-  width: 100%; /* or other value */
 }
 .cell {
   display: table-cell;
@@ -410,7 +409,7 @@ left, width, rightが負になる場合**は**margin-rightが
   text-align: center;
 }
 .inner {
-  display: inline-block;
+  display: inline-block; /* or width & margin: auto; */
 }
 ```
 </script>
