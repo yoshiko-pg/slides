@@ -1,0 +1,302 @@
+<html>
+<head>
+  <title>執筆を支える技術 - @yoshiko_pg</title>
+  <link rel="stylesheet" href="lib/talkie.min.css">
+  <link rel="stylesheet" href="lib/talkie-default.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="lib/hljs-styles/railscasts.css">
+</head>
+<body>
+
+
+<script layout="cover" invert type="text/x-markdown"
+  backface="image/cover.jpg" backface-filter="blur(2px) brightness(.6)">
+# 執筆を支える技術
+
+2015.12.16 [@yoshiko_pg](http://yoshiko-pg.github.io)
+</script>
+
+
+<script layout="bullets" invert type="text/x-markdown"
+  backface="image/bg-profile.png" backface-filter="blur(2px) brightness(.4)">
+
+## 自己紹介
+
+<img src="./image/yoshiko.png" class="yoshiko">
+
+よしこ [@yoshiko_pg](https://twitter.com/yoshiko_pg)
+
+Frontend engineer at <a href="http://goodpatch.com/jp"><img src="./image/goodpatch.png" class="company-logo"></a>
+
+*背景：[プログラミング言語チェックシートメーカー](http://yoshiko-pg.github.io/checksheetmaker/)*
+</script>
+
+
+<script layout="bullets" type="text/x-markdown" class="book m0">
+2015年11月2日
+
+[HTML5/CSS3 モダンコーディング](http://yoshiko.hatenablog.jp/entry/2015/11/02/081237) という本を出しました
+
+[![HTML5/CSS3 モダンコーディング](./image/book.jpg)](http://www.amazon.co.jp/dp/4798141577/)
+
+好評発売中！電子版もあるよ！
+</script>
+
+
+<!--
+- 今年本を出しました
+
+# 経緯
+- HTML/CSSの本書ける人探してるんだけど興味ある人いる？
+- 興味あります|дﾟ)ﾁﾗｯ
+
+- 12月 打ち合わせ
+- 12月 企画（通った）
+- 1月 執筆開始
+
+- 土日にコワーキングスペースにこもって書き続ける日々
+-->
+
+
+<script layout="bullets" type="text/x-markdown" class="m0">
+## そんな
+## 人生初の技術書執筆を支えてくれた
+## 技術たちをご紹介します
+</script>
+
+
+<script layout="bullets-invert" type="text/x-markdown" class="m0">
+## Re:VIEW
+
+Re:VIEW is flexible document format/conversion system
+
+https://github.com/kmuto/review
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## Re:VIEW
+
+[Re:VIEW記法](https://github.com/kmuto/review/blob/master/doc/format.ja.md)で原稿を書いていく  
+
+書いたRe:VIEWファイルはコマンドでtxt・html・pdf・LaTeX・epubなどに変換できる
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+### これが
+
+![Re:VIEW記法](image/review.png)
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+### こうなる（HTML + CSS）
+
+![HTML](image/review-html.png)
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+### Markdownじゃだめなん？
+
+「普段は使わないけど書籍では必要になる記法」が用意されているので、こっちのほうが小回りがきく  
+
+* コラムブロック `===[column]`
+* 脚注
+* リード文
+* ソースコードや図にキャプションをつけられる
+* 画像の表示倍率指定
+
+など
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+### review-live-reload
+
+書いた原稿をリアルタイムにブラウザでライブリロードプレビューできるサンプル作ってみた
+
+https://github.com/yoshiko-pg/review-live-reload
+
+↑についてや導入の流れを詳しく書いたブログ  
+[Re:VIEW導入 & Re:VIEW Live Reload作った](http://yoshiko.hatenablog.jp/entry/2015/01/04/Re%3AVIEW%E5%B0%8E%E5%85%A5_%26_Re%3AVIEW_Live_Reload%E4%BD%9C%E3%81%A3%E3%81%9F)
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+### 執筆の流れ
+
+* Re:VIEWで原稿を書く
+* ブラウザでプレビューしながらひたすら書く
+* できたらブラウザの「印刷」からPDF化
+* 念のため`review-compile`コマンドでtxtも用意
+* pdf・txt・文中で使用した画像を編集者さんへデプロイ
+
+入稿形式は特に指定なかったし何も言われませんでした🙆
+</script>
+
+
+<script layout="bullets-invert" type="text/x-markdown">
+## CSSComb
+
+Makes your code beautiful
+
+http://csscomb.com/
+
+*✕ 昆布　◯ コーム*
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+### CSSComb （+ vim-csscomb）
+
+コマンド一発で設定ファイルの通りにCSSプロパティを並び替えてくれるツール。  
+書籍なのでコードの一貫性と可読性は大事。上から順に
+
+* レイアウト（position, trbr, z-index等）
+* サイズ（width, height等）
+* ボックスの装飾（background, box-shadow等）
+* テキストの装飾（color, font-size）
+
+みたいな並び順で統一しました。（たしか）
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+# レビューを支える技術
+</script>
+
+
+<script layout="bullets-invert" type="text/x-markdown">
+## GitHub
+
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## 第一段階レビュー
+- Re:VIEWファイルをGitHubで管理
+  - 章ごとに全差分のコミットからPull Requestを作っておく
+- レビュアーさんにPDFを送付
+- コード差分には行ごとにコメントがつけられるので、全差分コミットのPRにコメントをつけてもらう
+- レビュー期間が終わったらクローズ
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## 第二段階レビュー
+- レイアウトが完成した状態のPDFをレビュー
+- PDFにメモをつけていただく形が一覧で見られてベンリだったのでわたしもそうした
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## 校正
+
+- 本のレイアウトを紙に印刷して編集者さんが書き込み
+- それをスキャンしたものをPDFでいただいて私も赤入れ
+- 1日にレッドブルとリポDを2本ずつ飲む
+  - 寿命が縮む
+- 三校までやって四校でやっとまとまりました
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+### 校正PDF 赤矩形＋メモ機能
+
+![校正](image/edit.png)
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+# 10月半ば　脱稿！
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+# 11月2日　出版！
+</script>
+
+
+<script layout="bullets" type="text/x-markdown" class="capture">
+![Webプログラミング　ベストセラー1位！！！！](image/amazon.png)
+</script>
+
+
+<script layout="cover" type="text/x-markdown">
+# 😂😂😂😂😂
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+### 出してみて
+
+死ぬかと思うほど大変だったけど、やってよかった！！  
+知らないことめちゃめちゃ調べて悩んだし、成長した。
+
+ずっと手に取れないアウトプットに慣れていたので、質量として残るものを生み出せたということにはまた違った感慨がありました。 *（出しちゃったらあとからの修正がきかないというつらみもある）*
+
+なによりレビュアーさんがたにひたすら感謝です＞＜
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+### 伝えたいこと
+
+技術書なんてどうやって書くの？どこに機会があるの？って感じかもしれませんが、出版社さん（少なくとも翔泳社さん）は技術書書きたいエンジニアを探してるようです。  
+
+書いてみたい！と思う気持ちがある方がいたら、ぜひ思い切ってコンタクトをとってみてください！  
+一緒に企画をつくりあげる相談にのってくださるそうです :)
+</script>
+
+
+<script layout="cover" invert type="text/x-markdown"
+  backface="image/cover.jpg" backface-filter="blur(2px) brightness(.6)">
+# Thank you
+[@yoshiko_pg](http://yoshiko-pg.github.io/)
+</script>
+
+
+<script layout="bullets-invert" type="text/x-markdown">
+### おまけ：最近注目している執筆支援ツール
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+### [textlint](https://github.com/textlint/textlint)
+
+自然言語のlinter
+
+http://efcl.info/2015/09/10/introduce-textlint/
+
+脱稿したあとぐらいに知りました。。。  
+導入できていたらもっと楽だっただろうなぁ・・・＞＜
+</script>
+
+
+<!--
+<script layout="bullets" type="text/x-markdown">
+## やりたかったけどできなかったこと
+- コードチェック
+  - 文章の修正とコードの修正がどっちか漏れたりする
+  - 文章中のコードブロックを引用元のコードと照らしあわせて自動チェックしたかった
+  - 今回は段階的にサイトを作っていく形式で、コードブロックのコードと最終形のコードが必ずしも一致しないのでできなかった。。。
+</script>
+-->
+
+
+<script src="lib/highlight.min.js"></script>
+<script src="lib/talkie.min.js"></script>
+<script>
+Talkie();
+
+// リンクは別タブ
+var i, links = document.querySelectorAll("a[href^='http']")
+for(i=0; i<links.length; i++) {
+  links[i].setAttribute('target', '_blank');
+}
+</script>
+</script>
+</body>
+</html>
