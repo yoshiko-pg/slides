@@ -26,7 +26,7 @@ a
     margin-top: 30px
 
 strong
-  color: red
+  color: tomato
 
 [layout=code]
   color #fff
