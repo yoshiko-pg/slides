@@ -307,7 +307,7 @@ W3C Visual formatting model details
 <script layout="bullets-invert" type="text/x-markdown">
 > 'left'、'width'、'right'の3つすべてが'auto'である場合：（省略）
 
-> この3つが'auto'でない場合：'margin-left'および'margin-right'の両方が'auto'である場合、**2つのマージンが等しい値を得る追加条件の下で式を解き**、
+> この3つが'auto'でない場合：'margin-left'および'margin-right'の両方が'auto'である場合、**2つのマージンが等しい値を得る追加条件の下で式を解く。**
 
 left、width、rightがすべてauto以外で、margin-leftとmargin-rightの両方がautoの場合は両側のmarginが同じ幅になる！→コンテンツが中央に配置される！  
 縦方向についても同様です。  
@@ -315,48 +315,6 @@ left、width、rightがすべてauto以外で、margin-leftとmargin-rightの両
 **top, right, bottom, leftに0を指定していた理由：  
 値を初期値のauto以外の何かにする必要があった！  
 （なので対になる値が等しければ0以外でもOK）**
-</script>
-
-
-<script layout="bullets-invert" type="text/x-markdown">
-### ちなみに
-
-> 2つのマージンが等しい値を得る追加条件の下で式を解き、**等式がその3つを負にする場合を除いて、**包含ボックスの方向が'ltr'（'rtl'）の場合、**'margin-left'（'margin-right'）を0に設定し'margin-right'（'margin-left'）を解く。**
-
-left, width, rightが負になる場合を除いて、'margin-left'（'margin-right'）を0に設定されちゃうの・・・？  
-だいたい負にはならないから、そしたら両側のmarginが異なって中央寄せにならなくない？？？？
-</script>
-
-
-<script layout="bullets-invert" type="text/x-markdown" class="m0">
-### ちなみに
-
-[CSS basic box model(W3C Working Draft)](http://www.w3.org/TR/css3-box/#abs-non-replaced-width)では  
-先述の文章のあとに以下の一文が挿入されています
-
-> Should we remove the phrase starting with “unless”?
-
-やっぱり「除いて」は不要っぽい・・・
-
-left, width, rightが負になる場合**は**margin-rightが  
-0として計算される、なら実際の挙動と一致します。
-</script>
-
-
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-<script layout="bullets" type="text/x-markdown" class="m0">
-### 追記
-
-さきほどリンクした日本語訳をされた[@momdo_](https://twitter.com/momdo_)さんが教えてくださいました！
-box modelの仕様は前の[CSS2.1](http://www.w3.org/TR/CSS21/visudet.html)を参照しましょう＞＜
-
-
-<blockquote class="twitter-tweet" lang="ja"><p lang="ja" dir="ltr">css3-boxは誰もメンテナンスしてない文書なの <a href="https://twitter.com/yoshiko_pg">@yoshiko_pg</a></p>&mdash; もんど (@momdo_) <a href="https://twitter.com/momdo_/status/676717984367296512">2015, 12月 15</a></blockquote>
-
-<blockquote class="twitter-tweet" data-conversation="none" lang="ja"><p lang="ja" dir="ltr"><a href="https://twitter.com/yoshiko_pg">@yoshiko_pg</a> エディターズドラフト <a href="https://t.co/RKSmloUDyn">https://t.co/RKSmloUDyn</a> には画面下の方に橙の注があって、これは要するにCSS2.1の定義を参照してね、とあります。</p>&mdash; もんど (@momdo_) <a href="https://twitter.com/momdo_/status/676720752809279488">2015, 12月 15</a></blockquote>
-
-*Unlessの件はわからない・・・*
-
 </script>
 
 
