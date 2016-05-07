@@ -65,6 +65,8 @@ li > code
 
 .yoshiko
   width 250px
+  background-color: #fff;
+  border-radius: 50%;
 
 .company-logo
   height 3rem
