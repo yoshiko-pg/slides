@@ -1,0 +1,751 @@
+<html>
+<head>
+  <title>Prott Front-end in 2016</title>
+  <link rel="stylesheet" href="lib/talkie.min.css">
+  <link rel="stylesheet" href="lib/talkie-default.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="lib/hljs-styles/railscasts.css">
+  <link rel="canonical" href="/slides/20160512-frontend-biz/">
+</head>
+<body>
+
+
+<script layout="cover" invert type="text/x-markdown"
+  backface="image/cover.jpg">
+# Prott Front-end in 2016
+
+2016.05.12 [@yoshiko_pg](http://yoshiko-pg.github.io)
+</script>
+
+
+<script layout="bullets" invert type="text/x-markdown"
+  backface="image/bg-profile.png" backface-filter="blur(2px) brightness(.4)">
+
+## 自己紹介
+
+<img src="./image/yoshiko.png" class="yoshiko">
+
+よしこ [@yoshiko_pg](https://twitter.com/yoshiko_pg)
+
+Frontend engineer at <a href="http://goodpatch.com/jp"><img src="./image/goodpatch.png" class="company-logo"></a>
+</script>
+
+
+<script layout="bullets" type="text/x-markdown" class="book m0">
+[HTML5/CSS3 モダンコーディング](http://yoshiko.hatenablog.jp/entry/2015/11/02/081237) という本を出しました
+
+[![HTML5/CSS3 モダンコーディング](./image/book.jpg)](http://www.amazon.co.jp/dp/4798141577/)
+
+好評発売中！電子版もあるよ！
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## 今日お話しすること
+
+- Prott front-end in 2015
+- 既存の構成における問題点
+- CoffeeScriptからES2015+へ
+- 今後の展望
+</script>
+
+
+<script layout="bullets-invert" type="text/x-markdown">
+# Prottってなに？
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+### Prott = プロトタイピングツール
+
+- Web App
+- iOS App
+- Android App
+- Mac App (開発中)
+
+今日はWeb Appのフロントエンドのお話
+</script>
+
+
+<script layout="bullets-invert" type="text/x-markdown">
+<iframe src="https://player.vimeo.com/video/140384043?color=ffc001&title=0&byline=0&portrait=0" width="100%" height="100%" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+</script>
+
+
+<script layout="cover" invert type="text/x-markdown" backface="image/prott-info.jpg">
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## Prott Front-end in 2015
+
+- Jade
+- SCSS
+- CoffeeScript
+- AngularJS
+- Grunt
+
+ログイン後はサーバーサイドと完全に分離したSPA
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## Prott Front-end in 2015
+
+- Jade
+- SCSS
+- **CoffeeScript**
+- AngularJS
+- Grunt
+
+ログイン後はサーバーサイドと完全に分離したSPA
+</script>
+
+<!--
+
+<script layout="bullets" type="text/x-markdown">
+### CoffeeScriptのメリット
+
+- 記述の簡易化・可読性の向上
+  - Class記法
+    - AngularJSと相性がいい
+  - 簡潔なFunction Syntax
+    - thisの束縛
+- ~~Rubyist / Railsとの相性~~
+  - Prottはサーバーサイドと分離してるのであまり関係ない
+  - Rubyメインのエンジニアがフロント書くわけでもない
+</script>
+
+
+<script layout="bullets-invert" type="text/x-markdown">
+# がしかし
+
+# 2015年といえば
+</script>
+
+
+<script layout="es2015" type="text/x-markdown">
+# ES2015
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+### CoffeeScriptのメリット
+
+- 記述の簡易化・可読性の向上　**←**
+  - Class記法　**←**
+    - AngularJSと相性がいい　**←**
+  - 簡潔なFunction Syntax　**←**
+    - thisの束縛　**←**
+- ~~Rubyist / Railsとの相性~~
+  - Prottはサーバーサイドと分離してるのであまり関係ない
+  - Rubyメインのエンジニアがフロント書くわけでもない
+</script>
+
+<script layout="es2015" type="text/x-markdown">
+## ＿人人人人人人人人人人人人＿<br>＞　それES2015でできるよ　＜<br>￣Y^Y^Y^Y^Y^Y^Y^Y^Y^Y^Y￣
+
+*[Hello, ES6 ~これから迎えるJSのミライ~](http://yoshiko-pg.github.io/slides/20150425-jsfes/)*
+</script>
+
+<script layout="bullets" type="text/x-markdown">
+### デメリットのほうが大きくなってはいないか
+
+- 各種コスト
+  - 学習コスト
+    - JSを知らないフロントエンドエンジニアはいないけど、<br>CoffeeScriptに慣れていないことは考えられる
+  - スイッチングコスト
+    - OffではJS書いてるのでお互いのSyntaxに引っ張られる
+  - ビルドコスト
+    - これはES5で書かない限りは付きまとってくるけど・・・
+- モチベーション
+  - 将来性のある技術を使いたい、未来に投資したい
+</script>
+
+
+<script layout="title" invert type="text/x-markdown"
+  backface="image/girl.jpg" backface-filter="blur(1px) brightness(.8)">
+# JS書きてぇ
+</script>
+
+
+<script layout="title" invert invert type="text/x-markdown"
+  backface="image/datsu.jpg" backface-filter="blur(1px) brightness(.5)">
+# 脱カフェインだ！！！
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## 他にも解決したい課題が
+
+- フロントエンドのテストがない
+  - せめてユニットテストだけでも・・・
+- コーディングフォーマットに一貫性がない
+  - CoffeeScriptの柔軟な書き方ができる強みが裏目に
+  - 括弧やブラケットやカンマがあったりなかったり
+- グローバル空間の汚染
+  - CS1ファイル=JS1ファイルに変換してscriptタグ全部並べて読み込み
+  - 本番環境ではgruntでconcat & minify（汚染は変わらず）
+</script>
+-->
+
+
+<script layout="bullets-invert" type="text/x-markdown">
+# 2015年といえば
+</script>
+
+
+<script layout="es2015" type="text/x-markdown">
+# ES2015
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## 今や2016年
+
+- 新しさを感じた名前はいつの間にか過去のものに
+- Coffeeの強みであったSyntaxの便利さは  
+ES2015の中で生きている
+  - Class記法
+  - Arrow Function & thisのbind
+- 長く続くプロダクトであるなら  
+Webの進歩と一緒に歩めるようにしたい
+
+ES2015書きたい
+</script>
+
+
+<script layout="bullets-invert" type="text/x-markdown">
+# 言うのは簡単
+</script>
+
+
+<script layout="title" invert type="text/x-markdown"
+  backface="image/girl.jpg" backface-filter="blur(1px) brightness(.5)">
+## app/scripts/\*\*/\*.coffee
+## 170ファイル
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## こんな感じで進めてみよう
+
+1. ユニットテストにES2015導入　←済
+1. 既存コードの一部をES2015化　←済
+1. 新機能をES2015で書く　←いまここ
+1. 既存コードをすべてES2015化
+</script>
+
+
+<script layout="bullets-invert" type="text/x-markdown">
+## ユニットテストにES2015導入
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+2015年末頃
+
+## フロントエンドにもテストを！ <br>という気持ちが社内で高まる
+
+→ ゼロからテスト環境構築するなら、  
+ES2015でテスト書けるようにしちゃえるのでは？
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## こんな感じにしてみた
+
+- テストランナー：Karma
+- テストフレームワーク：mocha
+- アサーションライブラリ：power-assert
+- テストコード：ES2015
+- テスト対象コード：CoffeeScript（のビルド後JS）
+
+詳しい手順はこちら： [Prottのテストを支える3つの施策](http://yoshiko.hatenablog.jp/entry/2015/12/01/085000)
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+```
+describe('sample test', () => {
+    it('1 + 1', () => {
+        assert(1 + 1 === 2);
+    });
+});
+```
+
+テストコードを通して基本的なSyntaxに慣れることができ、他メンバーにもES2015を書くことが浸透しはじめる
+
+プロダクトコードに採用する前の良い一歩になった
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+# 👏
+
+Prottフロントエンドのリポジトリに  
+初めてES2015のコードがコミットされました。
+</script>
+
+
+<script layout="bullets-invert" type="text/x-markdown">
+## 既存コードの一部をES2015化
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## いよいよプロダクトコードへ
+
+まずは小さいイースターエッグディレクティブひとつを  
+ES2015にrewriteしてミニマムなサンプルにしてみる
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## [decaf](https://github.com/juliankrispel/decaf) でcoffeeをES2015に変換
+
+```
+# 手元で試してみる場合
+npm install -g decafjs # decafだと別のライブラリが入るので注意
+decaf path/to/coffeedir/
+```
+
+path/to/coffeedir/sample.coffeeがあった場合、  
+同じ階層にsample.jsができます  
+
+参考： [decafでcoffeeのコードをES.nextに書き換える](http://qiita.com/mizchi/items/4dadfe006084b693267b)
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+変換前のCoffeeScript（サンプル）
+
+```
+class SampleCtrl
+    constructor: (@$scope, @$timeout) ->
+        @name = 'world'
+        @$scope.$on("hello", @hello)
+
+    hello: (e) =>
+        message = "Hello, #{@name}!!"
+
+        @$timeout(() ->
+            console.log(message)
+        , 1000)
+```
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+```
+class SampleCtrl {
+    constructor($scope, $timeout) {
+        this.$scope = $scope;
+        this.$timeout = $timeout;
+        this.name = "world";
+        this.$scope.$on("hello", this.hello);
+        this.hello = this.hello.bind(this);
+    }
+
+    hello(e) {
+        var message = ("Hello, " + (this.name) + "!!");
+
+        return this.$timeout(function() {
+            return console.log(message);
+        }, 1000);
+    }
+}
+```
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+### いくつか手直し
+
+1. varをconstかletに変更
+  - 再代入する変数はlet、それ以外は全部constにする方針
+  - 一括で `s/var/const/g` してeslintで警告でたとこだけletにするのが楽
+2. Arrow Functionを活用
+  - `->`が`function`になるので問題なければArrow functionに
+  - thisが外側のthisと同じになることに注意 (Coffeeでの`=>`)
+3. 不要なreturnを削除
+  - CoffeeScriptでは関数内の最後の式が勝手にreturnされるので  
+ビルド後は最後の式の全てにreturnがついてしまう
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+```
+class SampleCtrl {
+    constructor($scope, $timeout) {
+        this.$scope = $scope;
+        this.$timeout = $timeout;
+        this.name = "world";
+        this.$scope.$on("hello", this.hello);
+        this.hello = this.hello.bind(this);
+    }
+
+    hello(e) {
+        var message = ("Hello, " + (this.name) + "!!");
+
+        return this.$timeout(function() {
+            return console.log(message);
+        }, 1000);
+    }
+}
+```
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+```
+class SampleCtrl {
+    constructor($scope, $timeout) {
+        this.$scope = $scope;
+        this.$timeout = $timeout;
+        this.name = "world";
+        this.$scope.$on("hello", this.hello);
+        this.hello = this.hello.bind(this);
+    }
+
+    hello(e) {
+        const message = (`Hello, ${this.name}!!`);
+
+        this.$timeout(() => {
+            console.log(message);
+        }, 1000);
+    }
+}
+```
+</script>
+
+
+<script layout="es2015" type="text/x-markdown">
+# ES.next
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+### 4. [ES Class Fields & Static Properties](https://github.com/jeffmo/es-class-fields-and-static-properties) (Stage 1)
+
+```
+class Hoge {
+    constructor() {
+        this.foo = 'bar';
+    }
+}
+// ↓
+class Hoge {
+    foo = 'bar';
+}
+```
+
+TypeScriptへの移行を夢見て先取り的に採用
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+### 4. [ES Class Fields & Static Properties](https://github.com/jeffmo/es-class-fields-and-static-properties) (Stage 1)
+
+AngularJSの$inject(minify対策)をクラスプロパティとしてクラスの中に書けるのがうれしい
+
+```
+class Hoge {
+    static $inject = ["$scope", "$document"];
+
+    constructor($scope, $document) {
+        // ...
+    }
+}
+```
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+### 5. [This-Binding Syntax](https://github.com/zenparsing/es-function-bind/) (Stage 0)
+
+```
+// normal bind
+$document.on("keydown", this.myKeydown.bind(this))
+
+// This-Binding Syntax
+$document.on("keydown", ::this.myKeydown)
+```
+
+まだ早そうだけどSyntaxのgrepビリティが高くいざとなったらbindに一括置換することができそうなので導入
+
+メソッドを`=>`で定義しているとconstructor内でメソッドが再代入されているので削除し都度のbindに書き換える
+
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+```
+class SampleCtrl {
+    constructor($scope, $timeout) {
+        this.$scope = $scope;
+        this.$timeout = $timeout;
+        this.name = "world";
+        this.$scope.$on("hello", this.hello);
+        this.hello = this.hello.bind(this);
+    }
+
+    hello(e) {
+        const message = (`Hello, ${this.name}!!`);
+
+        this.$timeout(() => {
+            console.log(message);
+        }, 1000);
+    }
+}
+```
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+```
+class SampleCtrl {
+    name = "world";
+
+    constructor($scope, $timeout) {
+        this.$scope = $scope;
+        this.$timeout = $timeout;
+        this.$scope.$on("hello", ::this.hello);
+    }
+
+    hello(e) {
+        const message = (`Hello, ${this.name}!!`);
+
+        this.$timeout(() => {
+            console.log(message);
+        }, 1000);
+    }
+}
+```
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+```
+class SampleCtrl
+    constructor: (@$scope, @$timeout) ->
+        @name = 'world'
+        @$scope.$on("hello", @hello)
+
+    hello: (e) =>
+        message = "Hello, #{@name}!!"
+
+        @$timeout(() ->
+            console.log(message)
+        , 1000)
+```
+
+変換前のCoffeeScriptと比較しても  
+可読性はそんなに落ちていないと思う  
+（行数は増えたけど明示的になった）
+</script>
+
+<!--
+
+<script layout="es2015" type="text/x-markdown">
+# ES2016
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## [Array.prototype.includes](https://github.com/tc39/Array.prototype.includes/)
+
+```
+[1, 3, 5, 8].includes(3); // true
+[1, 3, 5, 8].includes(4); // false
+```
+
+配列の中に要素が存在するかのBooleanを返す  
+CoffeeScriptの`hoge in ['fuga', 'piyo']`を代用できる
+
+[babel-plugin-array-includes](https://github.com/stoeffel/babel-plugin-array-includes)
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## [Exponentiation Operator](https://github.com/rwaldron/exponentiation-operator)
+
+```
+let cubed = 2 ** 3;
+// same as: 2 * 2 * 2
+```
+
+べき乗の計算
+
+[babel-plugin-transform-exponentiation-operator](https://github.com/babel/babel/tree/master/packages/babel-plugin-transform-exponentiation-operator)
+</script>
+
+
+
+<script layout="bullets" type="text/x-markdown">
+```
+npm i -S babel-preset-es2016
+               babel-plugin-array-includes
+               babel-plugin-transform-class-properties
+               babel-plugin-transform-function-bind
+```
+
+### .babelrc
+```
+{
+    "presets": ["es2016"],
+    "plugins": [
+        "array-includes",
+        "transform-class-properties",
+        "transform-function-bind"
+    ]
+}
+```
+</script>
+
+-->
+
+
+<script layout="code" type="text/x-markdown">
+Proposalの機能はpluginを入れることで有効にできる
+
+```
+npm i -D babel-plugin-transform-class-properties
+               babel-plugin-transform-function-bind
+```
+
+```
+// .babelrc
+{
+    "plugins": [
+        "transform-class-properties",
+        "transform-function-bind"
+    ]
+}
+```
+
+[babel-preset-stage-0](https://github.com/babel/babel/tree/master/packages/babel-preset-stage-0)などのプリセットもあります。  
+今後こっちを入れるかも
+</script>
+
+
+<script layout="bullets-invert" type="text/x-markdown">
+## ES移行における心強い味方
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## ESLint
+![](image/eslint.png)
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+### うっかりを防ぐルールから
+
+- no-console, no-alert
+- eqeqeq
+- no-unused-vars
+
+### ES2015導入の手助け
+
+- no-var
+- prefer-const
+- object-shorthand
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+### 細部の統一まで
+
+- indent, quotes, comma-dangle
+- *-spacing, space-infix-ops
+- padded-blocks, newline-after-var
+
+😊 まるで一人の人が書いたようなコードになれる  
+😊 コードレビューで枝葉の指摘に消耗しない
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+### 実行タイミング
+
+- エディタでリアルタイム
+  - だいたいのエディタにはプラグインがある
+- push時にCIで実行
+  - 違反していたら落とすためレベルは全部error
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+```
+// .eslintrc.js
+module.exports = {
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "es6": true,
+  },
+  // 現状何がグローバルにいるのか把握できる
+  "globals": {
+    "angular": true,
+    "$": true,
+    "Primus": true,
+    "Raphael": true,
+    "StreamingService": true,
+  },
+  "extends": "eslint:recommended",
+  "rules": { ... }
+}
+```
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+# 👏
+
+Prottフロントエンドで初めてES2015からトランスパイルされたコードが動きました。
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+### 今後の展望（リファクタリング面）
+
+- 新機能をES2015+で書く　←いまここ
+- 既存コードをすべてES2015化
+- Angularバージョンアップ
+  - 1.3 -> 1.5
+- JadeとSCSSにもlinter導入
+</script>
+
+
+<script layout="title" invert type="text/x-markdown"
+  backface="image/goodpatch-bg.png" backface-filter="blur(3px) brightness(.4)">
+## ES2015+でガリガリSPA<br>書きたいひとを探しています
+
+[プロトタイピングツール Prottの<br>フロントエンドエンジニアを大募集！](https://www.wantedly.com/projects/54185)
+
+気軽に声をかけてください😊
+</script>
+
+
+<script layout="cover" invert type="text/x-markdown"
+  backface="image/goodpatch-bg.png" backface-filter="blur(3px) brightness(.4)">
+# Thank you
+[@yoshiko_pg](http://yoshiko-pg.github.io/)
+</script>
+
+
+<script src="lib/highlight.min.js"></script>
+<script src="lib/talkie.min.js"></script>
+<script>
+Talkie();
+
+// リンクは別タブ
+var i, links = document.querySelectorAll("a[href^='http']")
+for(i=0; i<links.length; i++) {
+  links[i].setAttribute('target', '_blank');
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+#control
+  color gray
+
+linkColor = #8FC0FF
+
+a
+  color linkColor
+  transition: color .1s ease-in-out
+
+#backface
+  transition: none
+
+[layout=code] .hljs-comment
+  color #555
+
+[layout][invert] a:link,
+[layout][invert] a:visited,
+[layout][invert] a:active
+  color linkColor
+[layout][invert] a:hover
+  color lighten(linkColor, 50%)
+
+[layout=bullets],
+[layout=bullets-invert]
+  h1, h2, h3, h4, h5, h6
+    margin-top: 30px
+
+strong
+  color: red
+
+[layout=code]
+  color #fff
+  .hljs-comment
+    color #555
+
+p > code,
+li > code
+  background: #f3f3f3
+  border: 1px solid lightblue
+  border-radius: 3px
+  padding: 3px 6px
+  font-size: .8em
+  color: #333
+[layout][invert],
+[layout$=invert]
+  code
+    background: #555
+    color: #fff
+  strong
+    color: lighten(red, 50%)
+
+[layout] table
+  font-size: 10px
+  th
+    background-color: #666
+    color: #fff
+    font-weight: bold
+  td
+    white-space: nowrap
+    padding: .6em
+
+.m0 > *
+  margin-left: 0
+  margin-right: 0
+
+.yoshiko
+  width 300px
+  background-color: #fff;
+  border-radius: 50%;
+
+.company-logo
+  height 3rem
+  vertical-align middle
+  margin-left 3px
+
+.book img
+  height 55%
+  margin -20px auto
+
+///////////////////////////////////////////////////////////////////////////////////////
+
+[layout=cover]:nth-of-type(1)
+  h1
+    display: none
+  p
+    transform: translate(-2rem, 17rem)
+    font-size: 1.2rem
+    letter-spacing: 2px
+    color: #090A10
+    background: rgba(#fff, .9)
+    border-radius: 1rem
+    text-shadow: none
+    padding: .3rem 1.0rem
+    box-shadow: 0 0 20px 6px #fff
+    a:link, a:visited, a:hover, a:active
+      margin-left: .5rem
+      color: inherit
+
+[layout] h1, [layout] h2, [layout] h3, [layout] h4, [layout] h5, [layout] h6
+  font-family: inherit
+
+[body-bg=es2015],
+[body-bg=es2015] #backface
+  background: #F9DB3D
+[layout=es2015]
+  color: #2E2E2C
+  *
+    font-weight: bold
+    white-space: nowrap
+  h1
+    font-weight: bold
+    font-size: 10rem
+    letter-spacing: .3rem
