@@ -1,0 +1,648 @@
+<html>
+<head>
+  <title>Angular 2から紐解くES.next Decorators</title>
+  <link rel="stylesheet" href="lib/talkie.min.css">
+  <link rel="stylesheet" href="lib/talkie-default.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="lib/hljs-styles/railscasts.css">
+  <link rel="canonical" href="/slides/20160517-ngmtg/">
+</head>
+<body>
+
+
+
+<script layout="cover" invert type="text/x-markdown"
+  backface="image/cover.jpg" backface-filter="blur(2px) brightness(.7)">
+# Angular 2から紐解くDecorators
+
+2016.05.17 [@yoshiko_pg](http://yoshiko-pg.github.io)
+</script>
+
+
+<script layout="bullets" invert type="text/x-markdown"
+  backface="image/bg-profile.png" backface-filter="blur(2px) brightness(.4)">
+
+## 自己紹介
+
+<img src="./image/yoshiko.png" class="yoshiko">
+
+よしこ [@yoshiko_pg](https://twitter.com/yoshiko_pg)
+
+Frontend engineer at <a href="http://goodpatch.com/jp"><img src="./image/goodpatch.png" class="company-logo"></a>
+</script>
+
+
+<script layout="bullets" type="text/x-markdown" class="book m0">
+[HTML5/CSS3 モダンコーディング](http://yoshiko.hatenablog.jp/entry/2015/11/02/081237) という本を出しました
+
+[![HTML5/CSS3 モダンコーディング](./image/book.jpg)](http://www.amazon.co.jp/dp/4798141577/)
+
+好評発売中！電子版もあるよ！
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## Angular 2 やってますか？
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+### [5 MIN QUICKSTART](https://angular.io/docs/ts/latest/quickstart.html)
+
+```
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'my-app',
+  template: '<h1>My First Angular 2 App</h1>'
+})
+export class AppComponent { }
+```
+
+最初のコード
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+### [5 MIN QUICKSTART](https://angular.io/docs/ts/latest/quickstart.html)
+
+```
+import { Component } from '@angular/core';
+
+@Component({ // ←これ
+  selector: 'my-app',
+  template: '<h1>My First Angular 2 App</h1>'
+})
+export class AppComponent { }
+```
+
+最初のコード
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## `@Component`
+
+## これは一体？
+
+※意味と挙動が完全にわかる人は  
+　前半は聞かなくてもいいかも
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## 今日話すこと
+
+- 前半
+  - `@Component`ってなによ？
+  - いろいろなDecoratorまとめ
+  - 各Decoratorの仕様/挙動
+- 後半
+  - Angular2でのDecorator一覧
+  - 中身をちょっと覗いてみよう
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## `@Component`
+
+## = `@` + `Component`
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## Component
+
+```
+import { Component } from '@angular/core';
+```
+
+`@angular/core`からexportされたただのFunction
+
+ES2015 Modulesについて: [ES6 in Practice](http://www.slideshare.net/teppeis/es6-in-practice)
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## @ = Decorators
+
+- tc39に提案中のECMAScriptの新機能候補
+  - [ES.next Decorators](https://github.com/wycats/javascript-decorators)
+- TypeScriptには既に実装されている
+  - [TypeScript-Handbook](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Decorators.md)
+
+今回はTypeScriptの型定義とES.nextのDesugaring  
+両方を参照しつつ仕様を眺めていきます
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+### Decoratorsってざっくりいうとなんなの
+
+対象の前に`@` + `Function` を書いておくことで、任意のFunctionに対象を渡して処理を挟める
+
+他の言語から導入された形
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+### Decorators まとめてみた
+
+| Spec Link                | ES.next | TypeScript | in Angular 2 |
+|--------------------------|---------|------------|--------------|
+| [Class Decorator](https://github.com/wycats/javascript-decorators/blob/master/README.md#class-declaration)          | Stage 1 | ◯         | ◯           |
+| [Class Method Decorator](https://github.com/wycats/javascript-decorators/blob/master/README.md#class-method-declaration)         | Stage 1 | ◯         | ◯           |
+| [Class Property Decorator](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Decorators.md#property-decorators)       | -       | ◯         | ◯           |
+| [Method Paramater Decorator](https://docs.google.com/document/d/1Qpkqf_8NzAwfD8LdnqPjXAQ2wwh8BBUGynhn-ZlCWT0/edit)      | Stage 0 | ◯         | ◯           |
+| [Function Expression Decorator](https://docs.google.com/document/d/1ikxIP5-RVYq6d_f8lAvf3pKC00W78ueyp-xIZ6q67uU/edit#heading=h.t9k9f05noi8w)       | Stage 0 | -          | -            |
+| [Object Literal Method Decorator](https://github.com/wycats/javascript-decorators/blob/master/README.md#object-literal-method-declaration) | Stage 1 | -          | -            |
+
+※ {Class, Object Literal} AccessorsはMethodに含んで省略
+</script>
+
+
+<script layout="bullets" type="text/x-markdown" class="table-highlight">
+### Decorators まとめてみた
+
+| Spec Link                | ES.next | TypeScript | in Angular 2 |
+|--------------------------|---------|------------|--------------|
+| [Class Decorator](https://github.com/wycats/javascript-decorators/blob/master/README.md#class-declaration)          | Stage 1 | ◯         | ◯           |
+| [Class Method Decorator](https://github.com/wycats/javascript-decorators/blob/master/README.md#class-method-declaration)         | Stage 1 | ◯         | ◯           |
+| [Class Property Decorator](https://github.com/Microsoft/TypeScript-Handbook/blob/master/pages/Decorators.md#property-decorators)       | -       | ◯         | ◯           |
+| [Method Paramater Decorator](https://docs.google.com/document/d/1Qpkqf_8NzAwfD8LdnqPjXAQ2wwh8BBUGynhn-ZlCWT0/edit)      | Stage 0 | ◯         | ◯           |
+| [Function Expression Decorator](https://docs.google.com/document/d/1ikxIP5-RVYq6d_f8lAvf3pKC00W78ueyp-xIZ6q67uU/edit#heading=h.t9k9f05noi8w)       | Stage 0 | -          | -            |
+| [Object Literal Method Decorator](https://github.com/wycats/javascript-decorators/blob/master/README.md#object-literal-method-declaration) | Stage 1 | -          | -            |
+
+上4つの話をします
+</script>
+
+
+<script layout="bullets-invert" type="text/x-markdown">
+# Class Decorator
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+## Class Decorator
+
+- 受け取る引数： Class
+- 返す値： Class or なし
+
+```
+declare type ClassDecorator =
+  <TFunction extends Function>(target: TFunction) =>
+    TFunction | void;
+```
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+## Class Decorator
+
+```
+@annotation
+class MyClass { }
+
+function annotation(target) {
+   target.annotated = true;
+}
+
+console.log(MyClass.annotated); // true
+```
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+## Class Decorator in Angular 2
+
+ex.) Component
+
+```
+@Component({
+  selector: 'my-app',
+  template: '<h1>My First Angular 2 App</h1>'
+})
+class AppComponent { }
+```
+
+※カッコと引数がついてるのは後述
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+## Desugaring from ES.next Proposal
+
+```
+@G
+class Foo {
+}
+```
+
+```
+var Foo = (function () {
+  class Foo {
+  }
+
+  Foo = G(Foo) || Foo;
+  return Foo;
+})();
+```
+</script>
+
+
+<script layout="bullets-invert" type="text/x-markdown">
+# Class Method Decorator
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+## Class Method Decorator
+
+- 受け取る引数： Classのprototype, メソッド名の文字列, Descriptor
+- 返す値： Descriptor もしくは何も返さない
+
+```
+declare type MethodDecorator =
+  <T>(target: Object, propertyKey: string | symbol, descriptor: TypedPropertyDescriptor<T>) =>
+    TypedPropertyDescriptor<T> | void;
+```
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+## Descriptor?
+
+[ES5, Property Descriptor解説](http://constellation.hatenablog.com/entry/20101205/1291564928)
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+## Class Method Decorator
+
+```
+class MyClass {
+  @enumerable
+  method() {}
+}
+const myObj = new MyClass();
+for (const key in myObj) {
+  console.log(key); // "method"
+}
+
+function enumerable(target, key, descriptor) {
+  descriptor.enumerable = true;
+}
+```
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+## Class Method Decorator in Angular 2
+
+ex.) HostListener
+
+```
+@Directive({selector: 'button[counting]'})
+class CountClicks {
+  numberOfClicks = 0;
+  @HostListener('click', ['$event.target'])
+  onClick(btn) {
+    console.log("button", btn, "number of clicks:", this.numberOfClicks++);
+  }
+}
+```
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+## Desugaring from ES.next Proposal
+
+```
+class Foo {
+  @G
+  bar() { }
+}
+```
+
+```
+var Foo = (function () {
+  class Foo {
+    bar() { }
+  }
+
+  var _temp;
+  _temp = G(Foo.prototype, "bar",
+    _temp = Object.getOwnPropertyDescriptor(Foo.prototype, "bar")) || _temp;
+  if (_temp) Object.defineProperty(Foo.prototype, "bar", _temp);
+  return Foo;
+})();
+```
+</script>
+
+
+<script layout="bullets-invert" type="text/x-markdown">
+# Class Property Decorator
+
+※ TypeScript Spec
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+## Class Property Decorator
+
+- 受け取る引数： Classのprototype, プロパティ名の文字列
+- 返す値： 何も返さない
+
+```
+declare type PropertyDecorator =
+  (target: Object, propertyKey: string | symbol) =>
+    void;
+```
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+## Class Property Decorator
+
+```
+class MyClass {
+    @echo
+    greeting: string = 'hello';
+}
+
+function echo(target, name) {
+  console.log(name); // greeting
+}
+```
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+## Class Decorator in Angular 2
+
+ex.) Input
+
+```
+class BankAccount {
+  @Input() bankName: string;
+  @Input('account-id') id: string;
+}
+```
+</script>
+
+
+<script layout="bullets-invert" type="text/x-markdown">
+# Method Paramater Decorator
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+## Method Paramater Decorator
+
+- 受け取る引数： Classのprototype, メソッド名の文字列, 引数のindex
+- 返す値： 何も返さない
+
+```
+declare type ParameterDecorator =
+  (target: Object, propertyKey: string | symbol, parameterIndex: number) =>
+    void;
+```
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+## Method Paramater Decorator
+
+```
+class MyClass {
+  method(
+    @echo hoge,
+    @echo fuga,
+    @echo piyo
+  ) { }
+}
+
+function echo(target, name, index) {
+  console.log(name, index);
+  // method 2
+  // method 1
+  // method 0
+}
+```
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+## Method Paramater Decorator in Angular 2
+
+ex.) Optional
+
+```
+class Login {
+  constructor(@Optional() service: LoginService) { }
+}
+```
+</script>
+
+<!--
+- 複数定義時の順番
+- 引数を取れる
+-->
+
+<script layout="code" type="text/x-markdown">
+## Desugaring
+
+```
+@F("color")
+@G
+class Foo {
+}
+```
+
+どっちが先に実行されるでしょう？
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+## Desugaring
+
+```
+var Foo = (function () {
+  class Foo {
+  }
+
+  Foo = F("color")(Foo = G(Foo) || Foo) || Foo;
+  return Foo;
+})();
+```
+
+下に書いたものから実行されるのがわかります
+</script>
+
+<script layout="code" type="text/x-markdown">
+## CMethod Paramater Decorator
+lass Decorator with arguments
+
+`@SomeFunc()`で`SomeFunc`関数の返り値の関数をDecoratorにすることができるので、擬似的に引数をとれる
+
+- 受け取る引数： Decoratorに渡された値
+- 返す値： 引数なしのDecorator形式の関数
+
+```
+@isTestable(true)
+class MyClass { }
+
+function isTestable(value) {
+   return (target) => {
+      target.isTestable = value;
+   }
+}
+
+console.log(MyClass.isTestable); // true
+```
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+まだstage0/1なのになんで使えるの？
+→TypeScriptに実装されてる
+フラグ立てると使える
+TypeScriptはJavaScriptのSuperset(ng-confのスライドより)
+
+</script>
+
+
+
+
+<script layout="bullets" type="text/x-markdown">
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+</script>
+
+
+
+
+
+
+
+
+
+<!--
+
+
+
+
+
+Class
+
+
+http://qiita.com/mizchi/items/6bdf9d100f564a5c5b08
+デコレータの振る舞い
+
+クラスデコレータは Class Functionをとって Class Function を返す関数
+クラスの関数デコレータは instance とname と descriptor を引数に descriptorを返す関数
+引数を取るデコレータは、関数を返す関数として実装する(部分適用っぽい感じ)
+クラスに所属しない関数へのデコレータはbabel/typescriptともに未実装？
+
+
+
++
+- decorator
+  - component
+  - imput
+- obserbable
+
+- zone.js
+- refrect.js
+- systemjs
+
+web components
+
+
+
+
+Component: ComponentMetadataFactory
+中のやつ: ComponentMetadata
+
+
+
+Metadatas
+https://github.com/angular/angular/blob/bb8976608db93b9ff90a71187608a4390cbd7a07/modules/%40angular/core/src/metadata.ts
+https://github.com/angular/angular/blob/bb8976608db93b9ff90a71187608a4390cbd7a07/modules/%40angular/core/src/di/decorators.ts
+
+makeDecorator
+https://github.com/angular/angular/blob/bb8976608db93b9ff90a71187608a4390cbd7a07/modules/%40angular/core/src/util/decorators.ts
+
+
+-->
+
+
+
+
+
+<script layout="title-invert" invert type="text/x-markdown"
+  backface="image/goodpatch-bg.png" backface-filter="blur(5px) brightness(.5)" class="goodpatch">
+
+### Goodpatchでは中央寄せに消耗しない<br>フロントエンドエンジニアを募集しています
+
+[www.wantedly.com/projects/16402](https://www.wantedly.com/projects/16402)
+
+1月から新フロア増床！オフィスにあそびにきてね！
+
+[学生さん向けに冬のインターンもやります！](https://www.wantedly.com/projects/36592)
+</script>
+
+
+<script layout="cover" invert type="text/x-markdown"
+  backface="image/end.gif" backface-filter="blur(3px) brightness(.4)">
+# Thank you
+[@yoshiko_pg](http://yoshiko-pg.github.io/)
+</script>
+
+
+<script layout="bullets-invert" type="text/x-markdown">
+# おまけ
+</script>
+
+
+<script layout="bullets-invert" type="text/x-markdown">
+## なんか書く
+</script>
+
+
+<!--
+ききたい
+
+- しゅーへいさんのPropertyとMethodが一緒になってるの
+- Angular2ってMethodDecoratorある？
+-->
+
+
+
+<script src="lib/highlight.min.js"></script>
+<script src="lib/talkie.min.js"></script>
+<script>
+Talkie();
+
+// リンクは別タブ
+var i, links = document.querySelectorAll("a[href^='http']")
+for(i=0; i<links.length; i++) {
+  links[i].setAttribute('target', '_blank');
+}
+</script>
+</body>
+</html>
