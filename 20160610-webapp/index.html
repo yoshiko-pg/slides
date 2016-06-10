@@ -1,0 +1,177 @@
+<html>
+<head>
+  <title>外部入力の改行に負けない体を作る - @yoshiko_pg</title>
+  <link rel="stylesheet" href="lib/talkie.min.css">
+  <link rel="stylesheet" href="lib/talkie-default.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="lib/hljs-styles/railscasts.css">
+  <link rel="canonical" href="/slides/20160610-webapp/">
+</head>
+<body>
+
+
+<script layout="cover" invert type="text/x-markdown"
+  backface="image/cover.jpg" backface-filter="blur(2px) brightness(.7)">
+# 外部入力の改行に負けない体を作る
+
+2016.06.10 [@yoshiko_pg](http://yoshiko-pg.github.io)
+</script>
+
+
+<script layout="bullets" invert type="text/x-markdown"
+  backface="image/bg-profile.png" backface-filter="blur(2px) brightness(.4)">
+
+## 自己紹介
+
+<img src="./image/yoshiko.png" class="yoshiko">
+
+よしこ [@yoshiko_pg](https://twitter.com/yoshiko_pg)
+
+Frontend engineer at <a href="http://goodpatch.com/jp"><img src="./image/goodpatch.png" class="company-logo"></a>
+</script>
+
+
+<script layout="bullets" invert type="text/x-markdown"
+  backface="image/geek-jam.jpg" backface-filter="blur(1px) brightness(.3)">
+### 楽器経験者・音楽好きなエンジニアのあなたへ
+## geek-jam slack team
+https://geek-jam.herokuapp.com/
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## Web Application書いてますか？
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## JSフレームワーク便利ですよね
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## ユーザー入力をはじめとする<br>外部からの入力の<br>リアルタイム表示も超簡単！
+
+*※ 外部入力＝上記のような入力と読み替えてください*
+</script>
+
+
+<script layout="bullets-invert" type="text/x-markdown">
+# 改行がない限り
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## 外部入力の改行つらい問題
+
+- `\n`を`<br>`に変換した上、HTMLの展開を許可？
+  - 汚染されている文字列なのに・・・？
+- `\n`で区切ってひとつずつブロックレベル要素で包む？
+  - 改行しているだけで、同じ段落の文章なのに・・・？
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+# わたしたちは<br>改行ごときで<br>何をしているんだろう
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+# 世界中で\nを&lt;br&gt;に<br>変換するfilterは<br>何度書かれたんだろう
+</script>
+
+
+
+<script layout="cover" invert type="text/x-markdown"
+  backface="image/cover.jpg" backface-filter="blur(2px) brightness(.7)">
+# 筋肉で解決しよう
+</script>
+
+
+<script layout="cover" invert type="text/x-markdown"
+  backface="image/cover.jpg" backface-filter="blur(2px) brightness(.7)">
+# CSS筋で
+</script>
+
+
+<script layout="bullets" type="text/x-markdown"
+  backface="image/don.jpg" backface-filter="blur(1px)">
+# 本日ご紹介するCSS
+
+# white-space: pre-line;
+</script>
+
+
+<section layout>
+<iframe height='498' scrolling='no' src='//codepen.io/yoshiko-pg/embed/Wxrzrr/?height=498&theme-id=0&default-tab=result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='http://codepen.io/yoshiko-pg/pen/Wxrzrr/'>Wxrzrr</a> by yoshiko-pg (<a href='http://codepen.io/yoshiko-pg'>@yoshiko-pg</a>) on <a href='http://codepen.io'>CodePen</a>.
+</iframe>
+</section>
+
+
+<script layout="cover" invert type="text/x-markdown"
+  backface="image/neko.jpg" backface-filter="brightness(.4)">
+# できた
+</script>
+
+
+<section layout>
+<h3>その他の値</h3>
+<iframe height='623' scrolling='no' src='//codepen.io/yoshiko-pg/embed/oLbqxa/?height=623&theme-id=0&default-tab=result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='http://codepen.io/yoshiko-pg/pen/oLbqxa/'>oLbqxa</a> by yoshiko-pg (<a href='http://codepen.io/yoshiko-pg'>@yoshiko-pg</a>) on <a href='http://codepen.io'>CodePen</a>.
+</iframe>
+</section>
+
+
+<script layout="bullets" type="text/x-markdown">
+
+## 猫でもわかる一覧表
+
+| value    | 改行を反映 | 連続する空白を表示 | 自動折り返し |
+|----------|------------|--------------------|--------------|
+| normal   | ✕          | ✕                  | ◯           |
+| nowrap   | ✕          | ✕                  | ✕            |
+| pre      | ◯         | ◯                 | ✕            |
+| pre-wrap | ◯         | ◯                 | ◯           |
+| pre-line | ◯         | ✕                  | ◯           |
+
+</script>
+
+
+<script layout="bullets" type="text/x-markdown" class="book m0">
+[HTML5/CSS3 モダンコーディング](http://yoshiko.hatenablog.jp/entry/2015/11/02/081237) という本を出しました
+
+[![HTML5/CSS3 モダンコーディング](./image/book.jpg)](http://www.amazon.co.jp/dp/4798141577/)
+
+つけよう！CSS筋！
+</script>
+
+
+<script layout="title-invert" invert type="text/x-markdown"
+  backface="image/goodpatch-bg.png" backface-filter="blur(5px) brightness(.5)" class="goodpatch">
+
+### Goodpatchでは改行に負けない<br>フロントエンドエンジニアを募集しています
+
+[プロトタイピングツール Prott の<br>フロントエンドエンジニアを大募集！](https://www.wantedly.com/projects/54185)
+</script>
+
+
+<script layout="cover" invert type="text/x-markdown"
+  backface="image/cover.jpg" backface-filter="blur(2px) brightness(.7)">
+# Thank you
+[@yoshiko_pg](http://yoshiko-pg.github.io/)
+</script>
+
+
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+<script src="lib/highlight.min.js"></script>
+<script src="lib/talkie.min.js"></script>
+<script>
+Talkie();
+
+// リンクは別タブ
+var i, links = document.querySelectorAll("a[href^='http']")
+for(i=0; i<links.length; i++) {
+  links[i].setAttribute('target', '_blank');
+}
+</script>
+</body>
+</html>
