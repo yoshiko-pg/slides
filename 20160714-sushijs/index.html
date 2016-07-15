@@ -1,0 +1,109 @@
+<html>
+<head>
+  <title>独自ズーム実装 - @yoshiko_pg</title>
+  <link rel="stylesheet" href="lib/talkie.min.css">
+  <link rel="stylesheet" href="lib/talkie-default.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="lib/hljs-styles/railscasts.css">
+  <link rel="canonical" href="/slides/20160714-sushijs/">
+</head>
+<body>
+
+
+<script layout="cover" invert type="text/x-markdown"
+  backface="image/cover.jpg" backface-filter="blur(1px) brightness(.2)">
+# 3分で独自ズーム
+
+2016.07.14 [@yoshiko_pg](http://yoshiko-pg.github.io)
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## PCブラウザから使われる<br>Webアプリケーションに<br>独自ズームを実装したかった
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## トラックパッドでの<br>ピンチイン/アウトによる<br>ズームイン/アウトって<br>どうやってとるの？
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## 独自ズームが実装されてるZeplin上で<br>ピンチインしながら<br>Event Listener Breakpoint
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## wheelイベント発火してた
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## wheel Event
+
+- Document Object Model Level 3 Eventsにより標準化されたevent
+- pointing deviceのホイールボタンが回されたときに発火
+- トラックパッドの2本指スクロールでも発火
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## wheel ≒ pinch ?
+
+- Chromeではトラックパッドのピンチイン/アウトでも発火
+- ピンチの場合はevent.ctrlKeyがtrueになる
+- windowsでctrl押しながらホイール回してズームするイメージ？
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## ピンチ量
+
+- event.deltaYでピンチの量がとれる
+- Returns a double representing the vertical scroll amount.
+- **注：ズームインで負の値、ズームアウトで正の値になる**
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## [Zoom Demo](./zoom.html)
+
+枠の外でピンチイン/アウトするとデフォルトのズーム  
+枠の中でピンチイン/アウトすると独自の変化が！
+
+トラックパッドのある環境で見てね
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## wheel ブラウザ対応状況
+
+- IE9~
+- Chrome31~
+- Firefox17~
+- Safari8~
+- Opera18~
+
+*[ホイール系イベント2014年版クロスブラウザ](https://w3g.jp/blog/wheelevent_crossbrowser)*
+</script>
+
+<script layout="cover" invert type="text/x-markdown"
+  backface="image/cover.jpg" backface-filter="blur(1px) brightness(.2)">
+# Thank you
+[@yoshiko_pg](http://yoshiko-pg.github.io/)
+</script>
+
+
+<script src="lib/highlight.min.js"></script>
+<script src="lib/talkie.min.js"></script>
+<script>
+Talkie();
+
+// リンクは別タブ
+var i, links = document.querySelectorAll("a[href^='http']")
+for(i=0; i<links.length; i++) {
+  links[i].setAttribute('target', '_blank');
+}
+</script>
+</body>
+</html>

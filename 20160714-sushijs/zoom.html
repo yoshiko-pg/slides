@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>wheelで独自ズーム</title>
+  <style>
+    .frame {
+      box-sizing: border-box;
+      width: 60%;
+      height: 60vh;
+      margin: 20vh 20%;
+      border: 1px solid gray;
+    }
+    #zoom-area {
+      width: 100%;
+      height: 100%;
+      filter: blur(80px);
+      -webkit-filter: blur(80px);
+      overflow: hidden;
+      text-align: center;
+    }
+    #zoom-area img {
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <div id="zoom-area">
+      <img src="./sushi.png" alt="sushi">
+    </div>
+  </div>
+  <script>
+    var zoomArea = document.getElementById("zoom-area");
+    var blur = 0;
+    var addBlur = (add) => {
+      blur += add;
+      var absValue = Math.abs(blur);
+      zoomArea.style.webkitFilter = `blur(${absValue}px)`;
+      zoomArea.style.filter = `blur(${absValue}px)`;
+    };
+
+    addBlur(80);
+    zoomArea.addEventListener("wheel", (event) => {
+      if (!event.ctrlKey) {
+        return;
+      }
+      event.preventDefault();
+      addBlur(-event.deltaY * 0.5);
+      console.log(event);
+    });
+  </script>
+</body>
+</html>
