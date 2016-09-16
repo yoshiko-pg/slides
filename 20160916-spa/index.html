@@ -1,0 +1,331 @@
+<html>
+<head>
+  <title>1pxをめぐる戦い - @yoshiko_pg</title>
+  <link rel="stylesheet" href="lib/talkie.min.css">
+  <link rel="stylesheet" href="lib/talkie-default.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="lib/hljs-styles/railscasts.css">
+  <link rel="canonical" href="/slides/20160916-spa/">
+</head>
+<body>
+
+
+<script layout="cover" invert type="text/x-markdown"
+  backface="image/cover.jpg" backface-filter="blur(2px) brightness(.7)">
+# 1pxをめぐる戦い
+
+2016.09.16 [@yoshiko_pg](http://yoshiko-pg.github.io)
+</script>
+
+
+<script layout="bullets" invert type="text/x-markdown"
+  backface="image/bg-profile.png" backface-filter="blur(2px) brightness(.4)">
+
+## 自己紹介
+
+<img src="./image/yoshiko.png" class="yoshiko">
+
+よしこ [@yoshiko_pg](https://twitter.com/yoshiko_pg)
+
+Frontend engineer at <a href="http://goodpatch.com/jp"><img src="./image/goodpatch.png" class="company-logo"></a>
+</script>
+
+
+<script layout="bullets" type="text/x-markdown" class="book m0">
+[HTML5/CSS3 モダンコーディング](http://yoshiko.hatenablog.jp/entry/2015/11/02/081237) という本を出しました
+
+[![HTML5/CSS3 モダンコーディング](./image/book.jpg)](http://www.amazon.co.jp/dp/4798141577/)
+
+好評発売中！電子版もあるよ！
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## 項目数が可変なリストって
+## SPAあるあるですよね
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+こんなかんじの
+
+<ul class="sample-list gray">
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+</ul>
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+項目の下線はborder-bottomで書きます
+
+`li { border-bottom: 1px solid blue }`
+
+<ul class="sample-list">
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+</ul>
+
+でも下までスクロールすると・・・？
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## 最後のliの下線と外枠の下線がダブる😞
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+### これでどうだ
+
+```
+li {
+  border-bottom: 1px solid blue;
+}
+
+li:last-child {
+  border-bottom: none;
+}
+```
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+`li:last-child{ border-bottom: none; }`
+
+<ul class="sample-list last-none">
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+</ul>
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+# 😊
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## おや・・・？
+
+<ul class="sample-list last-none">
+  <li></li>
+  <li></li>
+  <li></li>
+</ul>
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+### だめだった・・・😞
+
+```
+li {
+  border-bottom: 1px solid blue;
+}
+
+/*
+li:last-child {
+  border-bottom: none;
+}
+*/
+```
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## 結局
+
+<ul class="sample-list">
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+</ul>
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+# 😡
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## 項目が4つ以下のときは<br>最後の要素に下線ほしい！
+## 項目が5つ以上のときは<br>最後の要素に下線いらない！
+</script>
+
+
+<script layout="bullets-invert" type="text/x-markdown">
+# ﾌｧｲｯ
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+# 両立は無理？
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+# JSの出番?
+
+*`items.length` < ﾁﾗｯ*
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+# ちょっとまった
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+# それ、CSSでできるよ
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+### 「上から4つ目まで」の表現
+
+```
+li:nth-child(-n+4) {
+  border-bottom: 1px solid blue;
+}
+```
+
+
+- `-0+4 = 4` → 4番目の子要素
+- `-1+4 = 3` → 3番目の子要素
+- `-2+4 = 2` → 2番目の子要素
+- `-3+4 = 1` → 1番目の子要素
+- `-4+4 = 0` → 無効
+- `-5+4 = -1` → 無効...
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+### 「否定」の表現
+
+```
+li:not(:last-child) {
+  border-bottom: 1px solid blue;
+}
+
+/*
+以下と同じ
+li {
+  border-bottom: 1px solid blue;
+}
+li:last-child {
+  border-bottom: none;
+}
+*/
+```
+</script>
+
+
+<script layout="bullets-invert" type="text/x-markdown">
+## これをこうして・・・
+
+( ＾ω＾)  
+≡⊃⊂≡ 
+
+## こうじゃ！
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+### 上から5番目以内**ではない**last-childは<br>下線を消す
+
+```
+li {
+  border-bottom: 1px solid blue;
+}
+
+li:last-child:not(:nth-child(-n+5)) {
+  border-bottom: none;
+}
+```
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+# 😏
+
+<div class="sample-list-wrapper">
+  <ul class="sample-list complete">
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+  <ul class="sample-list complete">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+</div>
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+### AltCSSで変数管理しておけばさらによし
+
+Example: Stylus
+
+```
+ul-height = 380px
+li-height = 80px
+limit = floor(ul-height / li-height)
+
+li:last-child:not(:nth-child(-n+{limit})) {
+  border-bottom: none;
+}
+```
+</script>
+
+
+<script layout="cover" invert type="text/x-markdown"
+  backface="image/cover.jpg" backface-filter="blur(3px) brightness(.4)">
+# THANK YOU
+[@yoshiko_pg](http://yoshiko-pg.github.io/)
+</script>
+
+
+<script layout="bullets-invert" type="text/x-markdown">
+# おまけ
+
+SPAで便利なCSSシリーズ第一弾はこちら💪
+
+[外部入力の改行に負けない体を作る](http://yoshiko-pg.github.io/slides/20160610-webapp/)
+</script>
+
+
+<script src="lib/highlight.min.js"></script>
+<script src="lib/talkie.min.js"></script>
+<script>
+Talkie();
+
+// リンクは別タブ
+var i, links = document.querySelectorAll("a[href^='http']")
+for(i=0; i<links.length; i++) {
+  links[i].setAttribute('target', '_blank');
+}
+</script>
+</body>
+</html>

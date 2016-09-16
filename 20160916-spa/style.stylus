@@ -1,0 +1,132 @@
+#control
+  color gray
+
+linkColor = #8FC0FF
+
+a
+  color linkColor
+  transition: color .1s ease-in-out
+
+#backface
+  transition: none
+
+[layout=code] .hljs-comment
+  color #555
+
+[layout][invert] a:link,
+[layout][invert] a:visited,
+[layout][invert] a:active
+  color linkColor
+[layout][invert] a:hover
+  color lighten(linkColor, 50%)
+
+[layout=bullets],
+[layout=bullets-invert]
+  h1, h2, h3, h4, h5, h6
+    margin-top: 30px
+
+strong
+  color: red
+
+[layout=code]
+  color #fff
+  .hljs-comment
+    color #555
+
+[layout=cover]
+  h1
+    text-transform: none
+
+p > code,
+li > code
+  background: #f3f3f3
+  border: 1px solid lightblue
+  border-radius: 3px
+  padding: 3px 6px
+  font-size: .8em
+  color: #333
+[layout][invert],
+[layout$=invert]
+  code
+    background: #555
+    color: #fff
+  strong
+    color: lighten(red, 50%)
+
+[layout] table
+  font-size: 10px
+  th
+    background-color: #666
+    color: #fff
+    font-weight: bold
+  td
+    white-space: nowrap
+    padding: .6em
+
+.m0 > *
+  margin-left: 0
+  margin-right: 0
+
+.yoshiko
+  width 250px
+  background-color: #fff;
+  border-radius: 50%;
+
+.company-logo
+  height 3rem
+  vertical-align middle
+  margin-left 3px
+
+.book img
+  height 55%
+  margin -20px auto
+
+///////////////////////////////////////////////////////////////////////////////////////
+
+.sample-list
+  ul-height = 380px
+  li-height = 80px
+
+  counter-reset: sample-list
+  box-sizing: border-box
+  width: 600px
+  height: ul-height
+  border: 1px solid tomato
+  overflow-y: scroll
+
+  li
+    list-style-type: none
+    box-sizing: border-box
+    width: 100%
+    height: li-height
+    line-height: li-height
+    padding: 0 15px
+    margin: 0
+    border-bottom: 1px solid blue
+
+    &::before
+      counter-increment: sample-list
+      content: "Item " counter(sample-list)
+
+  &.gray
+    border-color: #ccc
+    li
+      border-bottom-color: #aaa
+
+  &.last-none
+    li:last-child
+      border-bottom: none
+
+  &.complete
+    limit = floor(ul-height / li-height)
+    li:last-child:not(:nth-child(-n+{limit}))
+      border-bottom: none;
+
+.sample-list-wrapper
+  display: flex
+  width: 100%
+  justify-content: space-between
+
+  .sample-list
+    width: auto
+    flex: 0 0 45%
