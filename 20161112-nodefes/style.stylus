@@ -32,6 +32,8 @@ strong
   color #fff
   .hljs-comment
     color #555
+  ul
+    list-style: initial
 
 p > code,
 li > code
@@ -46,8 +48,6 @@ li > code
   code
     background: #555
     color: #fff
-  strong
-    color: lighten(red, 50%)
 
 [layout] table
   font-size: 10px

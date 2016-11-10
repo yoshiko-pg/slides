@@ -71,10 +71,61 @@ hasOwnProperties && enumerable
 
 ## String padding
 
+String.prototype.padStart()
+String.prototype.padEnd()
+
+
+'abc'.padStart(10);         // "       abc"
+'abc'.padStart(10, "foo");  // "foofoofabc"
+'abc'.padStart(6,"123465"); // "123abc"
+
+https://github.com/tc39/proposal-string-pad-start-end
+http://yosuke-furukawa.hatenablog.com/entry/2016/03/27/152500
+
 ## Object.getOwnPropertyDescriptors
+
+あるオブジェクトの直接のプロパティ群のDescriptor群を取得する
+
+Descriiptor?
+https://yoshiko-pg.github.io/slides/20160517-ngmtg/#24
+
+今まではObject.getOwnPropertyDescriptorに対象とプロパティ名を渡してひとつのDescriptorを取得していた
+これからは一気に取れる
+
+polyfill
+```
+if (!Object.hasOwnProperty('getOwnPropertyDescriptors')) {
+  Object.defineProperty(
+    Object,
+    'getOwnPropertyDescriptors',
+    {
+      configurable: true,
+      writable: true,
+      value: function getOwnPropertyDescriptors(object) {
+        return Reflect.ownKeys(object).reduce((descriptors, key) => {
+          return Object.defineProperty(
+            descriptors,
+            key,
+            {
+              configurable: true,
+              enumerable: true,
+              writable: true,
+              value: Object.getOwnPropertyDescriptor(object, key)
+            }
+          );
+        }, {});
+      }
+    }
+  );
+}
+```
 
 ## Trailing commas in function parameter lists and calls
 
+引数を複数行で書いたときにケツカンマを許容するよ！
+
 ## Async Functions
 
+https://github.com/tc39/ecmascript-asyncawait
 
+目玉！！！

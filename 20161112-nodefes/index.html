@@ -1,20 +1,48 @@
 <html>
 <head>
-  <title>TODO: タイトル入れる - @yoshiko_pg</title>
+  <title>Tasting ES2017 - @yoshiko_pg</title>
   <link rel="stylesheet" href="lib/talkie.min.css">
   <link rel="stylesheet" href="lib/talkie-default.min.css">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="lib/hljs-styles/railscasts.css">
-  <link rel="canonical" href="/slides/TODO: path入れる/">
+  <link rel="canonical" href="/slides/20161112-nodefes/">
 </head>
 <body>
 
 
 <script layout="cover" invert type="text/x-markdown"
-  backface="image/cover.jpg" backface-filter="blur(2px) brightness(.7)">
-# ここにタイトル
+  backface="image/cover.jpg" backface-filter="blur(0px) brightness(.5)">
+# Tasting ES2017
 
-2016.XX.XX [@yoshiko_pg](http://yoshiko-pg.github.io)
+2016.11.12 [@yoshiko_pg](http://yoshiko-pg.github.io)
+</script>
+
+
+<script layout="cover" invert type="text/x-markdown" class="m0"
+  backface="image/xmas.jpg" backface-filter="blur(2px) brightness(.5)">
+# もうすぐ<br>年末ですね！
+</script>
+
+<script layout="cover" invert type="text/x-markdown" class="m0"
+  backface="image/newyear.jpg" backface-filter="blur(2px) brightness(.5)">
+# もうすぐ<br>2017年ですね！
+</script>
+
+<script layout="cover" type="text/x-markdown" class="m0" backface="image/es.png">
+# もうすぐ<br>ES2017の<br>確定ですね！
+</script>
+
+<script layout="cover" type="text/x-markdown" class="m0" backface="image/es.png">
+# ちょっと味見<br>してみましょう😋
+</script>
+
+
+<script layout="cover" type="text/x-markdown" class="m0" backface="image/es.png">
+## ※ テストの話ではありません
+
+### ✕ Testing<br>◯ Tasting
+
+ES2017の新仕様をざっくり眺めてみましょう！
 </script>
 
 
@@ -41,26 +69,264 @@ Frontend engineer at <a href="http://goodpatch.com/jp"><img src="./image/goodpat
 
 
 <script layout="bullets" type="text/x-markdown">
-## なんか書く
+## ES2017の中身ってどうやって決まるの？
+
+ES2016以降のECMAScript策定フローについて
+</script>
+
+
+
+
+<script layout="bullets" type="text/x-markdown">
+JavaScriptやNode.jsの仕様であるECMAScriptには  
+次々と新しい仕様が提案されていきます
+</script>
+
+
+
+<script layout="bullets" type="text/x-markdown">
+提案は以下のStageに従って進んでいきます
+
+- Stage 0: アイデア
+- Stage 1: Proposal（目的や実例の提示）
+- Stage 2: Draft（正式な記法で仕様を記述）
+- Stage 3: Candidate（仕様完成、FB受け付け）
+- Stage 4: Finished（2つ以上の実装が必要）
+
+2016年内にStage4に入った機能がES2017となります
+
+*https://tc39.github.io/process-document/*  
+*http://efcl.info/2015/10/18/ecmascript-paper/*
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## ES2016のタイムライン
+
+- 1月: 入れる機能のフリーズ
+- 3月: 仕様のスナップショット
+- 6月: General Assembly（会議）のあと正式リリース
+
+ES2017も同じようなフローで進むのではないかと思います。
+2017年のGAは6/13-14とのこと。
+
+*http://www.ecma-international.org/memento/GA.htm*
+</script>
+
+<script layout="bullets" type="text/x-markdown">
+### あと半年ほどで正式リリースとなるES2017  
+### いったいどんな仕様が追加されるのでしょう？
+
+*[finished-proposals.md](https://github.com/tc39/proposals/blob/master/finished-proposals.md)*
+</script>
+
+
+
+
+<script layout="cover" type="text/x-markdown" class="m0" backface="image/es.png">
+# ES2016
+
+- ・Array.prototype.includes
+- ・Exponentiation Operator (\*\*)
+</script>
+
+
+<script layout="cover" type="text/x-markdown" class="m0" backface="image/es.png">
+# ES2017
+
+- ・Object.values / Object.entries
+- ・String padding
+- ・Object.getOwnPropertyDescriptors
+- ・Trailing commas in function parameter lists and calls
+- ・Async Functions
+
+*https://github.com/tc39/proposals/blob/master/finished-proposals.md*
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+## 1. [Object.values / Object.entries](https://github.com/tc39/proposal-object-values-entries)
+
+Object.keys の仲間  
+Object.values は値の配列を返す  
+Object.entries はキーと値が配列になった配列を返す  
+
+
+```js
+const test = {a: 1, b: 'hoge'};
+Object.keys(test); // ["a", "b"]
+Object.values(test); // [1, "hoge"]
+Object.entries(test); // [["a", 1], ["b", "hoge"]]
+```
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+3つのメソッドとも、列挙されるのは  
+「与えられたオブジェクト自身に存在する  
+列挙可能なプロパティ」
+
+コードでいうと、  
+`hasOwnProperty(prop)`と`propertyIsEnumerable(prop)`が  
+両方`true`になるプロパティが列挙される
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+## 2. [String padding](https://github.com/tc39/proposal-string-pad-start-end)
+
+String.prototypeに文字埋めのための2つのメソッド（padStart, padEnd）が追加される。
+第一引数が文字長<br>第二引数が埋める文字列（デフォルトは`" "`）
+
+
+```js
+'abc'.padStart(10);         // "       abc"
+'abc'.padStart(10, "foo");  // "foofoofabc"
+'abc'.padStart(6,"123465"); // "123abc"
+'abc'.padEnd(10);         // "abc       "
+'abc'.padEnd(10, "foo");  // "abcfoofoof"
+'abc'.padEnd(6,"123465"); // "abc123"
+```
+
+*Code from https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/String/padStart*
+
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+### 3. [Object.getOwnPropertyDescriptors](https://github.com/tc39/proposal-object-getownpropertydescriptors)
+
+あるオブジェクト自身に存在するプロパティ群のDescriptor群を取得する
+
+今まではObject.getOwnPropertyDescriptorに対象とプロパティ名を渡してひとつのDescriptorを取得していたので、別途プロパティの列挙が必要だった  
+それらをまとめて行える便利メソッド
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+## What is Descriptor?
+
+JavaScript ObjectのPropertyについての設定値のセット  
+6つのフィールドを持つ  
+
+- `Enumerable` ... 列挙可能か（for-inで現れるか）
+- `Configurable` ... Descriptorを編集可能か
+- `Writable` ... 値を書き換え可能か
+- `Value` ... 値
+- `Get, Set` ... Accessor Function (getter/setter)
+
+[ES5, Property Descriptor解説](http://constellation.hatenablog.com/entry/20101205/1291564928)
+</script>
+
+<script layout="code" type="text/x-markdown" class="m0">
+```js
+// Polyfill（抜粋）
+// https://github.com/tc39/proposal-object-getownpropertydescriptors
+function getOwnPropertyDescriptors(object) {
+  return Reflect.ownKeys(object).reduce((descriptors, key) => {
+    return Object.defineProperty(
+      descriptors,
+      key,
+      {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        value: Object.getOwnPropertyDescriptor(object, key)
+      }
+    );
+  }, {});
+}
+```
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+### 4. [Trailing commas in<br>function parameter lists and calls](https://github.com/tc39/proposal-trailing-function-commas)
+
+引数を複数行で書いたときのケツカンマを許容する  
+追加/削除時の余分なdiffを回避できる
+
+```js
+function clownPuppiesEverywhere(
+  param1,
+  param2, // <- ここ
+) {  }
+
+clownPuppiesEverywhere(
+  'foo',
+  'bar', // <- ここ
+);
+```
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+## 5. [Async Functions](https://github.com/tc39/ecmascript-asyncawait)
+
+ES2017の目玉！  
+非同期処理を同期的に書くことができるようになる
+
+```
+(async () => {
+  console.log('async start');
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+  console.log('async end'); // 1秒後に実行される
+})().catch((error) => console.log(error));
+```
+
+async functionはPromiseを返すのでthen/catchを繋げられる
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+例：ステータスの取得を繰り返して、特定のレスポンスがあったら止める（雑に表すと↓） [demo](https://goo.gl/AZgzn1)
+
+```js
+(async () => {
+  let result = true;
+  while (result){
+    result = await checkStatus(); // 0 or 1
+  }
+  console.log('end');
+})();
+
+function checkStatus() {
+  return new Promise((resolve) => {
+    setTimeout(()=>{
+      resolve(parseInt(Math.random() * 2, 10));
+    }, 1000)
+  });
+}
+```
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+実案件で使ってみて、動的に条件が変わる直列の非同期処理で非常に助かった  
+Node.jsだとDBまわりの処理で嬉しいという声も
+
+例外処理のしやすさも良いが、ハマりどころでもある  
+私の場合は以下の記事が理解の助けになった
+
+- [JavaScriptは如何にしてAsync/Awaitを獲得したのか ](http://qiita.com/gaogao_9/items/5417d01b4641357900c7)  
+- [Promiseとasync-awaitの例外処理を完全に理解しよう](http://qiita.com/gaogao_9/items/40babdf63c73a491acbb)
 </script>
 
 
 <script layout="title-invert" invert type="text/x-markdown"
-  backface="image/goodpatch-bg.png" backface-filter="blur(5px) brightness(.5)" class="goodpatch">
+  backface="image/goodpatch-bg.png" backface-filter="blur(3px) brightness(.3)" class="goodpatch">
 
-### Goodpatchでは中央寄せに消耗しない<br>フロントエンドエンジニアを募集しています
+### Goodpatchでは業務でES2017+を書きたい<br>エンジニアを募集しています
 
-[www.wantedly.com/projects/16402](https://www.wantedly.com/projects/16402)
+https://www.wantedly.com/projects/54185
 
-1月から新フロア増床！オフィスにあそびにきてね！
-
-[学生さん向けに冬のインターンもやります！](https://www.wantedly.com/projects/36592)
+是非話しかけてください！
 </script>
 
 
 <script layout="cover" invert type="text/x-markdown"
-  backface="image/end.gif" backface-filter="blur(3px) brightness(.4)">
-# Thank you
+  backface="image/cover.jpg" backface-filter="blur(0px) brightness(.5)">
+# Thank<br>you
 [@yoshiko_pg](http://yoshiko-pg.github.io/)
 </script>
 
@@ -71,7 +337,16 @@ Frontend engineer at <a href="http://goodpatch.com/jp"><img src="./image/goodpat
 
 
 <script layout="bullets-invert" type="text/x-markdown">
-## なんか書く
+### Stage 3以下で個人的に嬉しいProposals
+
+- Stage 3: [Rest/Spread Properties](https://github.com/sebmarkbage/ecmascript-rest-spread) ... `a = {b, ...c}` 書きたいよね〜
+- Stage 2: [Public Class Fields](https://tc39.github.io/proposal-class-public-fields/) ... やっとまともなクラスに・・・
+- Stage 2: [Promise.prototype.finally](https://github.com/tc39/proposal-promise-finally) ... Native Promise 使っていて、欲しい場面けっこう多い
+- Stage 1: [Private Fields](https://github.com/tc39/proposal-private-fields) ... `#`ではないだろ〜感あるけど使いたい
+- Stage 1: [Observable](https://github.com/tc39/proposal-observable) ... async/awaitに次ぐ期待
+- Stage 0: [Function Bind Syntax](https://github.com/tc39/proposal-bind-operator) ... 書き味いいですよ・・・？？
+
+**ご利用は計画的に**
 </script>
 
 

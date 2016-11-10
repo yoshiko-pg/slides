@@ -44,6 +44,9 @@ strong {
 [layout=code] .hljs-comment {
   color: #555;
 }
+[layout=code] ul {
+  list-style: initial;
+}
 p > code,
 li > code {
   background: #f3f3f3;
@@ -57,10 +60,6 @@ li > code {
 [layout$=invert] code {
   background: #555;
   color: #fff;
-}
-[layout][invert] strong,
-[layout$=invert] strong {
-  color: #ff8080;
 }
 [layout] table {
   font-size: 10px;
