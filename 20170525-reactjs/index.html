@@ -1,20 +1,21 @@
 <html>
 <head>
-  <title>TODO: タイトル入れる - @yoshiko_pg</title>
+  <title>いまSPAを作るなら 〜Prott2の技術選定のウラガワ〜 - @yoshiko_pg</title>
   <link rel="stylesheet" href="lib/talkie.min.css">
   <link rel="stylesheet" href="lib/talkie-default.min.css">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="lib/hljs-styles/railscasts.css">
-  <link rel="canonical" href="/slides/TODO: path入れる/">
+  <link rel="canonical" href="/slides/20170525-reactjs/">
 </head>
 <body>
 
 
 <script layout="cover" invert type="text/x-markdown"
   backface="image/cover.jpg" backface-filter="blur(2px) brightness(.7)">
-# ここにタイトル
+# いまSPAを作るなら
+## 〜Prott2の技術選定のウラガワ〜
 
-2016.XX.XX [@yoshiko_pg](http://yoshiko-pg.github.io)
+2017.05.25 [@yoshiko_pg](http://yoshiko-pg.github.io)
 </script>
 
 
@@ -31,30 +32,202 @@ Frontend engineer at <a href="http://goodpatch.com/jp"><img src="./image/goodpat
 </script>
 
 
-<script layout="bullets" type="text/x-markdown" class="book m0">
-[HTML5/CSS3 モダンコーディング](http://yoshiko.hatenablog.jp/entry/2015/11/02/081237) という本を出しました
+<script layout="bullets" type="text/x-markdown">
+プロトタイピングツールPrott
 
-[![HTML5/CSS3 モダンコーディング](./image/book.jpg)](http://www.amazon.co.jp/dp/4798141577/)
-
-好評発売中！電子版もあるよ！
+今、ゼロからのリニューアル計画が動いています
 </script>
 
 
 <script layout="bullets" type="text/x-markdown">
-## なんか書く
+## 時を経て積もった負債の数々
+
+- コード
+- DB設計
+- UI
+- 課金プラン
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+<blockquote class="twitter-tweet" data-lang="ja"><p lang="ja" dir="ltr">下手だなあカイジくん…！技術的負債の返済の仕方が下手…！カイジくんが本当に欲しいのは、1からの作り直し…！だけどそれはあまりに時間がかかるから、こっちのしょぼいリファクタリングでごまかそうっていうんだ…！</p>&mdash; よーひら (@yohira_dev) <a href="https://twitter.com/yohira_dev/status/864465228246929411">2017年5月16日</a></blockquote>
+
+この道は行かずに済んだ
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+  先月から始まった0→1のプロジェクトにおいて<br>
+  意見の一つとして参考になればと思い<br>
+  どんな考えでどんな技術を選定したかをご紹介します。
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## Frontendのアーキテクチャ
+- React
+- Redux
+- Flow
+- styled-components
+- yarn
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## 技術選定基準
+
+- Web標準に即している、もしくは乖離しすぎていない
+- 別のツールを使うことになったときに乗り換えやすい
+- ある程度以上に枯れていて、情報量が多い
+- エコシステムが発達している
+- 解決する対象以上の難しさを持ち込まない（このへんReduxちょっと怪しい）
+
+このへんを意識しています。守れているかはケースバイケースというか、メリットが上回れば背いてしまうこともありますが・・・
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## React
+
+- 最初はAngularを検討
+  - 個人で小さいアプリを作ってみて試した
+  - https://yoshiko-pg.github.io/your-name/
+- 使い心地は好きだけどまだ枯れていなくて情報が少ないのと、（当時は）APIの変更が多くて調べる作業が多かったので、大きめのチーム開発に採用して自分が舵取りするのはなかなか難しいかもと判断
+- Reactは枯れているしライブラリも色々あり破壊的変更も少なそう。メジャー＝エンジニア人口も多く採用面でも有利かと判断
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## Redux
+
+- プロジェクトに人が増えたり自分の手が細部まで回らなくなったとき、自分の設計がそれらを統制するだけの強い一貫性を持てるだろうか？ドキュメントは充実させられるだろうか？啓蒙はできるだろうか？
+  - 未来の世代から憎まれるオレオレFWへの恐怖
+- 上記コストを既に払ってくれていて、十分にテストやメンテナンスもされていて、情報やエコシステムも育ってきている既存のレールに乗っかったほうが安牌なのでは
+- ["レールに乗ったほうが設計思想を共有するコストが減る"](https://speakerdeck.com/hokaccha/bdashniokerufluxshe-ji)
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## Redux
+
+逃げの選択ではあると思う。<br>
+実際Reduxに乗っかった上での設計にも難儀しているので、いちから組み立てるには到底設計力が足りてなかったなーと思います。<br>
+もっとゼロイチ繰り返して強化したい。
+
+ただ実際に進めていて、必要以上に冗長になっているというか正直めんどいところも見えてきたので、見えてきたメリット/デメリットを踏まえて形を変えていきたい。
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+### Redux - 設計面
+
+- [ReduxでのMiddleware不要論 - Qiita](http://qiita.com/uryyyyyyy/items/d8bae6a7fca1c4732696)
+  - ReactにもReduxにも依存しないかたちでピュアにドメインロジックを書けていてよい
+- 一番上の階層だけでなく、適切な単位でContainer Componentを挟んでいる
+  - 一番上でその画面のすべてのリソースを取ってきて分配するより、あるコンポーネントが使うデータはそのコンポーネントが取ってくる形のほうがいいと思う（粒度は考える）
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## Flow
+
+- Prott1の負債を踏まえても型は欲しい。FlowとTypeScriptで悩んだ
+- 「言語をTypeScriptへスイッチする」よりも「JSに型チェックの機能を付け加える」アプローチのほうがライトでいいかもと思った
+- Flowの型推論が賢いという情報をよく見た
+- babelで変換できるしReactとの相性がよさそう
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+### はまりどころ
+
+- flow-typedに型情報があるライブラリが少ない
+- node_modules以下を読むと死に、ignoreするとimportが解決できなくて死ぬ
+  - 今はnode_modulesをignoreして、flow-typedになくてエラーになるライブラリはdecls以下に自分で定義を書いている。（だいたいany）
+- 仕様確定前のproposalsがだいぶ使えない
+  - decoratorが使えないの結構痛い
+- // @flow書き忘れる
+  - styleファイルでエラーが出るので--allができない
+  - 漏れ対策としてlintとかcheckの仕組みを入れたい
+- DockerやCI上で実行するときうまくいかないケースが多かった
+
+このへん省みるとTypeScriptでもよかったのかなー・・・と思う。
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## styled-components
+CSSどうするかはなかなか悩ましさがあったけど、今はこれに落ち着いている
+[SPAにおけるCSSについて、ひとつの解 - エンジニアをリングする](http://yoshiko.hatenablog.jp/entry/css-in-js)
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+### メリット
+- コンポーネントごとにスコープを切れる
+- JSとCSSで値を共有できる
+- そのスタイルがどこで利用されているのか把握できる
+- あるコンポーネントにスタイルの定義を追加するのではなく、スタイルのあたった空コンポーネントそのものを作るので使い回しがしやすい
+- スタイルのsyntaxが標準のCSSから（わりと）乖離しない
+- エディタからCSSと同等のサポートを受けられる
+- JSが特定のツールに依存せずvalidである
+- stylelintを使える
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+### デメリット
+- 自身を参照するとき&を使ってしまう（SCSS）
+- `:host` がいければまだいいかな
+- PostCSSとか挟んだりしてない
+- CSSCombでの並び替えができない
+- パフォーマンス面まだ問題ないけど今後どうか要チェック
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+
+### 設計面
+React+Reduxでのコンポーネントの粒度はそこまで気にせず、デザインをコーディングする上で必要な１要素ごとにコンポーネント化する。ビュー側でそれらを必要に応じてimportし、使う形。
+既存のコンポーネントにスタイルを定義する形ではないので、似たコンポーネントどうする問題が解決される。（同じデザインの箇所だけ同じstyled-componentsを使えばいい）
+styled-componentsはHTML要素とスタイルをまとめてコンポーネント化するので、inputなど要素自体に振る舞いを持っている要素やaとbuttonなど異なる要素間で同じ見た目にしたい場合は工夫が必要。このへんはクラスベースがちょっと恋しい。
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## yarn
+
+- 速い
+- デフォルトでバージョンロックしてくれる
+  - `yarn.lock`
+  - バージョンのロックは絶対にしておいたほうがいい
+  - shrinkwrapに色々問題があるとのことなのでこれが一番大きい
+    - 次のNodeで対応されるみたいな情報を見たかも
+- インターフェイスが適切
+  - `npm install hoge -S` -> `yarn add hoge`
+  - `npm install -g hoge` -> `yarn global add hoge`
+- yarnのあとに続けて書くとnode_modulesにパスが通った状態で実行できる
+  - `yarn flow check`
+  - globalへのインストールもscriptsへの登録もいらなくて便利
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+  ## 技術選定してみて思ったこと
+
+  - 迷ったらまず小さいプロジェクトで使って試してみるの大事
+  - 採用基準は人（チーム）による。自分は何を基準にして何を優先したいのかなんとなく言語化しておくと指標になりそう
+    - 私は情報の多さやエコシステムの大きさを重視する派
+  - 解決される問題よりもコストが上回っていると感じたらすぐに見直したほうがいい
+  - 導入前に考えすぎるよりも動かしてみてだめならぱっとやめるほうが効率がよさそう（苦手）
 </script>
 
 
 <script layout="title-invert" invert type="text/x-markdown"
   backface="image/goodpatch-bg.png" backface-filter="blur(5px) brightness(.5)" class="goodpatch">
-
-### Goodpatchでは中央寄せに消耗しない<br>フロントエンドエンジニアを募集しています
+### Goodpatchではこんな技術に興味のある<br>フロントエンドエンジニアを募集しています
 
 [www.wantedly.com/projects/16402](https://www.wantedly.com/projects/16402)
-
-1月から新フロア増床！オフィスにあそびにきてね！
-
-[学生さん向けに冬のインターンもやります！](https://www.wantedly.com/projects/36592)
 </script>
 
 
@@ -65,18 +238,7 @@ Frontend engineer at <a href="http://goodpatch.com/jp"><img src="./image/goodpat
 </script>
 
 
-<script layout="bullets-invert" type="text/x-markdown">
-# おまけ
-</script>
-
-
-<script layout="bullets-invert" type="text/x-markdown">
-## なんか書く
-</script>
-
-
-
-
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 <script src="lib/highlight.min.js"></script>
 <script src="lib/talkie.min.js"></script>
 <script>

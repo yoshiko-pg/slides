@@ -3,12 +3,10 @@
 }
 a {
   color: #8fc0ff;
-  -webkit-transition: color 0.1s ease-in-out;
-          transition: color 0.1s ease-in-out;
+  transition: color 0.1s ease-in-out;
 }
 #backface {
-  -webkit-transition: none;
-          transition: none;
+  transition: none;
 }
 [layout=code] .hljs-comment {
   color: #555;
@@ -80,6 +78,8 @@ li > code {
 }
 .yoshiko {
   width: 250px;
+  background-color: #fff;
+  border-radius: 50%;
 }
 .company-logo {
   height: 3rem;
