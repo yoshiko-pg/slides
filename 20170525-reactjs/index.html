@@ -223,44 +223,6 @@ HTML要素とスタイルをまとめてコンポーネント化するので、i
 
 
 <script layout="bullets" type="text/x-markdown">
-## AVA
-
-- メソッドや記法がシンプル
-- async/awaitフレンドリー
-- アウトプットが見やすい
-- `.only` とか `.skip` とか地味に嬉しい感じがした
-
-今のところ不満ないです。
-</script>
-
-
-<script layout="bullets" type="text/x-markdown">
-## yarn
-
-（この並びで出すのは違和感あるけど、よかったので）
-
-- 速い
-- デフォルトでバージョンロックしてくれる
-  - `yarn.lock`
-  - バージョンのロックは絶対にしておいたほうがいい
-  - npmのshrinkwrapに色々問題があるとのことなので
-    - 次のNodeで対応されるみたいな情報を見たかも
-</script>
-
-
-<script layout="bullets" type="text/x-markdown">
-## yarn
-
-- インターフェイスが自然に感じる
-  - `npm install hoge -S` -> `yarn add hoge`
-  - `npm install -g hoge` -> `yarn global add hoge`
-- yarnのあとに続けて書くとnode_modulesにパスが通った状態で実行できる
-  - `yarn flow check`
-  - globalへのインストールもscriptsへの登録もいらなくて便利
-</script>
-
-
-<script layout="bullets" type="text/x-markdown">
   ## 振り返り: 今後変えるかも
 
   - Redux脱却
