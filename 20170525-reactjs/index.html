@@ -12,8 +12,8 @@
 
 <script layout="cover" invert type="text/x-markdown"
   backface="image/cover.jpg" backface-filter="blur(2px) brightness(.7)">
-# いまSPAを作るなら
-## 〜Prott2の技術選定のウラガワ〜
+## いまSPAを作るなら
+### 〜Prott2の技術選定のウラガワ〜
 
 2017.05.25 [@yoshiko_pg](http://yoshiko-pg.github.io)
 </script>
@@ -69,6 +69,7 @@ Frontend engineer at <a href="http://goodpatch.com/jp"><img src="./image/goodpat
 - Redux
 - Flow
 - styled-components
+- ava
 - yarn
 </script>
 
@@ -82,7 +83,8 @@ Frontend engineer at <a href="http://goodpatch.com/jp"><img src="./image/goodpat
 - エコシステムが発達している
 - 解決する対象以上の難しさを持ち込まない（このへんReduxちょっと怪しい）
 
-このへんを意識しています。守れているかはケースバイケースというか、メリットが上回れば背いてしまうこともありますが・・・
+このへんを意識しています。<br>
+守れているかはケースバイケースというか、メリットが上回れば背いてしまうこともありますが・・・
 </script>
 
 
@@ -124,6 +126,7 @@ Frontend engineer at <a href="http://goodpatch.com/jp"><img src="./image/goodpat
 - [ReduxでのMiddleware不要論 - Qiita](http://qiita.com/uryyyyyyy/items/d8bae6a7fca1c4732696)
   - ReactにもReduxにも依存しないかたちでピュアにドメインロジックを書けていてよい
 - 一番上の階層だけでなく、適切な単位でContainer Componentを挟んでいる
+- その単位でUsecaseもわけている
   - 一番上でその画面のすべてのリソースを取ってきて分配するより、あるコンポーネントが使うデータはそのコンポーネントが取ってくる形のほうがいいと思う（粒度は考える）
 </script>
 
@@ -131,7 +134,7 @@ Frontend engineer at <a href="http://goodpatch.com/jp"><img src="./image/goodpat
 <script layout="bullets" type="text/x-markdown">
 ## Flow
 
-- Prott1の負債を踏まえても型は欲しい。FlowとTypeScriptで悩んだ
+- 既存の負債を踏まえても型は欲しい。FlowとTypeScriptで悩んだ
 - 「言語をTypeScriptへスイッチする」よりも「JSに型チェックの機能を付け加える」アプローチのほうがライトでいいかもと思った
 - Flowの型推論が賢いという情報をよく見た
 - babelで変換できるしReactとの相性がよさそう
@@ -146,19 +149,30 @@ Frontend engineer at <a href="http://goodpatch.com/jp"><img src="./image/goodpat
   - 今はnode_modulesをignoreして、flow-typedになくてエラーになるライブラリはdecls以下に自分で定義を書いている。（だいたいany）
 - 仕様確定前のproposalsがだいぶ使えない
   - decoratorが使えないの結構痛い
-- // @flow書き忘れる
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+### はまりどころ
+
+- `// @flow`書き忘れる
   - styleファイルでエラーが出るので--allができない
   - 漏れ対策としてlintとかcheckの仕組みを入れたい
+- WebStormでリアルタイム実行すると重すぎて文字が打てない
 - DockerやCI上で実行するときうまくいかないケースが多かった
 
-このへん省みるとTypeScriptでもよかったのかなー・・・と思う。
+型いれて助かってるけど、このへん省みるとTypeScriptだったらどうなってたかなー・・・と思う。
 </script>
 
 
 <script layout="bullets" type="text/x-markdown">
 ## styled-components
-CSSどうするかはなかなか悩ましさがあったけど、今はこれに落ち着いている
+
+ブログを書きました。
+
 [SPAにおけるCSSについて、ひとつの解 - エンジニアをリングする](http://yoshiko.hatenablog.jp/entry/css-in-js)
+
+CSSどうするかはなかなか悩ましさがあったけど、今はこれに落ち着いている
 </script>
 
 
@@ -178,32 +192,66 @@ CSSどうするかはなかなか悩ましさがあったけど、今はこれ�
 <script layout="bullets" type="text/x-markdown">
 ### デメリット
 - 自身を参照するとき&を使ってしまう（SCSS）
-- `:host` がいければまだいいかな
+    - `:host` がいければまだいいかな
 - PostCSSとか挟んだりしてない
 - CSSCombでの並び替えができない
 - パフォーマンス面まだ問題ないけど今後どうか要チェック
+
+2.0が出たらしいのでチェックせねば
 </script>
 
 
 <script layout="bullets" type="text/x-markdown">
+### styled-components - 設計面
 
-### 設計面
-React+Reduxでのコンポーネントの粒度はそこまで気にせず、デザインをコーディングする上で必要な１要素ごとにコンポーネント化する。ビュー側でそれらを必要に応じてimportし、使う形。
+React+Reduxでのコンポーネントの粒度はそこまで気にせず、デザインをコーディングする上で必要な１要素ごとにコンポーネント化する。<br>
+ビュー側でそれらを必要に応じてimportし、使う形。<br>
 既存のコンポーネントにスタイルを定義する形ではないので、似たコンポーネントどうする問題が解決される。（同じデザインの箇所だけ同じstyled-componentsを使えばいい）
-styled-componentsはHTML要素とスタイルをまとめてコンポーネント化するので、inputなど要素自体に振る舞いを持っている要素やaとbuttonなど異なる要素間で同じ見た目にしたい場合は工夫が必要。このへんはクラスベースがちょっと恋しい。
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+### styled-components - 設計面
+
+使いまわせるのはクラスをあててく感じに近い。<br>
+違いのひとつは定義にHTML要素も含むこと。
+
+HTML要素とスタイルをまとめてコンポーネント化するので、inputなど要素自体に振る舞いを持っている要素やaとbuttonなど異なる要素間で同じ見た目にしたい場合は工夫が必要。<br>
+
+またブログ書きます。
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## AVA
+
+- メソッドや記法がシンプル
+- async/awaitフレンドリー
+- アウトプットが見やすい
+- `.only` とか `.skip` とか地味に嬉しい感じがした
+
+今のところ不満ないです。
 </script>
 
 
 <script layout="bullets" type="text/x-markdown">
 ## yarn
 
+（この並びで出すのは違和感あるけど、よかったので）
+
 - 速い
 - デフォルトでバージョンロックしてくれる
   - `yarn.lock`
   - バージョンのロックは絶対にしておいたほうがいい
-  - shrinkwrapに色々問題があるとのことなのでこれが一番大きい
+  - npmのshrinkwrapに色々問題があるとのことなので
     - 次のNodeで対応されるみたいな情報を見たかも
-- インターフェイスが適切
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## yarn
+
+- インターフェイスが自然に感じる
   - `npm install hoge -S` -> `yarn add hoge`
   - `npm install -g hoge` -> `yarn global add hoge`
 - yarnのあとに続けて書くとnode_modulesにパスが通った状態で実行できる
@@ -213,13 +261,25 @@ styled-componentsはHTML要素とスタイルをまとめてコンポーネン�
 
 
 <script layout="bullets" type="text/x-markdown">
+  ## 振り返り: 今後変えるかも
+
+  - Redux脱却
+    - プレーンでシンプルなFluxのままカオスをコントロールできないか？
+  - Flow -> TypeScript
+    - エディタでリアルタイムにチェックできないのが結構つらいので
+    - Decoratorもサポートしてほしい。。
+      - 次はESLintを無理やり使うのとの戦いだなあ
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
   ## 技術選定してみて思ったこと
 
   - 迷ったらまず小さいプロジェクトで使って試してみるの大事
-  - 採用基準は人（チーム）による。自分は何を基準にして何を優先したいのかなんとなく言語化しておくと指標になりそう
+  - 採用基準は人（チーム）や状況による。自分は何を基準にして何を優先したいのかなんとなくでも言語化しておくとよさそう
     - 私は情報の多さやエコシステムの大きさを重視する派
   - 解決される問題よりもコストが上回っていると感じたらすぐに見直したほうがいい
-  - 導入前に考えすぎるよりも動かしてみてだめならぱっとやめるほうが効率がよさそう（苦手）
+  - 導入前に考えすぎるよりも、動かしてみてだめならぱっとやめるほうが効率いい（苦手。。）
 </script>
 
 
@@ -227,7 +287,7 @@ styled-componentsはHTML要素とスタイルをまとめてコンポーネン�
   backface="image/goodpatch-bg.png" backface-filter="blur(5px) brightness(.5)" class="goodpatch">
 ### Goodpatchではこんな技術に興味のある<br>フロントエンドエンジニアを募集しています
 
-[www.wantedly.com/projects/16402](https://www.wantedly.com/projects/16402)
+[https://www.wantedly.com/projects/54185](https://www.wantedly.com/projects/54185)
 </script>
 
 
