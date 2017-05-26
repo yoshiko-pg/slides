@@ -10,10 +10,10 @@
 <body>
 
 
-<script layout="cover" invert type="text/x-markdown"
-  backface="image/cover.jpg" backface-filter="blur(2px) brightness(.7)">
-## いまSPAを作るなら
-### 〜Prott2の技術選定のウラガワ〜
+<script layout="cover" invert type="text/x-markdown" backface="image/cover.jpg">
+# いまSPAを<br>つくるなら
+
+\- Prott2の技術選定について -
 
 2017.05.25 [@yoshiko_pg](http://yoshiko-pg.github.io)
 </script>
@@ -28,31 +28,14 @@
 
 よしこ [@yoshiko_pg](https://twitter.com/yoshiko_pg)
 
-Frontend engineer at <a href="http://goodpatch.com/jp"><img src="./image/goodpatch.png" class="company-logo"></a>
+Frontend tech lead at <a href="http://goodpatch.com/jp"><img src="./image/goodpatch.png" class="company-logo"></a>
 </script>
 
 
 <script layout="bullets" type="text/x-markdown">
-プロトタイピングツールPrott
+プロトタイピングツール[Prott](https://prottapp.com/ja/)
 
 今、ゼロからのリニューアル計画が動いています
-</script>
-
-
-<script layout="bullets" type="text/x-markdown">
-## 時を経て積もった負債の数々
-
-- コード
-- DB設計
-- UI
-- 課金プラン
-</script>
-
-
-<script layout="bullets" type="text/x-markdown">
-<blockquote class="twitter-tweet" data-lang="ja"><p lang="ja" dir="ltr">下手だなあカイジくん…！技術的負債の返済の仕方が下手…！カイジくんが本当に欲しいのは、1からの作り直し…！だけどそれはあまりに時間がかかるから、こっちのしょぼいリファクタリングでごまかそうっていうんだ…！</p>&mdash; よーひら (@yohira_dev) <a href="https://twitter.com/yohira_dev/status/864465228246929411">2017年5月16日</a></blockquote>
-
-この道は行かずに済んだ
 </script>
 
 
@@ -64,12 +47,12 @@ Frontend engineer at <a href="http://goodpatch.com/jp"><img src="./image/goodpat
 
 
 <script layout="bullets" type="text/x-markdown">
-## Frontendのアーキテクチャ
+### 採用したフレームワークやツール
 - React
 - Redux
 - Flow
 - styled-components
-- ava
+- AVA
 - yarn
 </script>
 
@@ -81,7 +64,7 @@ Frontend engineer at <a href="http://goodpatch.com/jp"><img src="./image/goodpat
 - 別のツールを使うことになったときに乗り換えやすい
 - ある程度以上に枯れていて、情報量が多い
 - エコシステムが発達している
-- 解決する対象以上の難しさを持ち込まない（このへんReduxちょっと怪しい）
+- 解決する対象以上の難しさを持ち込まない
 
 このへんを意識しています。<br>
 守れているかはケースバイケースというか、メリットが上回れば背いてしまうこともありますが・・・
@@ -93,7 +76,7 @@ Frontend engineer at <a href="http://goodpatch.com/jp"><img src="./image/goodpat
 
 - 最初はAngularを検討
   - 個人で小さいアプリを作ってみて試した
-  - https://yoshiko-pg.github.io/your-name/
+  - https://yoshiko-pg.github.io/your-name/ （今日の名札も！）
 - 使い心地は好きだけどまだ枯れていなくて情報が少ないのと、（当時は）APIの変更が多くて調べる作業が多かったので、大きめのチーム開発に採用して自分が舵取りするのはなかなか難しいかもと判断
 - Reactは枯れているしライブラリも色々あり破壊的変更も少なそう。メジャー＝エンジニア人口も多く採用面でも有利かと判断
 </script>
@@ -110,17 +93,6 @@ Frontend engineer at <a href="http://goodpatch.com/jp"><img src="./image/goodpat
 
 
 <script layout="bullets" type="text/x-markdown">
-## Redux
-
-逃げの選択ではあると思う。<br>
-実際Reduxに乗っかった上での設計にも難儀しているので、いちから組み立てるには到底設計力が足りてなかったなーと思います。<br>
-もっとゼロイチ繰り返して強化したい。
-
-ただ実際に進めていて、必要以上に冗長になっているというか正直めんどいところも見えてきたので、見えてきたメリット/デメリットを踏まえて形を変えていきたい。
-</script>
-
-
-<script layout="bullets" type="text/x-markdown">
 ### Redux - 設計面
 
 - [ReduxでのMiddleware不要論 - Qiita](http://qiita.com/uryyyyyyy/items/d8bae6a7fca1c4732696)
@@ -128,6 +100,28 @@ Frontend engineer at <a href="http://goodpatch.com/jp"><img src="./image/goodpat
 - 一番上の階層だけでなく、適切な単位でContainer Componentを挟んでいる
 - その単位でUsecaseもわけている
   - 一番上でその画面のすべてのリソースを取ってきて分配するより、あるコンポーネントが使うデータはそのコンポーネントが取ってくる形のほうがいいと思う（粒度は考える）
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+### Redux - 使ってみて
+
+- 関数型的なパラダイムの方面へ矯正される感覚がある
+  - 無意識にOOP的な考え方をしてしまうところがあったので
+- 冗長に感じる
+  - ひとつのことをするのに3つ4つのパーツを増やさなければならない
+- 思想を理解せずにレール欲しさで持ち込んでしまった感
+- 解決する対象以上の難しさを持ち込んでしまっているのでは…?
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+### Redux
+
+実際に進めていく中で、必要以上に冗長になっているところも見えてきたので、見えてきたメリット/デメリットを踏まえて形を変えていきたい。
+
+ただ実際Reduxに乗っかった上での設計にも難儀しているので、いちから組み立てるには到底設計力が足りてなかったなーと思います。<br>
+もっとゼロイチ繰り返して強化したい。
 </script>
 
 
@@ -191,11 +185,9 @@ CSSどうするかはなかなか悩ましさがあったけど、今はこれ�
 
 <script layout="bullets" type="text/x-markdown">
 ### デメリット
-- 自身を参照するとき&を使ってしまう（SCSS）
-    - `:host` がいければまだいいかな
-- PostCSSとか挟んだりしてない
-- CSSCombでの並び替えができない
 - パフォーマンス面まだ問題ないけど今後どうか要チェック
+- CSSCombでの並び替えができない
+- PostCSS挟める…？
 
 2.0が出たらしいのでチェックせねば
 </script>
@@ -207,6 +199,27 @@ CSSどうするかはなかなか悩ましさがあったけど、今はこれ�
 React+Reduxでのコンポーネントの粒度はそこまで気にせず、デザインをコーディングする上で必要な１要素ごとにコンポーネント化する。<br>
 ビュー側でそれらを必要に応じてimportし、使う形。<br>
 既存のコンポーネントにスタイルを定義する形ではないので、似たコンポーネントどうする問題が解決される。（同じデザインの箇所だけ同じstyled-componentsを使えばいい）
+</script>
+
+
+<script layout="code" type="text/x-markdown">
+### styled-components - 設計面
+
+AuthBox, Title, Buttonがstyle用のコンポーネント
+
+```
+<!-- SigninComponent -->
+<AuthBox>
+  <Title>Sign in</Title>
+  <SigninForm onSubmit="this.signin"/>
+</AuthBox>
+
+<!-- SignupComponent -->
+<AuthBox>
+  <Title>Sign up</Title>
+  <SignupForm onSubmit="this.signup"/>
+</AuthBox>
+```
 </script>
 
 
@@ -242,6 +255,7 @@ HTML要素とスタイルをまとめてコンポーネント化するので、i
     - 私は情報の多さやエコシステムの大きさを重視する派
   - 解決される問題よりもコストが上回っていると感じたらすぐに見直したほうがいい
   - 導入前に考えすぎるよりも、動かしてみてだめならぱっとやめるほうが効率いい（苦手。。）
+    - 最初から100点の判断なんてできないから、フットワーク軽くいこうぜ！
 </script>
 
 
@@ -253,8 +267,7 @@ HTML要素とスタイルをまとめてコンポーネント化するので、i
 </script>
 
 
-<script layout="cover" invert type="text/x-markdown"
-  backface="image/end.gif" backface-filter="blur(3px) brightness(.4)">
+<script layout="cover" invert type="text/x-markdown" backface="image/cover.jpg">
 # Thank you
 [@yoshiko_pg](http://yoshiko-pg.github.io/)
 </script>
