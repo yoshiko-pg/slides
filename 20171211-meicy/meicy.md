@@ -34,8 +34,21 @@ FOLIO初の社内プロジェクトについてお話しします
   
 MEICY  
   
-`[ここで実際の動きをdemo ※社員情報はダミーに差し替え]`  
-  
+`[ここで実際の動きをdemo ※社員情報はダミーに差し替え]`
+
+## 名刺作成フローの比較
+
+### meicy以前
+
+- 名刺がなくなりそうな人が管理部にその旨を伝える
+- （ここさだこえくんにヒアリング）
+- AIからPDFを書き出し、入稿
+
+### meicy以後
+
+- 名刺がなくなりそうな人が管理部にその旨を伝える
+- 管理部がmeicyでPDFを書き出し、入稿
+
 ## 使用技術  
   
 - Vue.js  
@@ -60,7 +73,7 @@ dpi = dot per inch
 インチと相互変換できる実寸のサイズ（cm, mm）とdpiが決まれば、何px必要なのかわかる  
   
 名刺のサイズは91mm x 55mm （+塗り足し6mmぐらい）  
-91mm x 55mmで350dpiだと1254x758になるpx  
+91mm x 55mmで350dpiだと1254x758pxになる
 名刺部分が1254x758pxになるように画像を書き出せればいけそう  
   
 ## 2. 画像ファイルの書き出し  
@@ -99,16 +112,16 @@ HTML + CSSで再現すればいいならこっちのもんっしょ！
 $mm: 14px;  
   
 .card {  
-position: absolute;  
-width: 91 * $mm;  
-height: 55 * $mm;  
-padding: 5.5 * $mm;  
-border-radius: 2.5 * $mm;  
-transform: scale(0.26);  
-background: no-repeat center center;  
-font-family: URWDIN, MB101;  
-font-size: 2.4 * $mm;  
-line-height: 1;  
+    position: absolute;
+    width: 91 * $mm;
+    height: 55 * $mm;
+    padding: 5.5 * $mm;
+    border-radius: 2.5 * $mm;
+    transform: scale(0.26);
+    background: no-repeat center center;
+    font-family: URWDIN, MB101;
+    font-size: 2.4 * $mm;
+    line-height: 1;
 }  
 ```  
   
@@ -144,11 +157,13 @@ imageMagickに移行
 letter-spacingがちゃんと反映されない問題  
   
 html2canvasの再現度はすごいが、文字間だけはうまくいかなかった  
-optionにletterRendering: trueが必要でした  
+optionにletterRendering: trueが必要でした
+
+## そしてついに
   
   
 完成！！！！！！！！！！！！！！！！！！！  
-デザイナーの工数はゼロ  
+meicyを使ったフローだとデザイナーの工数はゼロ
 管理部のほうで入力できるようになり、とっても楽になりました  
   
 実際にmeicyで出力した名刺を持ってきたので、見てみたい方はあとできてください！  
