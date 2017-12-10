@@ -5,7 +5,7 @@
   <link rel="stylesheet" href="lib/talkie-default.min.css">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="lib/hljs-styles/railscasts.css">
-  <link rel="canonical" href="/slides/TODO: path入れる/">
+  <link rel="canonical" href="/slides/20171211-meicy/">
 </head>
 <body>
 
@@ -18,92 +18,261 @@
 </script>
 
 
-<script layout="bullets" invert type="text/x-markdown"
-  backface="image/bg-profile.png" backface-filter="blur(2px) brightness(.4)">
-
+<script layout="bullets-invert" invert type="text/x-markdown">
 ## 自己紹介
 
 <img src="./image/yoshiko.png" class="yoshiko">
 
 よしこ [@yoshiko_pg](https://twitter.com/yoshiko_pg)
 
-Frontend engineer at <a href="https://folio-sec.com"><img src="./image/folio.png" class="company-logo"></a>
+[HTML5/CSS3 モダンコーディング](https://www.amazon.co.jp/dp/4798141577/) 1万部突破 🎉
 </script>
 
 
-<script layout="bullets" type="text/x-markdown" class="book m0">
-[HTML5/CSS3 モダンコーディング](http://yoshiko.hatenablog.jp/entry/2015/11/02/081237) という本を出しました
-
-[![HTML5/CSS3 モダンコーディング](./image/book.jpg)](http://www.amazon.co.jp/dp/4798141577/)
-
-好評発売中！電子版もあるよ！
+<script layout="bullets" type="text/x-markdown" backface="image/bg-folio.jpg">
 </script>
 
 
 <script layout="bullets" type="text/x-markdown">
-## なんか書く
+## 突然ですが
+
+## 名刺、どうやって作ってますか？
 </script>
 
 
 <script layout="bullets" type="text/x-markdown">
-## なんか書く
+### 今までの名刺作成フロー
+
+- 社内からデザイナーに名刺作成依頼があがる
+- デザイナが社員情報のexcelをチェック
+- 時には情報が入っていないので多方面に確認
+- 社員にどの色がいいか聞く（3色あるので）
+- イラストレーターで社員毎にファイルを作る
+- デザイナ同士で名刺の情報間違えていないか相互チェック
+- 1人の社員ごとに、アウトライン化されたファイルと  
+  される前のファイルを会社の共有フォルダにアップロード
+- Aiファイルを入稿
 </script>
 
 
 <script layout="bullets" type="text/x-markdown">
-## なんか書く
+デザイナー「名刺に工数とられたくない人生だった・・・」
 </script>
 
 
 <script layout="bullets" type="text/x-markdown">
-## なんか書く
+会社「今度引っ越すから全員分の名刺の住所アップデートよろ」  
+デザイナー「むり ^o^」
 </script>
 
 
 <script layout="bullets" type="text/x-markdown">
-## なんか書く
+デザイナー「そうだ！社員情報入れてボタン押したら入稿ファイル出てくるみたいなやつあれば解決じゃん」
 </script>
 
 
 <script layout="bullets" type="text/x-markdown">
-## なんか書く
+→ よしこ入社
+
+デザイナー「かくかくしかじか」  
+よしこ「うーんとりあえずやってみる」
 </script>
 
 
 <script layout="bullets" type="text/x-markdown">
-## なんか書く
+## できた
 </script>
 
 
 <script layout="bullets" type="text/x-markdown">
-## なんか書く
+## DEMO
 </script>
 
 
 <script layout="bullets" type="text/x-markdown">
-## なんか書く
+### MEICYができてからのフロー
+
+- 名刺がなくなりそうな人がMEICYで情報を編集し、PDFを書き出して管理部に送る
+- 管理部が内容をチェックし、入稿
+
+**最高に楽**
 </script>
 
 
 <script layout="bullets" type="text/x-markdown">
-## なんか書く
+### 使用技術
+
+- Vue.js
+- Flow
+- Docker
+- Rails (API)
 </script>
 
 
 <script layout="bullets" type="text/x-markdown">
-## なんか書く
+## 大変だったことをいくつか紹介します
 </script>
 
 
 <script layout="bullets" type="text/x-markdown">
-## なんか書く
+## 1. 解像度
 </script>
-
 
 <script layout="bullets" type="text/x-markdown">
-## なんか書く
+一番最初に思ったこと：  
+「Webベースでやるとしたら、解像度足りんのかな…」
+
+Webで使うような画像の解像度はだいたい72dpi  
+印刷用データの解像度はだいたい350dpi以上
+
+*※ dpi = dot per inch。1インチにいくつのドットを入れて表示するか？という値*
 </script>
 
+<script layout="bullets" type="text/x-markdown">
+まずは必要なpxサイズを計算  
+印刷物のmmサイズとdpiが決まれば、何px必要なのかわかる
+
+名刺のサイズは91mm x 55mm  
+91mm x 55mmで350dpiだと1254x758pxになる  
+
+名刺部分が1254x758pxになるように画像を書き出せればいけそう
+</script>
+
+<script layout="bullets" type="text/x-markdown">
+## 2. 画像ファイルの書き出し
+</script>
+
+<script layout="bullets" type="text/x-markdown">
+AIファイルをエクスポートとかだと無理だけど、  
+幸いPDF入稿が可能な印刷所だったため形式はPDFでOK
+
+WebフロントエンドだけでどうやってPDFを書き出すか？  
+ここは個人的に何度もやったことがあって知見があった  
+（[Prott画面遷移図](https://blog.prottapp.com/post/ja/interaction-map-beta)、[参加者の名は。](https://yoshiko-pg.github.io/your-name/)）
+</script>
+
+<script layout="bullets" type="text/x-markdown">
+### 流れ
+
+- 名刺部分をブラウザ上でレンダリング（= CSS使える）
+- html2canvasでcanvas化
+- toDataUrlでJPGにしたものを、印刷所配布のテンプレートのJPGの上に配置
+- jspdfでPDF化
+
+HTML + CSSで再現すればいいならこっちのもんっしょ！  
+名刺データはテキスト中心だしよゆーよゆー
+</script>
+
+<script layout="bullets" type="text/x-markdown">
+## 3. プレビューサイズと書き出しサイズの乖離
+</script>
+
+<script layout="bullets" type="text/x-markdown">
+せっかくWebアプリだし、画像を書き出す前にリアルタイムプレビューしたい  
+
+プレビュー: 横400pxぐらい（1画面に表裏並べるので）  
+書き出し: 1254x758
+
+プレビューと書き出しでサイズを切り替えなければ...  
+でもプレビュー用の要素と書き出し用の要素それぞれ作るのは絶対イヤだ！！  
+変更あったときそれぞれ修正しなきゃいけないしめんどくさすぎる！！！
+</script>
+
+<script layout="bullets" type="text/x-markdown">
+## 解決策
+
+- まず書き出し用の1254x758でコーディング
+- プレビューのときには `transform: scale(0.26);` で縮小
+
+プレビューと書き出し用の要素が同じなので保守性も上がる
+</script>
+
+<!--<script layout="code" type="text/x-markdown">-->
+<!--```scss-->
+<!--$mm: 14px;-->
+
+<!--.card {-->
+  <!--width: 91 * $mm;-->
+  <!--height: 55 * $mm;-->
+  <!--padding: 5.5 * $mm;-->
+  <!--border-radius: 2.5 * $mm;-->
+  <!--font-size: 2.4 * $mm;-->
+  <!--transform: scale(0.26);-->
+<!--}-->
+<!--```-->
+
+<!--こんなファイルができるようになりました〜（PDFを見せる）-->
+<!--</script>-->
+
+<!--<script layout="bullets" type="text/x-markdown">-->
+
+<!--## 4. フォント-->
+
+<!--jspdfはいくつかのフォントを勝手に埋め込んでしまうらしく、そのフォントがインストールされていないので開けないと印刷所から連絡-->
+<!--JPGにしてからPDFにしてるから一度も文字使ってないのに！！！-->
+<!--内部のコードを見ると、初期化の中でaddFontしておりだめだこりゃ-->
+<!--</script>-->
+
+<script layout="bullets" type="text/x-markdown">
+## 4. 解像度（2回目）
+
+<!--フォント情報を手で取り除き再送。待ってる間にForkして直してPRでもだそうかと思ったら-->
+
+ついにPDFが完成！やっと印刷所に入稿してみると・・・
+
+印刷所「サイズ大きすぎるんですが 😡」
+
+どうやら1254x758px（72dpiだと442x267mm）で書き出したものを350dpi（91mmx51mm）として読み込んでもらうつもりが、dpi変換がされず442x267mmとして読み込まれてしまっているらしい  
+ちゃんと350dpiのファイルを送らないといけなさそう。。。  
+</script>
+
+<script layout="bullets" type="text/x-markdown">
+しかし調べても出力する画像の解像度をフロントエンドだけで変更する方法は見つからず。    
+jspdfで縮小してから書き出すと線がガタガタに。。  
+
+「これはもうアレしかないな…」
+</script>
+
+<script layout="bullets" type="text/x-markdown">
+## imageMagickに移行
+
+jpg → PDF の変換をjspdfではなくImageMagickですることに。
+
+`convert -density 350 -quality 100 path/to/before.jpg path/to/after.pdf`
+
+densityが解像度、qualityが画質。うまくいった 🎉🎉🎉
+
+サーバーサイドの処理になるので、ruby-imagemagickのimageでさくっと。  
+ImageMagickの環境構築は泥沼なイメージがあったけど、簡単にできました。Docker最高！
+</script>
+
+<script layout="bullets" type="text/x-markdown">
+
+## 6. letter-spacing
+
+最後に、なぜか出力後のPDFにletter-spacingがちゃんと反映されていない問題
+
+html2canvasの再現度はすごいが、文字間だけがうまくいかず。。。  
+optionに `letterRendering: true` が必要でした 😇
+</script>
+
+<script layout="bullets" type="text/x-markdown">
+## そしてついに
+
+### 完成！！！！！！！！！！！！！！！！！！！  
+
+MEICYを使ったフローで、デザイナーの工数はゼロに。  
+名刺に工数を割かれない人生を歩めるようになりました。  
+
+実際にMEICYで出力した名刺を持ってきたので、  
+気になる方はあとで声をかけてください 🙆
+</script>
+
+<!--<script layout="bullets" type="text/x-markdown">-->
+<!--ついでに顔写真つき社員名簿もつくったよ-->
+
+<!--おわり-->
+<!--</script>-->
 
 <script layout="cover" invert type="text/x-markdown"
   backface="image/end.gif" backface-filter="blur(3px) brightness(.4)">
@@ -112,22 +281,10 @@ Frontend engineer at <a href="https://folio-sec.com"><img src="./image/folio.png
 </script>
 
 
-<script layout="bullets-invert" type="text/x-markdown">
-# おまけ
-</script>
-
-
-<script layout="bullets-invert" type="text/x-markdown">
-## なんか書く
-</script>
-
-
-
-
 <script src="lib/highlight.min.js"></script>
 <script src="lib/talkie.min.js"></script>
 <script>
-Talkie();
+Talkie({ wide: true });
 
 // リンクは別タブ
 var i, links = document.querySelectorAll("a[href^='http']")
