@@ -160,46 +160,42 @@ Webで使うような画像の解像度はだいたい72dpi
 名刺部分が1254x758pxになるように画像を書き出せればいけそう
 </script>
 
-<!--<script layout="bullets" type="text/x-markdown">-->
-<!--## 3. プレビューサイズと書き出しサイズの乖離-->
-<!--</script>-->
+<script layout="bullets" type="text/x-markdown">
+## プレビューサイズと書き出しサイズの乖離
 
-<!--<script layout="bullets" type="text/x-markdown">-->
-<!--せっかくWebアプリだし、画像を書き出す前にリアルタイムプレビューしたい  -->
+せっかくWebアプリだし、画像を書き出す前にリアルタイムプレビューしたい  
 
-<!--プレビュー: 横400pxぐらい（1画面に表裏並べるので）  -->
-<!--書き出し: 1254x758-->
+プレビュー: 横400pxぐらい（1画面に表裏並べるので）  
+書き出し: 1254x758
 
-<!--プレビューと書き出しでサイズを切り替えなければ...  -->
-<!--でもプレビュー用の要素と書き出し用の要素それぞれ作るのは絶対イヤだ！！  -->
-<!--変更あったときそれぞれ修正しなきゃいけないしめんどくさすぎる！！！-->
-<!--</script>-->
+プレビューと書き出しでサイズを切り替えなければ...  
+でもプレビュー用の要素と書き出し用の要素それぞれ作るのは絶対イヤだ！！  
+変更あったときそれぞれ修正しなきゃいけないしめんどくさすぎる！！！
+</script>
 
-<!--<script layout="bullets" type="text/x-markdown">-->
-<!--## 解決策-->
+<script layout="bullets" type="text/x-markdown">
+## 解決策
 
-<!-- - まず書き出し用の1254x758でコーディング-->
-<!-- - プレビューのときには `transform: scale(0.26);` で縮小-->
+ - まず書き出し用の1254x758でコーディング
+ - プレビューのときには `transform: scale(0.26);` で縮小
 
-<!--プレビューと書き出し用の要素が同じなので保守性も上がる-->
-<!--</script>-->
+プレビューと書き出し用の要素が同じなので保守性も上がる
+</script>
 
-<!--<script layout="code" type="text/x-markdown">-->
-<!--```scss-->
-<!--$mm: 14px;-->
+<script layout="code" type="text/x-markdown">
+```scss
+$mm: 14px; // 350dpiで1mmは約14px
 
-<!--.card {-->
-  <!--width: 91 * $mm;-->
-  <!--height: 55 * $mm;-->
-  <!--padding: 5.5 * $mm;-->
-  <!--border-radius: 2.5 * $mm;-->
-  <!--font-size: 2.4 * $mm;-->
-  <!--transform: scale(0.26);-->
-<!--}-->
-<!--```-->
-
-<!--こんなファイルができるようになりました〜（PDFを見せる）-->
-<!--</script>-->
+.card {
+  width: 91 * $mm;
+  height: 55 * $mm;
+  padding: 5.5 * $mm;
+  border-radius: 2.5 * $mm;
+  font-size: 2.4 * $mm;
+  transform: scale(0.26);
+}
+```
+</script>
 
 <!--<script layout="bullets" type="text/x-markdown">-->
 
@@ -209,6 +205,9 @@ Webで使うような画像の解像度はだいたい72dpi
 <!--JPGにしてからPDFにしてるから一度も文字使ってないのに！！！-->
 <!--内部のコードを見ると、初期化の中でaddFontしておりだめだこりゃ-->
 <!--</script>-->
+
+<script layout="cover" invert type="text/x-markdown" backface="image/demo.jpg">
+</script>
 
 <script layout="bullets" type="text/x-markdown">
 <!--フォント情報を手で取り除き再送。待ってる間にForkして直してPRでもだそうかと思ったら-->
