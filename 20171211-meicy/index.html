@@ -44,12 +44,12 @@
 ### 今までの名刺作成フロー
 
 - 社内からデザイナーに名刺作成依頼があがる
-- デザイナが社員情報のexcelをチェック
-- 時には情報が入っていないので多方面に確認
-- 社員にどの色がいいか聞く（3色あるので）
-- イラストレーターで社員毎にファイルを作る
-- デザイナ同士で名刺の情報間違えていないか相互チェック
-- 1人の社員ごとに、アウトライン化されたファイルと  
+- デザイナーが社員情報のExcelをチェック
+- 時には情報が入っていないので各方面に確認
+- 社員にどの色がいいか聞く（白・黒・青があるので）
+- Illustratorで社員毎にファイルを作る
+- デザイナー同士で名刺の情報が間違っていないか相互チェック
+- 社員ごとにアウトライン化されたファイルと  
   される前のファイルを会社の共有フォルダにアップロード
 - Aiファイルを入稿
 </script>
@@ -102,7 +102,7 @@
 
 
 <script layout="bullets" type="text/x-markdown">
-### 使用技術
+## 使用技術
 
 - Vue.js
 - Flow
@@ -111,40 +111,13 @@
 </script>
 
 
-<script layout="bullets" type="text/x-markdown">
-## 大変だったことをいくつか紹介します
-</script>
-
-
-<script layout="bullets" type="text/x-markdown">
-## 1. 解像度
-</script>
+<!--<script layout="bullets" type="text/x-markdown">-->
+<!--## 大変だった点をいくつか紹介します-->
+<!--</script>-->
 
 <script layout="bullets" type="text/x-markdown">
-一番最初に思ったこと：  
-「Webベースでやるとしたら、解像度足りんのかな…」
+## PDFファイルの書き出し
 
-Webで使うような画像の解像度はだいたい72dpi  
-印刷用データの解像度はだいたい350dpi以上
-
-*※ dpi = dot per inch。1インチにいくつのドットを入れて表示するか？という値*
-</script>
-
-<script layout="bullets" type="text/x-markdown">
-まずは必要なpxサイズを計算  
-印刷物のmmサイズとdpiが決まれば、何px必要なのかわかる
-
-名刺のサイズは91mm x 55mm  
-91mm x 55mmで350dpiだと1254x758pxになる  
-
-名刺部分が1254x758pxになるように画像を書き出せればいけそう
-</script>
-
-<script layout="bullets" type="text/x-markdown">
-## 2. 画像ファイルの書き出し
-</script>
-
-<script layout="bullets" type="text/x-markdown">
 AIファイルをエクスポートとかだと無理だけど、  
 幸いPDF入稿が可能な印刷所だったため形式はPDFでOK
 
@@ -166,28 +139,50 @@ HTML + CSSで再現すればいいならこっちのもんっしょ！
 </script>
 
 <script layout="bullets" type="text/x-markdown">
-## 3. プレビューサイズと書き出しサイズの乖離
+## 解像度問題
+
+話を聞いて一番最初に思ったこと：  
+「Webベースでやるとしたら、解像度足りんのかな…」
+
+Webで使うような画像の解像度はだいたい72dpi  
+印刷用データの解像度はだいたい350dpi以上
+
+*※ dpi = dot per inch。1インチにいくつのドットを入れて表示するか？という値*
 </script>
 
 <script layout="bullets" type="text/x-markdown">
-せっかくWebアプリだし、画像を書き出す前にリアルタイムプレビューしたい  
+まずは必要なpxサイズを計算  
+印刷物のmmサイズとdpiが決まれば、何px必要なのかわかる
 
-プレビュー: 横400pxぐらい（1画面に表裏並べるので）  
-書き出し: 1254x758
+名刺のサイズは91mm x 55mm  
+91mm x 55mmで350dpiだと1254x758pxになる  
 
-プレビューと書き出しでサイズを切り替えなければ...  
-でもプレビュー用の要素と書き出し用の要素それぞれ作るのは絶対イヤだ！！  
-変更あったときそれぞれ修正しなきゃいけないしめんどくさすぎる！！！
+名刺部分が1254x758pxになるように画像を書き出せればいけそう
 </script>
 
-<script layout="bullets" type="text/x-markdown">
-## 解決策
+<!--<script layout="bullets" type="text/x-markdown">-->
+<!--## 3. プレビューサイズと書き出しサイズの乖離-->
+<!--</script>-->
 
-- まず書き出し用の1254x758でコーディング
-- プレビューのときには `transform: scale(0.26);` で縮小
+<!--<script layout="bullets" type="text/x-markdown">-->
+<!--せっかくWebアプリだし、画像を書き出す前にリアルタイムプレビューしたい  -->
 
-プレビューと書き出し用の要素が同じなので保守性も上がる
-</script>
+<!--プレビュー: 横400pxぐらい（1画面に表裏並べるので）  -->
+<!--書き出し: 1254x758-->
+
+<!--プレビューと書き出しでサイズを切り替えなければ...  -->
+<!--でもプレビュー用の要素と書き出し用の要素それぞれ作るのは絶対イヤだ！！  -->
+<!--変更あったときそれぞれ修正しなきゃいけないしめんどくさすぎる！！！-->
+<!--</script>-->
+
+<!--<script layout="bullets" type="text/x-markdown">-->
+<!--## 解決策-->
+
+<!-- - まず書き出し用の1254x758でコーディング-->
+<!-- - プレビューのときには `transform: scale(0.26);` で縮小-->
+
+<!--プレビューと書き出し用の要素が同じなので保守性も上がる-->
+<!--</script>-->
 
 <!--<script layout="code" type="text/x-markdown">-->
 <!--```scss-->
@@ -216,8 +211,6 @@ HTML + CSSで再現すればいいならこっちのもんっしょ！
 <!--</script>-->
 
 <script layout="bullets" type="text/x-markdown">
-## 4. 解像度（2回目）
-
 <!--フォント情報を手で取り除き再送。待ってる間にForkして直してPRでもだそうかと思ったら-->
 
 ついにPDFが完成！やっと印刷所に入稿してみると・・・
@@ -248,15 +241,14 @@ densityが解像度、qualityが画質。うまくいった 🎉🎉🎉
 ImageMagickの環境構築は泥沼なイメージがあったけど、簡単にできました。Docker最高！
 </script>
 
-<script layout="bullets" type="text/x-markdown">
+<!--<script layout="bullets" type="text/x-markdown">-->
+<!--## 6. letter-spacing-->
 
-## 6. letter-spacing
+<!--最後に、なぜか出力後のPDFにletter-spacingがちゃんと反映されていない問題-->
 
-最後に、なぜか出力後のPDFにletter-spacingがちゃんと反映されていない問題
-
-html2canvasの再現度はすごいが、文字間だけがうまくいかず。。。  
-optionに `letterRendering: true` が必要でした 😇
-</script>
+<!--html2canvasの再現度はすごいが、文字間だけがうまくいかず。。。  -->
+<!--optionに `letterRendering: true` が必要でした 😇-->
+<!--</script>-->
 
 <script layout="bullets" type="text/x-markdown">
 ## そしてついに
