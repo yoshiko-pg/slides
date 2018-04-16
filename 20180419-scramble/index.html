@@ -1,0 +1,270 @@
+<html>
+<head>
+  <title>SPAにおけるCSSについて、もうひとつの解 - @yoshiko_pg</title>
+  <link rel="stylesheet" href="lib/talkie.min.css">
+  <link rel="stylesheet" href="lib/talkie-default.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="lib/hljs-styles/railscasts.css">
+  <link rel="canonical" href="/slides/20180419-scramble/">
+</head>
+<body>
+
+
+<script layout="cover" invert type="text/x-markdown"
+  backface="image/cover.jpg" backface-filter="blur(2px) brightness(.7)">
+# SPAにおけるCSSについて、もうひとつの解
+
+2018.04.19 [@yoshiko_pg](http://yoshiko-pg.github.io)
+</script>
+
+
+<script layout="bullets" invert type="text/x-markdown"
+  backface="image/bg-profile.png" backface-filter="blur(2px) brightness(.4)">
+
+## 自己紹介
+
+<img src="./image/yoshiko.png" class="yoshiko">
+
+よしこ [@yoshiko_pg](https://twitter.com/yoshiko_pg)
+
+FOLIO 10ヶ月目
+</script>
+
+
+<script layout="bullets" type="text/x-markdown" class="book m0">
+[HTML5/CSS3 モダンコーディング](http://yoshiko.hatenablog.jp/entry/2015/11/02/081237) という本を出しました
+
+[![HTML5/CSS3 モダンコーディング](./image/book.jpg)](http://www.amazon.co.jp/dp/4798141577/)
+
+好評発売中！電子版もあるよ！
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+1年前にこんなブログを書きました
+
+[SPAにおけるCSSについて、ひとつの解](http://yoshiko.hatenablog.jp/entry/css-in-js)
+
+今日はFOLIOのアーキテクチャ刷新にて<br>
+これと違うアプローチで<br> 同じことを目指した話をします
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+  ## 今日話すこと
+
+  - 既存のCSSコードの問題点
+  - チームの特徴を踏まえた技術選定
+  - やってみて実際どうよ？
+</script>
+
+
+<script layout="bullets-invert" invert type="text/x-markdown">
+## 既存のCSSコードの問題点
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+## CSSつらみあるある
+
+- すべてがグローバル
+- (Old Browserも対象だと)変数が使えない
+- スタイルのまとまりを扱う方法がないので繰り返しが多く冗長になる
+- media queryとか同じクエリ毎回書くのめんどい
+</script>
+
+
+<script layout="bullets" type="text/x-markdown"
+        backface="image/sass.png" backface-filter="brightness(1.4) opacity(0.2)">
+## 今までどうしていたか
+
+SCSS + BEM
+
+- グローバルな世界からBEMでスコープを切る
+- SCSSで変数や便利な関数が使い放題
+- よく使うスタイルセットはmixinとして関数化
+- mixinのincludesでmedia queryも簡単
+</script>
+
+<script layout="bullets" invert type="text/x-markdown"
+        backface="image/sass-code.png" backface-filter="">
+</script>
+
+<script layout="bullets" type="text/x-markdown">
+## 甘い話には裏がある
+</script>
+
+
+<script layout="bullets-invert" invert type="text/x-markdown"
+        backface="image/sass.png" backface-filter="brightness(0.4) opacity(0.4)">
+# 裏を返せば
+
+- BEMは便利だけど命名コストが結構かかる
+  - クラスが長くなるのでviewも煩雑になりがち
+- ネストや変数やmixin、便利だけど、標準じゃなくない？
+  - 気づけばがっつりロックイン
+- あちらこちらで複雑に絡み合うmixinとextends
+  - 1行変えるだけですごい範囲に影響が出そう
+- このクラス消していいの？問題
+  - viewにクラスがそのまま書かれているとは限らないので消せない
+</script>
+
+<!--
+
+# 問題点
+
+- すべてのクラスがグローバル
+  - BEMで衝突回避していたが、命名が大変
+- 複雑に絡み合うmixinとextends
+  - 1行変えるだけですごい範囲に影響が出そう
+  - → 足すことしかできなくなる
+- このクラス消していいの？問題
+  - viewにクラスがそのまま書かれているとは限らないので消せない
+  - → 足すことしかできなくなる
+- 標準外のsyntax
+  - ネスト, includes, extends, mixin, などなど
+  - Sassにがっちりロックイン
+  - CSSで十分な時代になっても戻れないコードになっている
+
+-->
+
+
+<script layout="bullets" type="text/x-markdown">
+  ガイドラインもあって美意識持って書かれており、BEMでスコープもわかれていてわりかし綺麗だったものの、<br>
+  便利な機能を使いすぎ・DRYにしすぎ・複雑にしすぎでコード同士がかなり密になっており、壊れることを恐れて付け足すことしかできなくなっていた
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+  # 解決しよう！
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+  ## 💅 styled-component
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+  # ちょっとまって
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+  （FOLIOでは）CSSはフロントエンドエンジニアだけが書くものではない
+</script>
+
+
+<script layout="bullets" type="text/x-markdown">
+  使うチームの事情抜きに技術選定はできない
+</script>
+
+<script layout="code" type="text/x-markdown">
+標準でもないのにこれ覚えてもらう…？
+
+```js
+const Button = styled.button`
+  color: ${props =>
+    props.primary ? 'white' : 'blue'};
+  border: 2px solid ${COLOR.MAIN};
+  border-radius: 3px;
+`;
+```
+</script>
+
+<script layout="bullets" type="text/x-markdown">
+CSS in JSにはJSの知識が必要
+
+- 変数宣言
+- Template literal
+- Arrow function
+- props
+
+ほかにもたくさん
+</script>
+
+<script layout="bullets" type="text/x-markdown">
+### でもstyled-componentで得られた以下は得たい
+
+- コンポーネントごとにスコープが切られる
+- JSとCSSで値を共有できる
+- そのスタイルがどこで利用されているのか把握できる
+- スタイルのsyntaxが標準のCSSから乖離しない
+- エディタからCSSと同等のサポートを受けられる
+  - （syntax highlightや補完など）
+- JSが特定のツールに依存せずvalidである
+</script>
+
+<script layout="bullets" type="text/x-markdown">
+### JSの学習コストを剥がすとなると、<br>CSSに寄せるしかない
+
+- ✗: コンポーネントごとにスコープが切られる
+- ✗: JSとCSSで値を共有できる
+- ✗: そのスタイルがどこで利用されているのか把握できる
+- ○: スタイルのsyntaxが標準のCSSから乖離しない
+- ○: エディタからCSSと同等のサポートを受けられる
+- ○: JSが特定のツールに依存せずvalidである
+</script>
+
+<script layout="bullets" type="text/x-markdown">
+### CSS Modulesを使えば…？
+
+- ○: コンポーネントごとにスコープが切られる
+- ✗: JSとCSSで値を共有できる
+- ○: そのスタイルがどこで利用されているのか把握できる
+- ○: スタイルのsyntaxが標準のCSSから乖離しない
+- ○: エディタからCSSと同等のサポートを受けられる
+- ✗: JSが特定のツールに依存せずvalidである
+</script>
+
+<script layout="bullets" type="text/x-markdown">
+### PostCSSでcustom propertiesを使えば…？
+
+- ○: コンポーネントごとにスコープが切られる
+- ○: JSとCSSで値を共有できる
+- ○: そのスタイルがどこで利用されているのか把握できる
+- ○: スタイルのsyntaxが標準のCSSから乖離しない
+- ○: エディタからCSSと同等のサポートを受けられる
+- ✗: JSが特定のツールに依存せずvalidである
+</script>
+
+<script layout="bullets" type="text/x-markdown">
+## React + CSS ModulesでComponentごとのスコープをつくりだす
+</script>
+
+<script layout="bullets" type="text/x-markdown">
+サンプル
+</script>
+
+<script layout="cover" invert type="text/x-markdown"
+  backface="image/end.gif" backface-filter="blur(3px) brightness(.4)">
+# Thank you
+[@yoshiko_pg](http://yoshiko-pg.github.io/)
+</script>
+
+
+<script layout="bullets-invert" type="text/x-markdown">
+# おまけ
+</script>
+
+
+<script layout="bullets-invert" type="text/x-markdown">
+## なんか書く
+</script>
+
+
+
+
+<script src="lib/highlight.min.js"></script>
+<script src="lib/talkie.min.js"></script>
+<script>
+Talkie();
+
+// リンクは別タブ
+var i, links = document.querySelectorAll("a[href^='http']")
+for(i=0; i<links.length; i++) {
+  links[i].setAttribute('target', '_blank');
+}
+</script>
+</body>
+</html>
