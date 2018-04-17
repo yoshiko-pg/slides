@@ -61,27 +61,30 @@ FOLIO 10ヶ月目
 
 <script layout="bullets-invert" invert type="text/x-markdown">
 ## 既存のCSSコードの問題点
+
+の前に
 </script>
 
 
 <script layout="bullets" type="text/x-markdown">
-## CSSつらみあるある
+## 一般的CSSつらみあるある
 
 - すべてがグローバル
 - (Old Browserも対象だと)変数が使えない
-- スタイルのまとまりを扱う方法がないので繰り返しが多く冗長になる
+- セレクタやスタイルのまとまりを扱う方法がないので繰り返しが多く冗長になる
 - media queryとか同じクエリ毎回書くのめんどい
 </script>
 
 
 <script layout="bullets" type="text/x-markdown"
         backface="image/sass.png" backface-filter="brightness(1.4) opacity(0.2)">
-## 今までどうしていたか
+## 既存コードでの解決策
 
 SCSS + BEM
 
 - グローバルな世界からBEMでスコープを切る
 - SCSSで変数や便利な関数が使い放題
+- ネストでセレクタも繰り返し書かなくてよし
 - よく使うスタイルセットはmixinとして関数化
 - mixinのincludesでmedia queryも簡単
 </script>
@@ -97,16 +100,17 @@ SCSS + BEM
 
 <script layout="bullets-invert" invert type="text/x-markdown"
         backface="image/sass.png" backface-filter="brightness(0.4) opacity(0.4)">
-# 裏を返せば
+## 裏を返せば
 
-- BEMは便利だけど命名コストが結構かかる
+- BEMは良い手法だが、限界も出てきていた
+  - BlockとComponentの粒度が合っておらず、使い回しに弊害が
   - クラスが長くなるのでviewも煩雑になりがち
 - ネストや変数やmixin、便利だけど、標準じゃなくない？
-  - 気づけばがっつりロックイン
+  - 気づけばSassにがっつりロックイン
 - あちらこちらで複雑に絡み合うmixinとextends
   - 1行変えるだけですごい範囲に影響が出そう
 - このクラス消していいの？問題
-  - viewにクラスがそのまま書かれているとは限らないので消せない
+  - CSS/Viewにクラスがまるごと書かれているとは限らないので消せない
 </script>
 
 <!--
@@ -132,16 +136,21 @@ SCSS + BEM
 <script layout="bullets" type="text/x-markdown">
   ガイドラインもあって美意識持って書かれており、BEMでスコープもわかれていてわりかし綺麗だったものの、<br>
   便利な機能を使いすぎ・DRYにしすぎ・複雑にしすぎでコード同士がかなり密になっており、壊れることを恐れて付け足すことしかできなくなっていた
+
+  *プロダクトの歴史を支えてきた既存コードを貶す気はないが、運用に痛みがあったのは確か*
 </script>
 
 
-<script layout="bullets" type="text/x-markdown">
+<script layout="bullets-invert" invert type="text/x-markdown">
   # 解決しよう！
 </script>
 
 
 <script layout="bullets" type="text/x-markdown">
   ## 💅 styled-component
+
+
+  [がいいんでしょ？](http://yoshiko.hatenablog.jp/entry/css-in-js)
 </script>
 
 
@@ -152,11 +161,16 @@ SCSS + BEM
 
 <script layout="bullets" type="text/x-markdown">
   （FOLIOでは）CSSはフロントエンドエンジニアだけが書くものではない
+
+  *FOLIOのCSSを支えてきたのはdesignersです*<br>
+  *さくっと表示崩れ直したりデザイン実装手伝ってくれるの助かる〜*
 </script>
 
 
 <script layout="bullets" type="text/x-markdown">
-  使うチームの事情抜きに技術選定はできない
+  技術は誰かが使うもの
+
+  使う人・使うチームの考慮をせずに技術選定はできない
 </script>
 
 <script layout="code" type="text/x-markdown">
@@ -175,6 +189,8 @@ const Button = styled.button`
 <script layout="bullets" type="text/x-markdown">
 CSS in JSにはJSの知識が必要
 
+さっきのだけでも
+
 - 変数宣言
 - Template literal
 - Arrow function
@@ -186,19 +202,20 @@ CSS in JSにはJSの知識が必要
 <script layout="bullets" type="text/x-markdown">
 ### でもstyled-componentで得られた以下は得たい
 
-- コンポーネントごとにスコープが切られる
-- JSとCSSで値を共有できる
-- そのスタイルがどこで利用されているのか把握できる
-- スタイルのsyntaxが標準のCSSから乖離しない
-- エディタからCSSと同等のサポートを受けられる
-  - （syntax highlightや補完など）
-- JSが特定のツールに依存せずvalidである
+- ○: ローカルスコープを切れる
+- ○: JSとCSSで値を共有できる
+- ○: そのスタイルがどこで利用されているのか把握できる
+- △: スタイルのsyntaxが標準のCSSから乖離しない
+- △: エディタからCSSと同等のサポートを受けられる
+- ○: JSが特定のツールに依存せずvalidである
 </script>
 
 <script layout="bullets" type="text/x-markdown">
 ### JSの学習コストを剥がすとなると、<br>CSSに寄せるしかない
 
-- ✗: コンポーネントごとにスコープが切られる
+生CSSだとこんな感じ
+
+- ✗: ローカルスコープを切れる
 - ✗: JSとCSSで値を共有できる
 - ✗: そのスタイルがどこで利用されているのか把握できる
 - ○: スタイルのsyntaxが標準のCSSから乖離しない
@@ -209,7 +226,7 @@ CSS in JSにはJSの知識が必要
 <script layout="bullets" type="text/x-markdown">
 ### CSS Modulesを使えば…？
 
-- ○: コンポーネントごとにスコープが切られる
+- ○: ローカルスコープを切れる
 - ✗: JSとCSSで値を共有できる
 - ○: そのスタイルがどこで利用されているのか把握できる
 - ○: スタイルのsyntaxが標準のCSSから乖離しない
@@ -220,40 +237,125 @@ CSS in JSにはJSの知識が必要
 <script layout="bullets" type="text/x-markdown">
 ### PostCSSでcustom propertiesを使えば…？
 
-- ○: コンポーネントごとにスコープが切られる
+- ○: ローカルスコープを切れる
 - ○: JSとCSSで値を共有できる
 - ○: そのスタイルがどこで利用されているのか把握できる
 - ○: スタイルのsyntaxが標準のCSSから乖離しない
 - ○: エディタからCSSと同等のサポートを受けられる
 - ✗: JSが特定のツールに依存せずvalidである
+
+（うちでは対象ブラウザの関係上断念 😢）
+</script>
+
+<script layout="bullets-invert" invert type="text/x-markdown">
+## 今回はこれでいってみよう！
+</script>
+
+<script layout="code" type="text/x-markdown">
+  ```js
+  import styles from './Button.css'
+
+  const Button = ({ type }) => (
+    <button className={classNames(
+      styles.button, // 'Button--button--4fc32d'
+      { [styles.primary]: type === 'primary'}
+    )}>
+      {children}
+    </button>
+  )
+  ```
+
+  ```css
+  .button {
+    border: 2px solid var(--color-main);
+    border-radius: 3px;
+  }
+  .button.primary {
+    color: white;
+  }
+  ```
 </script>
 
 <script layout="bullets" type="text/x-markdown">
-## React + CSS ModulesでComponentごとのスコープをつくりだす
+### React×CSS Modulesでのscoped CSS
+
+- Componentに閉じたViewとCSSを一対一で書ける、AngularやVueに似た書き味
+- CSSは完全にValid CSS
+  - CSS+Shadow DOMで十分になったときいつでも乗り換え可能
+  - PrettierやPostCSSが完璧に効くのでformatは丸投げ楽ちん
+- JSはwebpack依存だがクラス部分は静的に置換可能
+</script>
+
+<script layout="bullets-invert" invert type="text/x-markdown">
+### 既存の密結合スタイルから脱出するポイント
+
+**使い回す単位はスタイルのセットではなくComponent**
+
+mixinやスタイル宣言したものをincludesやextendsで使い回すのではなく、その使いまわしたい粒度のComponentを作り、それを使い回す<br>
+→ スタイルのセットと違ってどこかでだけ部分的に上書きされてたみたいなことがないのでこんがらがりにくい
+</script>
+
+<script layout="code" type="text/x-markdown">
 </script>
 
 <script layout="bullets" type="text/x-markdown">
-サンプル
+### 本当につらみはないの？
+
+ビルドにすべての汚さを押し付けている感はある<br>
+あとSSRしてるとビルド設定がとてもめんどい
+
+SSR -> babel-plugin-css-modules-transform<br>
+CSR -> css-loader + ExtractTextPlugin
+
+タスク実行時にBABEL_ENVを指定してSSRのときだけ↑のpluginがあたるようにとかしないといけない
 </script>
 
-<script layout="cover" invert type="text/x-markdown"
-  backface="image/end.gif" backface-filter="blur(3px) brightness(.4)">
-# Thank you
-[@yoshiko_pg](http://yoshiko-pg.github.io/)
+<script layout="bullets-invert" invert type="text/x-markdown">
+## 強調しておきたいこと
 </script>
 
+<script layout="bullets" type="text/x-markdown">
+## 強調しておきたいこと
 
-<script layout="bullets-invert" type="text/x-markdown">
-# おまけ
+  - styled-componentsもCSS Modulesも<br>View+JSのComponentの世界にCSSも適応させるための**手段**
+  - そのプロダクトのスタイリングで実現したいことは何か？<br>その中で何を最優先したいか？をはっきり決めることが最重要<br>具体的な手段はその目的を実現できるものを選べばよい
 </script>
 
+<script layout="bullets" type="text/x-markdown">
+  ## 今回実現したかったこと
 
-<script layout="bullets-invert" type="text/x-markdown">
-## なんか書く
+  - Component粒度と対応したローカルスコープ
+  - デザイナーもCSSを書くのでJS構文の知識は極力要求したくない
+  - CSSの構文から乖離した構文は使いたくない（乗り換えづらい）
+    - 変数とかは欲しいが未来のCSSの構文で書いていきたい
+  - どこでどのスタイルを使っているかは明確であってほしい
+
+
+  これらすべてを実現できるのがCSS Modulesだった
 </script>
 
+<script layout="bullets" type="text/x-markdown">
+  ### 保守性の鍵は道具よりも方針や認識共有
 
+- 基本的に標準または今後標準になるであろう機能のみ使う
+  - ロックインを避け、乗り換えを容易にするため
+- extendsやmixinを使わない。DRYにしすぎず、重複は許容する
+  - 宣言同士が密になり編集や削除できなくなることを避けるため
+  - 使い回すのはComponent単位。CSSのセットだけを使い回しはしない
+  - 別のComponentの同じスタイルを無理やりまとめたりしない
+- Component自体にmarginやpositionなどその要素外に関係するスタイル指定をしない
+  - それらは使う側で指定する
+</script>
 
+<script layout="bullets" type="text/x-markdown">
+  Nativeでのローカルスコープが対象ブラウザでサポートされるまで、戦っていきましょう　やっていきましょう
+
+  俺たちの戦いはこれからだ！
+</script>
+
+<script layout="bullets-invert" invert type="text/x-markdown">
+# 完
+</script>
 
 <script src="lib/highlight.min.js"></script>
 <script src="lib/talkie.min.js"></script>
