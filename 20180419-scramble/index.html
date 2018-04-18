@@ -10,9 +10,9 @@
 <body>
 
 
-<script layout="cover" invert type="text/x-markdown"
+<script layout="cover"  type="text/x-markdown"
   backface="image/cover.jpg" backface-filter="blur(2px) brightness(.7)">
-# SPAにおけるCSSについて、もうひとつの解
+# SPAにおける<br>CSSについて<br>もうひとつの解
 
 2018.04.19 [@yoshiko_pg](http://yoshiko-pg.github.io)
 </script>
@@ -56,6 +56,7 @@ FOLIO 10ヶ月目
   - 既存のCSSコードの問題点
   - チームの特徴を踏まえた技術選定
   - やってみて実際どうよ？
+  - 本当に話したかったこと
 </script>
 
 
@@ -91,10 +92,6 @@ SCSS + BEM
 
 <script layout="bullets" invert type="text/x-markdown"
         backface="image/sass-code.png" backface-filter="">
-</script>
-
-<script layout="bullets" type="text/x-markdown">
-## 甘い話には裏がある
 </script>
 
 
@@ -226,19 +223,19 @@ CSS in JSにはJSの知識が必要
 <script layout="bullets" type="text/x-markdown">
 ### CSS Modulesを使えば…？
 
-- ○: ローカルスコープを切れる
+- **○: ローカルスコープを切れる**
 - ✗: JSとCSSで値を共有できる
-- ○: そのスタイルがどこで利用されているのか把握できる
+- **○: そのスタイルがどこで利用されているのか把握できる**
 - ○: スタイルのsyntaxが標準のCSSから乖離しない
 - ○: エディタからCSSと同等のサポートを受けられる
-- ✗: JSが特定のツールに依存せずvalidである
+- **✗: JSが特定のツールに依存せずvalidである**
 </script>
 
 <script layout="bullets" type="text/x-markdown">
-### PostCSSでcustom propertiesを使えば…？
+### Custom Propertiesを使えば…？
 
 - ○: ローカルスコープを切れる
-- ○: JSとCSSで値を共有できる
+- **○: JSとCSSで値を共有できる**
 - ○: そのスタイルがどこで利用されているのか把握できる
 - ○: スタイルのsyntaxが標準のCSSから乖離しない
 - ○: エディタからCSSと同等のサポートを受けられる
@@ -286,32 +283,21 @@ CSS in JSにはJSの知識が必要
 - JSはwebpack依存だがクラス部分は静的に置換可能
 </script>
 
-<script layout="bullets-invert" invert type="text/x-markdown">
-### 既存の密結合スタイルから脱出するポイント
-
-**使い回す単位はスタイルのセットではなくComponent**
-
-mixinやスタイル宣言したものをincludesやextendsで使い回すのではなく、その使いまわしたい粒度のComponentを作り、それを使い回す<br>
-→ スタイルのセットと違ってどこかでだけ部分的に上書きされてたみたいなことがないのでこんがらがりにくい
-</script>
-
-<script layout="code" type="text/x-markdown">
-</script>
-
 <script layout="bullets" type="text/x-markdown">
 ### 本当につらみはないの？
 
 ビルドにすべての汚さを押し付けている感はある<br>
 あとSSRしてるとビルド設定がとてもめんどい
 
-SSR -> babel-plugin-css-modules-transform<br>
-CSR -> css-loader + ExtractTextPlugin
+CSR: webpack (css-loader + ExtractTextPlugin)
+SSR: webpackを使ってないので、↑がかからない<br>
+なので babel-plugin-css-modules-transform でsyntax errorを回避する
 
-タスク実行時にBABEL_ENVを指定してSSRのときだけ↑のpluginがあたるようにとかしないといけない
+CSRのビルドだけでもつらみだが、<br>SSRも入るとさらにつらかった
 </script>
 
 <script layout="bullets-invert" invert type="text/x-markdown">
-## 強調しておきたいこと
+## ここからが本題です
 </script>
 
 <script layout="bullets" type="text/x-markdown">
@@ -335,6 +321,24 @@ CSR -> css-loader + ExtractTextPlugin
 </script>
 
 <script layout="bullets" type="text/x-markdown">
+## じゃあその目的を実現できるCSS Modules使っとけば勝手に書きやすくて読みやすくて保守性の高いコードになるの？
+</script>
+
+<script layout="bullets-invert" invert type="text/x-markdown">
+## そんなわけない
+</script>
+
+<script layout="bullets-invert" invert type="text/x-markdown">
+## コレ使っとけば勝手に書きやすくて読みやすくて保守性の高いコードになるツールなんて<br>**ない**
+</script>
+
+<script layout="bullets" type="text/x-markdown">
+  ## 銀の弾丸はない
+
+  CSS Modules使ってても、独自機能のcomposesとか使ってスタイルをまとめ始めると簡単に元のSCSSコードと同じような密結合のコードになる
+</script>
+
+<script layout="bullets" type="text/x-markdown">
   ### 保守性の鍵は道具よりも方針や認識共有
 
 - 基本的に標準または今後標準になるであろう機能のみ使う
@@ -345,6 +349,22 @@ CSR -> css-loader + ExtractTextPlugin
   - 別のComponentの同じスタイルを無理やりまとめたりしない
 - Component自体にmarginやpositionなどその要素外に関係するスタイル指定をしない
   - それらは使う側で指定する
+</script>
+
+<script layout="bullets-invert" invert type="text/x-markdown">
+### 既存の密結合スタイルから脱出するポイント
+
+**使い回す単位はスタイルのセットではなくComponent**
+
+mixinやスタイル宣言したものをincludesやextendsで使い回すのではなく、その使いまわしたい粒度のComponentを作り、それを使い回す<br>
+</script>
+
+<script layout="bullets" type="text/x-markdown">
+Component単位で使い回せば、スタイルセットと違ってどこかで部分的に上書きされてたみたいなことがないのでこんがらがりにくい
+
+styled-componentsなどのCSS in JSは勝手にComponent化されることでそちらに近づいていくので感覚を掴むのによいかも
+
+逆にその感覚さえ掴めてしまえばCSS ModulesでもBEM+SCSSでもぐちゃぐちゃなコードにはならないので目的に合った手段を使えばいいと思う
 </script>
 
 <script layout="bullets" type="text/x-markdown">
