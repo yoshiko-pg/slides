@@ -110,25 +110,6 @@ SCSS + BEM
   - CSS/Viewにクラスがまるごと書かれているとは限らないので消せない
 </script>
 
-<!--
-
-# 問題点
-
-- すべてのクラスがグローバル
-  - BEMで衝突回避していたが、命名が大変
-- 複雑に絡み合うmixinとextends
-  - 1行変えるだけですごい範囲に影響が出そう
-  - → 足すことしかできなくなる
-- このクラス消していいの？問題
-  - viewにクラスがそのまま書かれているとは限らないので消せない
-  - → 足すことしかできなくなる
-- 標準外のsyntax
-  - ネスト, includes, extends, mixin, などなど
-  - Sassにがっちりロックイン
-  - CSSで十分な時代になっても戻れないコードになっている
-
--->
-
 
 <script layout="bullets" type="text/x-markdown">
   ガイドラインもあって美意識持って書かれており、BEMでスコープもわかれていてわりかし綺麗だったものの、<br>
@@ -197,51 +178,31 @@ CSS in JSにはJSの知識が必要
 </script>
 
 <script layout="bullets" type="text/x-markdown">
-### でもstyled-componentで得られた以下は得たい
+### CSS in JSの利点
 
 - ○: ローカルスコープを切れる
 - ○: JSとCSSで値を共有できる
 - ○: そのスタイルがどこで利用されているのか把握できる
+- ○: JSが特定のツールに依存せずvalidである
+
+### styled-componentを選んだ理由
+
 - △: スタイルのsyntaxが標準のCSSから乖離しない
 - △: エディタからCSSと同等のサポートを受けられる
-- ○: JSが特定のツールに依存せずvalidである
-</script>
-
-<script layout="bullets" type="text/x-markdown">
-### JSの学習コストを剥がすとなると、<br>CSSに寄せるしかない
-
-生CSSだとこんな感じ
-
-- ✗: ローカルスコープを切れる
-- ✗: JSとCSSで値を共有できる
-- ✗: そのスタイルがどこで利用されているのか把握できる
-- ○: スタイルのsyntaxが標準のCSSから乖離しない
-- ○: エディタからCSSと同等のサポートを受けられる
-- ○: JSが特定のツールに依存せずvalidである
 </script>
 
 <script layout="bullets" type="text/x-markdown">
 ### CSS Modulesを使えば…？
 
-- **○: ローカルスコープを切れる**
-- ✗: JSとCSSで値を共有できる
-- **○: そのスタイルがどこで利用されているのか把握できる**
-- ○: スタイルのsyntaxが標準のCSSから乖離しない
-- ○: エディタからCSSと同等のサポートを受けられる
-- **✗: JSが特定のツールに依存せずvalidである**
-</script>
-
-<script layout="bullets" type="text/x-markdown">
-### Custom Propertiesを使えば…？
-
 - ○: ローカルスコープを切れる
-- **○: JSとCSSで値を共有できる**
+- ◯: JSとCSSで値を共有できる (標準のCustom Propertiesで)
 - ○: そのスタイルがどこで利用されているのか把握できる
-- ○: スタイルのsyntaxが標準のCSSから乖離しない
-- ○: エディタからCSSと同等のサポートを受けられる
 - ✗: JSが特定のツールに依存せずvalidである
 
-（うちでは対象ブラウザの関係上断念 😢）
+### CSSはただのCSSファイルなのでもちろん
+
+- ◎: スタイルのsyntaxが標準のCSSから乖離しない
+- ◎: エディタからCSSと同等のサポートを受けられる
 </script>
 
 <script layout="bullets-invert" invert type="text/x-markdown">
@@ -253,22 +214,16 @@ CSS in JSにはJSの知識が必要
   import styles from './Button.css'
 
   const Button = ({ type }) => (
-    <button className={classNames(
-      styles.button, // 'Button--button--4fc32d'
-      { [styles.primary]: type === 'primary'}
-    )}>
+    <button className={styles.button}>
       {children}
     </button>
   )
   ```
 
   ```css
-  .button {
+  .button { /* =>'Button--button--4fc32d' */
     border: 2px solid var(--color-main);
     border-radius: 3px;
-  }
-  .button.primary {
-    color: white;
   }
   ```
 </script>
@@ -345,7 +300,7 @@ CSRのビルドだけでもつらみだが、<br>SSRも入るとさらにつら�
   - ロックインを避け、乗り換えを容易にするため
 - extendsやmixinを使わない。DRYにしすぎず、重複は許容する
   - 宣言同士が密になり編集や削除できなくなることを避けるため
-  - 使い回すのはComponent単位。CSSのセットだけを使い回しはしない
+  - **使い回すのはComponent単位。CSSのセットだけを使い回しはしない**
   - 別のComponentの同じスタイルを無理やりまとめたりしない
 - Component自体にmarginやpositionなどその要素外に関係するスタイル指定をしない
   - それらは使う側で指定する
