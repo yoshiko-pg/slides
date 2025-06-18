@@ -1,2 +1,4 @@
 private-*
 draft
+marp/**/*.html
+

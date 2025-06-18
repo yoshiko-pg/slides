@@ -1,0 +1,337 @@
+@import "default";
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Global styles */
+section {
+  font-family: 'Inter', 'Noto Sans JP', sans-serif;
+  background: #ffffff;
+  color: #1a1a1a;
+  font-size: 28px;
+  line-height: 1.6;
+  padding: 80px;
+}
+
+/* Header with logo */
+section::before {
+  content: '';
+  position: absolute;
+  top: 40px;
+  right: 60px;
+  width: 200px;
+  height: 40px;
+  background: url('./logo.svg') no-repeat right center;
+  background-size: contain;
+}
+
+/* Footer */
+section::after {
+  content: '� Knowledge Work Inc.';
+  position: absolute;
+  bottom: 40px;
+  left: 60px;
+  font-size: 14px;
+  color: #666;
+  font-weight: 400;
+}
+
+/* Page number styling */
+section[data-marpit-pagination]::after {
+  content: '� Knowledge Work Inc.' attr(data-marpit-pagination);
+  position: absolute;
+  bottom: 40px;
+  left: auto;
+  right: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  color: #666;
+}
+
+section[data-marpit-pagination]::after {
+  content: '� Knowledge Work Inc.';
+}
+
+/* Custom page number in black box */
+section[data-marpit-pagination-total]::after {
+  content: '� Knowledge Work Inc.';
+  position: absolute;
+  bottom: 40px;
+  left: auto;
+  font-size: 14px;
+  color: #666;
+}
+
+/* Page number box */
+section {
+  position: relative;
+}
+
+section[data-marpit-pagination]::before {
+  content: '';
+  position: absolute;
+  top: 40px;
+  right: 60px;
+  width: 200px;
+  height: 40px;
+  background: url('../global-assets/logo.svg') no-repeat right center;
+  background-size: contain;
+  z-index: 1;
+}
+
+section[data-marpit-pagination-total]::after {
+  content: attr(data-marpit-pagination);
+  position: absolute;
+  bottom: 40px;
+  right: 60px;
+  background: #1a1a1a;
+  color: white;
+  padding: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Typography */
+h1 {
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 40px;
+  color: #1a1a1a !important;
+}
+
+h2 {
+  font-size: 24px !important;
+  font-weight: bold !important;
+  line-height: 1.3 !important;
+  padding-bottom: 24px !important;
+  color: #1a1a1a !important;
+  position: fixed !important;
+  width: 91% !important;
+  top: 40px !important;
+  left: 60px !important;
+  border-bottom: 1px solid #ccc !important;
+  z-index: 10 !important;
+}
+
+h3 {
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 1.4;
+  margin-bottom: 24px;
+  color: #1a1a1a;
+}
+
+/* Text styles */
+p {
+  margin-bottom: 24px;
+  font-weight: 400;
+}
+
+strong {
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+/* Lists */
+ul, ol {
+  margin-bottom: 24px;
+  padding-left: 32px;
+}
+
+li {
+  margin-bottom: 12px;
+  line-height: 1.6;
+  padding-left: 20px;
+}
+
+li::marker {
+  color: #000;
+}
+
+/* Code styles */
+code {
+  background: #f5f5f5;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
+  font-size: 24px;
+}
+
+pre {
+  background: #f8f9fa;
+  border-radius: 8px;
+  margin: 24px 0;
+  overflow-x: auto;
+  line-height: 1.2;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+  color: #1a1a1a;
+  font-size: 20px;
+}
+
+/* Links */
+a {
+  color: #0366d6;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease;
+  padding-bottom: 2px;
+  border-bottom: 2px solid currentColor;
+}
+
+a:hover {
+  border-bottom-color: #0366d6;
+}
+
+/* Images */
+img {
+  max-width: 100%;
+  max-height: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 24px 0;
+}
+
+/* Blockquotes */
+blockquote {
+  border-left: 4px solid #dfe2e5;
+  padding-left: 24px;
+  margin: 24px 0 !important;
+  color: #666;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 24px 0;
+  font-size: 24px;
+}
+
+th, td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid #dfe2e5;
+}
+
+th {
+  background: #f6f8fa;
+  font-weight: 600;
+}
+
+/* Special slide types */
+section.title {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+section.title h1 {
+  font-size: 64px;
+  margin-bottom: 24px;
+}
+
+section.title p {
+  font-size: 24px;
+  color: #666;
+}
+
+/* Two column layout */
+.columns {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+.columns > * {
+  flex: 1;
+}
+
+/* Highlight boxes */
+.highlight {
+  background: #fff3cd;
+  border: 1px solid #ffeaa7;
+  border-radius: 8px;
+  padding: 24px;
+  margin: 24px 0;
+}
+
+.highlight.info {
+  background: #d1ecf1;
+  border-color: #bee5eb;
+}
+
+.highlight.success {
+  background: #d4edda;
+  border-color: #c3e6cb;
+}
+
+.highlight.warning {
+  background: #fff3cd;
+  border-color: #ffeaa7;
+}
+
+.highlight.danger {
+  background: #f8d7da;
+  border-color: #f5c6cb;
+}
+
+.me {
+  width: 90%;
+  margin: 0;
+}
+
+.yoshiko {
+  margin-left: auto;
+  display: block;
+}
+
+.twoCol {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  position: relative;
+}
+.twoCol::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  content: '▶';
+  color: #000;
+  user-select: none;
+}
+
+.twoCol pre code {
+  line-height: 2;
+}
+
+/* Two column with arrow */
+.columns-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+}
+.columns-arrow__left,
+.columns-arrow__right {
+  flex: 1;
+}
+.columns-arrow__arrow {
+  font-size: 2.5em;
+  margin: 0 16px;
+  color: #888;
+  user-select: none;
+}
