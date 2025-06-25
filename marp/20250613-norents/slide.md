@@ -3,7 +3,7 @@ marp: true
 paginate: true
 size: 16:9
 style: |
-  @import url('../global-assets/style.css');
+  @import url('../global-assets/kwork.css');
 ---
 
 # 全コードレビューコメントを AI に分析させて<br />学びを得てみる
