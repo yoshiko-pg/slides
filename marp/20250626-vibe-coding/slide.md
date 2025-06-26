@@ -15,7 +15,7 @@ style: |
 <br />
 <br />
 
-2025/06/25  #vibe_coding_findy
+2025/06/26  #vibe_coding_findy
 @yoshko
 
 ---
@@ -210,9 +210,10 @@ AIと一緒に作りながら詰めていくのも醍醐味です
 
 ---
 
-## デザイン調整して公開しました
+## デザイン調整して公開しました！　https://yoshiko-pg.github.io
 
-https://yoshiko-pg.github.io
+![](./assets/site.png)
+
 
 ---
 
