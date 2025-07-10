@@ -1,6 +1,5 @@
 ---
 marp: true
-paginate: true
 size: 16:9
 style: |
   @import url('../global-assets/utils.css');
@@ -14,7 +13,28 @@ section{
 pre, code {
   line-height: 1.5;
 }
+
+.kontomo {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: rgba(0,0,0,0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99;
+}
+.kontomo::before {
+  content: 'こんなの友達じゃ\Aないですよね？？';
+  white-space: pre;
+  font-weight: bold;
+  color: white;
+  font-size: 120px;
+}
 </style>
+
 
 # AIで造るオーダーメイド親友
 
@@ -41,7 +61,7 @@ ZennのAIカテゴリで、次トークするmizchiさんの全部賭けろ記�
 
 友達づくりを通して、AIチャットの基本的な仕組みと実装方法を学ぼう！
 
-まず各セクションの「なにするの？」で汎用的なAIチャットの仕組みを解説します。
+まず各セクションの「何するの？」で汎用的なAIチャットの仕組みを解説します。
 
 そのあとの実装は主に自分の慣れているフロントエンド周りの技術で作りますが
 仕組みを理解してもらえていれば、どの言語/技術で作っても同じです。
@@ -52,25 +72,26 @@ ZennのAIカテゴリで、次トークするmizchiさんの全部賭けろ記�
 
 # 脳をつくる
 
-<br />
-<br />
-<br />
-<br />
-<br />
-
-Mastra
+![bg right center](./assets/1-brain/cover.png)
 
 ---
 
 ## 脳をつくる  ―  何するの？
 
-- クラウドAIにカスタム指示をつけたAIエージェントをつくる
+- クラウドAIにカスタム指示をつけたAIエージェント(※)をつくる
 - AIエージェントにテキストを送って、返ってきたテキストを見る
-- 会話履歴を保存する
+- 会話履歴をデータベースに保存する
 
 <br />
 
 まずは言葉を交わせるようになりましょう！
+
+<br />
+
+<small>
+※ 一般的に会話だけのAIチャットはAIエージェントとは呼ばないことが多いです。<br />
+　 今回は素のクラウドAIとの区別のため、内部の技術的な呼称(agent)を引用しています
+</small>
 
 ---
 
@@ -109,7 +130,7 @@ npx mastra init
 
 </div>
 
-![](./assets/files.png)
+![](./assets/1-brain/files.png)
 
 </div>
 
@@ -121,33 +142,95 @@ npx mastra init
 最初はサンプルのWeather Agentが入っているはず
 疎通を試してみましょう。チャット欄から会話してみて話せればOK！
 
-![](./assets/mastra.png)
+![](./assets/1-brain/mastra.png)
 
 ---
 
 ## 脳をつくる
 
-サンプルは消してオリジナルのエージェントを作ってみましょう！
+<br />
+
+![](./assets/1-brain/failed.png)
+
+
+---
+
+<div class="kontomo" ></div>
+
+## 脳をつくる
+
+<br />
+
+![](./assets/1-brain/failed.png)
+
+</section>
+
+---
+
+
+## 脳をつくる
+
+サンプルは消してオリジナルの友達エージェントを作ってみましょう！
+`mastra/agents/friend.ts` を作ります
 
 ```ts
-// mastra/agents/friend.ts
 export const friendAgent = new Agent({
   name: 'ともだちエージェント',
   instructions: `あなたはユーザーととても仲の良い友達です。落ち着いた話し方をします。`,
-  // OpenAIの場合 .responses で 新しい Responses APIを使える
-  model: openai.responses('chatgpt-4o-latest'),
+  model: openai.responses('gpt-4o'),
   memory: new Memory(),
 });
 ```
 
+`instructions` にカスタム指示（性格、話し方など）を指定できます
+`model` で使うモデルを選べます。GeminiもClaudeもGrokもいけます（要.env KEY）
+
 ---
 
 ## 脳をつくる
 
-- `instructions` にカスタム指示（性格、話し方など）を指定できます
-- `model` で使うモデルを選べます。GeminiもClaudeもGrokもいけます
+`mastra/index.ts` でmastraから友達エージェントを使えるように組み込みます
+このファイルがMastraの起点となるファイルです
 
+```ts
+export const mastra = new Mastra({
+  agents: { friendAgent },
+  storage: new LibSQLStore({ url: "file:../mastra.db" }),
+});
+```
 
+`storage` にデータベースを指定することで会話データを永続化できます。
+（これがないとサーバーを起動するたびに過去の履歴が消えてしまいます）
+
+---
+
+## 脳をつくる
+
+<br />
+
+![](./assets/1-brain/friend.png)
+
+---
+
+## 脳をつくる  ―  やったこと
+
+<div class="image">
+
+<div>
+
+- クラウドAIにカスタム指示をつけた<br />AIエージェントをつくる
+- AIエージェントにテキストを送って、<br />返ってきたテキストを見る
+- 会話履歴をデータベースに保存する
+
+<br />
+
+Mastraを使って簡単にAIとやりとりができました！
+
+</div>
+
+![](./assets/1-brain/cover.png)
+
+</div>
 
 ---
 
