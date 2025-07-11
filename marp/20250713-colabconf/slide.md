@@ -33,19 +33,26 @@ pre, code {
   color: white;
   font-size: 120px;
 }
+.title {
+  background-color: rgba(255,255,255,0.85);
+  position: absolute;
+  right: 0;
+  top: 55%;
+  padding: 12px 80px 30px 80px;
+  line-height: 0.4;
+  text-align: right;
+}
 </style>
 
+<div class="title">
 
-# AIで造るオーダーメイド親友
+# AIでつくるオーダーメイド親友
 
-<br />
-<br />
-<br />
-<br />
-<br />
+@yoshiko &nbsp;− &nbsp;2025/07/13 &nbsp;  CoLab Conf　
 
-2025/07/13  CoLab Conf
-@yoshiko
+</div>
+
+![bg](./assets/slide.png)
 
 ---
 
@@ -72,7 +79,7 @@ ZennのAIカテゴリで、次トークするmizchiさんの全部賭けろ記�
 
 # 脳をつくる
 
-![bg right center](./assets/1-brain/cover.png)
+![bg right center 80%](./assets/1-brain/cover.png)
 
 ---
 
@@ -95,7 +102,7 @@ ZennのAIカテゴリで、次トークするmizchiさんの全部賭けろ記�
 
 ---
 
-## 脳をつくる  --- Mastra
+## 脳をつくる  ―  実装
 
 Mastraでエージェントのコア部分を作ります。
 
@@ -113,7 +120,7 @@ npx mastra init
 
 ---
 
-## 脳をつくる  --- Mastra
+## 脳をつくる  ―  実装
 
 <div class="columns">
 
@@ -125,7 +132,7 @@ npx mastra init
 `.env` に使いたいAIモデルのAPI Keyを設定します
 
 <small>
-詳細手順: <a href="https://mastra.ai/ja/docs/frameworks/web-frameworks/next-js">https://mastra.ai/ja/docs/frameworks/web-frameworks/next-js</a>
+全手順: <a href="https://mastra.ai/ja/docs/frameworks/web-frameworks/next-js">https://mastra.ai/ja/docs/frameworks/web-frameworks/next-js</a>
 </small>
 
 </div>
@@ -136,9 +143,9 @@ npx mastra init
 
 ---
 
-## 脳をつくる
+## 脳をつくる  ―  実装
 
-`npx mastra dev` でMastraのPlayground画面を立ち上げられます
+`npm run dev:mastra` でMastraのPlayground画面を立ち上げられます
 最初はサンプルのWeather Agentが入っているはず
 疎通を試してみましょう。チャット欄から会話してみて話せればOK！
 
@@ -146,7 +153,7 @@ npx mastra init
 
 ---
 
-## 脳をつくる
+## 脳をつくる  ―  実装
 
 <br />
 
@@ -157,7 +164,7 @@ npx mastra init
 
 <div class="kontomo" ></div>
 
-## 脳をつくる
+## 脳をつくる  ―  実装
 
 <br />
 
@@ -167,8 +174,33 @@ npx mastra init
 
 ---
 
+## 脳をつくる  ―  解説
 
-## 脳をつくる
+<div class="columns">
+
+<div>
+WeatherAgentのシステムプロンプトが「天気情報提供アシスタント」だったのでこんな返答になっちゃいました。<br />
+<br />
+一般的なAIチャットでは、事前の役割定義や条件付けとなる「システムプロンプト」と、ユーザーからの毎回のチャット入力を繋ぎ合わせてAIに入力します。<br >
+モデルやチャット入力が同じでも、役割定義次第で返答は変わってきます。
+</div>
+
+<div>
+
+![](./assets/1-brain/ai.png)
+
+<small>
+システムプロンプトを工夫して、<br />欲しい出力を得ることが<br />代表的なプロンプトエンジニアリングです
+</small>
+
+</div>
+
+</div>
+
+---
+
+
+## 脳をつくる  ―  実装
 
 サンプルは消してオリジナルの友達エージェントを作ってみましょう！
 `mastra/agents/friend.ts` を作ります
@@ -177,17 +209,16 @@ npx mastra init
 export const friendAgent = new Agent({
   name: 'ともだちエージェント',
   instructions: `あなたはユーザーととても仲の良い友達です。落ち着いた話し方をします。`,
-  model: openai.responses('gpt-4o'),
-  memory: new Memory(),
+  model: openai('gpt-4o'),
 });
 ```
 
-`instructions` にカスタム指示（性格、話し方など）を指定できます
+`instructions` にシステムプロンプト（性格、話し方など）を指定できます
 `model` で使うモデルを選べます。GeminiもClaudeもGrokもいけます（要.env KEY）
 
 ---
 
-## 脳をつくる
+## 脳をつくる  ―  実装
 
 `mastra/index.ts` でmastraから友達エージェントを使えるように組み込みます
 このファイルがMastraの起点となるファイルです
@@ -204,7 +235,7 @@ export const mastra = new Mastra({
 
 ---
 
-## 脳をつくる
+## 脳をつくる  ―  実装
 
 <br />
 
@@ -234,152 +265,407 @@ Mastraを使って簡単にAIとやりとりができました！
 
 ---
 
-2. 顔をつくる — Next.js × Vercel AI SDK
+# 顔をつくる
 
-useChat Hook
+![bg right center 80%](./assets/2-face/cover.png)
 
-機能	ひとことで
-ストリーミング	モデルの出力を逐次レンダリング
-状態管理	ローディング・エラー・履歴まとめて面倒見てくれる
-カスタム Body	追加メタデータを送信できる（例：timezone）
+---
 
-// app/chat/page.tsx
-'use client'
-import { useChat } from '@ai-sdk/react'
+## 顔をつくる  ―  何するの？
 
-export default function Chat() {
-  const { messages, input, handleInputChange, handleSubmit } = useChat({
-    api: '/api/chat',
-    body: { tz: 'Asia/Tokyo' }
-  })
-  /* …UI はお好みで… */
+やりとりはできるようになったけど…　Playgroundはあまりにも管理画面すぎる。。
+
+![](./assets/2-face/playground.png)
+
+---
+
+<div class="kontomo" ></div>
+
+## 顔をつくる  ―  何するの？
+
+やりとりはできるようになったけど…　Playgroundはあまりにも管理画面すぎる。。
+
+![](./assets/2-face/playground.png)
+
+---
+
+## 顔をつくる  ―  何するの？
+
+- 友達エージェントとやりとりできるチャット画面を作る
+- 普段使うメッセージアプリみたいな、親しみやすい見た目にしてみよう！
+
+
+---
+
+## 顔をつくる  ―  何するの？
+
+- 友達エージェントとやりとりできるチャット画面を作る
+- 普段使うメッセージアプリみたいな、親しみやすい見た目にしてみよう！
+
+<br />
+
+<center>
+<h1>Vibe Codingチャンス！！</h1>
+
+<br />
+<small>
+※ Vibe Coding = 人間がコードを書かずにAIへの指示中心で進める開発手法のこと
+</small>
+</center>
+
+---
+
+## 顔をつくる  ―  実装
+
+Claude Code（または好みのコーディングエージェント）に頼んでみましょう
+
+```
+Next.jsのトップページを、MastraのfriendAgentとチャットできる画面にして。
+普段使うメッセージアプリみたいな、親しみのあるデザインがいい。
+streamで返ってくるAPIを作って、@ai-sdk/react の useChat を使って実装して。
+リロードしても同じスレッドでやりとりできるようにthreadIdを固定して。
+```
+
+ReactならVercel AI SDKのuseChatを使うのがおすすめです。
+
+<small>
+mastra使うならClaudeにDocsのMCPサーバー登録しておくとスムーズかも<br />
+<code>claude mcp add mastra-docs npx @mastra/mcp-docs-server</code>
+</small>
+
+---
+<style scoped>
+  section { background-color: #333; }
+  img { height : 60vh; }
+</style>
+
+<div class="columns">
+
+<center>
+
+![](./assets/2-face/chat-1.png)
+
+</center>
+
+
+<center>
+
+![](./assets/2-face/chat-2.png)
+
+</center>
+
+</div>
+
+---
+
+## 顔をつくる  ―  実装
+
+ちなみにAPIの実装は必要最低限これだけ
+
+```ts
+export async function POST(req: Request) {
+  const { messages } = await req.json();
+  const friendAgent = mastra.getAgent("friendAgent");
+  const stream = await friendAgent.stream([messages.at(-1)], {
+    memory: {
+      thread: "default", // 任意のスレッドID
+      resource: "default-user", // 任意のユーザーID
+    },
+  });
+  return stream.toDataStreamResponse();
 }
+```
 
 
 ---
 
-API ルート側
+## 顔をつくる  ―  実装
 
-// pages/api/chat.ts
-import { OpenAIStream, StreamingTextResponse } from 'ai'
-import { assistant } from '@/agents/assistant' // Mastra instance
+アクセスしたときに過去の会話履歴も表示されてほしいですね
 
-export const POST = async (req: Request) => {
-  const { messages, tz } = await req.json()
-  const stream = await OpenAIStream(assistant.run({
-    messages,
-    system: `ユーザーのタイムゾーンは${tz}`,
-  }))
-  return new StreamingTextResponse(stream)
+```
+useChatでチャット画面表示するとき、過去のチャット履歴も表示できるようにして。
+threadId/resourceIdはroute.tsにある内容で
+```
+
+履歴取得用のAPIを作ってクライアントから呼んで表示してくれるはず。
+もしくはサーバーサイドで取得してuseChatのinitialMessagesに渡してもOK
+
+---
+
+## 顔をつくる  ―  やったこと
+
+<div class="image">
+
+<div>
+
+- おしゃべり用のメッセージWebアプリを作る
+- 会話履歴を表示する
+- 会話の送信と受信をする
+
+<br />
+
+Vibe Codingで簡単に専用画面ができました！
+
+</div>
+
+![](./assets/2-face/cover.png)
+
+</div>
+
+---
+
+
+# 記憶をつくる
+
+![bg right center 80%](./assets/3-memory/cover.png)
+
+---
+
+## 記憶をつくる  ―  何するの？
+
+素のAI（LLM）には記憶を保持する仕組みがありません。ステートレスです。
+入力文（コンテキスト）だけが可変なので、全情報をそこに入れる必要があります。
+
+ChatGPTなどのチャットAIは、スレッドの全履歴を毎回送って記憶保持しています。
+それゆえ、ひとつのスレッドを長くし続けることはできません。
+今のスレッドで文章量の上限に達したら、新しいスレッドを作る必要があります。
+
+---
+<style scoped>
+section { background-color: black; }
+</style>
+
+![bg center center contain 80%](./assets/3-memory/over.png)
+
+
+
+---
+<style scoped>
+section { background-color: black; }
+</style>
+
+<div class="kontomo" ></div>
+
+![bg center center contain 80%](./assets/3-memory/over.png)
+
+---
+
+## 記憶をつくる  ―  何するの？
+
+普段使うメッセージアプリのように、ひとつの流れの中でずっとやりとりしたい。
+
+常に直近10メッセージだけを送る、というふうにすれば実現できます！
+送信対象がスライドしていくのでスライディングウインドウ方式などと呼ばれます。
+（1件送るごとに古いメッセージが1件コンテキストから消える）
+
+
+---
+<style scoped>
+  .fukidashi {
+    padding: 16px 32px;
+    border-radius: 20px;
+    width: fit-content;
+    margin-top: -46px
+  }
+  .fukidashi.ai {
+    background-color: #eee;
+    border-bottom-left-radius: 0;
+  }
+  .fukidashi.user {
+    background-color: #4357aa;
+    color: white;
+    margin-left: auto;
+    border-bottom-right-radius: 0;
+  }
+  center { margin: 60px 0 120px;}
+  .wrapper { width: 90%; margin: 0 auto; }
+</style>
+
+## 記憶をつくる  ―  何するの？
+<br />
+
+<div class="wrapper">
+
+<p class="fukidashi ai">
+今日は何する予定なの？
+</p>
+<p class="fukidashi user">
+今日は美容院に行く予定なんだよね〜
+</p>
+<center>
+........10件やりとり後.......
+</center>
+<p class="fukidashi ai">
+それで、今日は何する予定なの？
+</p>
+<p class="fukidashi user">
+（さっき言ったじゃん！！）
+</p>
+
+</div>
+
+---
+<style scoped>
+  .fukidashi {
+    padding: 16px 32px;
+    border-radius: 20px;
+    width: fit-content;
+    margin-top: -46px
+  }
+  .fukidashi.ai {
+    background-color: #eee;
+    border-bottom-left-radius: 0;
+  }
+  .fukidashi.user {
+    background-color: #4357aa;
+    color: white;
+    margin-left: auto;
+    border-bottom-right-radius: 0;
+  }
+  center { margin: 60px 0 120px;}
+  .wrapper { width: 90%; margin: 0 auto; }
+</style>
+
+<div class="kontomo"></div>
+
+## 記憶をつくる  ―  何するの？
+<br />
+
+<div class="wrapper">
+
+<p class="fukidashi ai">
+今日は何する予定なの？
+</p>
+<p class="fukidashi user">
+今日は美容院に行く予定なんだよね〜
+</p>
+<center>
+........10件やりとり後.......
+</center>
+<p class="fukidashi ai">
+それで、今日は何する予定なの？
+</p>
+<p class="fukidashi user">
+（さっき言ったじゃん！！）
+</p>
+
+</div>
+
+---
+
+## 記憶をつくる  ―  何するの？
+
+- 友達エージェントとやりとりできるチャット画面を作る
+- 普段使うメッセージアプリみたいな、親しみやすい見た目にしてみよう！
+
+<br />
+
+<center>
+<h1>Vibe Codingチャンス！！</h1>
+
+<br />
+<small>
+※ Vibe Coding = 人間がコードを書かずにAIへの指示中心で進める開発手法のこと
+</small>
+</center>
+
+---
+
+## 記憶をつくる  ―  実装
+
+Claude Code（または好みのコーディングエージェント）に頼んでみましょう
+
+```
+Next.jsのトップページを、MastraのfriendAgentとチャットできる画面にして。
+普段使うメッセージアプリみたいな、親しみのあるデザインがいい。
+streamで返ってくるAPIを作って、@ai-sdk/react の useChat を使って実装して。
+リロードしても同じスレッドでやりとりできるようにthreadIdを固定して。
+```
+
+ReactならVercel AI SDKのuseChatを使うのがおすすめです。
+
+<small>
+mastra使うならClaudeに <a href="https://mastra.ai/ja/docs/getting-started/mcp-docs-server">MastraDocsのMCPサーバー</a>登録しておくとスムーズかも<br />
+<code>claude mcp add mastra-docs npx @mastra/mcp-docs-server</code>
+</small>
+
+---
+<style scoped>
+  section { background-color: #333; }
+  img { height : 60vh; }
+</style>
+
+<div class="columns">
+
+<center>
+
+![](./assets/2-face/chat-1.png)
+
+</center>
+
+
+<center>
+
+![](./assets/2-face/chat-2.png)
+
+</center>
+
+</div>
+
+---
+
+## 記憶をつくる  ―  実装
+
+ちなみにAPIの実装は必要最低限これだけ
+
+```ts
+export async function POST(req: Request) {
+  const { messages } = await req.json();
+  const friendAgent = mastra.getAgent("friendAgent");
+  const stream = await friendAgent.stream(messages, {
+    memory: {
+      thread: "default", // 任意のスレッドID
+      resource: friendAgent.id,
+      options: { lastMessages: 10 }, // 10メッセージを取得
+    },
+  });
+  return stream.toDataStreamResponse();
 }
+```
 
 
 ---
 
-3. 記憶をつくる — Mem0
+## 記憶をつくる  ―  実装
 
-LLMs は基本 “記憶喪失” → 外部ストレージで補完しよう
+アクセスしたときに過去の会話履歴も表示されてほしいですね
 
-3レイヤー構成
-
-レイヤ	保持期間	技術	用途
-短期記憶	会話 10 メッセージ	Context Sliding	文脈維持
-中期記憶	1日	Mem0 “daily” namespace	「今日あったこと」
-長期記憶	無期限	Mem0 + Vector RAG	プロファイル / 好み
-
-	•	Mem0 は Graph + Vector + KV をハイブリッドに管理し、個人情報をセキュアに保存
+```
+useChatでチャット画面表示するとき、過去のチャット履歴も表示できるようにして。
+threadId/resourceIdはroute.tsにある内容で
+```
 
 ---
 
-Mem0 実装例
+## 記憶をつくる  ―  やったこと
 
-import { createClient } from 'mem0'
-const mem = createClient({ apiKey: process.env.MEM0_KEY })
+<div class="image">
 
-export async function recall(userId: string, query: string) {
-  const memories = await mem.search({
-    namespace: 'long',
-    userId,
-    query,
-    topK: 5
-  })
-  return memories.map(m => m.text).join('\n')
-}
+<div>
 
-Tips: retrieval を system プロンプト に差し込むと「長期記憶→脳→短期文脈」の三段活用ができる
+- おしゃべり用のメッセージWebアプリを作る
+- 会話履歴を表示する
+- 会話の送信と受信をする
 
----
+<br />
 
-4. 目をつくる — Cloudinary 画像アップロード
-	•	cloudinary.uploader.upload() で受け取った画像をホスティング
-	•	URL をメッセージに添付し、Vision 対応 LLM に追加
-	•	Cloudinary は 署名付き URL が作れるのでプライベートでも安心
+Vibe Codingで簡単に専用画面ができました！
 
-const { secure_url } = await cloudinary.uploader.upload(filePath, {
-  folder: 'ai-friend',
-})
-messages.push({ role: 'user', content: [{ type:'image_url', image_url: secure_url }] })
+</div>
 
+![](./assets/2-face/cover.png)
+
+</div>
 
 ---
-
-5. 仲良くなる — “Context Injection”
-	1.	ユーザー情報
-	•	名前、趣味、好みの温度感など
-	2.	AI 人格
-	•	一人称、口調、専門分野
-	3.	時間情報
-	•	現地時刻、曜日、祝日 etc.
-
-const system = `
-あなたは「優しいの友達AI」です。
-今日の日付: ${new Date().toLocaleDateString('ja-JP')}
-ユーザー名: xxx
-ユーザーの趣味: xxxx
-`
-
-
----
-
-6. さらに広がる可能性
-
-アイデア	使うツール	例
-IoT 操作	Home Assistant API	「電気消して」→ webhook で照明OFF
-スケジュール管理	Google Calendar API	「明日の昼にランチ入れて」
-メール要約 & 返信	Gmail API + LLM	新着メールを TL;DR + Draft
-健康管理	Wearable API	睡眠スコア→ bedtime 提案
-
-
----
-
-よくある落とし穴
-	1.	プロンプト肥大化
-	•	context sliding／メモリ retrieval のバランスをチェック
-	2.	コスト爆発
-	•	Token 使用量 × LLM 単価 → metric で監視
-	3.	個人情報の扱い
-	•	Mem0 は SOC2 / HIPAA 対応だが、自社基準も忘れず
-	4.	モデル切替の自由度
-	•	Mastra で abstraction しておくと楽
-
----
-
-まとめ
-	1.	レイヤーで考えると迷わない
-	2.	Mastra × Mem0 × Vercel AI SDK で最短 MVP
-	3.	人格 & 記憶を設計すれば “友達AI” は1日で誕生
-	4.	次の一歩: Tool 連携で “リアルの友達” 並みに役立つ存在へ
-
----
-
-参考リンク
-	•	Mastra GitHub: https://github.com/mastra-ai/mastra
-	•	Mem0 Docs: https://docs.mem0.ai
-	•	Vercel AI SDK: https://ai-sdk.dev
-	•	Cloudinary Docs: https://cloudinary.com/documentation
-
----
-
-Q & A
-
-なんでもどうぞ！
