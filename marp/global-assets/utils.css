@@ -10,6 +10,20 @@
   flex: 1;
 }
 
+.image {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+.image > * {
+  flex: 1;
+}
+
+.image > *:has(img) {
+  flex: 0 0 fit-content;
+}
+
 .me {
   width: 90%;
   margin: 0;
@@ -41,4 +55,11 @@ video {
   bottom: 0;
   width: 100%;
   height: 100%;
+}
+
+small {
+  font-size: 0.7em;
+  color: #666;
+  line-height: 1.5;
+  display: block;
 }
