@@ -40,7 +40,7 @@ pre, code {
   top: 55%;
   padding: 12px 80px;
   line-height: 0.4;
-  text-align: right;
+  text-align: center;
 }
 .title > p {
   padding-bottom: 18px;
@@ -75,7 +75,7 @@ pre, code {
 
 <div class="title">
 
-# AIでつくるオーダーメイド親友
+# 友達のつくりかた
 
 @yoshiko &nbsp;− &nbsp;2025/07/13 &nbsp;  CoLab Conf　
 
