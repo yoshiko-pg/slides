@@ -60,7 +60,9 @@ pre, code {
 
 ---
 
-ZennのAIカテゴリで、次トークするmizchiさんの全部賭けろ記事に次いで2位になってます
+ZennのAIカテゴリの全記事のうち、このあとトークされるmizchiさんの全部賭けろ記事に次いで Vibe Coding（AIコーディング）記事が2位に！
+
+![](./assets/zenn.png)
 
 ---
 
