@@ -42,6 +42,32 @@ pre, code {
   line-height: 0.4;
   text-align: right;
 }
+
+  .fukidashi {
+    padding: 16px 32px;
+    border-radius: 20px;
+    width: fit-content;
+    margin-top: -46px
+  }
+  .fukidashi.ai {
+    background-color: #eee;
+    border-bottom-left-radius: 0;
+  }
+  .fukidashi.user {
+    background-color: #4357aa;
+    color: white;
+    margin-left: auto;
+    border-bottom-right-radius: 0;
+  }
+  .yaritori { margin: 60px 0 120px;}
+  .wrapper { width: 90%; margin: 0 auto; }
+
+  .nav-image {
+    position: absolute;
+    width: 30%;
+    right: 2%;
+    top: 4%;
+}
 </style>
 
 <div class="title">
@@ -500,26 +526,6 @@ Mastraは元々デフォルトがこの挙動。<br />
 
 
 ---
-<style scoped>
-  .fukidashi {
-    padding: 16px 32px;
-    border-radius: 20px;
-    width: fit-content;
-    margin-top: -46px
-  }
-  .fukidashi.ai {
-    background-color: #eee;
-    border-bottom-left-radius: 0;
-  }
-  .fukidashi.user {
-    background-color: #4357aa;
-    color: white;
-    margin-left: auto;
-    border-bottom-right-radius: 0;
-  }
-  center { margin: 60px 0 120px;}
-  .wrapper { width: 90%; margin: 0 auto; }
-</style>
 
 ## 記憶をつくる  ―  何するの？
 <br />
@@ -532,7 +538,7 @@ Mastraは元々デフォルトがこの挙動。<br />
 <p class="fukidashi user">
 今日は家族で夜ご飯に行くんだ〜
 </p>
-<center>
+<center class="yaritori">
 ........10件やりとり後.......
 </center>
 <p class="fukidashi ai">
@@ -545,26 +551,6 @@ Mastraは元々デフォルトがこの挙動。<br />
 </div>
 
 ---
-<style scoped>
-  .fukidashi {
-    padding: 16px 32px;
-    border-radius: 20px;
-    width: fit-content;
-    margin-top: -46px
-  }
-  .fukidashi.ai {
-    background-color: #eee;
-    border-bottom-left-radius: 0;
-  }
-  .fukidashi.user {
-    background-color: #4357aa;
-    color: white;
-    margin-left: auto;
-    border-bottom-right-radius: 0;
-  }
-  center { margin: 60px 0 120px;}
-  .wrapper { width: 90%; margin: 0 auto; }
-</style>
 
 <div class="kontomo"></div>
 
@@ -579,7 +565,7 @@ Mastraは元々デフォルトがこの挙動。<br />
 <p class="fukidashi user">
 今日は美容院に行く予定なんだよね〜
 </p>
-<center>
+<center class="yaritori">
 ........10件やりとり後.......
 </center>
 <p class="fukidashi ai">
@@ -786,6 +772,172 @@ assistant:
 
 ## 目をつくる  ―  何するの？
 
+<br />
+
+<div class="wrapper">
+
+<p class="fukidashi user">
+めっちゃ綺麗な夕焼け撮れた！
+</p>
+<br />
+<p class="fukidashi ai">
+え！どんな感じ！？
+</p>
+<br />
+<p class="fukidashi user">
+えー、空全体がオレンジで、太陽が…
+</p>
+
+</div>
+
+---
+
+<div class="kontomo"></div>
+
+## 目をつくる  ―  何するの？
+
+<br />
+
+<div class="wrapper">
+
+<p class="fukidashi user">
+めっちゃ綺麗な夕焼け撮れた！
+</p>
+<br />
+<p class="fukidashi ai">
+え！どんな感じ！？
+</p>
+<br />
+<p class="fukidashi user">
+えー、空全体がオレンジで、太陽が…
+</p>
+
+</div>
+
+---
+
+## 目をつくる  ―  何するの？
+
+友達に送るみたいに、写真や画像を送れるようにしよう！
+
+- 画像データを送れるようにする
+- AIがその画像を見られるようにする
+- 画像をアップロードして後からでも見られるようにする
+
+<br />
+
+画像を見せるには、使うAIモデルがマルチモーダルなモデルである必要があります。
+
+「モーダル」は情報の形式を指していて、マルチモーダルなら複数形式を扱えます。
+つまりテキストだけじゃなくて画像や音声も入力して解釈できるということですね！
+
+---
+<style scoped>
+  img { width: 64%; display: block; margin: 0 auto; }
+</style>
+
+## 目をつくる  ―  実装
+
+今回は画像のアップロード先に [Cloudinary](https://cloudinary.com/) というサービスを使ってみます。
+
+- 無料枠のストレージ・転送量が十分
+- クライアントからSDKで直接アップロード可能
+
+![](./assets/4-eye/flow.png)
+
+---
+
+<img src="./assets/4-eye/flow-1.png" class="nav-image" />
+
+## 目をつくる  ―  実装（ファイルアップロード）
+
+チャット送信欄に画像添付ボタンをつけて、添付された画像をアップロード
+
+```ts
+const CLOUD_NAME   = 'your-cloud-name';
+const UPLOAD_PRESET = 'unsigned_preset';
+const ENDPOINT = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`;
+
+const formData = new FormData();
+formData.append('file', file);
+formData.append('upload_preset', UPLOAD_PRESET);
+
+const res  = await fetch(ENDPOINT, { method: 'POST', body: formData });
+const json = await res.json();
+console.log(json.secure_url) // 画像URL
+```
+
+---
+
+<img src="./assets/4-eye/flow-2.png" class="nav-image" />
+
+## 目をつくる  ―  実装（画像URLをAPIに送信）
+
+クライアントから送るVercel AI SDKのuseChatのリクエストに含めます
+
+```ts
+const urls = ['...', '...',] // 添付した画像URLの配列
+
+// Vercel AI SDKのuseChatから返ってくるhandleSubmit
+handleSubmit(e, {
+  experimental_attachments: urls.map((url) => ({
+    url,
+    contentType: 'image/*',
+  })),
+});
+```
+
+
+---
+
+<img src="./assets/4-eye/flow-3.png" class="nav-image" />
+
+## 目をつくる  ―  実装（画像URLをAIに送信）
+
+自前APIの中で整形して `friendAgent.stream` の第一引数のユーザー発言に含める
+
+```ts
+[{
+  role: 'user',
+  content: [
+    { type: 'text', text: userMessage.content }, // テキスト
+    ...(userMessage.experimental_attachments || []).map(
+      ({ url, contentType }) => ({
+        type: 'image', image: url, mimeType: contentType,
+      }),
+    ),
+  ],
+}],
+```
+
+---
+<style scoped>
+img {
+  margin-left: auto;
+  width: 30%;
+  display: block;
+  border-radius: 10px;
+}
+</style>
+
+## 目をつくる  ―  実装
+
+<br />
+
+<div class="wrapper">
+
+<p class="fukidashi user">
+めっちゃ綺麗な夕焼け撮れた！
+</p>
+
+<img src="./assets/4-eye/sunset.jpeg" style="" />
+
+<br />
+<p class="fukidashi ai">
+うわあ！富士山の影も美しいね！
+</p>
+
+</div>
 
 ---
 
@@ -796,7 +948,7 @@ assistant:
 <div>
 
 - 画像データを送れるようにする
-- AIが画像を読み込めるようにする
+- AIが画像を見られるようにする
 - 画像をアップロードして<br />後からでも見られるようにする
 
 <br />
