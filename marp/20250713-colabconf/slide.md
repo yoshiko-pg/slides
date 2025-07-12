@@ -597,14 +597,22 @@ Mastraは元々デフォルトがこの挙動。<br />
 より自然なやりとりを目指して、これらを実装していきます！
 
 ---
+<style scoped>
+  h3 {
+    display: flex; align-items: flex-end;
+  }
+  small {
+    font-weight: normal;
+  }
+</style>
 
 ## 記憶をつくる  ―  実装
 
 [mem0](https://mem0.ai/) というサービスを使ってみます。
 OSSなので自分でホスティングすることもできるし、SaaSサービスもあります。
 
-<h3 style="display: flex; align-items: center;">
-mem0を使う理由<small style="font-weight: normal;">（参考: <a href="https://techcommunity.microsoft.com/blog/azure-ai-services-blog/memory-management-for-ai-agents/4406359">Microsoftの詳細記事</a> ）</small>
+<h3>
+mem0を使う理由<small>（参考: <a href="https://techcommunity.microsoft.com/blog/azure-ai-services-blog/memory-management-for-ai-agents/4406359">Microsoftの詳細記事</a> ）</small>
 
 
 </h3>
