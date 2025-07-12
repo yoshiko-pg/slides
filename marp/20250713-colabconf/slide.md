@@ -68,12 +68,16 @@ ZennのAIカテゴリで、次トークするmizchiさんの全部賭けろ記�
 
 友達づくりを通して、AIチャットの基本的な仕組みと実装方法を学ぼう！
 
+<br />
+
 まず各セクションの「何するの？」で汎用的なAIチャットの仕組みを解説します。
 
 そのあとの実装は主に自分の慣れているフロントエンド周りの技術で作りますが
-仕組みを理解してもらえていれば、どの言語/技術で作っても同じです。
+仕組みがわかれば、どの言語/技術で作っても同じです。
 
-オリジナリティのあるAIチャットはどうやって作るんだろう？がわかる発表になれば！
+<br />
+
+AIチャットってどう出来ているんだろう？が垣間見える発表になれば！
 
 ---
 
@@ -86,7 +90,7 @@ ZennのAIカテゴリで、次トークするmizchiさんの全部賭けろ記�
 ## 脳をつくる  ―  何するの？
 
 - クラウドAIにカスタム指示をつけたAIエージェント(※)をつくる
-- AIエージェントにテキストを送って、返ってきたテキストを見る
+- AIエージェントにテキストを送って、返ってきたテキストを見る、会話の実現
 - 会話履歴をデータベースに保存する
 
 <br />
@@ -104,7 +108,7 @@ ZennのAIカテゴリで、次トークするmizchiさんの全部賭けろ記�
 
 ## 脳をつくる  ―  実装
 
-Mastraでエージェントのコア部分を作ります。
+[Mastra](https://mastra.ai) でエージェントのコア部分を作ります。
 
 MastraはTypeScript製のエージェントフレームワークで、
 AIエージェントをつくるのに便利な機能が標準搭載されています。
@@ -360,15 +364,15 @@ mastra使うならClaudeにDocsのMCPサーバー登録しておくとスムー�
 
 ## 顔をつくる  ―  実装
 
-ちなみにAPIの実装は必要最低限これだけ
+ちなみにAPIの実装は必要最低限これだけ。 `app/api/chat/route.ts` で動く
 
 ```ts
 export async function POST(req: Request) {
   const { messages } = await req.json();
-  const friendAgent = mastra.getAgent("friendAgent");
+  const friendAgent = mastra.getAgent("friendAgent"); // new Mastra したやつ
   const stream = await friendAgent.stream([messages.at(-1)], {
     memory: {
-      thread: "default", // 任意のスレッドID
+      thread: "default",        // 任意のスレッドID
       resource: "default-user", // 任意のユーザーID
     },
   });
@@ -442,7 +446,7 @@ ChatGPT等のチャットAIは、会話の全履歴を毎回送って記憶保�
 
 <small>
 新しい発言のたびにスレッド内の全履歴ごと送信する形式<br />
-モデルのコンテキストウインドウサイズの上限に達するとそのスレッドは使えなくなる
+文章量が膨らむのでAPIの課金額も膨らむ
 </small>
 
 </div>
@@ -478,7 +482,7 @@ section { background-color: black; }
 <br />
 常に直近10メッセージだけを送る、というふうに件数を絞れば実現できます！<br />
 1件送るごとに古いメッセージが1件コンテキスト入りの対象から外れるので、送る文章のボリュームが一定になります。<br />
-<br />
+Mastraは元々デフォルトがこの挙動。<br />
 ただし…
 </div>
 
@@ -487,7 +491,7 @@ section { background-color: black; }
 ![](./assets/3-memory/sliding.png)
 
 <small>
-送信対象が下にスライドしていくのでスライディングウインドウ方式などと呼ばれます。<br />
+送信対象が下にスライドしていくのでスライディングウインドウ方式などと呼ばれます<br />
 </small>
 
 </div>
@@ -524,7 +528,7 @@ section { background-color: black; }
 今日は何する予定なの？
 </p>
 <p class="fukidashi user">
-今日は美容院に行く予定なんだよね〜
+今日は家族で夜ご飯に行くんだ〜
 </p>
 <center>
 ........10件やりとり後.......
@@ -607,9 +611,144 @@ section { background-color: black; }
 [mem0](https://mem0.ai/) というサービスを使ってみます。
 OSSなので自分でホスティングすることもできるし、SaaSサービスもあります。
 
-### mem0を使う理由
+<h3 style="display: flex; align-items: center;">
+mem0を使う理由<small style="font-weight: normal;">（参考: <a href="https://techcommunity.microsoft.com/blog/azure-ai-services-blog/memory-management-for-ai-agents/4406359">Microsoftの詳細記事</a> ）</small>
 
-- 
+
+</h3>
+
+
+- 発言をそのまま保存せず、AIで分解や要約をしてから保存してくれる
+- メモリのアイテム同士の重複を避けてくれる
+- 最近のやりとりに基づいて関連する過去のメモリの更新・削除がされる
+- メモリのアクセス頻度や保存時刻に基づいてメモリを優先順位付けする
+
+どれも自分で実装することもできますが、勝手にやってくれるのは助かりますね！
+
+---
+
+## 記憶をつくる  ―  実装
+
+SaaSのmem0を使えばLLMでの要約やDBのホスティングも任せられ、メモリ管理画面も使えるのでかなり楽です。無料枠もあります（回し者ではありません）
+
+Mastraと一番簡単に統合するなら [公式ExampleのTools経由で叩く方法](https://docs.mem0.ai/examples/mem0-mastra)。
+
+でもToolsに対応していないAIモデルもあったり、小回りもきかせたいので、
+今回はAPIの中で直接呼び出してみます。
+
+```ts
+import MemoryClient from 'mem0ai';
+
+const client = new MemoryClient({ apiKey: process.env.MEM0_API_KEY });
+```
+
+---
+
+## 記憶をつくる  ―  実装（長期記憶）
+
+まずは会話のたびに `client.add` に会話を渡してメモリをmem0に保存します。
+
+```ts
+await client.add(messages, {
+  user_id: 'default-user',
+  agent_id: 'friendAgent',
+  custom_instructions: `感情や認識は無視し、事実に注目して抽出して。特に
+      ・ユーザーに直近起きたこと、現在の状態、これから先の予定
+      ・ユーザーの嗜好、習慣
+      ・ユーザーの過去の経験
+      ・会話の中での特徴的な発言
+      など、人間の長期記憶に残りそうなことをピックアップして記録して。`,
+});
+```
+
+---
+
+## 記憶をつくる  ―  実装（長期記憶）
+
+次に各会話の前処理で、自分の発言をqueryに渡して関連メモリを検索します
+
+```ts
+const result = await client.search(query, {
+  filters: { user_id: 'default-user' },
+  top_k: 30,             // 最大何件取得するか
+  threshold: 0.4,        // 類似度スコアが0.4以下は除外
+  keyword_search: true,  // ベクトル検索に加えキーワード検索の併用
+  rerank: true,          // 関連度を再評価し、その順に並べ直す
+});
+```
+
+取得したメモリ配列を箇条書きに加工して、 `agent.stream` の第二引数Optionの `context` propに `[{ role: 'system', content: memoryStr }]` で追加すればOK
+
+---
+
+## 記憶をつくる  ―  実装（短期記憶）
+
+短期記憶の場合も保存は長期記憶と同様。
+簡易的に `user_id` と `agent_id` に `-today` prefixをつけて区別できる
+（ちゃんとやるならmetaなどに日付を持たせて検索時それを条件にするとよいです）
+
+こちらは必要になるのが当日のみなので、毎日のバッチ処理で全件削除します
+
+---
+
+## 記憶をつくる  ―  実装（短期記憶）
+
+各会話の前処理で、今日のメモリを全て取得します
+
+```ts
+const result = await client.getAll({
+  user_id: 'default-user-today',
+  page: 1,
+  page_size: 500, // 全件がおさまる程度
+});
+```
+
+
+こちらも取得したメモリ配列を箇条書きに加工して、「今日の会話」的な見出しをつける。先程の `context` の配列に `{ role: 'system', content: todayMemoryStr }` で追加すればOK
+
+
+---
+
+## 記憶をつくる  ―  実装
+
+<div class="columns">
+
+<div>
+
+```
+...直近10件の会話履歴（略）...
+user:
+  そういえば、夜食べるのは中華だよ。
+assistant:
+  へえ、いいね！一人で行くの？
+```
+
+<small>
+朝に会話した「今日は家族で夕食にいく予定」という発言がコンテキストから外れて、忘れてしまっている<br />
+
+<br />
+長期/短期メモリ情報を追加した場合 →
+</small>
+
+</div>
+
+```
+[過去のメモリ]
+- ユーザーはエビチリが好き
+
+[今日の会話]
+- 今日ユーザーは家族で夕食に行く予定
+
+...直近10件の会話履歴（略）...
+user:
+  そういえば、夜食べるのは中華だよ。
+assistant:
+  へえ、いいね！家族との時間、楽しんで！
+  君の好きなエビチリがあるといいね。
+```
+
+
+</div>
 
 
 ---
@@ -627,6 +766,7 @@ OSSなので自分でホスティングすることもできるし、SaaSサー�
 <br />
 
 今までの会話の蓄積を踏まえた自然なやりとりができるようになりました！
+このように外部から必要な情報を取得してコンテキストに埋め込む手法はRAGと呼ばれます。
 
 </div>
 
@@ -635,3 +775,34 @@ OSSなので自分でホスティングすることもできるし、SaaSサー�
 </div>
 
 ---
+
+# 目をつくる
+
+![bg right center 50%](./assets/4-eye/cover.png)
+
+---
+
+## 目をつくる  ―  何するの？
+
+
+---
+
+## 目をつくる  ―  やったこと
+
+<div class="image">
+
+<div>
+
+- 画像データを送れるようにする
+- AIが画像を読み込めるようにする
+- 画像をアップロードして<br />後からでも見られるようにする
+
+<br />
+
+画像を送ってコミュニケーションができるようになりました！
+
+</div>
+
+![](./assets/4-eye/cover.png)
+
+</div>
