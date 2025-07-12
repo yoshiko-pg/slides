@@ -190,7 +190,7 @@ WeatherAgentのシステムプロンプトが「天気情報提供アシスタ�
 ![](./assets/1-brain/ai.png)
 
 <small>
-システムプロンプトを工夫して、<br />欲しい出力を得ることが<br />代表的なプロンプトエンジニアリングです
+このようにシステムプロンプトなどを調整して期待に沿う出力を得る過程はプロンプトエンジニアリングと呼ばれたりします
 </small>
 
 </div>
@@ -424,12 +424,30 @@ Vibe Codingで簡単に専用画面ができました！
 
 ## 記憶をつくる  ―  何するの？
 
-素のAI（LLM）には記憶を保持する仕組みがありません。ステートレスです。
-入力文（コンテキスト）だけが可変なので、全情報をそこに入れる必要があります。
 
-ChatGPTなどのチャットAIは、スレッドの全履歴を毎回送って記憶保持しています。
-それゆえ、ひとつのスレッドを長くし続けることはできません。
-今のスレッドで文章量の上限に達したら、新しいスレッドを作る必要があります。
+
+<div class="columns">
+
+<div>
+素のAI（LLM）には記憶を保持する仕組みがありません。ステートレスです。<br />
+入力文（コンテキスト）だけが可変で、そこに全情報を入れる必要があります。<br />
+<br />
+ChatGPT等のチャットAIは、会話の全履歴を毎回送って記憶保持しています。<br />
+それゆえ、ひとつののスレッドでのやりとりが文章量の上限に達したら、新しいスレッドを作る必要があります。
+</div>
+
+<div>
+
+![](./assets/3-memory/thread.png)
+
+<small>
+新しい発言のたびにスレッド内の全履歴ごと送信する形式<br />
+モデルのコンテキストウインドウサイズの上限に達するとそのスレッドは使えなくなる
+</small>
+
+</div>
+
+</div>
 
 ---
 <style scoped>
@@ -445,7 +463,7 @@ section { background-color: black; }
 section { background-color: black; }
 </style>
 
-<div class="kontomo" ></div>
+<div class="kontomo"></div>
 
 ![bg center center contain 80%](./assets/3-memory/over.png)
 
@@ -453,11 +471,26 @@ section { background-color: black; }
 
 ## 記憶をつくる  ―  何するの？
 
-普段使うメッセージアプリのように、ひとつの流れの中でずっとやりとりしたい。
+<div class="columns">
 
-常に直近10メッセージだけを送る、というふうにすれば実現できます！
-送信対象がスライドしていくのでスライディングウインドウ方式などと呼ばれます。
-（1件送るごとに古いメッセージが1件コンテキストから消える）
+<div>
+普段使うメッセージアプリのように、<br />単一スレッドでずっとやりとりしたい。<br />
+<br />
+常に直近10メッセージだけを送る、というふうに件数を絞れば実現できます！<br />
+1件送るごとに古いメッセージが1件コンテキスト入りの対象から外れるので、送る文章のボリュームが一定になります。<br />
+<br />
+ただし…
+</div>
+
+<div>
+
+![](./assets/3-memory/sliding.png)
+
+<small>
+送信対象が下にスライドしていくのでスライディングウインドウ方式などと呼ばれます。<br />
+</small>
+
+</div>
 
 
 ---
@@ -497,7 +530,7 @@ section { background-color: black; }
 ........10件やりとり後.......
 </center>
 <p class="fukidashi ai">
-それで、今日は何する予定なの？
+ところで、今日は何する予定なの？
 </p>
 <p class="fukidashi user">
 （さっき言ったじゃん！！）
@@ -556,95 +589,28 @@ section { background-color: black; }
 
 ## 記憶をつくる  ―  何するの？
 
-- 友達エージェントとやりとりできるチャット画面を作る
-- 普段使うメッセージアプリみたいな、親しみやすい見た目にしてみよう！
+送信する履歴は直近10件をスライドさせる方式にしつつ、<br />そこから溢れた会話内容も、主要なものは把握していてほしい！
 
 <br />
 
-<center>
-<h1>Vibe Codingチャンス！！</h1>
+- 長期記憶： 今の話題に応じて過去話したことを思い出してほしい
+- 短期記憶： 今日話したことは今の話題になくてもだいたい覚えておいてほしい
 
 <br />
-<small>
-※ Vibe Coding = 人間がコードを書かずにAIへの指示中心で進める開発手法のこと
-</small>
-</center>
+
+より自然なやりとりを目指して、これらを実装していきます！
 
 ---
 
 ## 記憶をつくる  ―  実装
 
-Claude Code（または好みのコーディングエージェント）に頼んでみましょう
+[mem0](https://mem0.ai/) というサービスを使ってみます。
+OSSなので自分でホスティングすることもできるし、SaaSサービスもあります。
 
-```
-Next.jsのトップページを、MastraのfriendAgentとチャットできる画面にして。
-普段使うメッセージアプリみたいな、親しみのあるデザインがいい。
-streamで返ってくるAPIを作って、@ai-sdk/react の useChat を使って実装して。
-リロードしても同じスレッドでやりとりできるようにthreadIdを固定して。
-```
+### mem0を使う理由
 
-ReactならVercel AI SDKのuseChatを使うのがおすすめです。
+- 
 
-<small>
-mastra使うならClaudeに <a href="https://mastra.ai/ja/docs/getting-started/mcp-docs-server">MastraDocsのMCPサーバー</a>登録しておくとスムーズかも<br />
-<code>claude mcp add mastra-docs npx @mastra/mcp-docs-server</code>
-</small>
-
----
-<style scoped>
-  section { background-color: #333; }
-  img { height : 60vh; }
-</style>
-
-<div class="columns">
-
-<center>
-
-![](./assets/2-face/chat-1.png)
-
-</center>
-
-
-<center>
-
-![](./assets/2-face/chat-2.png)
-
-</center>
-
-</div>
-
----
-
-## 記憶をつくる  ―  実装
-
-ちなみにAPIの実装は必要最低限これだけ
-
-```ts
-export async function POST(req: Request) {
-  const { messages } = await req.json();
-  const friendAgent = mastra.getAgent("friendAgent");
-  const stream = await friendAgent.stream(messages, {
-    memory: {
-      thread: "default", // 任意のスレッドID
-      resource: friendAgent.id,
-      options: { lastMessages: 10 }, // 10メッセージを取得
-    },
-  });
-  return stream.toDataStreamResponse();
-}
-```
-
-
----
-
-## 記憶をつくる  ―  実装
-
-アクセスしたときに過去の会話履歴も表示されてほしいですね
-
-```
-useChatでチャット画面表示するとき、過去のチャット履歴も表示できるようにして。
-threadId/resourceIdはroute.tsにある内容で
-```
 
 ---
 
@@ -654,17 +620,17 @@ threadId/resourceIdはroute.tsにある内容で
 
 <div>
 
-- おしゃべり用のメッセージWebアプリを作る
-- 会話履歴を表示する
-- 会話の送信と受信をする
+- スライディングウインドウ方式で<br />単一スレッドでのやりとりを維持する
+- 過去の会話を長期記憶として実装する
+- 今日のやりとりを短期記憶として実装する
 
 <br />
 
-Vibe Codingで簡単に専用画面ができました！
+今までの会話の蓄積を踏まえた自然なやりとりができるようになりました！
 
 </div>
 
-![](./assets/2-face/cover.png)
+![](./assets/3-memory/cover.png)
 
 </div>
 
