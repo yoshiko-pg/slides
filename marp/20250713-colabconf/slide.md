@@ -38,9 +38,12 @@ pre, code {
   position: absolute;
   right: 0;
   top: 55%;
-  padding: 12px 80px 30px 80px;
+  padding: 12px 80px;
   line-height: 0.4;
   text-align: right;
+}
+.title > p {
+  padding-bottom: 18px;
 }
 
   .fukidashi {
@@ -95,8 +98,6 @@ ZennのAIカテゴリの全記事のうち、このあとトークされるmizch
 ## 今日話すこと
 
 喋れる友達AIづくりを通して、AIチャットの基本的な仕組みと実装方法を学ぼう！
-
-<br />
 
 
 実装は主にフロントエンド周りの技術で作りますが、
@@ -1071,3 +1072,50 @@ timeoutを長めにできるところを選びましょう。
 <center><h3>君だけの親友AIをつくろう！！</h3></center>
 
 ---
+<style scoped>
+  img {
+    width: 80%;
+    margin: 90px 0 80px;
+  }
+  center { font-size: 1.3rem;}
+</style>
+
+## 宣伝（会社）
+
+<center>
+
+ナレッジワークはセールス**AIエージェント**の会社です！！！
+
+![](../global-assets/logo.svg)
+それだけ覚えていってください！！！
+
+</center>
+
+---
+<style scoped>
+  img {
+    width: 70%;
+    margin-top: 20px
+  }
+</style>
+
+
+## 宣伝（個人）
+
+[ローカルでコード差分のレビューできるOSS](https://github.com/yoshiko-pg/difit) 作ってます！ `npx difit` してみてね
+
+<center>
+
+![](../global-assets/difit.png)
+
+</center>
+
+---
+
+<div class="title">
+
+# Thank you for listening!
+
+</div>
+
+![bg](./assets/end.png)
