@@ -868,7 +868,7 @@ assistant:
 
 ```ts
 const CLOUD_NAME   = 'your-cloud-name';
-const UPLOAD_PRESET = 'unsigned_preset';
+const UPLOAD_PRESET = 'unsigned_preset'; // ※ 簡単にするため署名なしなので内容注意
 const ENDPOINT = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`;
 
 const formData = new FormData();
