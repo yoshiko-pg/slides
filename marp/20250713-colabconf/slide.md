@@ -198,8 +198,6 @@ npx mastra init
 
 ---
 
-<div class="kontomo" ></div>
-
 ## 脳をつくる  ―  実装
 
 <br />
@@ -207,6 +205,8 @@ npx mastra init
 ![](./assets/1-brain/failed.png)
 
 </section>
+
+<div class="kontomo" ></div>
 
 ---
 
@@ -315,13 +315,13 @@ Mastraを使って簡単にAIとやりとりができました！
 
 ---
 
-<div class="kontomo" ></div>
-
 ## 顔をつくる  ―  何するの？
 
 やりとりはできるようになったけど…　Playgroundはあまりにも管理画面すぎる。。
 
 ![](./assets/2-face/playground.png)
+
+<div class="kontomo" ></div>
 
 ---
 
@@ -499,9 +499,9 @@ section { background-color: black; }
 section { background-color: black; }
 </style>
 
-<div class="kontomo"></div>
-
 ![bg center center contain 80%](./assets/3-memory/over.png)
+
+<div class="kontomo"></div>
 
 ---
 
@@ -532,6 +532,7 @@ Mastraは元々デフォルトがこの挙動。<br />
 ---
 
 ## 記憶をつくる  ―  何するの？
+
 <br />
 
 <div class="wrapper">
@@ -546,37 +547,10 @@ Mastraは元々デフォルトがこの挙動。<br />
 ........10件やりとり後.......
 </center>
 <p class="fukidashi ai">
-ところで、今日は何する予定なの？
-</p>
-<p class="fukidashi user">
-（さっき言ったじゃん！！）
-</p>
-
-</div>
-
----
-
-<div class="kontomo"></div>
-
-## 記憶をつくる  ―  何するの？
-<br />
-
-<div class="wrapper">
-
-<p class="fukidashi ai">
 今日は何する予定なの？
 </p>
 <p class="fukidashi user">
-今日は美容院に行く予定なんだよね〜
-</p>
-<center class="yaritori">
-........10件やりとり後.......
-</center>
-<p class="fukidashi ai">
-それで、今日は何する予定なの？
-</p>
-<p class="fukidashi user">
-（さっき言ったじゃん！！）
+（もう話したのに😭）
 </p>
 
 </div>
@@ -798,31 +772,11 @@ assistant:
 </p>
 <br />
 <p class="fukidashi user">
-えー、空全体がオレンジで、太陽が…
-</p>
-
-</div>
-
----
-
-<div class="kontomo"></div>
-
-## 目をつくる  ―  何するの？
-
-<br />
-
-<div class="wrapper">
-
-<p class="fukidashi user">
-めっちゃ綺麗な夕焼け撮れた！
+えー、なんか、空がオレンジだった（語彙力）
 </p>
 <br />
 <p class="fukidashi ai">
-え！どんな感じ！？
-</p>
-<br />
-<p class="fukidashi user">
-えー、空全体がオレンジで、太陽が…
+そうなんだ、よかったね！
 </p>
 
 </div>
@@ -831,7 +785,7 @@ assistant:
 
 ## 目をつくる  ―  何するの？
 
-友達に送るみたいに、写真や画像を送れるようにしよう！
+メッセージアプリで写真や画像を送って見てもらえるようにしよう！
 
 - 画像データを送れるようにする
 - AIがその画像を見られるようにする
@@ -852,9 +806,7 @@ assistant:
 ## 目をつくる  ―  実装
 
 今回は画像のアップロード先に [Cloudinary](https://cloudinary.com/) というサービスを使ってみます。
-
-- 無料枠のストレージ・転送量が十分
-- クライアントからSDKで直接アップロード可能
+（無料枠が大きめなこととクライアントから直接アップロードがサポートされているので選びましたが、他のストレージサービスでも原理は同じです）
 
 ![](./assets/4-eye/flow.png)
 
@@ -966,7 +918,7 @@ img {
 
 <br />
 
-画像を送ってコミュニケーションができるようになりました！
+コミュニケーションに画像が使えるようになりました！
 
 </div>
 
@@ -1006,8 +958,6 @@ img {
 
 ---
 
-<div class="kontomo"></div>
-
 ## 外に出す  ―  何するの？
 
 <br />
@@ -1030,6 +980,8 @@ img {
 
 </div>
 
+<div class="kontomo"></div>
+
 
 ---
 
@@ -1037,7 +989,7 @@ img {
 
 - どこからでもやりとりできるようにクラウドサーバーにデプロイする
 - 知らない人にチャットされないように認証をかける
-  - envにいれた自分のメールアドレス以外なら弾く、などのブロック
+  - envにいれた自分のメールアドレス以外なら弾く、など簡易的にでもブロック
 
 <br />
 
@@ -1081,24 +1033,12 @@ timeoutを長めにできるところを選びましょう。
 <center><h3>君だけの親友AIをつくろう！！</h3></center>
 
 ---
-<style scoped>
-  img {
-    width: 80%;
-    margin: 90px 0 80px;
-  }
-  center { font-size: 1.3rem;}
-</style>
 
-## 宣伝（会社）
+![bg](../global-assets/kw_general.png)
 
-<center>
+---
 
-ナレッジワークはセールス**AIエージェント**の会社です！！！
-
-![](../global-assets/logo.svg)
-それだけ覚えていってください！！！
-
-</center>
+![bg](../global-assets/kw_x.png)
 
 ---
 <style scoped>
