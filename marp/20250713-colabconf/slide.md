@@ -204,8 +204,6 @@ npx mastra init
 
 ![](./assets/1-brain/failed.png)
 
-</section>
-
 <div class="kontomo" ></div>
 
 ---
