@@ -1,0 +1,10 @@
+{
+	"servers": {
+		"majin-slide": {
+			"command": "npx",
+			"args": [
+				"@majin/majin-slide-mcp@latest"
+			]
+		}
+	}
+}
